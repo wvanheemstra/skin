@@ -16,7 +16,7 @@ function appendStyles()
 	foundationStyle.id='core.foundationStyle';
 	foundationStyle = headElement.appendChild(foundationStyle);
 	foundationStyle.rel='stylesheet';
-	foundationStyle.href='assets/templates/core/stylesheets/medium/foundation.min.css';
+	foundationStyle.href='assets/templates/skin/stylesheets/medium/foundation.min.css';
 }
 function appendText(node,txt)
 {
@@ -129,7 +129,7 @@ function buildPage()
 	// Auto-starts when document is fully loaded
 	$(document).ready(function(){	
 		$.holdReady(true);
-		$.getScript('assets/templates/core/javascripts/parseuri/parseuri.js', function() {
+		$.getScript('assets/templates/skin/javascripts/parseuri/parseuri.js', function() {
 		    $.holdReady(false);
 			var page_id = parseUri(document.URL).queryKey.page_id; // takes the value of param 'page_id' in URL
 			//alert('page_id: '+page_id);

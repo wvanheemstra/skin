@@ -15,7 +15,7 @@ function appendStyles()
 	foundationStyle.id='core.foundationStyle';
 	foundationStyle = headElement.appendChild(foundationStyle);
 	foundationStyle.rel='stylesheet';
-	foundationStyle.href='assets/templates/core/stylesheets/small/foundation.min.css';
+	foundationStyle.href='assets/templates/skin/stylesheets/small/foundation.min.css';
 }
 function appendText(node,txt)
 {
