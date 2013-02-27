@@ -42,19 +42,16 @@ function buildPage()
 	    navs: [{id:1, 
 		 		class: 'top-bar',
 				openingComment: 'start of nav', 
-				closingComment: 'end of nav',		
+				closingComment: 'end of nav',
+				data: '<ul><!-- Title Area --><li class="name"><h1><a href="#">Top Bar Title</a></h1></li><li class="toggle-topbar"><a href="#"></a></li></ul>',	
 				sections:[
-					{id:1, openingComment: 'start of section', closingComment: 'end of section'},
-					{id:2, openingComment: 'start of section', closingComment: 'end of section'}
+					{id:1, openingComment: 'start of section', closingComment: 'end of section', data: '<ul class="left"><li class="divider"></li><li><a href="#">Main Item Left</a></li></ul><ul class="right"><li class="divider"></li><li><a href="#">Main Item Right</a></li></ul>'}
 				]}
 			  ],
 	    rows: [
-			{id:1, class:'row', openingComment: 'start of row', closingComment: 'end of row'},
-			{id:2, class:'row', openingComment: 'start of row', closingComment: 'end of row'},
-			{id:3, class:'row', openingComment: 'start of row', closingComment: 'end of row'},
-			{id:4, class:'row', openingComment: 'start of row', closingComment: 'end of row'}],
+			{id:1, class:'row', style: 'border:1px;', openingComment: 'start of row', closingComment: 'end of row', data: '<div class="three columns"><div class="panel"><h5>Panel Title</h5><p>This is a three columns grid panel with an arbitrary height.</p></div></div>'}],
 	    footers: [
-			{id:1, class:'row', openingComment: 'start of footer', closingComment: 'end of footer'}
+			{id:1, class:'row', style: '', openingComment: 'start of footer', closingComment: 'end of footer', data: '<div class="twelve columns"><hr /><div class="row"><div class="six columns"><p>&copy; Copyright no one at all. Go to town.</p></div><div class="six columns"><ul class="link-list right"><li><a href="#">Section 1</a></li><li><a href="#">Section 2</a></li><li><a href="#">Section 3</a></li><li><a href="#">Section 4</a></li></ul></div></div></div>'}
 		]
 	  },
 	  {
@@ -119,7 +116,7 @@ function buildPage()
 	// THE CONTROLLER
 	Pages = can.Control({
 		init: function() {
-			this.element.html(can.view('views/pagesList.ejs', {
+			this.element.html(can.view('core/components/skin/views/pagesList.ejs', {
 				pages: this.options.pages
 			}));
 		}
@@ -148,16 +145,18 @@ function buildPage()
 			var pages = pageResponse[0];
 			var pageElement= document.createElement('page');	
 			pageElement.id=pages[page_id].id; // pick the first page
-			pageElement.setAttribute('style', pages[page_id].style); // style is a reserved wrd, use setAttribute
+			pageElement.setAttribute('style', pages[page_id].style); // style is a reserved word, use setAttribute
 			appendText(pageElement,pages[page_id].text);
 			var openingComment;
 			var closingComment;
 			for (var i = 0; i < pages[page_id].navs.length; i++) {
 				var navElement= document.createElement('nav');
-				navElement.setAttribute('class', pages[page_id].navs[i].class); // class is a reserved wrd, use setAttribute
+				navElement.setAttribute('class', pages[page_id].navs[i].class); // class is a reserved word, use setAttribute
+				navElement.innerHTML = pages[page_id].navs[i].data;
 				navElement = pageElement.appendChild(navElement);
 				for (var n = 0; n < pages[page_id].navs[i].sections.length; n++) {
 					var sectionElement= document.createElement('section');
+					sectionElement.innerHTML = pages[page_id].navs[i].sections[n].data;
 					sectionElement = navElement.appendChild(sectionElement);
 					var openingComment = document.createComment(pages[page_id].navs[i].sections[n].openingComment);
 					sectionElement.parentNode.insertBefore(openingComment, sectionElement);
@@ -172,6 +171,8 @@ function buildPage()
 			for (var i = 0; i < pages[page_id].rows.length; i++) {
 				var rowElement= document.createElement('div');
 				rowElement.setAttribute('class', pages[page_id].rows[i].class);
+				rowElement.setAttribute('style', pages[page_id].rows[i].style);
+				rowElement.innerHTML = pages[page_id].rows[i].data;
 				rowElement = pageElement.appendChild(rowElement);
 				var openingComment = document.createComment(pages[page_id].rows[i].openingComment);
 				rowElement.parentNode.insertBefore(openingComment, rowElement);
@@ -181,6 +182,8 @@ function buildPage()
 			for (var i = 0; i < pages[page_id].footers.length; i++) {
 				var footerElement= document.createElement('footer');
 				footerElement.setAttribute('class', pages[page_id].footers[i].class);
+				footerElement.setAttribute('style', pages[page_id].footers[i].style);
+				footerElement.innerHTML =  pages[page_id].footers[i].data;
 				footerElement = pageElement.appendChild(footerElement);
 				var openingComment = document.createComment(pages[page_id].footers[i].openingComment);
 				footerElement.parentNode.insertBefore(openingComment, footerElement);
