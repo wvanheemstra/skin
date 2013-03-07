@@ -1,4 +1,4 @@
-Page = can.Model({
+var Page = can.Model({
   findOne : "GET /pages/{id}",
   //findAll : "GET /pages/",
   findAll : "GET /core/components/skin/api/services/pages/",
@@ -28,9 +28,9 @@ var id= 1;
 can.fixture("GET /pages/{id}", function(){
   return {};
 });
-can.fixture("GET /pages/", function(){
-  return [PAGES];
-});
+//can.fixture("GET /pages/", function(){
+//  return [PAGES];
+//});
 var id= 4;
 can.fixture("POST /pages/", function(){
   return {id: (id++)}
