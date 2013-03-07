@@ -1,12 +1,13 @@
 Page = can.Model({
-  findOne : 'GET /pages/{id}',
-  //findAll : 'GET /pages',
-  findAll : 'GET /core/components/skin/api/services/pages.php',
-  create  : "POST /pages",
+  findOne : "GET /pages/{id}",
+  //findAll : "GET /pages/",
+  findAll : "GET /core/components/skin/api/services/pages/",
+  create  : "POST /pages/",
   update  : "PUT /pages/{id}",
   destroy : "DELETE /pages/{id}"
 },{});
 
+/*
 var PAGES = [
   {
     id: 1,
@@ -21,16 +22,17 @@ var PAGES = [
     data: '<page>yet another page</page>'
   }
 ];
+*/
 
 var id= 1;
 can.fixture("GET /pages/{id}", function(){
   return {};
 });
-can.fixture('GET /pages', function(){
+can.fixture("GET /pages/", function(){
   return [PAGES];
 });
 var id= 4;
-can.fixture("POST /pages", function(){
+can.fixture("POST /pages/", function(){
   return {id: (id++)}
 });
 can.fixture("PUT /pages/{id}", function(){
