@@ -86,7 +86,8 @@ function buildPage()
 	// THE MODEL
 	Page = can.Model({
 	  findOne : 'GET /pages/{id}',
-	  findAll : 'GET /pages',
+	  //findAll : 'GET /pages',
+	  findAll : 'GET /core/components/skin/api/services/pages.php', // made dynamic
 	  create  : "POST /pages",
 	  update  : "PUT /pages/{id}",
 	  destroy : "DELETE /pages/{id}"
@@ -99,7 +100,40 @@ function buildPage()
 	  return {};
 	});
 	can.fixture('GET /pages', function(){
-	  return [PAGES];
+	  //return [PAGES];
+	  return [
+		{ id: 1,
+		  style: "width:100%;margin:0px;",
+		  openingComment: "start of page",
+		  closingComment: "end of page",
+		  text: "I am Page One",
+		  navs: [
+		    { id:1, 
+		      class: "top-bar",
+			  openingComment: "start of nav", 
+			  closingComment: "end of nav",
+			  data: "<ul><!-- Title Area --><li class='name'><h1><a href='#'>Dynamic Top Bar Title</a></h1></li><li class='toggle-topbar'><a href='#'></a></li></ul>",	
+			  sections:[
+			    { id:1, openingComment: "start of section", closingComment: "end of section", data: "<ul class='left'><li class='divider'></li><li><a href='#'>Main Item Left</a></li></ul><ul class='right'><li class='divider'></li><li><a href='#'>Main Item Right</a></li></ul>"
+				}
+			  ]
+			}
+		  ],
+		  rows: [
+		    { id:1, class:"row", style: "border:1px;", openingComment: "start of row", closingComment: "end of row", data: "<div class='three columns'><div class='panel'><h5>Panel Title</h5><p>This is a three columns grid panel with an arbitrary height.</p></div></div>"}
+		  ],
+		  footers: [
+		    { id:1, class:"row", style: "", openingComment: "start of footer", closingComment: "end of footer", data: "<div class='twelve columns'><hr /><div class='row'><div class='six columns'><p>&copy; Copyright no one at all. Go to town.</p></div><div class='six columns'><ul class='link-list right'><li><a href='#'>Section 1</a></li><li><a href='#'>Section 2</a></li><li><a href='#'>Section 3</a></li><li><a href='#'>Section 4</a></li></ul></div></div></div>"
+			}
+		  ]
+		},
+		{
+			id: 2
+		},
+		{
+			id: 3
+		}
+	  ]; // oef return
 	});
 	var id= 4;
 	can.fixture("POST /pages", function(){
@@ -129,7 +163,7 @@ function buildPage()
 		$.getScript('assets/templates/skin/javascripts/parseuri/parseuri.js', function() {
 		    $.holdReady(false);
 			var page_id = parseUri(document.URL).queryKey.page_id; // takes the value of param 'page_id' in URL
-			//alert('page_id: '+page_id);
+			//alert('page_id: '+page_id); // for test only
 			loadPage(page_id);
 		});
 	}); // eof ready
@@ -139,10 +173,16 @@ function buildPage()
 		var page_id;
 		if(id) {page_id = id;}
 		else {page_id=0;}
+		//alert('page_id: '+page_id); // for test only
+		console.log(Page.findAll()); // for test only
 		// All Pages
 		$.when(Page.findAll()).then(function(pageResponse){
+			//alert('inside when'); // for test only
 			var bodyElement= document.getElementsByTagName('body')[0];
-			var pages = pageResponse[0];
+			var pages = pageResponse; // pick all
+			
+			console.log(pages[0]); // for test only
+			
 			var pageElement= document.createElement('page');	
 			pageElement.id=pages[page_id].id; // pick the first page
 			pageElement.setAttribute('style', pages[page_id].style); // style is a reserved word, use setAttribute
