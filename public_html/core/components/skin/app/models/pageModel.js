@@ -1,6 +1,7 @@
 Page = can.Model({
   findOne : 'GET /pages/{id}',
-  findAll : 'GET /pages',
+  //findAll : 'GET /pages',
+  findAll : 'GET /core/components/skin/api/services/pages.php',
   create  : "POST /pages",
   update  : "PUT /pages/{id}",
   destroy : "DELETE /pages/{id}"

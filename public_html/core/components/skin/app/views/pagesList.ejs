@@ -1,7 +1,7 @@
 <ul class="clearfix">
 	<% list(pages, function(page){ %>
 		<li class="page span8" <%= (el)-> el.data('page', page) %>>
-			<%== can.view.render('core/components/skin/views/pageView.ejs', {page: page}) %>
+			<%== can.view.render('core/components/skin/app/views/pageView.ejs', {page: page}) %>
 		</li>
 	<% }) %>
 </ul>
