@@ -8,13 +8,18 @@
 <meta charset="utf-8" />
 <!-- Set the viewport width to device width for mobile -->
 <meta name="viewport" content="width=device-width" />
+<meta name='apple-mobile-web-app-capable' content='yes' />
 <title>Skin</title>
 <base href="http://vanheemstrapictures.com"></base>
+<!-- stylesheet for touch -->
+<link href='assets/templates/core/javascripts/sencha-touch/resources/css/sencha-touch.css' rel='stylesheet' type='text/css' />
+
 <!-- We need these first -->
 <!--script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script-->
 <script src="assets/templates/skin/javascripts/jquery/jquery-1.9.1.js"></script>
 <script src="assets/templates/skin/javascripts/can/can.jquery.min.js"></script>
 <script src="assets/templates/skin/javascripts/can/can.fixture.js"></script>
+<script src='assets/templates/core/javascripts/sencha-touch/sencha-touch-all-debug.js' type='text/javascript'></script>
 <!--script src="assets/templates/skin/javascripts/parseuri/parseuri.js"></script-->
 
 <script type='text/javascript'>
@@ -25,19 +30,19 @@ function init()
 	// determine client details and load suitable mvc
 	var clientWidth = document.body.clientWidth;
 	if (clientWidth < 768) {
-   		mvcLoaderScript.setAttribute('src', 'core/components/skin/app/controllers/skin.mvc.loader.small.js');
+   		mvcLoaderScript.setAttribute('src', 'core/components/skin/app/controller/skin.mvc.loader.small.js');
 		window.globalClientWidth = 'small'; // set the value globally
 	} 
 	else if (clientWidth < 1280) {
-		mvcLoaderScript.setAttribute('src', 'core/components/skin/app/controllers/skin.mvc.loader.medium.js');
+		mvcLoaderScript.setAttribute('src', 'core/components/skin/app/controller/skin.mvc.loader.medium.js');
 		window.globalClientWidth = 'medium'; // set the value globally
 	}
 	else if (clientWidth < 1441) {
-		mvcLoaderScript.setAttribute('src', 'core/components/skin/app/controllers/skin.mvc.loader.large.js');
+		mvcLoaderScript.setAttribute('src', 'core/components/skin/app/controller/skin.mvc.loader.large.js');
 		window.globalClientWidth = 'large'; // set the value globally
 	}
 	else {
-		mvcLoaderScript.setAttribute('src', 'core/components/skin/app/controllers/skin.mvc.loader.veryLarge.js');
+		mvcLoaderScript.setAttribute('src', 'core/components/skin/app/controller/skin.mvc.loader.veryLarge.js');
 		window.globalClientWidth = 'very large'; // set the value globally
     }
 }
@@ -47,28 +52,28 @@ function resize()
 		//alert('Change to small!');
 		housekeeping();
 		var mvcLoaderScript= document.getElementById('skin.mvcLoaderScript');
-		mvcLoaderScript.src='core/components/skin/controllers/app/skin.mvc.loader.small.js';		
+		mvcLoaderScript.src='core/components/skin/app/controller/skin.mvc.loader.small.js';		
 		window.globalClientWidth = 'small';
 	}
 	if(document.body.clientWidth<1280 && document.body.clientWidth>767 && window.globalClientWidth != 'medium') {
 		//alert('Change to medium!');
 		housekeeping();
 		var mvcLoaderScript= document.getElementById('skin.mvcLoaderScript');
-		mvcLoaderScript.src='core/components/skin/controllers/app/skin.mvc.loader.medium.js';
+		mvcLoaderScript.src='core/components/skin/app/controller/skin.mvc.loader.medium.js';
 		window.globalClientWidth = 'medium';
 	}
 	if(document.body.clientWidth<1441 && document.body.clientWidth>1279 && window.globalClientWidth != 'large') {
 		//alert('Change to large!');
 		housekeeping();
 		var mvcLoaderScript= document.getElementById('skin.mvcLoaderScript');
-		mvcLoaderScript.src='core/components/skin/controllers/app/skin.mvc.loader.large.js';
+		mvcLoaderScript.src='core/components/skin/app/controller/skin.mvc.loader.large.js';
 		window.globalClientWidth = 'large';
 	}
 	if(document.body.clientWidth>1440 && window.globalClientWidth != 'very large') {
 		//alert('Change to very large!');
 		housekeeping();
 		var mvcLoaderScript= document.getElementById('skin.mvcLoaderScript');
-		mvcLoaderScript.src='core/components/skin/controllers/app/skin.mvc.loader.veryLarge.js';
+		mvcLoaderScript.src='core/components/skin/app/controller/skin.mvc.loader.veryLarge.js';
 		window.globalClientWidth = 'very large';
 	}
 }
@@ -101,7 +106,7 @@ function appendToHead(el){
 <body onload='init()' onresize='resize()' style='margin:0px;'>	
 <!--<input type="button" onclick="init()" value="Init">-->
 
-
-
+<div id='appEl' style='border:1px solid blue'>empty</div>
+<script src='core/components/skin/app.js' type='text/javascript'></script>
 </body>
 </html>

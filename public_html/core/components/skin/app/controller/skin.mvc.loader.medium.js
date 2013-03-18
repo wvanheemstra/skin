@@ -2,7 +2,7 @@ function init()
 {
 	// get the Model(s)
 	$.holdReady(true);
-	$.getScript("/core/components/skin/app/models/pageModel.js", function() {
+	$.getScript('core/components/skin/app/model/pageModel.js', function() {
 	    $.holdReady(false);
 		//console.log('Got the model pageModel!');
 	});
@@ -40,7 +40,7 @@ function buildPage()
 	// THE CONTROLLER
 	Pages = can.Control({
 		init: function() {
-			this.element.html(can.view('core/components/skin/app/views/pagesList.ejs', {
+			this.element.html(can.view('core/components/skin/app/view/pagesList.ejs', {
 				pages: this.options.pages
 			}));
 		}

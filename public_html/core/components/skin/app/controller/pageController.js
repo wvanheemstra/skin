@@ -42,7 +42,7 @@ can.fixture("DELETE /pages/{id}", function(){
 // THE CONTROLLER
 Pages = can.Control({
 	init: function() {
-		this.element.html(can.view('views/pageView.ejs', {
+		this.element.html(can.view('view/pageView.ejs', {
 			pages: this.options.pages
 		}));
 	}
