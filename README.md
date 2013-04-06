@@ -3,7 +3,7 @@ skin
 
 A viewable component in the aid of developing, publishing and maintaining web based information.
 
-##licence
+##Licence
 (The MIT License)
 
 Copyright (C) 2013 Willem van Heemstra willem@vanheemstrasystems.com
