@@ -4,7 +4,7 @@ skin
 The layout layer.
 
 *See [skin readme] [6] in the docs skin docs subfolder.*
-[6]: ../docs/master/skin/README.md "skin readme"
+[6]: ../../../docs/master/skin/README.md "skin readme"
 
 ##Licence
 (The MIT License)
