@@ -3,5 +3,5 @@
 </header>
 
 <div class="content">
-  <p><%= @data %></p>
+  <p><%= @data.title %></p>
 </div>
