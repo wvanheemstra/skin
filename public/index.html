@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html i18n-values="dir:textdirection;"
+      class="starting-up">
 <head>
   <meta charset=utf-8>
-  <title>App</title>
+  <title i18n-content="title">App</title>
   <link rel="stylesheet" href="/application.css" type="text/css" charset="utf-8">
   <script src="/application.js" type="text/javascript" charset="utf-8"></script>
   <script type="text/javascript" charset="utf-8">
@@ -13,9 +14,159 @@
       exports.app = new App({el: $("body")});      
     });
   </script>
-  
-  <!-- Getting started script - should be removed -->
-  <script src="http://maccman-spine.herokuapp.com/start.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body></body>
 </html>
+<script>
+    var loadTimeData = JSON.parse(localStorage.getItem("LoadTimeData"));
+    console.log('loadTimeData:');
+    console.log(loadTimeData);
+    var index = 0;
+    console.log('index:');
+    console.log(index);
+</script>
+<script>
+    var i18nTemplate = (function() {
+        /**
+         * This provides the handlers for the templating engine. The key is used as
+         * the attribute name and the value is the function that gets called for every
+         * single node that has this attribute.
+         * @type {Object}
+         */
+        var handlers = {
+            /**
+             * This handler sets the textContent of the element.
+             * @param {HTMLElement} element The node to modify.
+             * @param {string} key The name of the value in the dictionary.
+             * @param {LoadTimeData} dictionary The dictionary of strings to draw from.
+             * @param {int} index The index of the strings of the dictionary to draw from.
+             */
+            'i18n-content': function(element, key, dictionary, index) {
+                
+                console.log("key:");
+                console.log(key);             
+                
+                console.log("dictionary[index].data[key]:");
+                console.log(dictionary[index].data[key]);
+                /*element.textContent = dictionary.getString(key);*/
+                element.textContent = dictionary[index].data[key];
+            },
+            /**
+             * This handler adds options to a <select> element.
+             * @param {HTMLElement} select The node to modify.
+             * @param {string} key The name of the value in the dictionary. It should
+             *     identify an array of values to initialize an <option>. Each value,
+             *     if a pair, represents [content, value]. Otherwise, it should be a
+             *     content string with no value.
+             * @param {LoadTimeData} dictionary The dictionary of strings to draw from.
+             * @param {int} index The index of the strings of the dictionary to draw from.
+             */
+            'i18n-options': function(select, key, dictionary, index) {
+                var options = dictionary[index].getValue(key);
+                options.forEach(function(optionData) {
+                    
+                    console.log("optionData:");
+                    console.log(optionData);                      
+                    
+                    var option = typeof optionData == 'string' ?
+                            new Option(optionData) :
+                            new Option(optionData[1], optionData[0]);
+                    select.appendChild(option);
+                });
+            },
+            /**
+             * This is used to set HTML attributes and DOM properties. The syntax is:
+             *   attributename:key;
+             *   .domProperty:key;
+             *   .nested.dom.property:key
+             * @param {HTMLElement} element The node to modify.
+             * @param {string} attributeAndKeys The path of the attribute to modify
+             *     followed by a colon, and the name of the value in the dictionary.
+             *     Multiple attribute/key pairs may be separated by semicolons.
+             * @param {LoadTimeData} dictionary The dictionary of strings to draw from.
+             * @param {int} index The index of the strings of the dictionary to draw from.
+             */
+            'i18n-values': function(element, attributeAndKeys, dictionary, index) {
+                var parts = attributeAndKeys.replace(/\s/g, '').split(/;/);
+                parts.forEach(function(part) {
+                    
+                    console.log("part:");
+                    console.log(part);                    
+                    
+                    if (!part)
+                        return;
+
+                    var attributeAndKeyPair = part.match(/^([^:]+):(.+)$/);
+                    if (!attributeAndKeyPair)
+                        throw new Error('malformed i18n-values: ' + attributeAndKeys);
+
+                    var propName = attributeAndKeyPair[1];
+                    var propExpr = attributeAndKeyPair[2];
+                    
+                    console.log("propExpr:");
+                    console.log(propExpr);                 
+
+                    /*var value = dictionary[index].getValue(propExpr);*/
+                    var value = dictionary[index].data[propExpr];
+ 
+                    console.log("value:");
+                    console.log(value);      
+
+                    // Allow a property of the form '.foo.bar' to assign a value into
+                    // element.foo.bar.
+                    if (propName[0] == '.') {
+                        var path = propName.slice(1).split('.');
+                        var targetObject = element;
+                        while (targetObject && path.length > 1) {
+                            targetObject = targetObject[path.shift()];
+                        }
+                        if (targetObject) {
+                            targetObject[path] = value;
+                            // In case we set innerHTML (ignoring others) we need to
+                            // recursively check the content.
+                            if (path == 'innerHTML')
+                                process(element, dictionary, index);
+                        }
+                    } else {
+                        element.setAttribute(propName, value);
+                    }
+                });
+            }
+        };
+
+        var attributeNames = Object.keys(handlers);
+        var selector = '[' + attributeNames.join('],[') + ']';        
+        
+        /**
+         * Processes a DOM tree with the {@code dictionary} map.
+         * @param {HTMLElement} node The root of the DOM tree to process.
+         * @param {LoadTimeData} dictionary The dictionary to draw from.
+         * @param {int} index The index of the strings of the dictionary to draw from. 
+         */
+        function process(node, dictionary, index) {
+        
+            /* START: for testing purposes only */
+            console.log('i18nTemplate.process(node):');
+            console.log(node);
+            console.log('i18nTemplate.process(index):');
+            console.log(index);            
+            console.log('i18nTemplate.process(dictionary[index]):');
+            console.log(dictionary[index]); 
+            /* END: for testing purposes only */
+        
+            var elements = node.querySelectorAll(selector);
+            for (var element, i = 0; element = elements[i]; i++) {
+                for (var j = 0; j < attributeNames.length; j++) {
+                    var name = attributeNames[j];
+                    var attribute = element.getAttribute(name);
+                    if (attribute != null)
+                        handlers[name](element, attribute, dictionary, index);
+                }
+            }
+        }
+        return {
+            process: process
+        };
+    }());
+    i18nTemplate.process(document, loadTimeData, index);
+</script>

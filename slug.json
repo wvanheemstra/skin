@@ -1,4 +1,8 @@
 {
+  "main": "./app/index",  
+  "public": "./public",  
+  "css": "./css/index", 
+  "paths": ["./app"],  
   "dependencies": [
     "es5-shimify", 
     "json2ify", 
@@ -7,7 +11,8 @@
     "spine/lib/local",
     "spine/lib/ajax",
     "spine/lib/route",
-    "spine/lib/manager"
+    "spine/lib/manager",
+    "spine/lib/list"
   ],
   "libs": []
 }
