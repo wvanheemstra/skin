@@ -27,8 +27,10 @@ class Index extends Spine.Controller
     
     @append @sidebar, divide, @main
 
-    # Create an instance at the start
-    item = LoadTimeData.create(data: {textdirection: "ltr", title: "skin"})
+    # Create instances at the start, will come from the database in the future
+    
+    item = LoadTimeData.create(data: {textdirection: "ltr", title: "Administration"})
+    item = LoadTimeData.create(data: {textdirection: "ltr", title: "All"})
 
     LoadTimeData.fetch()
 

@@ -11,7 +11,7 @@ class LoadTimeData extends Spine.Model
     return @all() unless query
     query = query.toLowerCase()
     @select (item) ->
-      item.data?.toLowerCase().indexOf(query) isnt -1
+      item.data.title?.toLowerCase().indexOf(query) isnt -1
 
   # LoadTimeData(data: {textdirection: "ltr", title: "skin"})
   # LoadTimeData.save()
