@@ -1,0 +1,4 @@
+<div class="item">
+  <%= @data %>
+  <%- "<i>No Data</i>" unless @data %>                                          
+</div>
