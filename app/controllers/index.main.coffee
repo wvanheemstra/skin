@@ -1,5 +1,6 @@
 Spine = require('spine')
 LoadTimeData = require('models/loadTimeData')
+LoadTimeApp = require('models/loadTimeApp')
 $       = Spine.$
 
 class Show extends Spine.Controller

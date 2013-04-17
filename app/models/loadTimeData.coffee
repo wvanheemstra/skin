@@ -1,11 +1,17 @@
 Spine = require('spine')
+LoadTimeApp = require('models/loadTimeApp')
 
 class LoadTimeData extends Spine.Model
 # Configure name & attributes
   @configure 'LoadTimeData', 'data'
+  @hasMany 'loadTimeApps', 'models/loadTimeApp', 'fk_loadTimeApp'
   
   # Persist with Local Storage
   @extend Spine.Model.Local
+  
+  # Persist with AJAX
+  # @extend Spine.Model.Ajax
+  # @url '/loadTimeDatas' is the default
 
   @filter: (query) ->
     return @all() unless query

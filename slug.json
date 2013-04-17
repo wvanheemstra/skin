@@ -12,7 +12,8 @@
     "spine/lib/ajax",
     "spine/lib/route",
     "spine/lib/manager",
-    "spine/lib/list"
+    "spine/lib/list",
+    "spine/lib/relation"
   ],
   "libs": []
 }

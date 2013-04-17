@@ -1,7 +1,0 @@
-<header>
-  <a class="edit">Edit</a>
-</header>
-
-<div class="content">
-  <p><%= @data.title %></p>
-</div>
