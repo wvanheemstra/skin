@@ -34,11 +34,11 @@ class Index extends Spine.Controller
     )
     
     loadTimeData.loadTimeApps().create(
-      data: {name: "App1_Name", title: "App1_Title", belongsTo: ["All"]}
+      data: {name: "One", title: "One", belongsTo: ["All"]}
     )
 
     loadTimeData.loadTimeApps().create(
-      data: {name: "App2_Name", title: "App2_Title", belongsTo: ["All"]}
+      data: {name: "Two", title: "Two", belongsTo: ["All"]}
     )
         
     #@log('loadTimeData.loadTimeApps().model.all().length:')
@@ -51,6 +51,16 @@ class Index extends Spine.Controller
     loadTimeData.loadTimeApps().create(
       data: {name: "Persons", title: "Persons", belongsTo: ["All", "Administration"]}
     )
+
+
+    loadTimeData = LoadTimeData.create(
+      data: {textdirection: "ltr", title: "Other"}
+    )
+ 
+    loadTimeData.loadTimeApps().create(
+      data: {name: "Other", title: "Other", belongsTo: ["All", "Other"]}
+    )
+
 
     LoadTimeData.fetch()
 
