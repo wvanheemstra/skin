@@ -52,8 +52,6 @@ class Index extends Spine.Controller
       data: {name: "App3_Name", title: "App3_Title", belongsTo: ["All", "Administration"]}
     )
 
-    LoadTimeApp.fetch()
-
     LoadTimeData.fetch()
 
 module.exports = Index

@@ -1,20 +1,30 @@
 <header>
   <a class="edit">Edit</a>
 </header>
-
 <div class="content">
   <p><%= @data.title %></p>
-  <ul>
+  <div id="wrapper" style="margin:0px;width:100%">
   <% loadTimeApps = JSON.parse(localStorage.getItem("LoadTimeApp")) %>
   <% if loadTimeApps.length: %>
     <% for loadTimeApp in loadTimeApps: %>
       <% for belongsToLoadTimeData in loadTimeApp.data.belongsTo: %>
         <% if @data.title == belongsToLoadTimeData: %>
-          <li><%= loadTimeApp.data.title %></li>
+	  <div class="default icon">
+            <div class="header">
+              <p class="weekday">
+                  <%= loadTimeApp.data.title %>
+              </p>
+            </div>
+            <div class="paper">
+              <p class="daynumber">
+                  icon
+              </p>
+            </div>
+          </div>
         <% end %>
       <% end %>
     <% end %>
   <% else: %>
-    <li>No apps</li>
-  </ul>
+    No apps
+  </div>
 </div>

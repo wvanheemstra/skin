@@ -4,7 +4,7 @@ LoadTimeApp = require('models/loadTimeApp')
 class LoadTimeData extends Spine.Model
 # Configure name & attributes
   @configure 'LoadTimeData', 'data'
-  @hasMany 'loadTimeApps', 'models/loadTimeApp', 'fk_loadTimeApp'
+  @hasMany 'loadTimeApps', 'models/loadTimeApp'
   
   # Persist with Local Storage
   @extend Spine.Model.Local
