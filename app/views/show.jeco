@@ -8,7 +8,11 @@
   <% loadTimeApps = JSON.parse(localStorage.getItem("LoadTimeApp")) %>
   <% if loadTimeApps.length: %>
     <% for loadTimeApp in loadTimeApps: %>
-      <li><%= loadTimeApp.data.title %></li>
+      <% for belongsToLoadTimeData in loadTimeApp.data.belongsTo: %>
+        <% if @data.title == belongsToLoadTimeData: %>
+          <li><%= loadTimeApp.data.title %></li>
+        <% end %>
+      <% end %>
     <% end %>
   <% else: %>
     <li>No apps</li>

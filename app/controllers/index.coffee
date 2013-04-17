@@ -34,37 +34,25 @@ class Index extends Spine.Controller
     )
     
     loadTimeData1.loadTimeApps().create(
-      data: {name: "App1_Name", title: "App1_Title"}
+      data: {name: "App1_Name", title: "App1_Title", belongsTo: ["All"]}
     )
 
     loadTimeData1.loadTimeApps().create(
-      data: {name: "App2_Name", title: "App2_Title"}
+      data: {name: "App2_Name", title: "App2_Title", belongsTo: ["All"]}
+    )
+        
+    #@log('loadTimeData1.loadTimeApps().model.all().length:')
+    #@log(loadTimeData1.loadTimeApps().model.all().length)
+    
+    loadTimeData2 = LoadTimeData.create(
+      data: {textdirection: "ltr", title: "Administration"}
+    )
+ 
+    loadTimeData2.loadTimeApps().create(
+      data: {name: "App3_Name", title: "App3_Title", belongsTo: ["All", "Administration"]}
     )
 
-    @log('loadTimeData1:')
-    @log(loadTimeData1)
-
-    @log('loadTimeData1.loadTimeApps():')
-    @log(loadTimeData1.loadTimeApps())
-    
-    @log('loadTimeData1.loadTimeApps().model.all():')
-    @log(loadTimeData1.loadTimeApps().model.all())
-    
-    @log('loadTimeData1.loadTimeApps().model.all().length:')
-    @log(loadTimeData1.loadTimeApps().model.all().length)
-    
-    #loadTimeData1.loadTimeApps[0] = LoadTimeApp.create(data: {name: "App1", title: "App1_Title"})
-    
-    #LoadTimeApp.create(data: {name: "App1", title: "App1_Title"})
-    
-    #loadTimeData1.loadTimeApps().create(data: {name: "App1", title: "App1_Title"})
-    
-    #loadTimeData1.loadTimeApps().create(data: {name: "App1_2", title: "App1_2_Title"})
-    
-    #LoadTimeData.create(data: {textdirection: "ltr", title: "Administration"})
-    #loadTimeData1.loadTimeApps().create(data: {name: "App2", title: "App2Title"})
-
-    LoadTimeApp.fetch()   
+    LoadTimeApp.fetch()
 
     LoadTimeData.fetch()
 
