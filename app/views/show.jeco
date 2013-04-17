@@ -12,12 +12,12 @@
         <% if @data.title == belongsToLoadTimeData: %>
 	  <div class="default icon">
             <div class="header">
-              <p class="weekday">
+              <p class="title">
                   <%= loadTimeApp.data.title %>
               </p>
             </div>
-            <div class="paper">
-              <p class="daynumber">
+            <div class="body">
+              <p class="context">
                   *
               </p>
             </div>
