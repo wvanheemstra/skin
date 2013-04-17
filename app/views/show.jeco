@@ -1,6 +1,7 @@
 <header>
   <a class="edit">Edit</a>
 </header>
+
 <div class="content">
   <p><%= @data.title %></p>
   <div id="wrapper" style="margin:0px;width:100%">
@@ -17,7 +18,7 @@
             </div>
             <div class="paper">
               <p class="daynumber">
-                  icon
+                  *
               </p>
             </div>
           </div>
@@ -26,5 +27,6 @@
     <% end %>
   <% else: %>
     No apps
+  <% end %>
   </div>
 </div>
