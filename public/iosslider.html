@@ -91,27 +91,6 @@
             }
         </style>
         <link rel="stylesheet" href="resources/css/modal.css" /> 
-        <!-- jQuery library -->
-        <script type = 'text/javascript' src = '/resources/js/iosSlider/jquery-1.7.min.js'></script>
-        <!-- iosSlider plugin -->
-        <script type = 'text/javascript' src = '/resources/js/iosSlider/jquery.iosslider.js'></script>
-        <script>
-            $(document).ready(function() {
-                /* some custom settings */
-                $('.iosSlider').iosSlider({
-                        snapToChildren: true,
-                        scrollbar: true,
-                        scrollbarHide: false,
-                        desktopClickDrag: true,
-                        scrollbarLocation: 'bottom',
-                        scrollbarHeight: '6px',
-                        scrollbarBorder: '1px solid #000',
-                        scrollbarMargin: '0 30px 16px 30px',
-                        scrollbarOpacity: '0.75',
-                        keyboardControls: true
-                });
-            });
-        </script>
     </head>
     <body><p style="width:100%;border:0px solid red;text-align:center;">All</p>
         <!-- slider container -->
@@ -192,5 +171,26 @@
                 </div>
             </div>
         </div>
+        <!-- jQuery library -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <!-- iosSlider plugin -->
+        <script type = 'text/javascript' src = '/resources/js/iosSlider/jquery.iosslider.js'></script>
+        <script>
+            $(document).ready(function() {
+                /* some custom settings */
+                $('.iosSlider').iosSlider({
+                        snapToChildren: true,
+                        scrollbar: true,
+                        scrollbarHide: false,
+                        desktopClickDrag: true,
+                        scrollbarLocation: 'bottom',
+                        scrollbarHeight: '6px',
+                        scrollbarBorder: '1px solid #000',
+                        scrollbarMargin: '0 30px 16px 30px',
+                        scrollbarOpacity: '0.75',
+                        keyboardControls: true
+                });
+            });
+        </script>
     </body>
 </html>
