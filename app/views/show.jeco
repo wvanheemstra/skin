@@ -3,7 +3,7 @@
 </header>
 
 <div class="content">
-  <p><%= @data.title %></p>
+  <p style="width:100%;text-align:center;"><h2><%= @data.title %></h2></p>
   <div class='iosSlider'>
     <div class='slider'>
       <div id="wrapper" style="margin:0px;width:100%">
@@ -13,18 +13,27 @@
           <% for loadTimeApp in loadTimeApps: %>
             <% for belongsToLoadTimeData in loadTimeApp.data.belongsTo: %>
               <% if @data.title == belongsToLoadTimeData: %>
-	        <div class="default icon">
-                  <div class="header">
-                    <p class="title">
+                <a href="#<%= loadTimeApp.data.title %>" class="openModal">
+                  <div class="default icon">
+                    <div class="header">
+                      <p class="title">
                         <%= loadTimeApp.data.title %>
-                    </p>
-                  </div>
-                  <div class="body">
-                    <p class="context">
+                      </p>
+                    </div>
+                    <div class="body">
+                      <p class="context">
                         *
-                    </p>
+                      </p>
+                    </div>
                   </div>
-                </div>
+                </a>
+                <aside id="<%= loadTimeApp.data.title %>" class="modal">
+                  <div>
+                    <h2><%= loadTimeApp.data.title %></h2>
+                    <p>Some text here.</p>
+                    <a href="#close" title="Close">Close</a>
+                  </div>
+                </aside>
               <% end %>
             <% end %>
           <% end %>
