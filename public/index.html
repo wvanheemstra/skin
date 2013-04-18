@@ -6,12 +6,28 @@
   <title i18n-content="title">Loading...</title>
   <link rel="stylesheet" href="/application.css" type="text/css" charset="utf-8">
   <script src="/application.js" type="text/javascript" charset="utf-8"></script>
-  <script type="text/javascript" charset="utf-8">
+  <script src="/resources/js/jquery-1.7.min.js" type="text/javascript"></script>
+  <script src="/resources/js/jquery.iosslider.js" type="text/javascript"></script>
+  <script>
     var jQuery  = require("jqueryify");
     var exports = this;
     jQuery(function(){
       var App = require("index");
       exports.app = new App({el: $("#article")});      
+    });
+    /* some custom slider settings */
+    $('.iosSlider').iosSlider({
+      snapToChildren: true,
+      scrollbar: true,
+      scrollbarHide: false,
+      desktopClickDrag: true,
+      scrollbarLocation: 'bottom',
+      scrollbarHeight: '6px',
+      scrollbarBackground: 'url(_img/some-img.png) repeat 0 0',
+      scrollbarBorder: '1px solid #000',
+      scrollbarMargin: '0 30px 16px 30px',
+      scrollbarOpacity: '0.75',
+      onSlideChange: changeSlideIdentifier
     });
   </script>
 </head>
