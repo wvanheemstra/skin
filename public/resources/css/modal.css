@@ -165,20 +165,7 @@
 
 /* Open modal */
 a.openModal {
-    margin: 1em auto;
-    display: block;
-    width: 200px;
-    background: #ccc;
-    text-align: center;
-    padding: 10px;
-    border-radius: 7px;
-    background: #fff;
-    background: -moz-linear-gradient(#fff, #ddd);
-    background: -webkit-linear-gradient(#fff, #ddd);
-    background: -o-linear-gradient(#fff, #ddd);
-    text-shadow: 0 1px 0 #fff;
-    border: 1px solid rgba(0,0,0,0.1);
-    box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+
 }
 
 a.openModal:hover,
