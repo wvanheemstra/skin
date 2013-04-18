@@ -68,28 +68,29 @@
         <style>
             /* slider container */
             .iosSlider {
-                    /* required */
-                    position: relative;
-                    top: 0;
-                    left: 0;
-                    overflow: hidden;
-                    width: 970px;
-                    height: 600px;
+              /* required */
+              position: relative;
+              top: 0;
+              left: 0;
+              overflow: hidden;
+              width: 970px;
+              height: 600px;
             }
             /* slider */
             .iosSlider .slider {
-                    /* required */
-                    width: 100%;
-                    height: 100%;
+              /* required */
+              width: 100%;
+              height: 100%;
             }
             /* slide */
             .iosSlider .slider .slide {
-                    /* required */
-                    float: left;
-                    width: 970px;
-                    height: 600px;
+              /* required */
+              float: left;
+              width: 970px;
+              height: 600px;
             }
         </style>
+        <link rel="stylesheet" href="resources/css/modal.css" /> 
         <!-- jQuery library -->
         <script type = 'text/javascript' src = '/resources/js/iosSlider/jquery-1.7.min.js'></script>
         <!-- iosSlider plugin -->
@@ -112,7 +113,7 @@
             });
         </script>
     </head>
-    <body>
+    <body><p style="width:100%;border:0px solid red;text-align:center;">All</p>
         <!-- slider container -->
         <div class = 'iosSlider'>
             <!-- slider -->
@@ -120,7 +121,7 @@
                 <!-- slides -->
                 <div class = 'slide'>
                     <p style="width:100%;border:0px solid red;text-align:center;">Misc</p>
-                    <div class="default icon">
+                    <a href="#modalOne" class="openModal"><div class="default icon">
                       <div class="header">
                         <p class="title">
                             One
@@ -131,8 +132,15 @@
                             *
                         </p>
                       </div>
-                    </div>
-                    <div class="default icon">
+                    </div></a>
+                    <aside id="modalOne" class="modal">
+                        <div>
+                            <h2>Modal One</h2>
+                            <p>Some text here.</p>
+                            <a href="#close" title="Close">Close</a>
+                        </div>
+                    </aside>
+                    <a href="#modalTwo" class="openModal"><div class="default icon">
                       <div class="header">
                         <p class="title">
                             Two
@@ -143,7 +151,14 @@
                             *
                         </p>
                       </div>
-                    </div>
+                    </div></a>
+                    <aside id="modalTwo" class="modal">
+                        <div>
+                            <h2>Modal Two</h2>
+                            <p>Some text here.</p>
+                            <a href="#close" title="Close">Close</a>
+                        </div>
+                    </aside>
                 </div>
                 <div class = 'slide'>
                     <p style="width:100%;border:0px solid blue;text-align:center;">Administration</p>
