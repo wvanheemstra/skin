@@ -16,6 +16,7 @@ class Sidebar extends Spine.Controller
   
   constructor: ->
     super
+    @log("Index Sidebar Initialized")
     @html require('views/sidebar')()
     
     @list = new List

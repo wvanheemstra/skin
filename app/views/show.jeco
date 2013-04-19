@@ -2,6 +2,8 @@
   <a class="edit">Edit</a>
 </header>
 
+<% console.log('inside show') %>
+
 <div class="content">
   <p style="width:100%;text-align:center;"><h2><%= @data.title %></h2></p>
   <div id='iosSlider' class='iosSlider'>

@@ -22,24 +22,25 @@
     jQuery(function(){
       var App = require("index");
       exports.app = new App({el: $("#article")});  
-
-      console.log('app.index.main.show.__proto__.slider:');  
-      console.log(app.index.main.show.__proto__.slider);
+      console.log('app');  
+      console.log(app);
       
-      /* TO DO: attach .slider() to the right element */
+      var Slider = app.slider;
+      console.log('Slider:');
+      console.log(Slider);
+      
       var iosSlider = document.getElementById('iosSlider'); // a DOM element
  
       console.log('iosSlider:');  
       console.log(iosSlider);
       
-      /* testing */
-      //iosSlider.slider = function(message){alert(message);};
-      iosSlider.slider = app.index.main.show.__proto__.slider;
+      /* Attach Slider to the element */      
+      iosSlider = Slider;
       iosSlider.slider({
+          
           keyboardControls: true
       });
-      //iosSlider.slider('I am a happy slider'); // WORKS!, no bind it to the real slider method
-        
+      //iosSlider.slider('I am a happy slider'); // WORKS!        
       /* some custom slider settings */
       /*
       iosSlider.slider({
@@ -55,9 +56,8 @@
                 keyboardControls: true
       });
       */
-
     });
-  </script>
+  </script>   
 </body>
 </html>
 <script>

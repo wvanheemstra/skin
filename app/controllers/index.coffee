@@ -29,39 +29,38 @@ class Index extends Spine.Controller
     @append @sidebar, divide, @main
 
     # Create instances at the start, will come from the database in the future
-    loadTimeData = LoadTimeData.create(
+    loadTimeData1 = LoadTimeData.create(
       data: {textdirection: "ltr", title: "All"}
     )
     
-    loadTimeData.loadTimeApps().create(
+    loadTimeData1.loadTimeApps().create(
       data: {name: "One", title: "One", belongsTo: ["All"]}
     )
 
-    loadTimeData.loadTimeApps().create(
+    loadTimeData1.loadTimeApps().create(
       data: {name: "Two", title: "Two", belongsTo: ["All"]}
     )
         
     #@log('loadTimeData.loadTimeApps().model.all().length:')
     #@log(loadTimeData.loadTimeApps().model.all().length)
     
-    loadTimeData = LoadTimeData.create(
+    loadTimeData2 = LoadTimeData.create(
       data: {textdirection: "ltr", title: "Administration"}
     )
  
-    loadTimeData.loadTimeApps().create(
+    loadTimeData2.loadTimeApps().create(
       data: {name: "Persons", title: "Persons", belongsTo: ["All", "Administration"]}
     )
 
-
-    loadTimeData = LoadTimeData.create(
+    loadTimeData3 = LoadTimeData.create(
       data: {textdirection: "ltr", title: "Other"}
     )
  
-    loadTimeData.loadTimeApps().create(
+    loadTimeData3.loadTimeApps().create(
       data: {name: "Other", title: "Other", belongsTo: ["All", "Other"]}
     )
 
-
+    LoadTimeApp.fetch()
     LoadTimeData.fetch()
 
 module.exports = Index

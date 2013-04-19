@@ -2,14 +2,16 @@ require('lib/setup')
 
 Spine = require('spine')
 Index = require('controllers/index')
+Slider = require('controllers/slider')
 
 # app/index.coffee
 class App extends Spine.Controller
   constructor: ->
     super
-    @log("Initialized")
+    @log("App Initialized")
     @index = new Index
-    @append @index
+    @slider = new Slider
+    @append @index, @slider
 
     Spine.Route.setup()
 
