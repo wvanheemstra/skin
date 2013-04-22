@@ -969,7 +969,9 @@
     var methods = {
 		
 		init: function(options, node) {
-			
+			console.log('inside methods: init')
+                        console.log('inside methods: init: options: ' + JSON.stringify(options))
+                        console.log('inside methods: init: node: ' + node)
 			has3DTransform = helpers.has3DTransform();
 			
 			var settings = $.extend(true, {
@@ -1145,15 +1147,19 @@
 				function init() {
 					
 					helpers.autoSlidePause(sliderNumber);
-					
+					console.log('$(scrollerNode): ' + $(scrollerNode));
 					anchorEvents = $(scrollerNode).find('a');
 					onclickEvents = $(scrollerNode).find('[onclick]');
 					allScrollerNodeChildren = $(scrollerNode).find('*');
-					
+                                        
+                                        console.log('allScrollerNodeChildren: ' + allScrollerNodeChildren);
+                                        
+					console.log('$(stageNode): ' + $(stageNode));
 					$(stageNode).css('width', '');
 					$(stageNode).css('height', '');
 					$(scrollerNode).css('width', '');
 					slideNodes = $(scrollerNode).children().not('script').get();
+                                        console.log('slideNodes: ' +slideNodes);
 					slideNodeWidths = new Array();
 					slideNodeOuterWidths = new Array();
 					

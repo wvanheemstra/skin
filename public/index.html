@@ -37,7 +37,14 @@
       /* Attach Slider to the element */      
       iosSlider = Slider;
       iosSlider.slider({
-          
+          scrollbar: true,
+          scrollbarHide: false,
+          desktopClickDrag: true,
+          scrollbarLocation: 'bottom',
+          scrollbarHeight: '6px',
+          scrollbarBorder: '1px solid #000',
+          scrollbarMargin: '0 30px 16px 30px',
+          scrollbarOpacity: '0.75',
           keyboardControls: true
       });
       //iosSlider.slider('I am a happy slider'); // WORKS!        

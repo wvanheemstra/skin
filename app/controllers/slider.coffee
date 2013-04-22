@@ -56,13 +56,42 @@ class Slider extends Spine.Controller
   # used by slider 
   # private functions
   helpers =
+ 
+    explode: (delimiter, string, limit) ->
+      return null  if arguments.length < 2 or typeof delimiter is "undefined" or typeof string is "undefined"
+      return false  if delimiter is "" or delimiter is false or delimiter is null
+      return 0: ""  if typeof delimiter is "function" or typeof delimiter is "object" or typeof string is "function" or typeof string is "object"
+      delimiter = "1"  if delimiter is true
+
+      # Here we go...
+      delimiter += ""
+      string += ""
+      s = string.split(delimiter)
+      return s  if typeof limit is "undefined"
+
+      # Support for limit
+      limit = 1  if limit is 0
+
+      # Positive limit
+      if limit > 0
+        return s  if limit >= s.length
+        return s.slice(0, limit - 1).concat([s.slice(limit - 1).join(delimiter)])
+
+      # Negative limit
+      return []  if -limit >= s.length
+      s.splice s.length + limit
+      s 
+    #eof explode
+  
     showScrollbar: (settings, scrollbarClass) ->
+      console.log('inside showScrollbar')   
       if settings.scrollbarHide
         $("." + scrollbarClass).css
           opacity: settings.scrollbarOpacity
           filter: "alpha(opacity:" + (settings.scrollbarOpacity * 100) + ")"
 
     hideScrollbar: (settings, scrollTimeouts, j, distanceOffsetArray, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, sliderNumber) ->
+      console.log('inside hideScrollbar')    
       if settings.scrollbar and settings.scrollbarHide
         i = j
 
@@ -71,6 +100,7 @@ class Slider extends Spine.Controller
           i++
 
     hideScrollbarInterval: (newOffset, opacity, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, sliderNumber, settings) ->
+      console.log('inside hideScrollbarInterval')
       scrollbarDistance = (newOffset * -1) / (sliderMax[sliderNumber]) * (stageWidth - scrollMargin - scrollBorder - scrollbarWidth)
       helpers.setSliderOffset "." + scrollbarClass, scrollbarDistance
       $("." + scrollbarClass).css
@@ -78,6 +108,7 @@ class Slider extends Spine.Controller
         filter: "alpha(opacity:" + (settings.scrollbarOpacity * opacity * 100) + ")"
 
     slowScrollHorizontalInterval: (node, slideNodes, newOffset, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, activeChildOffset, originalOffsets, childrenOffsets, infiniteSliderWidth, numberOfSlides, slideNodeOuterWidths, sliderNumber, centeredSlideOffset, endOffset, settings) ->
+      console.log('inside slowScrollHorizontalInterval')
       if settings.infiniteSlider
         if newOffset <= (sliderMax[sliderNumber] * -1)
           scrollerWidth = $(node).width()
@@ -182,6 +213,7 @@ class Slider extends Spine.Controller
           $("." + scrollbarClass).css width: width + "px"
 
     slowScrollHorizontal: (node, slideNodes, scrollTimeouts, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, currentEventNode, snapOverride, centeredSlideOffset, settings) ->
+      console.log('inside slowScrollHorizontal')
       distanceOffsetArray = new Array()
       xScrollDistanceArray = new Array()
       nodeOffset = helpers.getSliderOffset(node, "x")
@@ -306,6 +338,7 @@ class Slider extends Spine.Controller
       helpers.hideScrollbar settings, scrollTimeouts, j, distanceOffsetArray, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, sliderNumber
 
     onSlideComplete: (settings, node, slideNode, newChildOffset, sliderNumber) ->
+      console.log('inside onSlideComplete')
       isChanged = (if (onChangeEventLastFired[sliderNumber] isnt newChildOffset) then true else false)
       args = new helpers.args("complete", settings, $(node), slideNode, newChildOffset, newChildOffset)
       $(node).parent().data "args", args
@@ -313,11 +346,9 @@ class Slider extends Spine.Controller
       onChangeEventLastFired[sliderNumber] = newChildOffset
 
     getSliderOffset: (node, xy) ->
-    
       console.log('inside getSliderOffset')
       console.log('inside getSliderOffset: node ' + JSON.stringify(node))
       console.log('inside getSliderOffset: xy ' + xy)  # WE HAVE COME THIS FAR !!    
-      
       sliderOffset = 0
       if xy is "x"
         xy = 4
@@ -326,30 +357,21 @@ class Slider extends Spine.Controller
       if has3DTransform and not isIe7 and not isIe8
         transforms = new Array("-webkit-transform", "-moz-transform", "transform")
         i = 0
-
-        console.log('transforms.length: ' + transforms.length)
-
         while i < transforms.length
           unless $(node).css(transforms[i]) is `undefined`
             if $(node).css(transforms[i]).length > 0
               transformArray = $(node).css(transforms[i]).split(",")
               break
-          console.log('i: '+ i)   
-          
-          
-          
-          
-          
-          
-          
-          i++  # HERE IS WHERE IT GOES WRONG, THE i GOES ROUND ONE TIME TOO MANY
-          
-          
-          
-          
-          
-          
-        sliderOffset = parseInt(transformArray[xy], 10)
+          i++
+        console.log('end of while') # It goes wrong in the next statement
+        console.log('transformArray: '+transformArray)# transformArray is undefined
+        
+        if transformArray is `undefined` # Added by wvh in case transformArray is undefined
+          sliderOffset = parseInt('0', 10)
+        else
+          sliderOffset = parseInt(transformArray[xy], 10)
+        
+        console.log('sliderOffset: '+sliderOffset)
       else
         sliderOffset = parseInt($(node).css("left"), 10)
       sliderOffset
@@ -494,6 +516,7 @@ class Slider extends Spine.Controller
       helpers.autoSlide node, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings
 
     autoSlide: (scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings) ->
+      console.log('inside helpers: autoSlide')
       return false  unless iosSliderSettings[sliderNumber].autoSlide
       helpers.autoSlidePause sliderNumber
       autoSlideTimeouts[sliderNumber] = setTimeout(->
@@ -504,7 +527,9 @@ class Slider extends Spine.Controller
       , settings.autoSlideTimer + settings.autoSlideTransTimer)
 
     autoSlidePause: (sliderNumber) ->
+      console.log('inside helpers: autoSlidePause: sliderNumber '+ sliderNumber)
       clearTimeout autoSlideTimeouts[sliderNumber]
+      console.log('inside helpers: autoSlidePause: clearTimeout: ' + clearTimeout)
 
     isUnselectable: (node, settings) ->
       return true  if $(node).closest(settings.unselectableSelector).size() is 1  unless settings.unselectableSelector is ""
@@ -568,7 +593,7 @@ class Slider extends Spine.Controller
   # used by slider
   methods = init: (options, node) -> #sof init
     console.log('inside slider init')
-    console.log('inside slider init: options ' + options)
+    console.log('inside slider init: options ' + JSON.stringify(options))
     console.log('inside slider init: node ' + node) #node is currently undefined   
     has3DTransform = helpers.has3DTransform()
     console.log('inside slider init: has3DTransform ' + has3DTransform)
@@ -624,7 +649,7 @@ class Slider extends Spine.Controller
       onSlideChange: ""
       onSlideComplete: ""
     , options)#eof settings
-    console.log('inside slider init: settings ' + settings)
+    console.log('inside slider init: settings ' + JSON.stringify(settings))
     node = this if node is `undefined`
     console.log('inside slider init: node ' + node)
     #sof return
@@ -632,20 +657,32 @@ class Slider extends Spine.Controller
       console.log('inside slider init: node ' + node)    
       init = ->
         console.log('inside slider init -> init')
+        console.log('inside slider init -> init: sliderNumber ' + sliderNumber)
         helpers.autoSlidePause sliderNumber
+        
+        console.log('$(scrollerNode): ' +JSON.stringify(helpers.explode ",",$(scrollerNode)))
+        
         anchorEvents = $(scrollerNode).find("a")
         onclickEvents = $(scrollerNode).find("[onclick]")
         allScrollerNodeChildren = $(scrollerNode).find("*")
+        
+        
+        console.log('allScrollerNodeChildren: ' + JSON.stringify(helpers.explode ",",$(allScrollerNodeChildren)))
+        
+        console.log('$(stageNode).css: '+ $(stageNode).css)
         $(stageNode).css "width", ""
         $(stageNode).css "height", ""
+        console.log('$(scrollerNode).css: '+ $(scrollerNode).css)
         $(scrollerNode).css "width", ""
         slideNodes = $(scrollerNode).children().not("script").get()
+        console.log('slideNodes: '+ JSON.stringify(helpers.explode ",",$(slideNodes)))
         slideNodeWidths = new Array()
         slideNodeOuterWidths = new Array()
         $(slideNodes).css "width", ""
         sliderMax[sliderNumber] = 0
         childrenOffsets = new Array()
         console.log('inside slider stageNode:' + stageNode)
+        console.log('inside slider $(stageNode).parent().width():' + $(stageNode).parent().width())
         containerWidth = $(stageNode).parent().width()
         console.log('inside slider containerWidth:' + containerWidth)
         
@@ -945,11 +982,11 @@ class Slider extends Spine.Controller
 
         isFirstInit = false
         
-        console.log('inside slider : isFirstInit' + isFirstInit)
+        console.log('inside slider : isFirstInit ' + isFirstInit)
         
         true # something goes wrong at this point
         
-      console.log('inside slider : around line 928')  
+        console.log('inside slider : around line 928')  
         
       scrollbarNumber++
       sliderNumber = scrollbarNumber
@@ -1393,6 +1430,7 @@ class Slider extends Spine.Controller
     #eof destroy
     #sof update
     update: (node) ->
+      console.log('inside slider update')
       node = this  if node is `undefined`
       $(node).each ->
         $this = $(this)
@@ -1408,6 +1446,7 @@ class Slider extends Spine.Controller
     #eof update
     #sof addSlide
     addSlide: (slideNode, slidePosition) ->
+      console.log('inside slider addSlide')
       @each ->
         $this = $(this)
         data = $this.data("iosslider")
@@ -1433,6 +1472,7 @@ class Slider extends Spine.Controller
     #eof addSlide
     #sof removeSlide
     removeSlide: (slideNumber) ->
+      console.log('inside slider removeSlide')
       @each ->
         $this = $(this)
         data = $this.data("iosslider")
@@ -1443,6 +1483,7 @@ class Slider extends Spine.Controller
     #eof removeSlide
     #sof goToSlide
     goToSlide: (slide, node) ->
+      console.log('inside slider goToSlide')
       node = this  if node is `undefined`
       $(node).each ->
         $this = $(this)
@@ -1454,6 +1495,7 @@ class Slider extends Spine.Controller
     #eof goToSlide
     #sof lock
     lock: ->
+      console.log('inside slider lock')
       @each ->
         $this = $(this)
         data = $this.data("iosslider")
@@ -1462,6 +1504,7 @@ class Slider extends Spine.Controller
     #eof lock
     #sof unlock
     unlock: ->
+      console.log('inside slider unlock')
       @each ->
         $this = $(this)
         data = $this.data("iosslider")
@@ -1470,6 +1513,7 @@ class Slider extends Spine.Controller
     #eof unlock
     #sof getData
     getData: ->
+      console.log('inside slider getData')
       @each ->
         $this = $(this)
         data = $this.data("iosslider")
@@ -1478,6 +1522,7 @@ class Slider extends Spine.Controller
     #eof getData
     #sof autoSlidePause
     autoSlidePause: ->
+      console.log('inside slider autoSlidePause')
       @each ->
         $this = $(this)
         data = $this.data("iosslider")
@@ -1487,6 +1532,7 @@ class Slider extends Spine.Controller
     #eof autoSlidePause
     #sof autoSlidePlay
     autoSlidePlay: ->
+      console.log('inside slider autoSlidePlay')
       @each ->
         $this = $(this)
         data = $this.data("iosslider")
@@ -1496,5 +1542,5 @@ class Slider extends Spine.Controller
         data
     #eof autoSlidePlay
   #eof methods
-
+console.log('module.exports = Slider')
 module.exports = Slider

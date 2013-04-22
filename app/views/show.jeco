@@ -8,8 +8,7 @@
   <p style="width:100%;text-align:center;"><h2><%= @data.title %></h2></p>
   <div id='iosSlider' class='iosSlider'>
     <div class='slider'>
-      <div id="wrapper" style="margin:0px;width:100%">
-        <div class='slide'>
+      <div class='slide'>
         <% loadTimeApps = JSON.parse(localStorage.getItem("LoadTimeApp")) %>
         <% if loadTimeApps.length: %>
           <% for loadTimeApp in loadTimeApps: %>
@@ -42,8 +41,12 @@
         <% else: %>
           No apps
         <% end %>
+        </div><!-- eof .slide -->
+
+        <div class='slide'>
+          Dummy Slide Content
         </div><!-- eof .slide --> 
-      </div><!-- eof wrapper -->
+
     </div><!-- eof .slider -->
   </div><!-- eof .iosSlider -->
 </div><!-- eof .content -->
