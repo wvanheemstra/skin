@@ -8,16 +8,22 @@ class Slider extends Spine.Controller
   constructor: ->
     super 
     @log("Slider Initialized")
+ 
+  setDOMElement: (domElement) ->
+    console.log('setDOMElement: '+domElement)
+    this.domElement = domElement
+    
+  getDOMElement: ->
+    this.domElement
     
   slider: (method) ->  
     if methods[method]
       console.log('slider method:' + method)
       methods[method].apply this, Array::slice.call(arguments, 1)
     else if typeof method is "object" or not method
-      console.log('slider without method')
-      console.log('slider without method: this ' + this)      
-      console.log('slider without method: arguments ' + JSON.stringify(arguments))        
-      methods.init.apply this, arguments  
+      console.log('slider without method')   
+      console.log('slider without method: arguments ' + arguments)
+      methods.init.apply this, arguments 
     else console.log('invalid method call!')
     console.log('end of slider')
   # used by slider  
@@ -593,8 +599,8 @@ class Slider extends Spine.Controller
   # used by slider
   methods = init: (options, node) -> #sof init
     console.log('inside slider init')
-    console.log('inside slider init: options ' + JSON.stringify(options))
-    console.log('inside slider init: node ' + node) #node is currently undefined   
+    console.log('inside slider init: options ' + JSON.stringify(helpers.explode ",",options))
+    console.log('inside slider init: node ' + JSON.stringify(helpers.explode ",",node)) #node is currently undefined   
     has3DTransform = helpers.has3DTransform()
     console.log('inside slider init: has3DTransform ' + has3DTransform)
     settings = $.extend(true,
@@ -650,29 +656,35 @@ class Slider extends Spine.Controller
       onSlideComplete: ""
     , options)#eof settings
     console.log('inside slider init: settings ' + JSON.stringify(settings))
-    node = this if node is `undefined`
+    #ORIGINAL node = this if node is `undefined`
+    node = this.domElement if node is `undefined`
     console.log('inside slider init: node ' + node)
-    #sof return
+    #sof return 
     $(node).each (i) ->
-      console.log('inside slider init: node ' + node)    
+      console.log('inside slider init: node ' + node)  
+
+      #sof init->init
       init = ->
         console.log('inside slider init -> init')
         console.log('inside slider init -> init: sliderNumber ' + sliderNumber)
         helpers.autoSlidePause sliderNumber
         
-        console.log('$(scrollerNode): ' +JSON.stringify(helpers.explode ",",$(scrollerNode)))
+        console.log('$(scrollerNode): ' +$(scrollerNode))
         
         anchorEvents = $(scrollerNode).find("a")
+        
+        console.log('anchorEvents: ' +anchorEvents)
+        
         onclickEvents = $(scrollerNode).find("[onclick]")
+        
+        console.log('onclickEvents: ' +onclickEvents)
+        
         allScrollerNodeChildren = $(scrollerNode).find("*")
         
+        console.log('allScrollerNodeChildren: ' + $(allScrollerNodeChildren))
         
-        console.log('allScrollerNodeChildren: ' + JSON.stringify(helpers.explode ",",$(allScrollerNodeChildren)))
-        
-        console.log('$(stageNode).css: '+ $(stageNode).css)
         $(stageNode).css "width", ""
         $(stageNode).css "height", ""
-        console.log('$(scrollerNode).css: '+ $(scrollerNode).css)
         $(scrollerNode).css "width", ""
         slideNodes = $(scrollerNode).children().not("script").get()
         console.log('slideNodes: '+ JSON.stringify(helpers.explode ",",$(slideNodes)))
@@ -791,7 +803,7 @@ class Slider extends Spine.Controller
         $(stageNode).css height: stageHeight
         helpers.setSliderOffset scrollerNode, childrenOffsets[activeChildOffsets[sliderNumber]]
         
-        console.log('inside slider : around line 733') #so far so good
+        console.log('inside slider : around line 806')
         
         if settings.infiniteSlider and not shortContent
           currentScrollOffset = helpers.getSliderOffset($(scrollerNode), "x")
@@ -846,7 +858,7 @@ class Slider extends Spine.Controller
         helpers.setSliderOffset scrollerNode, childrenOffsets[activeChildOffsets[sliderNumber]]
         $(scrollerNode).css cursor: "default"  unless settings.desktopClickDrag
         
-        console.log('inside slider : around line 788') # so far so good
+        console.log('inside slider : around line 861')
         
         if settings.scrollbar
           $("." + scrollbarBlockClass).css
@@ -951,7 +963,7 @@ class Slider extends Spine.Controller
           $(stageNode).bind "touchend.iosSliderEvent", ->
             helpers.autoSlide scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings  if not isAutoSlideToggleOn and not shortContent
 
-        console.log('inside slider : around line 893') # so far so good
+        console.log('inside slider : around line 966')
 
         $(stageNode).data "iosslider",
           obj: $this
@@ -984,10 +996,11 @@ class Slider extends Spine.Controller
         
         console.log('inside slider : isFirstInit ' + isFirstInit)
         
-        true # something goes wrong at this point
+        true
         
-        console.log('inside slider : around line 928')  
+        console.log('inside slider : end of init -> init') 
         
+      #eof init -> init
       scrollbarNumber++
       sliderNumber = scrollbarNumber
       scrollTimeouts = new Array()
@@ -1060,18 +1073,27 @@ class Slider extends Spine.Controller
       $(this).find("img").bind "dragstart.iosSliderEvent", (event) ->
         event.preventDefault()
 
-      console.log('inside slider : around line 1002')# something went wrong before we reached this
+      console.log('inside slider : around line 1076')
 
       settings.scrollbar = false  if settings.infiniteSlider
+
+      console.log('inside slider : around line 1080')
+
       if settings.scrollbar
         unless settings.scrollbarContainer is ""
           $(settings.scrollbarContainer).append "<div class = '" + scrollbarBlockClass + "'><div class = '" + scrollbarClass + "'></div></div>"
         else
           $(scrollerNode).parent().append "<div class = '" + scrollbarBlockClass + "'><div class = '" + scrollbarClass + "'></div></div>"
+      console.log('inside slider : around line 1087')
       return true  unless init()
+      
+      console.log('inside slider : around line 1090')     
+      
       $(this).find("a").bind "mousedown", helpers.preventDrag
       $(this).find("[onclick]").bind("click", helpers.preventDrag).each ->
         $(this).data "onclick", @onclick
+
+      console.log('inside slider : around line 1096') 
 
       newChildOffset = helpers.calcActiveOffset(settings, helpers.getSliderOffset($(scrollerNode), "x"), childrenOffsets, stageWidth, infiniteSliderOffset[sliderNumber], numberOfSlides, `undefined`, sliderNumber)
       tempOffset = (newChildOffset + infiniteSliderOffset[sliderNumber] + numberOfSlides) % numberOfSlides
@@ -1079,6 +1101,9 @@ class Slider extends Spine.Controller
       $(stageNode).data "args", args
       settings.onSliderLoaded args  unless settings.onSliderLoaded is ""
       onChangeEventLastFired[sliderNumber] = tempOffset
+      
+      console.log('inside slider : around line 1105')     
+      
       if iosSliderSettings[sliderNumber].responsiveSlides or iosSliderSettings[sliderNumber].responsiveSlideContainer
         orientationEvent = (if supportsOrientationChange then "orientationchange" else "resize")
         $(window).bind orientationEvent + ".iosSliderEvent", ->

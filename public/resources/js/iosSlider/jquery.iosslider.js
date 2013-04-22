@@ -72,7 +72,7 @@
 	/* private functions */
 	var helpers = {
     
-        showScrollbar: function(settings, scrollbarClass) {
+                showScrollbar: function(settings, scrollbarClass) {
 			
 			if(settings.scrollbarHide) {
 				$('.' + scrollbarClass).css({
@@ -682,7 +682,7 @@
 		
 		}, 
 
-        calcActiveOffset: function(settings, offset, childrenOffsets, stageWidth, infiniteSliderOffset, numberOfSlides, activeChildOffset, sliderNumber) {
+                calcActiveOffset: function(settings, offset, childrenOffsets, stageWidth, infiniteSliderOffset, numberOfSlides, activeChildOffset, sliderNumber) {
 
 			var isFirst = false;
 			var arrayOfOffsets = new Array();
@@ -1105,7 +1105,7 @@
 				var data = $this.data('iosslider');	
 				if(data != undefined) return true;
            		
-           		$(this).find('img').bind('dragstart.iosSliderEvent', function(event) { event.preventDefault(); });
+           			$(this).find('img').bind('dragstart.iosSliderEvent', function(event) { event.preventDefault(); });
 
 				if(settings.infiniteSlider) {
 					settings.scrollbar = false;

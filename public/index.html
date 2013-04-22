@@ -34,12 +34,12 @@
       console.log('iosSlider:');  
       console.log(iosSlider);
       
-      /* Attach Slider to the element */      
-      iosSlider = Slider;
-      iosSlider.slider({
+      /* Initiate the Slider for the DOM element */
+      Slider.setDOMElement(iosSlider);
+      Slider.slider({
           scrollbar: true,
           scrollbarHide: false,
-          desktopClickDrag: true,
+          desktopClickDrag: false,
           scrollbarLocation: 'bottom',
           scrollbarHeight: '6px',
           scrollbarBorder: '1px solid #000',
