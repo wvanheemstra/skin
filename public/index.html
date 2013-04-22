@@ -29,13 +29,11 @@
       console.log('Slider:');
       console.log(Slider);
       
-      var iosSlider = document.getElementById('iosSlider'); // a DOM element
- 
-      console.log('iosSlider:');  
-      console.log(iosSlider);
-      
       /* Initiate the Slider for the DOM element */
-      Slider.setDOMElement(iosSlider);
+      Slider.domElement = document.getElementById('iosSlider');
+      
+      console.log('Slider.domElement: ' + Slider.domElement);
+      
       Slider.slider({
           scrollbar: true,
           scrollbarHide: false,

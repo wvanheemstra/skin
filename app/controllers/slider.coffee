@@ -4,18 +4,12 @@ $ = Spine.$
 class Slider extends Spine.Controller
   # Set the HTML class
   className: 'slider'
-
+  domElement: new Array()
+  
   constructor: ->
     super 
     @log("Slider Initialized")
- 
-  setDOMElement: (domElement) ->
-    console.log('setDOMElement: '+domElement)
-    this.domElement = domElement
-    
-  getDOMElement: ->
-    this.domElement
-    
+      
   slider: (method) ->  
     if methods[method]
       console.log('slider method:' + method)
@@ -28,6 +22,7 @@ class Slider extends Spine.Controller
     console.log('end of slider')
   # used by slider  
   # sof global variables
+  domElement = this.domElement
   scrollbarNumber = 0
   xScrollDistance = 0
   yScrollDistance = 0
@@ -602,7 +597,8 @@ class Slider extends Spine.Controller
     console.log('inside slider init: options ' + JSON.stringify(helpers.explode ",",options))
     console.log('inside slider init: node ' + JSON.stringify(helpers.explode ",",node)) #node is currently undefined   
     has3DTransform = helpers.has3DTransform()
-    console.log('inside slider init: has3DTransform ' + has3DTransform)
+    domElement = this.domElement
+    console.log('inside slider init: has3DTransform ' + has3DTransform)   
     settings = $.extend(true,
       elasticPullResistance: 0.6
       frictionCoefficient: 0.92
@@ -657,12 +653,13 @@ class Slider extends Spine.Controller
     , options)#eof settings
     console.log('inside slider init: settings ' + JSON.stringify(settings))
     #ORIGINAL node = this if node is `undefined`
-    node = this.domElement if node is `undefined`
+    console.log('this.domElement: ' + this.domElement)    
+    node = this.domElement if node is `undefined`  #this.domElement is set.. GREAT
     console.log('inside slider init: node ' + node)
     #sof return 
     $(node).each (i) ->
       console.log('inside slider init: node ' + node)  
-
+      console.log('inside slider init: node ' +JSON.stringify(helpers.explode ",",node))
       #sof init->init
       init = ->
         console.log('inside slider init -> init')
@@ -670,6 +667,7 @@ class Slider extends Spine.Controller
         helpers.autoSlidePause sliderNumber
         
         console.log('$(scrollerNode): ' +$(scrollerNode))
+        console.log('$(scrollerNode): ' +JSON.stringify(helpers.explode ",",$(slideNodes)))
         
         anchorEvents = $(scrollerNode).find("a")
         
@@ -681,7 +679,7 @@ class Slider extends Spine.Controller
         
         allScrollerNodeChildren = $(scrollerNode).find("*")
         
-        console.log('allScrollerNodeChildren: ' + $(allScrollerNodeChildren))
+        console.log('allScrollerNodeChildren: ' + $(allScrollerNodeChildren)) # the allScrollerNodeChildren should have HTMLDivElement(s)
         
         $(stageNode).css "width", ""
         $(stageNode).css "height", ""
