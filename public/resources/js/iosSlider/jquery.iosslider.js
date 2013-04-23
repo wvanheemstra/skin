@@ -1183,7 +1183,8 @@
 						'webkitPerspective': 1000,
 						'webkitBackfaceVisibility': 'hidden',
 						'-ms-touch-action': 'pan-y',
-						width: stageWidth
+						width: stageWidth,
+                                                border: '1px solid red'
 					});
 					
 					$(settings.unselectableSelector).css({

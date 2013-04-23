@@ -35,17 +35,43 @@
                     <a href="#close" title="Close">Close</a>
                   </div>
                 </aside>
-              <% end %>
-            <% end %>
-          <% end %>
-        <% else: %>
+              <% end %><!-- eof if -->
+            <% end %><!-- eof for -->
+          <% end %><!-- eof for -->
+        <% else: %><!-- eof if -->
           No apps
-        <% end %>
-        </div><!-- eof .slide -->
+        <% end %><!-- eof else -->
+      </div><!-- eof .slide -->
 
-        <div class='slide'>
-          Dummy Slide Content
-        </div><!-- eof .slide --> 
+      <div class='slide'>
+        <div class="default icon">
+          <div class="header">
+            <p class="title">
+              Dummy 2
+            </p>
+          </div>
+          <div class="body">
+            <p class="context">
+              *
+            </p>
+          </div>
+        </div>
+      </div><!-- eof .slide --> 
+
+      <div class='slide'>
+        <div class="default icon">
+          <div class="header">
+            <p class="title">
+              Dummy 3
+            </p>
+          </div>
+          <div class="body">
+            <p class="context">
+              *
+            </p>
+          </div>
+        </div>
+      </div><!-- eof .slide --> 
 
     </div><!-- eof .slider -->
   </div><!-- eof .iosSlider -->
