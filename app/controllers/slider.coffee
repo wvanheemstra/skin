@@ -6,7 +6,7 @@ class Slider extends Spine.Controller
   className: 'slider'
   domElement: new Array()
   
-  # TO DO:  REPLACE $(this) EVERYWHERE WITH $(domElement) !!!!!!!!
+  # DONE:  REPLACED $(this) EVERYWHERE WITH $(domElement)
   
   constructor: ->
     super 
@@ -195,18 +195,16 @@ class Slider extends Spine.Controller
             console.log('end of if settings.infiniteSlider')
             
       slideChanged = false
-      
-      
+
       console.log('inside slider: settings: '+settings)# WORKS
-      console.log('inside slider: newOffset: '+newOffset)# FAILS ... IS NAN... FIX IT !!!!!!!!!!
+      console.log('inside slider: newOffset: '+newOffset)# WORKS
       console.log('inside slider: childrenOffsets: '+childrenOffsets)# WORKS
       console.log('inside slider: stageWidth: '+stageWidth)# WORKS
       console.log('inside slider: infiniteSliderOffset[sliderNumber]: '+infiniteSliderOffset[sliderNumber])# WORKS
       console.log('inside slider: numberOfSlides: '+numberOfSlides)# WORKS
       console.log('inside slider: activeChildOffset: '+activeChildOffset)# WORKS
       console.log('inside slider: sliderNumber: '+sliderNumber)# WORKS
-      
-      
+
       newChildOffset = helpers.calcActiveOffset(settings, newOffset, childrenOffsets, stageWidth, infiniteSliderOffset[sliderNumber], numberOfSlides, activeChildOffset, sliderNumber)
       
       console.log('inside slider: newChildOffset: '+newChildOffset) #FAILS AS IT IS UNDEFINED... FIX IT
@@ -226,16 +224,12 @@ class Slider extends Spine.Controller
       activeChildOffsets[sliderNumber] = newChildOffset
       activeChildInfOffsets[sliderNumber] = tempOffset
       newOffset = Math.floor(newOffset)
-      
-      
-      
+
       #CHECK IF WE CALL helpers.setSliderOffset with valid arguments
       console.log('inside slider: around line 215')
       console.log('inside slider: activeChildOffsets[sliderNumber]: '+activeChildOffsets[sliderNumber]) #THIS FAILS ... IT IS UNDEFINED .. FIX IT
       console.log('inside slider: newOffset: '+newOffset) #THIS FAILS ... IT IS NAN .. FIX IT
-      
-      
-      
+
       helpers.setSliderOffset node, newOffset
       if settings.scrollbar
         scrollbarDistance = Math.floor((newOffset * -1 - sliderMin[sliderNumber] + centeredSlideOffset) / (sliderMax[sliderNumber] - sliderMin[sliderNumber] + centeredSlideOffset) * (scrollbarStageWidth - scrollMargin - scrollbarWidth))
@@ -366,17 +360,12 @@ class Slider extends Spine.Controller
         if (j is jStart) or (Math.abs(distanceOffsetArray[j] - lastCheckOffset) > 1) or (j >= (distanceOffsetArray.length - 2))
           lastCheckOffset = distanceOffsetArray[j]
           
-          
-          
-          
           #WARNING below line added by wvh in case centeredSlideOffset is 'undefined'
           console.log('inside slider : around line 342') 
           console.log('inside slider : centeredSlideOffset: '+centeredSlideOffset) 
           if centeredSlideOffset is `undefined`
             centeredSlideOffset = 0
-          
-          
-          
+
           scrollTimeouts[scrollTimeouts.length] = helpers.slowScrollHorizontalIntervalTimer(scrollIntervalTime * j, node, slideNodes, distanceOffsetArray[j], scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, newChildOffset, originalOffsets, childrenOffsets, infiniteSliderWidth, numberOfSlides, slideNodeOuterWidths, sliderNumber, centeredSlideOffset, endOffset, settings)
         j = j + 2
       slideChanged = false
@@ -399,8 +388,6 @@ class Slider extends Spine.Controller
 
     getSliderOffset: (node, xy) ->
       console.log('inside getSliderOffset')
-      console.log('inside getSliderOffset: node ' + node)
-      console.log('inside getSliderOffset: xy ' + xy)  # WE HAVE COME THIS FAR !!    
       sliderOffset = 0
       if xy is "x"
         xy = 4
@@ -422,8 +409,7 @@ class Slider extends Spine.Controller
           sliderOffset = parseInt('0', 10)
         else
           sliderOffset = parseInt(transformArray[xy], 10)
-        
-        console.log('sliderOffset: '+sliderOffset)
+
       else
         sliderOffset = parseInt($(node).css("left"), 10)
       console.log('end of getSliderOffset: '+sliderOffset)  
@@ -437,7 +423,6 @@ class Slider extends Spine.Controller
           webkitTransform: "matrix(1,0,0,1," + sliderOffset + ",0)"
           MozTransform: "matrix(1,0,0,1," + sliderOffset + ",0)"
           transform: "matrix(1,0,0,1," + sliderOffset + ",0)"
-
       else
         $(node).css left: sliderOffset + "px"
 
