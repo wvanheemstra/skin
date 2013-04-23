@@ -44,18 +44,37 @@
       </div><!-- eof .slide -->
 
       <div class='slide'>
-        <div class="default icon">
-          <div class="header">
-            <p class="title">
-              Dummy 2
-            </p>
+        <a href="#Dummy%202" class="openModal">
+          <div class="default icon">
+            <div class="header">
+              <p class="title">
+                Dummy 2
+              </p>
+            </div>
+            <div class="body">
+              <p class="context">
+                *
+              </p>
+            </div>
           </div>
-          <div class="body">
-            <p class="context">
-              *
-            </p>
-          </div>
-        </div>
+        </a>
+        <aside id="Dummy%202" class="modal">
+          <div><!-- bof div modal -->
+            <ul id="tabs">
+              <li><a href="#" name="tab1">One</a></li>
+              <li><a href="#" name="tab2">Two</a></li>
+              <li><a href="#" name="tab3">Three</a></li>
+              <li><a href="#" name="tab4">Four</a></li>    
+            </ul>
+            <div id="content"> 
+              <div id="tab1">Content of Tab One</div>
+              <div id="tab2">Content of Tab Two</div>
+              <div id="tab3">Content of Tab Three</div>
+              <div id="tab4">Content of Tab Four</div>
+            </div>
+            <a href="#close" title="Close">Close</a>
+          </div><!-- eof div modal -->
+        </aside>
       </div><!-- eof .slide --> 
 
       <div class='slide'>

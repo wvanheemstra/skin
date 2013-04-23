@@ -3,6 +3,7 @@ require('lib/setup')
 Spine = require('spine')
 Index = require('controllers/index')
 Slider = require('controllers/slider')
+Tabs = require('controllers/tabs')
 
 # app/index.coffee
 class App extends Spine.Controller
@@ -11,7 +12,8 @@ class App extends Spine.Controller
     @log("App Initialized")
     @index = new Index
     @slider = new Slider
-    @append @index, @slider
+    @tabs = new Tabs
+    @append @index, @slider, @tabs
 
     Spine.Route.setup()
 
