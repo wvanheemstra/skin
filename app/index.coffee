@@ -13,7 +13,7 @@ class App extends Spine.Controller
     @index = new Index
     @slider = new Slider
     @tabs = new Tabs
-    @append @index, @slider, @tabs
+    @append @index.active(), @slider, @tabs
 
     Spine.Route.setup()
 

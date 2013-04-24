@@ -24,7 +24,7 @@ class Index extends Spine.Controller
         @sidebar.active(params)
         @main.show.active(params)
     
-    divide = $('<div />').addClass('vdivide')
+    divide = $('<div><span /></div>').addClass('vdivide')
     
     @append @sidebar, divide, @main
 

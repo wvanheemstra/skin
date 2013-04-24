@@ -5,5 +5,5 @@
 <div class="items"></div>
 
 <footer>
-  <button>New LoadTimeData</button>
+  <button>Add Group</button>
 </footer>

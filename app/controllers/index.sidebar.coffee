@@ -13,6 +13,7 @@ class Sidebar extends Spine.Controller
   events:
     'keyup input': 'filter'
     'click footer button': 'create'
+    'click vdivide span': 'resize'
   
   constructor: ->
     super
@@ -45,5 +46,9 @@ class Sidebar extends Spine.Controller
   create: ->
     item = LoadTimeData.create()
     @navigate('/index', item.id, 'edit')
+    @log('Sidebar - create call received')
+    
+  resize: ->
+    @log('Sidebar - resize call received')
     
 module.exports = Sidebar

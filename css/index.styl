@@ -93,7 +93,20 @@ header#header h1
       vbg-gradient(#ffffff, #dedfe0)
       box-shadow(0, -1px, 2px, rgba(0, 0, 0, 0.1))
       text-align: right;
-  
+
+  .vdivide
+      span
+        position absolute
+        top 240px
+        height 40px
+        width 6px
+        background-color: rgb(185, 185, 185);
+        background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+        background-size: 5px 5px;
+        &:hover
+          background-color: rgb(85, 85, 85);
+          cursor pointer
+
   .main
     vbox()
     box-flex(1)
