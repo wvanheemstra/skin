@@ -10,6 +10,9 @@ Sidebar = require('controllers/index.sidebar')
 class Index extends Spine.Controller
   className: 'index'
 
+  events:
+    'click .vdivide span': 'resize'
+
   constructor: ->
     super
 
@@ -62,5 +65,8 @@ class Index extends Spine.Controller
 
     LoadTimeApp.fetch()
     LoadTimeData.fetch()
+  
+  resize: ->
+    @sidebar.resize()
 
 module.exports = Index

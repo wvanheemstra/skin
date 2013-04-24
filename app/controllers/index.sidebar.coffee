@@ -13,7 +13,7 @@ class Sidebar extends Spine.Controller
   events:
     'keyup input': 'filter'
     'click footer button': 'create'
-    'click vdivide span': 'resize'
+    'keyup .vdivide span': 'resize'
   
   constructor: ->
     super
@@ -37,10 +37,12 @@ class Sidebar extends Spine.Controller
     @render()
     
   render: =>
+    @log('Sidebar - call received to render')
     index = LoadTimeData.filter(@query)
     @list.render(index)
     
   change: (item) =>
+    @log('Sidebar - call received to change item.id: '+item.id)
     @navigate '/index', item.id
     
   create: ->
@@ -51,5 +53,11 @@ class Sidebar extends Spine.Controller
     
   resize: ->
     @log('Sidebar - resize call received')
+    if(parseInt(this.el[0].style.width) == 0)
+      this.el[0].style.width = '300px'
+      this.el[0].style.visibility = 'visible'
+    else
+      this.el[0].style.width = '0px'
+      this.el[0].style.visibility = 'hidden'
     
 module.exports = Sidebar
