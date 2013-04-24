@@ -44,9 +44,10 @@ class Sidebar extends Spine.Controller
     @navigate '/index', item.id
     
   create: ->
-    item = LoadTimeData.create()
-    @navigate('/index', item.id, 'edit')
     @log('Sidebar - create call received')
+    item = LoadTimeData.create()
+    @log(item)
+    @navigate('/index', item.id, 'edit')
     
   resize: ->
     @log('Sidebar - resize call received')

@@ -1,4 +1,8 @@
 <div class="item">
-  <%= @data.title %>
-  <%- "<i>No Data</i>" unless @data.title %>                                          
+  <% if @data is `undefined`: %>
+    ...
+  <% else: %>
+    <%= @data.title %>
+    <%- "<i>No Data</i>" unless @data.title %> 
+  <% end %>                       
 </div>
