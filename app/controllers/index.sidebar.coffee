@@ -22,7 +22,7 @@ class Sidebar extends Spine.Controller
     
     @list = new List
       el: @items, 
-      template: require('views/item'), 
+      template: require('views/item'),
       selectFirst: true
 
     @list.bind 'change', @change
