@@ -53,18 +53,15 @@ class Edit extends Spine.Controller
     
   submit: (e) ->
     e.preventDefault()
-    @log('Main - received call to submit')
-    @log(@item.fromForm(@form))
     data = {}
     data['title'] = @item.fromForm(@form).title
-    @log(data)
+    delete @item.fromForm(@form).title
     @item.fromForm(@form).data = data
-    @log(@item.fromForm(@form))
     @item.fromForm(@form).save()
     @navigate('/index', @item.id)
     
   delete: ->
-    @item.destroy() if confirm('Are you sure?')
+    @item.destroy() if confirm('Are you sure to delete ?')
 
 class Main extends Spine.Stack
   className: 'main stack'
