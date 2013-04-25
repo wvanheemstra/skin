@@ -72,14 +72,12 @@
       Tabs.domElement = document.getElementById('Dummy%202');
       Tabs.tabs({});<!-- eof Tabs -->
               
-              
       $('#login-trigger').click(function(){
 	$(this).next('#login-content').slideToggle();
 	$(this).toggleClass('active');	
 	if ($(this).hasClass('active')) $(this).find('span').html('&#x25B2;')
 	else $(this).find('span').html('&#x25BC;')
-      })/* eof login-trigger */        
-              
+      })/* eof login-trigger */ 
     });
   </script>
   <script>

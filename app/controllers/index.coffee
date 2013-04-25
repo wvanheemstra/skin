@@ -22,11 +22,11 @@ class Index extends Spine.Controller
     @routes
       '/index/:id/edit': (params) -> 
         @sidebar.active(params)
-        @main.edit.active(params)
+        @main.edit.active(params)    
       '/index/:id': (params) ->
         @sidebar.active(params)
         @main.show.active(params)
-    
+        
     divide = $('<div><span /></div>').addClass('vdivide')
     
     @append @sidebar, divide, @main
