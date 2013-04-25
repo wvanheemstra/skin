@@ -1,24 +1,9 @@
-/***
- * Copyright (c) 2012 http://www.dforge.net
- *
- * More information can be found at:
- * http://www.dforge.net/2012/11/19/slidingpane-slide-page-to-reveal-content-underneath-using-html5javascript
- *
- * This software is released under MIT license:
- * http://www.dforge.net/mit-license.txt
- *
- * Version 0.8 - Last updated: 2012.11.17
- * Version 0.8.1 - Last updated: 2012.12.11 - Fixed bug with complex SlidingPanes embedded in table cells where the
- *                                            hidden div was not positioned correctly. Component wrapper needed to be
- *                                            set to relative positioning.
- */
-
 var SlidingPane = function (config) {
   /* Internal use, but exposed in case you want to query it */
   this.targetElement = null;
   this.hiddenPaneElement = null;
   this.isOpen = false;
-  this.pre = 'dforge-';
+  this.pre = 'slidingpane-';
 
   /* Options */
   this.targetId = null;

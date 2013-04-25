@@ -4,6 +4,7 @@ Spine = require('spine')
 Index = require('controllers/index')
 Slider = require('controllers/slider')
 Tabs = require('controllers/tabs')
+SlidingPane = require('controllers/slidingpane')
 
 # app/index.coffee
 class App extends Spine.Controller
@@ -13,7 +14,8 @@ class App extends Spine.Controller
     @index = new Index
     @slider = new Slider
     @tabs = new Tabs
-    @append @index.active(), @slider, @tabs
+    @slidingpane = new SlidingPane
+    @append @index.active(), @slider, @tabs, @slidingpane
 
     Spine.Route.setup()
 

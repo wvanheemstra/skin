@@ -1,92 +1,157 @@
 <!DOCTYPE html>
 <html i18n-values="dir:textdirection;"
       class="starting-up">
-<head>
-  <meta charset=utf-8>
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="viewport" content="user-scalable=no, width=device-width" />
-  <title i18n-content="title">Loading...</title>
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="apple-touch-startup-image" href="/startup-ipad.png" />
-  <link rel="stylesheet" href="/application.css" type="text/css" charset="utf-8">
-  <script src="/application.js" type="text/javascript" charset="utf-8"></script>
-</head>
-<body ontouchmove="BlockMove(event);">
-  <header id="header">
-      <h1>Your Company</h1>
-      <nav>
-        <ul>
-            <li id="login">
-                <a id="login-trigger" href="#">
-                    Log in <span>▼</span>
-		</a>
-		<div id="login-content">
-                    <form>
-			<fieldset id="inputs">
-                        	<input id="username" type="email" name="Email" placeholder="Your email address" required>   
-				<input id="password" type="password" name="Password" placeholder="Password" required>
-			</fieldset>
-			<fieldset id="actions">
-				<input type="submit" id="submit" value="Log in">
-				<label><input type="checkbox" checked="checked"> Keep me signed in</label>
-			</fieldset>
-                    </form>
-		</div>                     
-            </li>
-            <li id="signup">
-		<a href="">Sign up</a>
-            </li>
-        </ul>
-    </nav>
-  </header>
-  <article id="article"></article>
-  <div id="background">
-    <img src="resources/images/backgrounds/illusion_of_depth_bg.png" class="stretch" alt="" />
-  </div>
-  <script>
-    var jQuery  = require("jqueryify");
-    var exports = this;
-    jQuery(function(){
-      var App = require("index");
-      exports.app = new App({el: $("#article")});  
-      
-      var Slider = app.slider;
-      /* Initiate the Slider for the DOM element */
-      Slider.domElement = document.getElementById('iosSlider');
-      Slider.slider({
-          scrollbar: true,
-          scrollbarHide: false,
-          desktopClickDrag: true,
-          scrollbarLocation: 'bottom',
-          scrollbarHeight: '6px',
-          scrollbarBorder: '1px solid #000',
-          scrollbarMargin: '0 30px 16px 30px',
-          scrollbarOpacity: '0.75',
-          keyboardControls: true,
-          autoSlide: false
-      });<!-- eof Slider -->
-      
-      var Tabs = app.tabs;
-      /* Initiate the Tabs for the DOM element */
-      Tabs.domElement = document.getElementById('Dummy%202');
-      Tabs.tabs({});<!-- eof Tabs -->
-              
-      $('#login-trigger').click(function(){
-	$(this).next('#login-content').slideToggle();
-	$(this).toggleClass('active');	
-	if ($(this).hasClass('active')) $(this).find('span').html('&#x25B2;')
-	else $(this).find('span').html('&#x25BC;')
-      })/* eof login-trigger */ 
-    });
-  </script>
-  <script>
-   function BlockMove(event) {
-    // Tell Safari not to move the window.
-    event.preventDefault() ;
-   }
-  </script>
-</body>
+    <head>
+        <meta charset=utf-8>
+        <meta name="apple-touch-fullscreen" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title i18n-content="title">Your Company</title>
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="apple-touch-startup-image" href="/startup-ipad.png" />
+        <link rel="stylesheet" href="/application.css" type="text/css" charset="utf-8">
+        <!-- START TEMPORARY -->
+        <script src="/resources/js/slidingPane/sliding-pane.js" type="text/javascript" charset="utf-8"></script>
+        <!-- END TEMPORARY -->
+        <script src="/application.js" type="text/javascript" charset="utf-8"></script>
+    </head>
+    <body ontouchmove="BlockMove(event);">
+        <header id="header">
+            <h1>Your Company</h1>
+            <nav>
+                <ul>
+                    <li id="login">
+                        <a id="login-trigger" href="#">
+                            Log in <span>▼</span>
+                        </a>
+                        <div id="login-content">
+                            <form>
+                                <fieldset id="inputs">
+                                    <input id="username" type="email" name="Email" placeholder="Your email address" required>   
+                                    <input id="password" type="password" name="Password" placeholder="Password" required>
+                                </fieldset>
+                                <fieldset id="actions">
+                                    <input type="submit" id="submit" value="Log in">
+                                    <label><input type="checkbox" checked="checked"> Keep me signed in</label>
+                                </fieldset>
+                            </form>
+                        </div>                     
+                    </li>
+                    <li id="signup">
+                        <a href="">Sign up</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <article id="article"></article>
+        <div id="background">
+            <img src="resources/images/backgrounds/illusion_of_depth_bg.png" class="stretch" alt="" />
+        </div>
+        <script>
+            var jQuery = require("jqueryify");
+            var exports = this;
+            jQuery(function() {
+                var App = require("index");
+                exports.app = new App({el: $("#article")});
+
+                var Slider = app.slider;
+                /* Initiate the Slider for the DOM element */
+                Slider.domElement = document.getElementById('iosSlider');
+                Slider.slider({
+                    scrollbar: true,
+                    scrollbarHide: false,
+                    desktopClickDrag: true,
+                    scrollbarLocation: 'bottom',
+                    scrollbarHeight: '6px',
+                    scrollbarBorder: '1px solid #000',
+                    scrollbarMargin: '0 30px 16px 30px',
+                    scrollbarOpacity: '0.75',
+                    keyboardControls: true,
+                    autoSlide: false
+                });/* eof Slider */
+
+                var Tabs = app.tabs;
+                /* Initiate the Tabs for the DOM element */
+                Tabs.domElement = document.getElementById('Dummy%202');
+                Tabs.tabs({});/* eof Tabs */
+
+                var SlidingPane = app.slidingpane;
+                /* Initiate the SlidingPane for the DOM element */
+                SlidingPane.domElement = document.getElementById('Foo');
+                SlidingPane.slidingpane({
+                    id: 'my-div-to-hide',
+                    targetId: 'my-div',
+                    side: 'bottom',
+                    width: 1060,
+                    height: 400,
+                    duration: 0.75,
+                    timingFunction: 'ease'
+                });/* eof SlidingPane */
+
+                //      var settingsPane = null;
+                //      function r(f){/in/.test(document.readyState)?setTimeout('r('+f+')',9):f()}; // However you want to do document ready.
+                //      r(function () {
+                //        settingsPane = new SlidingPane({
+                //          id: 'my-div-to-hide',
+                //          targetId: 'my-div',
+                //          side: 'bottom',
+                //          width: 200,
+                //          duration: 0.75,
+                //          timingFunction: 'ease'
+                //        });
+                //        // Add various handlers
+                //        document.querySelector('#toggle').addEventListener('click', function () {
+                //          settingsPane.toggle();
+                //        });
+                //        document.querySelector('#save').addEventListener('click', function () {
+                //          settingsPane.close();
+                //        });
+                //      });
+                /* eof settingsPane */
+
+                $('#login-trigger').click(function() {
+                    $(this).next('#login-content').slideToggle();
+                    $(this).toggleClass('active');
+                    if ($(this).hasClass('active'))
+                        $(this).find('span').html('&#x25B2;')
+                    else
+                        $(this).find('span').html('&#x25BC;')
+                })/* eof login-trigger */
+
+            });
+        </script>
+        <script>
+            function BlockMove(event) {
+                // Tell Safari not to move the window.
+                event.preventDefault();
+            }
+        </script>
+        
+        <!-- START TEMPORARY -->
+        <script type="text/javascript">
+          var settingsPane = null;
+          function r(f){/in/.test(document.readyState)?setTimeout('r('+f+')',9):f()}; // However you want to do document ready.
+          r(function () {
+            settingsPane = new SlidingPane({
+              id: 'my-div-to-hide',
+              targetId: 'my-div',
+              side: 'bottom',
+              width: 200,
+              duration: 0.75,
+              timingFunction: 'ease'
+            });
+            // Add various handlers
+            document.querySelector('#toggle').addEventListener('click', function () {
+              settingsPane.toggle();
+            });
+            document.querySelector('#save').addEventListener('click', function () {
+              settingsPane.close();
+            });
+          });
+        </script>
+        <!-- END TEMPORARY -->        
+    </body>
 </html>
 <script>
     var loadTimeData = JSON.parse(localStorage.getItem("LoadTimeData"));
@@ -109,10 +174,10 @@
              * @param {int} index The index of the strings of the dictionary to draw from.
              */
             'i18n-content': function(element, key, dictionary, index) {
-                
+
                 console.log("key:");
-                console.log(key);             
-                
+                console.log(key);
+
                 console.log("dictionary[index].data[key]:");
                 console.log(dictionary[index].data[key]);
                 /*element.textContent = dictionary.getString(key);*/
@@ -131,10 +196,10 @@
             'i18n-options': function(select, key, dictionary, index) {
                 var options = dictionary[index].getValue(key);
                 options.forEach(function(optionData) {
-                    
+
                     console.log("optionData:");
-                    console.log(optionData);                      
-                    
+                    console.log(optionData);
+
                     var option = typeof optionData == 'string' ?
                             new Option(optionData) :
                             new Option(optionData[1], optionData[0]);
@@ -156,10 +221,10 @@
             'i18n-values': function(element, attributeAndKeys, dictionary, index) {
                 var parts = attributeAndKeys.replace(/\s/g, '').split(/;/);
                 parts.forEach(function(part) {
-                    
+
                     console.log("part:");
-                    console.log(part);                    
-                    
+                    console.log(part);
+
                     if (!part)
                         return;
 
@@ -169,15 +234,15 @@
 
                     var propName = attributeAndKeyPair[1];
                     var propExpr = attributeAndKeyPair[2];
-                    
+
                     console.log("propExpr:");
-                    console.log(propExpr);                 
+                    console.log(propExpr);
 
                     /*var value = dictionary[index].getValue(propExpr);*/
                     var value = dictionary[index].data[propExpr];
- 
+
                     console.log("value:");
-                    console.log(value);      
+                    console.log(value);
 
                     // Allow a property of the form '.foo.bar' to assign a value into
                     // element.foo.bar.
@@ -202,8 +267,8 @@
         };
 
         var attributeNames = Object.keys(handlers);
-        var selector = '[' + attributeNames.join('],[') + ']';        
-        
+        var selector = '[' + attributeNames.join('],[') + ']';
+
         /**
          * Processes a DOM tree with the {@code dictionary} map.
          * @param {HTMLElement} node The root of the DOM tree to process.
@@ -211,16 +276,16 @@
          * @param {int} index The index of the strings of the dictionary to draw from. 
          */
         function process(node, dictionary, index) {
-        
+
             /* START: for testing purposes only */
             console.log('i18nTemplate.process(node):');
             console.log(node);
             console.log('i18nTemplate.process(index):');
-            console.log(index);            
+            console.log(index);
             console.log('i18nTemplate.process(dictionary[index]):');
-            console.log(dictionary[index]); 
+            console.log(dictionary[index]);
             /* END: for testing purposes only */
-        
+
             var elements = node.querySelectorAll(selector);
             for (var element, i = 0; element = elements[i]; i++) {
                 for (var j = 0; j < attributeNames.length; j++) {
