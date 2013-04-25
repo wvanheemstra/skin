@@ -14,6 +14,7 @@ class Sidebar extends Spine.Controller
     'keyup input': 'filter'
     'click footer a': 'create'
     'keyup .vdivide span': 'resize'
+    'click .item': 'activate'
   
   constructor: ->
     super
@@ -26,8 +27,9 @@ class Sidebar extends Spine.Controller
       selectFirst: true
 
     @list.bind 'change', @change
-
+    
     @active (params) -> 
+      @log('Sidebar - call received to active with params: '+JSON.stringify(params))
       @list.change(LoadTimeData.find(params.id))
     
     LoadTimeData.bind('refresh change', @render)
@@ -44,12 +46,16 @@ class Sidebar extends Spine.Controller
   change: (item) =>
     @log('Sidebar - call received to change item.id: '+item.id)
     @navigate '/index', item.id
-    
+
   create: ->
     @log('Sidebar - create call received')
     item = LoadTimeData.create()
-    @log(item)
     @navigate('/index', item.id, 'edit')
+    
+  activate: (item) ->
+    @log('Sidebar - activate call received')
+    $(item.currentTarget).addClass('active')
+    $(item.currentTarget).siblings('div').removeClass('active')
     
   resize: ->
     @log('Sidebar - resize call received')

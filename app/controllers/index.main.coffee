@@ -23,6 +23,7 @@ class Show extends Spine.Controller
     @html require('views/show')(@item)
 
   change: (params) =>
+    @log('Main - call to change received')
     @item = LoadTimeData.find(params.id)
     @render()
     
