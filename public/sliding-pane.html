@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Sliding Pane</title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-touch-fullscreen" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+  <link rel='stylesheet' href='/resources/css/sliding-pane.css' type='text/css'>
+  <script type="text/javascript" src="/resources/js/slidingPane/sliding-pane.js"></script>
+  <script type="text/javascript">
+    var settingsPane = null;
+    function r(f){/in/.test(document.readyState)?setTimeout('r('+f+')',9):f()}; // However you want to do document ready.
+    r(function () {
+      settingsPane = new SlidingPane({
+        id: 'my-div-to-hide',
+        targetId: 'my-div',
+        side: 'bottom',
+        width: 200,
+        duration: 0.75,
+        timingFunction: 'ease'
+      });
+      // Add various handlers
+      document.querySelector('#toggle').addEventListener('click', function () {
+        settingsPane.toggle();
+      });
+      document.querySelector('#save').addEventListener('click', function () {
+        settingsPane.close();
+      });
+    });
+  </script>
+</head>
+<body>
+  <div id='toggle'>Toggle</div>
+    <div id='my-div-to-hide-container' style='float:left; width: 200px;'>
+      <!--
+      If you want to define HTML fragment for your hidden div ahead of time, just make sure:
+        1) The div to hide (in this case, my-div-to-hide) exists somewhere in the DOM.
+        2) The div to hide must not be a child of the target div or vice-versa.
+      -->
+      <div id='my-div-to-hide'>
+        <div style="margin: 5px;">My Settings Go Here</div>
+        <div style="border: 1px solid #fff; border-radius: 10px; padding: 10px;">
+          <input type="radio" name="group1" id="option1"><label for="option1">Option 1</label></input><br />
+          <input type="radio" name="group1" id="option2"><label for="option2">Option 2</label></input><br />
+          <input type="radio" name="group1" id="option3"><label for="option3">Option 3</label></input><br />
+        </div>
+        <div id="save" style="width: 50px; margin: 10px 0;">Save</div>
+      </div>
+      <!-- In the below example, my-div-to-hide exists above so we'll use that -->
+      <div id='my-div'>
+        Some Content
+      </div>
+    </div>
+  </div>
+</body>
+</html>

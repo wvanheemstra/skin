@@ -12,7 +12,7 @@ class Sidebar extends Spine.Controller
     
   events:
     'keyup input': 'filter'
-    'click footer button': 'create'
+    'click footer a': 'create'
     'keyup .vdivide span': 'resize'
   
   constructor: ->

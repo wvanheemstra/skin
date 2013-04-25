@@ -95,3 +95,7 @@
     </div><!-- eof .slider -->
   </div><!-- eof .iosSlider -->
 </div><!-- eof .content -->
+
+<footer>
+  <a class="toggle">Toggle</a>
+</footer>
