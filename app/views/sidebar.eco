@@ -5,5 +5,5 @@
 <div class="items"></div>
 
 <footer>
-  <a class="add">Add Group</a>
+  <a class="add" sign="&#043;"/>
 </footer>

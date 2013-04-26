@@ -4,183 +4,173 @@
 
 <% console.log('inside show') %>
 
-<div id="my-div-to-hide-container" style="float:left; width: 100%; -webkit-perspective: 0px; -moz-perspective: 0px; -o-perspective: 0px; perspective: 0px;">
+<div id="my-div-to-hide-container" style="float:left; width: 100%;">
   <!--
     If you want to define HTML fragment for your hidden div ahead of time, just make sure:
     1) The div to hide (in this case, my-div-to-hide) exists somewhere in the DOM.
     2) The div to hide must not be a child of the target div or vice-versa.
   -->
   <!-- In the below example, my-div-to-hide exists above so we'll use that -->
-  <div id="my-div-component" style="position: relative; overflow: hidden; -webkit-transform-style: preserve-3d; -moz-transform-style: preserve-3d; -o-transform-style: preserve-3d; transform-style: preserve-3d; width: 100%; height: 660px;">
-    <div id="my-div-to-hide-wrapper" style="position: absolute; overflow: hidden; width: 100%; height: 660px;">
-      <div id="my-div-to-hide">
+  <div id="my-div-to-hide">
+    <!-- hidden pane info goes here -->
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+    <h1>Underground</h1><br>
+  </div><!-- eof #my-div-to-hide -->
+  <div id="my-div">
+    <div class="content">
+      <p style="width:100%;text-align:center;"><h2><%= @data.title %></h2></p>
+      <div id='iosSlider' class='iosSlider'>
+        <div class='slider'>
 
+          <div class='slide'>
+            <% loadTimeApps = JSON.parse(localStorage.getItem("LoadTimeApp")) %>
+            <% if loadTimeApps.length: %>
+              <% for loadTimeApp in loadTimeApps: %>
+                <% for belongsToLoadTimeData in loadTimeApp.data.belongsTo: %>
+                  <% if @data.title == belongsToLoadTimeData: %>
+                    <a href="#<%= loadTimeApp.data.title %>" class="openModal">
+                      <div class="default icon medium">
+                        <div class="header medium">
+                          <p class="title medium">
+                            <%= loadTimeApp.data.title %>
+                          </p>
+                        </div>
+                        <div class="body medium">
+                          <p class="context medium">
+                            *
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                    <aside id="<%= loadTimeApp.data.title %>" class="modal">
+                      <div>
+                        <h2><%= loadTimeApp.data.title %></h2>
+                        <p>Some text here.</p>
+                        <a href="#close" title="Close">Close</a>
+                      </div>
+                    </aside>
+                  <% end %><!-- eof if -->
+                <% end %><!-- eof for -->
+              <% end %><!-- eof for -->
+            <% else: %><!-- eof if -->
+              No apps
+            <% end %><!-- eof else -->
+          </div><!-- eof .slide -->
 
-        <!-- hidden pane info goes here -->
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-        <h1>Underground</h1><br>
-
-      </div><!-- eof #my-div-to-hide -->
-    </div><!-- eof #my-div-to-hide-wrapper -->
-    <div id="my-div-wrapper" style="box-shadow: 0px 0px 30px #000;transition: transform 0.75s ease; -moz-transition: -moz-transform 0.75s ease; -webkit-transition: -webkit-transform 0.75s ease; -o-transition: -o-transform 0.75s ease; width: 100%; height: 660px; -webkit-transform: translateY(-0px); -moz-transform: translateY(-0px); -o-transform: translateY(-0px); transform: translateY(-0px);">
-      <div id="my-div">
-
-        <div class="content">
-          <p style="width:100%;text-align:center;"><h2><%= @data.title %></h2></p>
-          <div id='iosSlider' class='iosSlider'>
-            <div class='slider'>
-
-              <div class='slide'>
-                <% loadTimeApps = JSON.parse(localStorage.getItem("LoadTimeApp")) %>
-                <% if loadTimeApps.length: %>
-                  <% for loadTimeApp in loadTimeApps: %>
-                    <% for belongsToLoadTimeData in loadTimeApp.data.belongsTo: %>
-                      <% if @data.title == belongsToLoadTimeData: %>
-                        <a href="#<%= loadTimeApp.data.title %>" class="openModal">
-                          <div class="default icon">
-                            <div class="header">
-                              <p class="title">
-                                <%= loadTimeApp.data.title %>
-                              </p>
-                            </div>
-                            <div class="body">
-                              <p class="context">
-                                *
-                              </p>
-                            </div>
-                          </div>
-                        </a>
-                        <aside id="<%= loadTimeApp.data.title %>" class="modal">
-                          <div>
-                            <h2><%= loadTimeApp.data.title %></h2>
-                            <p>Some text here.</p>
-                            <a href="#close" title="Close">Close</a>
-                          </div>
-                        </aside>
-                      <% end %><!-- eof if -->
-                    <% end %><!-- eof for -->
-                  <% end %><!-- eof for -->
-                <% else: %><!-- eof if -->
-                  No apps
-                <% end %><!-- eof else -->
-              </div><!-- eof .slide -->
-
-              <div class='slide'>
-                <a href="#Dummy%202" class="openModal">
-                  <div class="default icon">
-                    <div class="header">
-                      <p class="title">
-                        Dummy 2
-                      </p>
-                    </div>
-                    <div class="body">
-                      <p class="context">
-                        *
-                      </p>
-                    </div>
-                  </div>
-                </a>
-                <aside id="Dummy%202" class="modal">
-                  <div><!-- bof div modal -->
-                    <ul id="tabs">
-                      <li><a href="#" name="tab1">One</a></li>
-                      <li><a href="#" name="tab2">Two</a></li>
-                      <li><a href="#" name="tab3">Three</a></li>
-                      <li><a href="#" name="tab4">Four</a></li>    
-                    </ul>
-                    <div id="content"> 
-                      <div id="tab1">Content of Tab One</div>
-                      <div id="tab2">Content of Tab Two</div>
-                      <div id="tab3">Content of Tab Three</div>
-                      <div id="tab4">Content of Tab Four</div>
-                    </div>
-                    <a href="#close" title="Close">Close</a>
-                  </div><!-- eof div modal -->
-                </aside>
-              </div><!-- eof .slide --> 
-
-              <div class='slide'>
-                <div class="default icon">
-                  <div class="header">
-                    <p class="title">
-                      Dummy 3
-                    </p>
-                  </div>
-                  <div class="body">
-                    <p class="context">
-                      *
-                    </p>
-                  </div>
+          <div class='slide'>
+            <a href="#Dummy%202" class="openModal">
+              <div class="default icon">
+                <div class="header">
+                  <p class="title">
+                    Dummy 2
+                  </p>
                 </div>
-              </div><!-- eof .slide --> 
+                <div class="body">
+                  <p class="context">
+                    *
+                  </p>
+                </div>
+              </div>
+            </a>
+            <aside id="Dummy%202" class="modal">
+              <div><!-- bof div modal -->
+                <ul id="tabs">
+                  <li><a href="#" name="tab1">One</a></li>
+                  <li><a href="#" name="tab2">Two</a></li>
+                  <li><a href="#" name="tab3">Three</a></li>
+                  <li><a href="#" name="tab4">Four</a></li>    
+                </ul>
+                <div id="content"> 
+                  <div id="tab1">Content of Tab One</div>
+                  <div id="tab2">Content of Tab Two</div>
+                  <div id="tab3">Content of Tab Three</div>
+                  <div id="tab4">Content of Tab Four</div>
+                </div>
+                <a href="#close" title="Close">Close</a>
+              </div><!-- eof div modal -->
+            </aside>
+          </div><!-- eof .slide --> 
 
-            </div><!-- eof .slider -->
-          </div><!-- eof .iosSlider -->
-        </div><!-- eof .content -->
+          <div class='slide'>
+            <div class="default icon">
+              <div class="header">
+                <p class="title">
+                  Dummy 3
+                </p>
+              </div>
+              <div class="body">
+                <p class="context">
+                  *
+                </p>
+              </div>
+            </div>
+          </div><!-- eof .slide --> 
 
-      </div><!-- eof #my-div -->
-    </div><!-- eof #my-div-wrapper -->
-  </div><!-- eof #my-div-component -->
+        </div><!-- eof .slider -->
+      </div><!-- eof .iosSlider -->
+    </div><!-- eof .content -->
+
+  </div><!-- eof #my-div -->
 </div><!-- eof #my-div-to-hide-container -->
 
 <footer>
-  <a id="toggle" class="toggle">Toggle</a>
+  <a id="toggle" class="toggle" sign="&#9650;" />
 </footer>

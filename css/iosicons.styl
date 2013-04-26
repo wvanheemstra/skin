@@ -1,17 +1,30 @@
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td
+div,h2,p
   margin 0
   padding 0
 
 .icon 
-  width 176px
-  height 176px
-  -webkit-border-radius 30px
   background #fff
   float left
-  margin 50px
-  -webkit-box-shadow 0px 4px 6px rgba(0, 0, 0, 0.5)
   cursor auto
   -webkit-user-select none
+  &.small
+    margin 25px
+    width 88px
+    height 88px 
+    -webkit-border-radius 15px
+    -webkit-box-shadow 0px 2px 3px rgba(0, 0, 0, 0.5)
+  &.medium
+    margin 37px
+    width 132px
+    height 132px 
+    -webkit-border-radius 23px
+    -webkit-box-shadow 0px 3px 5px rgba(0, 0, 0, 0.5)
+  &.large
+    margin 50px
+    width 176px
+    height 176px 
+    -webkit-border-radius 30px
+    -webkit-box-shadow 0px 4px 6px rgba(0, 0, 0, 0.5)
 
 .icon:hover
   cursor pointer
@@ -27,34 +40,74 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,
   background #9B2424
 
 .default .header
-  -webkit-border-top-left-radius 30px
-  -webkit-border-top-right-radius 30px
   background -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffffff), to(#363636), color-stop(.92,#BEC5CF),color-stop(.1,#DDE5EE))
-  height 50px
-  width 176px
   -webkit-box-shadow inset 0px 2px 1px #BEC5CF
+  &.small
+    -webkit-border-top-left-radius 15px
+    -webkit-border-top-right-radius 15px  
+    height 25px
+    width 88px   
+  &.medium
+    -webkit-border-top-left-radius 23px
+    -webkit-border-top-right-radius 23px  
+    height 37px
+    width 132px
+  &.large
+    -webkit-border-top-left-radius 30px
+    -webkit-border-top-right-radius 30px  
+    height 50px
+    width 176px
 
 .default p.title
   color #fff
   font-weight bold
   text-shadow 0px 1px 1px rgba(0, 0, 0, 0.7)
-  width 176px
-  line-height 50px
-  font-size 25px
   text-align center
+  &.small
+    width 88px 
+    line-height 25px
+    font-size 12px 
+  &.medium
+    width 132px 
+    line-height 37px
+    font-size 18px 
+  &.large
+    width 176px 
+    line-height 50px
+    font-size 25px 
 
 .default p.context
   color #000
   font-weight bold
   text-shadow 0px 1px 0px #fff
-  width 176px
-  line-height 126px
-  font-size 130px
   text-align center
+  &.small
+    width 88px
+    line-height 63px
+    font-size 65px 
+  &.medium
+    width 132px
+    line-height 95px
+    font-size 97px
+  &.large
+    width 176px
+    line-height 126px
+    font-size 130px
 
 .default .body
-  -webkit-border-bottom-left-radius 30px
-  -webkit-border-bottom-right-radius 30px
   background -webkit-gradient(linear, 0% 0%, 0% 100%, from(#7A7A7A), to(#EDEDED), color-stop(.05,#BFBFBF),color-stop(.2,#E3E3E3))
-  height 126px
-  width 176px
+  &.small
+    -webkit-border-bottom-left-radius 15px
+    -webkit-border-bottom-right-radius 15px
+    height 63px
+    width 88px
+  &.medium
+    -webkit-border-bottom-left-radius 23px
+    -webkit-border-bottom-right-radius 23px
+    height 95px
+    width 132px
+  &.large
+    -webkit-border-bottom-left-radius 30px
+    -webkit-border-bottom-right-radius 30px
+    height 126px
+    width 176px

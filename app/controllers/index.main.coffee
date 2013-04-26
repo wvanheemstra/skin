@@ -9,6 +9,7 @@ class Show extends Spine.Controller
 
   events:
     'click .edit': 'edit'
+    'click .toggle': 'toggle'
 
   constructor: ->
     super
@@ -29,6 +30,13 @@ class Show extends Spine.Controller
     
   edit: ->
     @navigate('/index', @item.id, 'edit') 
+    
+  toggle: (a) ->
+    @log('Main - call to toggle received')
+    if $(a.currentTarget).attr('sign') == '▲' 
+      $(a.currentTarget).attr('sign', '▼')
+    else
+      $(a.currentTarget).attr('sign', '▲')
     
 class Edit extends Spine.Controller
   className: 'edit'

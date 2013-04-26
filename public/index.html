@@ -83,8 +83,7 @@
                     id: 'my-div-to-hide',
                     targetId: 'my-div',
                     side: 'bottom',
-                    width: 1060,
-                    height: 400,
+                    width: 200,
                     duration: 0.75,
                     timingFunction: 'ease'
                 });/* eof SlidingPane */
@@ -137,16 +136,13 @@
               id: 'my-div-to-hide',
               targetId: 'my-div',
               side: 'bottom',
-              width: 200,
+              width: 650,
               duration: 0.75,
               timingFunction: 'ease'
             });
             // Add various handlers
             document.querySelector('#toggle').addEventListener('click', function () {
               settingsPane.toggle();
-            });
-            document.querySelector('#save').addEventListener('click', function () {
-              settingsPane.close();
             });
           });
         </script>

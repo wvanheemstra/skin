@@ -27,6 +27,7 @@ var SlidingPane = function (config) {
     var me = this;
     if(['top', 'right', 'bottom', 'left'].indexOf(s) > -1) {
       me.side = s;
+      console.log('me.side: '+me.side)
       wrapperOrigPos = visiblePaneWrapper.getBoundingClientRect()[me.side];
     };
     return me;
