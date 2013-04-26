@@ -173,4 +173,5 @@
 
 <footer>
   <a id="toggle" class="toggle" sign="&#9650;" />
+  <a class="ruler icon">Show</a>
 </footer>

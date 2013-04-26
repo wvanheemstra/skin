@@ -10,6 +10,7 @@ class Show extends Spine.Controller
   events:
     'click .edit': 'edit'
     'click .toggle': 'toggle'
+    'click .ruler': 'ruler'  
 
   constructor: ->
     super
@@ -37,7 +38,16 @@ class Show extends Spine.Controller
       $(a.currentTarget).attr('sign', '▼')
     else
       $(a.currentTarget).attr('sign', '▲')
-    
+
+  ruler: (a) ->
+    @log('Main - call to ruler received')
+    if a.currentTarget.innerHTML == 'Show'
+      a.currentTarget.innerHTML = 'Hide'
+      $(document.getElementById('my-div').children[0]).addClass('ruler')
+    else
+      a.currentTarget.innerHTML = 'Show'
+      $(document.getElementById('my-div').children[0]).removeClass('ruler')
+
 class Edit extends Spine.Controller
   className: 'edit'
   
