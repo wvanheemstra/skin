@@ -77,10 +77,10 @@
   <div id="my-div">
     <div class="content">
       <p style="width:100%;text-align:center;"><h2><%= @data.title %></h2></p>
-      <div id='iosSlider' class='iosSlider'>
-        <div class='slider'>
+      <div id='iosSlider' class='iosSlider medium'>
+        <div class='slider medium'>
 
-          <div class='slide'>
+          <div class='slide medium'>
             <% loadTimeApps = JSON.parse(localStorage.getItem("LoadTimeApp")) %>
             <% if loadTimeApps.length: %>
               <% for loadTimeApp in loadTimeApps: %>
@@ -115,7 +115,7 @@
             <% end %><!-- eof else -->
           </div><!-- eof .slide -->
 
-          <div class='slide'>
+          <div class='slide medium'>
             <a href="#Dummy%202" class="openModal">
               <div class="default icon">
                 <div class="header">
@@ -149,7 +149,7 @@
             </aside>
           </div><!-- eof .slide --> 
 
-          <div class='slide'>
+          <div class='slide medium'>
             <div class="default icon">
               <div class="header">
                 <p class="title">
