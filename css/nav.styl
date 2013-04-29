@@ -27,7 +27,8 @@ nav #login {
 }
 
 nav #login-trigger,
-nav #signup a {
+nav #signup a,
+nav #reload a {
   display: inline-block;
   *display: inline;
   *zoom: 1;
@@ -41,6 +42,13 @@ nav #signup a {
 }
 
 nav #signup a {
+  border-right: 1px solid #ddd;
+  -moz-border-radius: 0 3px 3px 0;
+  -webkit-border-radius: 0 3px 3px 0;
+  border-radius: 0 3px 3px 0;
+}
+
+nav #reload a {
   -moz-border-radius: 0 3px 3px 0;
   -webkit-border-radius: 0 3px 3px 0;
   border-radius: 0 3px 3px 0;
@@ -54,7 +62,8 @@ nav #login-trigger {
 
 nav #login-trigger:hover,
 nav #login .active,
-nav #signup a:hover {
+nav #signup a:hover,
+nav #reload a:hover {
   background: #fff;
 }
 
