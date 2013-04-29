@@ -104,7 +104,7 @@ class Index extends Spine.Controller
 #    )
 
     loadTimeData3 = LoadTimeData.create(
-      data: {textdirection: "ltr", title: "Files"}
+      data: {textdirection: "ltr", title: "Documents"}
     )
 
     loadTimeData5 = LoadTimeData.create(
