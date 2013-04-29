@@ -11,9 +11,6 @@
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="apple-touch-startup-image" href="/startup-ipad.png" />
         <link rel="stylesheet" href="/application.css" type="text/css" charset="utf-8">
-        <!-- START TEMPORARY -->
-        <script src="/resources/js/slidingPane/sliding-pane.js" type="text/javascript" charset="utf-8"></script>
-        <!-- END TEMPORARY -->
         <script src="/application.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body ontouchmove="BlockMove(event);">
@@ -80,37 +77,18 @@
                 Tabs.tabs({});/* eof Tabs */
 
                 var SlidingPane = app.slidingpane;
-                /* Initiate the SlidingPane for the DOM element */
-                SlidingPane.domElement = document.getElementById('Foo');
                 SlidingPane.slidingpane({
                     id: 'my-div-to-hide',
                     targetId: 'my-div',
                     side: 'bottom',
-                    width: 200,
+                    width: 650,
                     duration: 0.75,
                     timingFunction: 'ease'
                 });/* eof SlidingPane */
-
-                //      var settingsPane = null;
-                //      function r(f){/in/.test(document.readyState)?setTimeout('r('+f+')',9):f()}; // However you want to do document ready.
-                //      r(function () {
-                //        settingsPane = new SlidingPane({
-                //          id: 'my-div-to-hide',
-                //          targetId: 'my-div',
-                //          side: 'bottom',
-                //          width: 200,
-                //          duration: 0.75,
-                //          timingFunction: 'ease'
-                //        });
-                //        // Add various handlers
-                //        document.querySelector('#toggle').addEventListener('click', function () {
-                //          settingsPane.toggle();
-                //        });
-                //        document.querySelector('#save').addEventListener('click', function () {
-                //          settingsPane.close();
-                //        });
-                //      });
-                /* eof settingsPane */
+                // Add various handlers
+                document.querySelector('#toggle').addEventListener('click', function () {
+                  SlidingPane.toggle();
+                });
 
                 $('#login-trigger').click(function() {
                     $(this).next('#login-content').slideToggle();
@@ -128,28 +106,7 @@
                 // Tell Safari not to move the window.
                 event.preventDefault();
             }
-        </script>
-        
-        <!-- START TEMPORARY -->
-        <script type="text/javascript">
-          var settingsPane = null;
-          function r(f){/in/.test(document.readyState)?setTimeout('r('+f+')',9):f()}; // However you want to do document ready.
-          r(function () {
-            settingsPane = new SlidingPane({
-              id: 'my-div-to-hide',
-              targetId: 'my-div',
-              side: 'bottom',
-              width: 650,
-              duration: 0.75,
-              timingFunction: 'ease'
-            });
-            // Add various handlers
-            document.querySelector('#toggle').addEventListener('click', function () {
-              settingsPane.toggle();
-            });
-          });
-        </script>
-        <!-- END TEMPORARY -->        
+        </script>       
     </body>
 </html>
 <script>
