@@ -136,7 +136,43 @@ div,h2,p
     -webkit-border-bottom-right-radius 5px 10px
     -webkit-border-bottom-left-radius 5px 10px
     -moz-border-radius 5px 5px 5px 5px / 5px 5px 10px 10px
-    border-radius 5px 5px 5px 5px / 5px 5px 10px 10px 
+    border-radius 5px 5px 5px 5px / 5px 5px 10px 10px
+  &.medium.file
+    border 1px solid transparent
+    width 130px
+    height 94px
+  &.medium.file span
+    display block
+    margin-left 46px
+    width 40px
+    height inherit
+  &.medium.file span:before /* page */
+    margin-top 12px
+    left 5px
+    width 40px
+    height 58px
+    border 2px solid rgb(64, 64, 64)
+    display block
+    content '.'
+    color transparent 
+    -webkit-box-shadow 0px 1px 0px #fff
+    -moz-box-box-shadow 0px 1px 0px #fff
+    box-shadow 0px 1px 0px #fff
+    background transparent   
+  &.medium.file span:after /* corner */
+    margin-left 1px
+    border-width 3px
+    width 16px
+    border-style solid
+    border-color transparent rgb(64, 64, 64) rgb(64, 64, 64) transparent
+    margin-top -61px 
+    display block
+    content '.'
+    color transparent 
+    -webkit-box-shadow 0px 1px 0px #fff
+    -moz-box-box-shadow 0px 1px 0px #fff
+    box-shadow 0px 1px 0px #fff
+    background transparent
   &.large.default
     width 176px
     line-height 126px

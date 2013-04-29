@@ -53,7 +53,7 @@ class Index extends Spine.Controller
     )
 
     loadTimeData1.loadTimeApps().create(
-      data: {name: "Files", title: "Files", belongsTo: ["All", "Documents"]}
+      data: {name: "Files", title: "Files", belongsTo: ["All", "Documents"], icon: "File"}
     )
 
     loadTimeData1.loadTimeApps().create(
