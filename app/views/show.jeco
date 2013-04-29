@@ -94,9 +94,17 @@
                           </p>
                         </div>
                         <div class="body medium">
-                          <p class="context medium">
-                            *
-                          </p>
+                          <% icon = loadTimeApp.data.icon %>
+                          <% console.log('icon: '+icon) %>
+                          <% if icon == undefined: %>
+                            <p class="context medium default">
+                              *
+                            </p>
+                          <% else: %>
+                            <p class="context medium <%= icon.toLowerCase() %>">
+                              <span/>
+                            </p>
+                          <% end %>
                         </div>
                       </div>
                     </a>

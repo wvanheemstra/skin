@@ -11,7 +11,7 @@ class Index extends Spine.Controller
   className: 'index'
 
   events:
-    'click .vdivide span': 'resize'
+    'click .vdivide a': 'resize'
 
   constructor: ->
     super
@@ -27,7 +27,7 @@ class Index extends Spine.Controller
         @sidebar.active(params)
         @main.show.active(params)
         
-    divide = $('<div><span /></div>').addClass('vdivide')
+    divide = $('<div><a /></div>').addClass('vdivide')
     
     @append @sidebar, divide, @main
 
@@ -52,7 +52,7 @@ class Index extends Spine.Controller
     )
  
     loadTimeData2.loadTimeApps().create(
-      data: {name: "Persons", title: "Persons", belongsTo: ["All", "Administration"]}
+      data: {name: "Persons", title: "Persons", belongsTo: ["All", "Administration"], icon: "Profile"}
     )
 
     loadTimeData3 = LoadTimeData.create(

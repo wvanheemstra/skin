@@ -2,6 +2,8 @@ div,h2,p
   margin 0
   padding 0
 
+/* ICON
+------------------------------------------------------------------------------------------------------------------------------- */
 .icon 
   background #fff
   float left
@@ -36,6 +38,8 @@ div,h2,p
 .icon:hover .body
   background -webkit-gradient(linear, 0% 0%, 0% 100%, from(#363636), to(#ffffff), color-stop(.05,#EBEBEB),color-stop(.2,#E3E3E3))
 
+/* DEFAULT
+------------------------------------------------------------------------------------------------------------------------------- */
 .default
   background #9B2424
 
@@ -77,23 +81,67 @@ div,h2,p
     font-size 25px 
 
 .default p.context
-  color #000
+  color rgb(64, 64, 64)
   font-weight bold
-  text-shadow 0px 1px 0px #fff
   text-align center
-  &.small
+  &.small.default
     width 88px
     line-height 63px
     font-size 65px 
-  &.medium
+    text-shadow 0px 1px 0px #fff
+  &.medium.default
     width 132px
     line-height 95px
     font-size 97px
-  &.large
+    text-shadow 0px 1px 0px #fff
+    background transparent
+  &.medium.profile
+    border 1px solid transparent
+    width 130px
+    height 94px
+  &.medium.profile span
+    display block
+    margin-left 46px
+    width 40px
+    height inherit
+  &.medium.profile span:before /* body */
+    margin-top 38px
+    width 40px
+    height 34px
+    display block
+    content '.'
+    color transparent
+    background rgb(64, 64, 64)
+    -webkit-box-shadow 0px 1px 0px #fff
+    -moz-box-box-shadow 0px 1px 0px #fff
+    box-shadow 0px 1px 0px #fff
+    -webkit-border-top-right-radius 5px
+    -webkit-border-top-left-radius 5px
+    -moz-border-radius 5px 5px 0 0
+    border-radius 5px 5px 0 0
+  &.medium.profile span:after /* head */
+    margin-left 11px
+    margin-top -60px
+    width 16px
+    height 24px
+    display block
+    content '.'
+    color transparent 
+    background rgb(64, 64, 64)
+    -webkit-box-shadow 0px 1px 0px #fff
+    -moz-box-box-shadow 0px 1px 0px #fff
+    box-shadow 0px 1px 0px #fff
+    -webkit-border-top-right-radius 5px
+    -webkit-border-top-left-radius 5px
+    -webkit-border-bottom-right-radius 5px 10px
+    -webkit-border-bottom-left-radius 5px 10px
+    -moz-border-radius 5px 5px 5px 5px / 5px 5px 10px 10px
+    border-radius 5px 5px 5px 5px / 5px 5px 10px 10px 
+  &.large.default
     width 176px
     line-height 126px
     font-size 130px
-
+    text-shadow 0px 1px 0px #fff
 .default .body
   background -webkit-gradient(linear, 0% 0%, 0% 100%, from(#7A7A7A), to(#EDEDED), color-stop(.05,#BFBFBF),color-stop(.2,#E3E3E3))
   &.small
