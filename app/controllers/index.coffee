@@ -43,7 +43,23 @@ class Index extends Spine.Controller
     loadTimeData1.loadTimeApps().create(
       data: {name: "Two", title: "Two", belongsTo: ["All"]}
     )
-        
+    
+    loadTimeData1.loadTimeApps().create(
+      data: {name: "Persons", title: "Persons", belongsTo: ["All", "Administration"], icon: "Profile"}
+    )
+
+    loadTimeData1.loadTimeApps().create(
+      data: {name: "Four", title: "Four", belongsTo: ["All", "Documents"]}
+    )
+
+    loadTimeData1.loadTimeApps().create(
+      data: {name: "Files", title: "Files", belongsTo: ["All", "Documents"]}
+    )
+
+    loadTimeData1.loadTimeApps().create(
+      data: {name: "Other", title: "Other", belongsTo: ["All", "Other"]}
+    )
+
     #@log('loadTimeData.loadTimeApps().model.all().length:')
     #@log(loadTimeData.loadTimeApps().model.all().length)
     
@@ -51,17 +67,21 @@ class Index extends Spine.Controller
       data: {textdirection: "ltr", title: "Administration"}
     )
  
-    loadTimeData2.loadTimeApps().create(
-      data: {name: "Persons", title: "Persons", belongsTo: ["All", "Administration"], icon: "Profile"}
-    )
+#    loadTimeData2.loadTimeApps().create(
+#      data: {name: "Persons", title: "Persons", belongsTo: ["All", "Administration"], icon: "Profile"}
+#    )
 
     loadTimeData3 = LoadTimeData.create(
+      data: {textdirection: "ltr", title: "Files"}
+    )
+
+    loadTimeData5 = LoadTimeData.create(
       data: {textdirection: "ltr", title: "Other"}
     )
  
-    loadTimeData3.loadTimeApps().create(
-      data: {name: "Other", title: "Other", belongsTo: ["All", "Other"]}
-    )
+#    loadTimeData5.loadTimeApps().create(
+#      data: {name: "Other", title: "Other", belongsTo: ["All", "Other"]}
+#    )
 
     LoadTimeApp.fetch()
     LoadTimeData.fetch()
