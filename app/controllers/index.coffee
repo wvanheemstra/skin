@@ -60,6 +60,38 @@ class Index extends Spine.Controller
       data: {name: "Other", title: "Other", belongsTo: ["All", "Other"]}
     )
 
+    loadTimeData1.loadTimeApps().create(
+      data: {name: "Seven", title: "Seven", belongsTo: ["All", "Other"]}
+    )
+
+    loadTimeData1.loadTimeApps().create(
+      data: {name: "Eight", title: "Eight", belongsTo: ["All", "Other"]}
+    )
+
+    loadTimeData1.loadTimeApps().create(
+      data: {name: "Nine", title: "Nine", belongsTo: ["All", "Other"]}
+    )
+
+    loadTimeData1.loadTimeApps().create(
+      data: {name: "Ten", title: "Ten", belongsTo: ["All", "Other"]}
+    )
+
+    loadTimeData1.loadTimeApps().create(
+      data: {name: "Eleven", title: "Eleven", belongsTo: ["All", "Other"]}
+    )
+
+    loadTimeData1.loadTimeApps().create(
+      data: {name: "Twelve", title: "Twelve", belongsTo: ["All", "Other"]}
+    )
+
+    loadTimeData1.loadTimeApps().create(
+      data: {name: "Thirteen", title: "Thirteen", belongsTo: ["All", "Other"]}
+    )
+
+    loadTimeData1.loadTimeApps().create(
+      data: {name: "Fourteen", title: "Fourteen", belongsTo: ["All", "Other"]}
+    )
+    
     #@log('loadTimeData.loadTimeApps().model.all().length:')
     #@log(loadTimeData.loadTimeApps().model.all().length)
     
