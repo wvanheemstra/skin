@@ -9,6 +9,23 @@
 @import './slidingpane'
 @import './ruler'
 
+#warning-message
+  display none 
+
+@media only screen and (orientation:portrait)
+  #wrapper
+    display none
+  #warning 
+    display block
+    background #000
+    color #fff
+    text-align center
+    width 100%
+    margin-top 100px
+@media only screen and (orientation:landscape)
+  #warning
+    display none 
+
 .stack
   position: relative
   
@@ -25,7 +42,7 @@ body
   vbox()
 
 header#header
-  /*overflow: hidden;*/
+  overflow: hidden;
   height: 50px;
   border-box()
   inset-box-shadow(0px, -1px, 3px, #1d1d1d)
@@ -42,6 +59,9 @@ header#header h1
   box-shadow(1px, 0px, 1px, #525252)
   text-shadow: 0 -1px 1px black;
   font-weight: bold;
+
+article#article
+  overflow: hidden;
 
 #article
   box-flex(1)
@@ -84,7 +104,8 @@ header#header h1
         
     .items
       box-flex(1)
-      overflow-y: scroll
+      overflow-x: hidden
+      overflow-y: auto
     
     .item
       height: 33px
