@@ -98,7 +98,9 @@
                     else
                         $(this).find('span').html('&#x25BC;')
                 })/* eof login-trigger */
-
+                
+                var Sidebar = app.index.sidebar;
+                Sidebar.selectFirst(); /* select the first item in the list */
             });
         </script>
         <script>
@@ -251,6 +253,7 @@
                         handlers[name](element, attribute, dictionary, index);
                 }
             }
+            console.log('i18nTemplate.process - FINISHED !!!!!!')
         }
         return {
             process: process

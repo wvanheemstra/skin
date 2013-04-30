@@ -24,7 +24,7 @@ class Sidebar extends Spine.Controller
     @list = new List
       el: @items, 
       template: require('views/item'),
-      selectFirst: true
+      selectFirst: false # selectFirst later on!
 
     @list.bind 'change', @change
     
@@ -38,6 +38,10 @@ class Sidebar extends Spine.Controller
     @query = @search.val()
     @render()
     
+  selectFirst: ->
+    @log('Sidebar - call received to selectFirst')
+    @list.children(':first').click()
+    
   render: =>
     @log('Sidebar - call received to render')
     index = LoadTimeData.filter(@query)
@@ -48,17 +52,17 @@ class Sidebar extends Spine.Controller
     @navigate '/index', item.id
 
   create: ->
-    @log('Sidebar - create call received')
+    @log('Sidebar - call received to create')
     item = LoadTimeData.create()
     @navigate('/index', item.id, 'edit')
     
   activate: (item) ->
-    @log('Sidebar - activate call received')
+    @log('Sidebar - call received to activate')
     $(item.currentTarget).addClass('active')
     $(item.currentTarget).siblings('div').removeClass('active')
     
   resize: ->
-    @log('Sidebar - resize call received')
+    @log('Sidebar - call received to resize')
     if(parseInt(this.el[0].style.width) == 0)
       this.el[0].style.width = '169px'
       this.el[0].style.visibility = 'visible'
