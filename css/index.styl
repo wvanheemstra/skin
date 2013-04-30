@@ -29,9 +29,12 @@
     display none
   #wrapper
     width 1024px
-    padding 0
-    margin-left auto
-    margin-right auto
+    height 768px
+    position absolute
+    left 50%
+    top 50% 
+    margin-left -512px
+    margin-top -384px
 
 .stack
   position: relative
@@ -228,7 +231,8 @@ article#article
       height: 33px;
       bottom: 0;
       position: fixed;
-      width: 100%;
+      overflow: hidden;
+      width: 846px;
       z-index: 9999;
 
       a
