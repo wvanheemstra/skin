@@ -24,17 +24,17 @@ class Show extends Spine.Controller
     @slidingPane = new SlidingPane
     
   render: ->
-    @log('Main Show - call to render received')
+    @log('Index Main Show - call to render received')
     # Render a template, replacing the 
     # controller's HTML
     @html require('views/show')(@item)
     
-#  slidingpane: (params) ->  
-#    @log('Main - call to slidingpane received')
-#    @slidingPane.slidingpane(params)
+  slidingpane: (params) ->  
+    @log('Index Main Show - call to slidingpane received')
+    @slidingPane.slidingpane(params)
     
   change: (params) =>
-    @log('Main Show  - call to change received')
+    @log('Index Main Show  - call to change received')
     @item = LoadTimeData.find(params.id)
     @render()
 
@@ -42,14 +42,14 @@ class Show extends Spine.Controller
     @navigate('/index', @item.id, 'edit') 
     
   toggle: (a) ->
-    @log('Main Show  - call to toggle received')
+    @log('Index Main Show  - call to toggle received')
     if $(a.currentTarget).attr('sign') == '▲' 
       $(a.currentTarget).attr('sign', '▼')
     else
       $(a.currentTarget).attr('sign', '▲') 
 
   ruler: (a) ->
-    @log('Main Show  - call to ruler received')
+    @log('Index Main Show  - call to ruler received')
     if a.currentTarget.innerHTML == 'Show'
       a.currentTarget.innerHTML = 'Hide'
       $(document.getElementById('my-div').children[0]).addClass('ruler')

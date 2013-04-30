@@ -109,6 +109,10 @@ class SlidingPane extends Spine.Controller
       me = this
       me.hiddenPaneElement = $("#" + me.id) or document.createElement("div")
       me.targetElement = $("#" + me.targetId)
+      console.log("SlidingPane - inside init: me.targetId: "+me.targetId)
+      console.log("SlidingPane - inside init: me.targetElement: "+me.targetElement)
+      if(!me.targetElement)
+        return; # elements have not been rendered yet
       componentWrapper = document.createElement("div")
       hiddenPaneWrapper = document.createElement("div")
       visiblePaneWrapper = document.createElement("div")
@@ -116,8 +120,6 @@ class SlidingPane extends Spine.Controller
       hiddenPaneWrapper.id = me.id + "-wrapper"
       visiblePaneWrapper.id = me.targetId + "-wrapper"
       me.hiddenPaneElement.id = me.id
-
-      console.log("SlidingPane - inside init: me.targetElement: "+me.targetElement)
 
       # Before we start, get parent node of target element 
       parentElement = me.targetElement.parentNode

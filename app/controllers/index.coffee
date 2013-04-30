@@ -27,6 +27,15 @@ class Index extends Spine.Controller
         @sidebar.active(params)
         @main.show.active(params)
         @log('Index - inside routes after call to @main.show.active(params)')
+        @main.show.slidingpane({
+          id: 'my-div-to-hide',
+          targetId: 'my-div',
+          side: 'bottom',
+          width: 650,
+          duration: 0.75,
+          timingFunction: 'ease'         
+        })
+        @log('Index - inside routes after call to @main.show.slidingpane(params)')
         
     divide = $('<div><a /></div>').addClass('vdivide')
     
