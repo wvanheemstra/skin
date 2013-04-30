@@ -69,7 +69,7 @@
                     timingFunction: 'ease'
                 });/* eof SlidingPane */
                 
-                var Slider = app.slider;
+                var Slider = app.index.main.show.slider;
                 /* Initiate the Slider for the DOM element */
                 Slider.domElement = document.getElementById('iosSlider');
                 Slider.slider({
@@ -82,7 +82,7 @@
                     scrollbarMargin: '0 30px 16px 30px',
                     scrollbarOpacity: '0.55',
                     keyboardControls: true,
-                    autoSlide: false
+                    autoSlide: true
                 });/* eof Slider */
 
                 var Tabs = app.tabs;

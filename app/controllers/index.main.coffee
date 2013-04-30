@@ -4,6 +4,7 @@ LoadTimeApp = require('models/loadTimeApp')
 $ = Spine.$
 
 SlidingPane = require('controllers/slidingpane')
+Slider = require('controllers/slider')
 
 class Show extends Spine.Controller
   # Set the HTML class
@@ -22,12 +23,17 @@ class Show extends Spine.Controller
     @active @change
     
     @slidingPane = new SlidingPane
+    @slider = new Slider
     
   render: ->
     @log('Index Main Show - call to render received')
     # Render a template, replacing the 
     # controller's HTML
     @html require('views/show')(@item)
+    
+  slider: (params) -> 
+    @log('Index Main Show - call to slider received')
+    @slider.slider(params)
     
   slidingpane: (params) ->  
     @log('Index Main Show - call to slidingpane received')

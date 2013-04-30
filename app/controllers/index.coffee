@@ -36,10 +36,25 @@ class Index extends Spine.Controller
           timingFunction: 'ease'         
         })
         @log('Index - inside routes after call to @main.show.slidingpane(params)')
-        
-    divide = $('<div><a /></div>').addClass('vdivide')
+#        @main.show.slider({
+#          scrollbar: true,
+#          scrollbarHide: false,
+#          desktopClickDrag: true,
+#          scrollbarLocation: 'bottom',
+#          scrollbarHeight: '6px',
+#          scrollbarBorder: '1px solid #000',
+#          scrollbarMargin: '0 30px 16px 30px',
+#          scrollbarOpacity: '0.55',
+#          keyboardControls: true,
+#          autoSlide: true        
+#        })
+#        @log('Index - inside routes after call to @main.show.slider(params)')        
     
-    @append @sidebar, divide, @main
+    divideLeft = $('<div />').addClass('vdivide')
+    divideMiddle = $('<div><a /></div>').addClass('vdivide')
+    divideRight = $('<div />').addClass('vdivide')
+    
+    @append divideLeft, @sidebar, divideMiddle, @main, divideRight
 
     # Create instances at the start, will come from the database in the future
     loadTimeData1 = LoadTimeData.create(

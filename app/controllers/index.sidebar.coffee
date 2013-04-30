@@ -64,7 +64,7 @@ class Sidebar extends Spine.Controller
   resize: ->
     @log('Sidebar - call received to resize')
     if(parseInt(this.el[0].style.width) == 0)
-      this.el[0].style.width = '169px'
+      this.el[0].style.width = '154px'
       this.el[0].style.visibility = 'visible'
     else
       this.el[0].style.width = '0px'

@@ -125,14 +125,14 @@
 
           <div class='slide medium'>
             <a href="#Dummy%202" class="openModal">
-              <div class="default icon">
-                <div class="header">
-                  <p class="title">
+              <div class="default icon medium">
+                <div class="header medium">
+                  <p class="title medium">
                     Dummy 2
                   </p>
                 </div>
-                <div class="body">
-                  <p class="context">
+                <div class="body medium">
+                  <p class="context medium default">
                     *
                   </p>
                 </div>
@@ -158,14 +158,14 @@
           </div><!-- eof .slide --> 
 
           <div class='slide medium'>
-            <div class="default icon">
-              <div class="header">
-                <p class="title">
+            <div class="default icon medium">
+              <div class="header medium">
+                <p class="title medium">
                   Dummy 3
                 </p>
               </div>
-              <div class="body">
-                <p class="context">
+              <div class="body medium">
+                <p class="context medium default">
                   *
                 </p>
               </div>

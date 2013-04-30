@@ -14,14 +14,14 @@ class Slider extends Spine.Controller
       
   slider: (method) ->  
     if methods[method]
-      console.log('slider method:' + method)
+      console.log('Slider - slider method:' + method)
       methods[method].apply this, Array::slice.call(arguments, 1)
     else if typeof method is "object" or not method
-      console.log('slider without method')   
-      console.log('slider without method: arguments ' + arguments)
+      console.log('Slider - slider without method')   
+      console.log('Slider - slider without method: arguments ' + arguments)
       methods.init.apply this, arguments 
-    else console.log('invalid method call!')
-    console.log('end of slider')
+    else console.log('Slider - invalid method call!')
+    console.log('Slider - end of slider')
   # used by slider  
   # sof global variables
   domElement = this.domElement
@@ -87,14 +87,14 @@ class Slider extends Spine.Controller
     #eof explode
   
     showScrollbar: (settings, scrollbarClass) ->
-      console.log('inside showScrollbar')   
+      console.log('Slider - inside showScrollbar')   
       if settings.scrollbarHide
         $("." + scrollbarClass).css
           opacity: settings.scrollbarOpacity
           filter: "alpha(opacity:" + (settings.scrollbarOpacity * 100) + ")"
 
     hideScrollbar: (settings, scrollTimeouts, j, distanceOffsetArray, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, sliderNumber) ->
-      console.log('inside hideScrollbar')    
+      console.log('Slider - inside hideScrollbar')    
       if settings.scrollbar and settings.scrollbarHide
         i = j
 
@@ -103,7 +103,7 @@ class Slider extends Spine.Controller
           i++
 
     hideScrollbarInterval: (newOffset, opacity, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, sliderNumber, settings) ->
-      console.log('inside hideScrollbarInterval')
+      console.log('Slider - inside hideScrollbarInterval')
       scrollbarDistance = (newOffset * -1) / (sliderMax[sliderNumber]) * (stageWidth - scrollMargin - scrollBorder - scrollbarWidth)
       helpers.setSliderOffset "." + scrollbarClass, scrollbarDistance
       $("." + scrollbarClass).css
@@ -111,9 +111,9 @@ class Slider extends Spine.Controller
         filter: "alpha(opacity:" + (settings.scrollbarOpacity * opacity * 100) + ")"
 
     slowScrollHorizontalInterval: (node, slideNodes, newOffset, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, activeChildOffset, originalOffsets, childrenOffsets, infiniteSliderWidth, numberOfSlides, slideNodeOuterWidths, sliderNumber, centeredSlideOffset, endOffset, settings) ->
-      console.log('inside slowScrollHorizontalInterval')
+      console.log('Slider - inside slowScrollHorizontalInterval')
       if settings.infiniteSlider
-        console.log('inside slowScrollHorizontalInterval: if settings.infiniteSlider')
+        console.log('Slider - inside slowScrollHorizontalInterval: if settings.infiniteSlider')
         if newOffset <= (sliderMax[sliderNumber] * -1)
           scrollerWidth = $(node).width()
           if newOffset <= (sliderAbsMax[sliderNumber] * -1)
@@ -192,22 +192,22 @@ class Slider extends Spine.Controller
             sliderMin[sliderNumber] = childrenOffsets[0] * -1 + centeredSlideOffset
             sliderMax[sliderNumber] = sliderMin[sliderNumber] + scrollerWidth - stageWidth
             infiniteSliderOffset[sliderNumber]--
-            console.log('end of if settings.infiniteSlider')
+            console.log('Slider - end of if settings.infiniteSlider')
             
       slideChanged = false
 
-      console.log('inside slider: settings: '+settings)# WORKS
-      console.log('inside slider: newOffset: '+newOffset)# WORKS
-      console.log('inside slider: childrenOffsets: '+childrenOffsets)# WORKS
-      console.log('inside slider: stageWidth: '+stageWidth)# WORKS
-      console.log('inside slider: infiniteSliderOffset[sliderNumber]: '+infiniteSliderOffset[sliderNumber])# WORKS
-      console.log('inside slider: numberOfSlides: '+numberOfSlides)# WORKS
-      console.log('inside slider: activeChildOffset: '+activeChildOffset)# WORKS
-      console.log('inside slider: sliderNumber: '+sliderNumber)# WORKS
+      console.log('Slider - inside slider: settings: '+settings)# WORKS
+      console.log('Slider - inside slider: newOffset: '+newOffset)# WORKS
+      console.log('Slider - inside slider: childrenOffsets: '+childrenOffsets)# WORKS
+      console.log('Slider - inside slider: stageWidth: '+stageWidth)# WORKS
+      console.log('Slider - inside slider: infiniteSliderOffset[sliderNumber]: '+infiniteSliderOffset[sliderNumber])# WORKS
+      console.log('Slider - inside slider: numberOfSlides: '+numberOfSlides)# WORKS
+      console.log('Slider - inside slider: activeChildOffset: '+activeChildOffset)# WORKS
+      console.log('Slider - inside slider: sliderNumber: '+sliderNumber)# WORKS
 
       newChildOffset = helpers.calcActiveOffset(settings, newOffset, childrenOffsets, stageWidth, infiniteSliderOffset[sliderNumber], numberOfSlides, activeChildOffset, sliderNumber)
       
-      console.log('inside slider: newChildOffset: '+newChildOffset) #FAILS AS IT IS UNDEFINED... FIX IT
+      console.log('Slider - inside slider: newChildOffset: '+newChildOffset) #FAILS AS IT IS UNDEFINED... FIX IT
       
       tempOffset = (newChildOffset + infiniteSliderOffset[sliderNumber] + numberOfSlides) % numberOfSlides
       if settings.infiniteSlider
@@ -219,16 +219,16 @@ class Slider extends Spine.Controller
         $(node).parent().data "args", args
         settings.onSlideChange args  unless settings.onSlideChange is ""
       
-      console.log('inside slider: newChildOffset: '+newChildOffset) #FAILS AS IT IS UNDEFINED... FIX IT
+      console.log('Slider - inside slider: newChildOffset: '+newChildOffset) #FAILS AS IT IS UNDEFINED... FIX IT
       
       activeChildOffsets[sliderNumber] = newChildOffset
       activeChildInfOffsets[sliderNumber] = tempOffset
       newOffset = Math.floor(newOffset)
 
       #CHECK IF WE CALL helpers.setSliderOffset with valid arguments
-      console.log('inside slider: around line 215')
-      console.log('inside slider: activeChildOffsets[sliderNumber]: '+activeChildOffsets[sliderNumber]) #THIS FAILS ... IT IS UNDEFINED .. FIX IT
-      console.log('inside slider: newOffset: '+newOffset) #THIS FAILS ... IT IS NAN .. FIX IT
+      console.log('Slider - inside slider: around line 215')
+      console.log('Slider - inside slider: activeChildOffsets[sliderNumber]: '+activeChildOffsets[sliderNumber]) #THIS FAILS ... IT IS UNDEFINED .. FIX IT
+      console.log('Slider - inside slider: newOffset: '+newOffset) #THIS FAILS ... IT IS NAN .. FIX IT
 
       helpers.setSliderOffset node, newOffset
       if settings.scrollbar
@@ -247,7 +247,7 @@ class Slider extends Spine.Controller
           $("." + scrollbarClass).css width: width + "px"
 
     slowScrollHorizontal: (node, slideNodes, scrollTimeouts, scrollbarClass, xScrollDistance, yScrollDistance, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, currentEventNode, snapOverride, centeredSlideOffset, settings) ->
-      console.log('inside slowScrollHorizontal')
+      console.log('Slider - inside slowScrollHorizontal')
       distanceOffsetArray = new Array()
       xScrollDistanceArray = new Array()
       nodeOffset = helpers.getSliderOffset(node, "x")
@@ -361,8 +361,8 @@ class Slider extends Spine.Controller
           lastCheckOffset = distanceOffsetArray[j]
           
           #WARNING below line added by wvh in case centeredSlideOffset is 'undefined'
-          console.log('inside slider : around line 342') 
-          console.log('inside slider : centeredSlideOffset: '+centeredSlideOffset) 
+          console.log('Slider - inside slider : around line 342') 
+          console.log('Slider - inside slider : centeredSlideOffset: '+centeredSlideOffset) 
           if centeredSlideOffset is `undefined`
             centeredSlideOffset = 0
 
@@ -379,7 +379,7 @@ class Slider extends Spine.Controller
       helpers.hideScrollbar settings, scrollTimeouts, j, distanceOffsetArray, scrollbarClass, scrollbarWidth, stageWidth, scrollMargin, scrollBorder, sliderNumber
 
     onSlideComplete: (settings, node, slideNode, newChildOffset, sliderNumber) ->
-      console.log('inside onSlideComplete')
+      console.log('Slider - inside onSlideComplete')
       isChanged = (if (onChangeEventLastFired[sliderNumber] isnt newChildOffset) then true else false)
       args = new helpers.args("complete", settings, $(node), slideNode, newChildOffset, newChildOffset)
       $(node).parent().data "args", args
@@ -387,7 +387,7 @@ class Slider extends Spine.Controller
       onChangeEventLastFired[sliderNumber] = newChildOffset
 
     getSliderOffset: (node, xy) ->
-      console.log('inside getSliderOffset')
+      console.log('Slider - inside getSliderOffset')
       sliderOffset = 0
       if xy is "x"
         xy = 4
@@ -402,8 +402,8 @@ class Slider extends Spine.Controller
               transformArray = $(node).css(transforms[i]).split(",")
               break
           i++
-        console.log('end of while') # It goes wrong in the next statement
-        console.log('transformArray: '+transformArray)# transformArray is undefined
+        console.log('Slider - end of while') # It goes wrong in the next statement
+        console.log('Slider - transformArray: '+transformArray)# transformArray is undefined
         
         if transformArray is `undefined` # Added by wvh in case transformArray is undefined
           sliderOffset = parseInt('0', 10)
@@ -412,12 +412,12 @@ class Slider extends Spine.Controller
 
       else
         sliderOffset = parseInt($(node).css("left"), 10)
-      console.log('end of getSliderOffset: '+sliderOffset)  
+      console.log('Slider - end of getSliderOffset: '+sliderOffset)  
       sliderOffset
 
     setSliderOffset: (node, sliderOffset) ->
-      console.log('inside setSliderOffset: node: '+node)
-      console.log('inside setSliderOffset: sliderOffset: '+sliderOffset) # Currently sliderOffset is undefined... FIX IT
+      console.log('Slider - inside setSliderOffset: node: '+node)
+      console.log('Slider - inside setSliderOffset: sliderOffset: '+sliderOffset) # Currently sliderOffset is undefined... FIX IT
       if has3DTransform and not isIe7 and not isIe8
         $(node).css
           webkitTransform: "matrix(1,0,0,1," + sliderOffset + ",0)"
@@ -539,8 +539,8 @@ class Slider extends Spine.Controller
         if (i is 0) or (Math.abs(stepArray[i] - lastCheckOffset) > 1) or (i >= (stepArray.length - 2))
           lastCheckOffset = stepArray[i]
           #WARNING below line added by wvh in case centeredSlideOffset is 'undefined'
-          console.log('inside slider : around line 518') 
-          console.log('inside slider : centeredSlideOffset: '+centeredSlideOffset) 
+          console.log('Slider - inside slider : around line 518') 
+          console.log('Slider - inside slider : centeredSlideOffset: '+centeredSlideOffset) 
           if centeredSlideOffset is `undefined`
             centeredSlideOffset = 0
 
@@ -561,7 +561,7 @@ class Slider extends Spine.Controller
       helpers.autoSlide node, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings
 
     autoSlide: (scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings) ->
-      console.log('inside helpers: autoSlide')
+      console.log('Slider - inside helpers: autoSlide')
       return false  unless iosSliderSettings[sliderNumber].autoSlide
       helpers.autoSlidePause sliderNumber
       autoSlideTimeouts[sliderNumber] = setTimeout(->
@@ -569,8 +569,8 @@ class Slider extends Spine.Controller
         nextSlide = (activeChildOffsets[sliderNumber] + infiniteSliderOffset[sliderNumber] + numberOfSlides + 1) % numberOfSlides
 
         #WARNING below line added by wvh in case centeredSlideOffset is 'undefined'
-        console.log('inside slider : around line 542') 
-        console.log('inside slider : centeredSlideOffset: '+centeredSlideOffset) 
+        console.log('Slider - inside slider : around line 542') 
+        console.log('Slider - inside slider : centeredSlideOffset: '+centeredSlideOffset) 
         if centeredSlideOffset is `undefined`
           centeredSlideOffset = 0
 
@@ -579,7 +579,7 @@ class Slider extends Spine.Controller
       , settings.autoSlideTimer + settings.autoSlideTransTimer)
 
     autoSlidePause: (sliderNumber) ->
-      console.log('inside helpers: autoSlidePause: sliderNumber '+ sliderNumber)
+      console.log('Slider - inside helpers: autoSlidePause: sliderNumber '+ sliderNumber)
       clearTimeout autoSlideTimeouts[sliderNumber]
 
     isUnselectable: (node, settings) ->
@@ -590,8 +590,8 @@ class Slider extends Spine.Controller
     slowScrollHorizontalIntervalTimer: (scrollIntervalTime, node, slideNodes, step, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, slide, originalOffsets, childrenOffsets, infiniteSliderWidth, numberOfSlides, slideNodeOuterWidths, sliderNumber, centeredSlideOffset, endOffset, settings) ->
 
       #WARNING below line added by wvh in case centeredSlideOffset is 'undefined'
-      console.log('inside slider : around line 590') 
-      console.log('inside slider : centeredSlideOffset: '+centeredSlideOffset) 
+      console.log('Slider - inside slider : around line 590') 
+      console.log('Slider - inside slider : centeredSlideOffset: '+centeredSlideOffset) 
       if centeredSlideOffset is `undefined`
         centeredSlideOffset = 0
 
@@ -650,12 +650,12 @@ class Slider extends Spine.Controller
   helpers.setBrowserInfo()
   # used by slider
   methods = init: (options, node) -> #sof init
-    console.log('inside slider init')
-    console.log('inside slider init: options ' + JSON.stringify(helpers.explode ",",options))
-    console.log('inside slider init: node ' + JSON.stringify(helpers.explode ",",node)) #node is currently undefined   
+    console.log('Slider - inside slider init')
+    console.log('Slider - inside slider init: options ' + JSON.stringify(helpers.explode ",",options))
+    console.log('Slider - inside slider init: node ' + JSON.stringify(helpers.explode ",",node)) #node is currently undefined   
     has3DTransform = helpers.has3DTransform()
     domElement = this.domElement
-    console.log('inside slider init: has3DTransform ' + has3DTransform)   
+    console.log('Slider - inside slider init: has3DTransform ' + has3DTransform)   
     settings = $.extend(true,
       elasticPullResistance: 0.6
       frictionCoefficient: 0.92
@@ -708,18 +708,18 @@ class Slider extends Spine.Controller
       onSlideChange: ""
       onSlideComplete: ""
     , options)#eof settings
-    console.log('inside slider init: settings ' + JSON.stringify(settings))
+    console.log('Slider - inside slider init: settings ' + JSON.stringify(settings))
     #ORIGINAL node = this if node is `undefined`
-    console.log('domElement: ' + domElement)    
+    console.log('Slider - domElement: ' + domElement)    
     node = domElement if node is `undefined`  #this.domElement is set.. GREAT
-    console.log('inside slider init: node ' + node)
+    console.log('Slider - inside slider init: node ' + node)
     #sof return 
     $(node).each (i) ->
-      console.log('inside slider init: node ' + node)
+      console.log('Slider - inside slider init: node ' + node)
       #sof init->init
       init = ->
-        console.log('inside slider init -> init')
-        console.log('inside slider init -> init: sliderNumber ' + sliderNumber)
+        console.log('Slider - inside slider init -> init')
+        console.log('Slider - inside slider init -> init: sliderNumber ' + sliderNumber)
         helpers.autoSlidePause sliderNumber
         
         console.log('$(scrollerNode): ' +$(scrollerNode))
@@ -727,49 +727,49 @@ class Slider extends Spine.Controller
         
         anchorEvents = $(scrollerNode).find("a")
         
-        console.log('inside slider init -> init: anchorEvents: ' +anchorEvents)
+        console.log('Slider - inside slider init -> init: anchorEvents: ' +anchorEvents)
         
         onclickEvents = $(scrollerNode).find("[onclick]")
         
-        console.log('inside slider init -> init: onclickEvents: ' +onclickEvents)
+        console.log('Slider - inside slider init -> init: onclickEvents: ' +onclickEvents)
         
         allScrollerNodeChildren = $(scrollerNode).find("*")
         
-        console.log('inside slider init -> init: allScrollerNodeChildren: ' + $(allScrollerNodeChildren))
+        console.log('Slider - inside slider init -> init: allScrollerNodeChildren: ' + $(allScrollerNodeChildren))
         
         $(stageNode).css "width", ""
         $(stageNode).css "height", ""
         $(scrollerNode).css "width", ""
         slideNodes = $(scrollerNode).children().not("script").get() # WORKS ! the slideNodes should be a collection of HTMLDivElements
-        console.log('inside slider init -> init: slideNodes: '+ slideNodes)
+        console.log('Slider - inside slider init -> init: slideNodes: '+ slideNodes)
         slideNodeWidths = new Array()
         slideNodeOuterWidths = new Array()
         $(slideNodes).css "width", ""
         sliderMax[sliderNumber] = 0
         childrenOffsets = new Array()
-        console.log('inside slider init -> init: stageNode:' + stageNode)
-        console.log('inside slider init -> init: $(stageNode).parent().width():' + $(stageNode).parent().width())
+        console.log('Slider - inside slider init -> init: stageNode:' + stageNode)
+        console.log('Slider - inside slider init -> init: $(stageNode).parent().width():' + $(stageNode).parent().width())
         containerWidth = $(stageNode).parent().width()
-        console.log('inside slider init -> init: containerWidth:' + containerWidth)
+        console.log('Slider - inside slider init -> init: containerWidth:' + containerWidth)
         
         document = domElement.ownerDocument # WORKS PERFECT! added this because it is required next
-        console.log('inside slider init -> init: document:' + document)
+        console.log('Slider - inside slider init -> init: document:' + document)
         
         elem = node # added this because it is required next
-        console.log('inside slider init -> init: elem:' + elem)
+        console.log('Slider - inside slider init -> init: elem:' + elem)
         
         if(typeof node.style == 'undefined')
           elem.style = ''
         else
           elem.style = node.style
         elem.style = node.style # added this because it is required next
-        console.log('inside slider init -> init: elem.style:' + elem.style)        
+        console.log('Slider - inside slider init -> init: elem.style:' + elem.style)        
         
         elem.ownerDocument = document # added this because it is required next
-        console.log('inside slider init -> init: elem.ownerDocument:' + elem.ownerDocument)        
+        console.log('Slider - inside slider init -> init: elem.ownerDocument:' + elem.ownerDocument)        
         
         stageWidth = $(stageNode).outerWidth(true)
-        console.log('inside slider init -> init: stageWidth:' + stageWidth)
+        console.log('Slider - inside slider init -> init: stageWidth:' + stageWidth)
         stageWidth = (if ($(stageNode).outerWidth(true) > containerWidth) then containerWidth else $(stageNode).outerWidth(true))  if settings.responsiveSlideContainer
         $(stageNode).css
           position: settings.stageCSS.position
@@ -784,10 +784,10 @@ class Slider extends Spine.Controller
 
         $(settings.unselectableSelector).css cursor: "default"
         j = 0
-        console.log('inside slider init -> init: j:' + j) # WORKS so far so good
+        console.log('Slider - inside slider init -> init: j:' + j) # WORKS so far so good
         while j < slideNodes.length
-          console.log('inside slider init -> init: while j < slideNodes.length: j:' +j)
-          console.log('inside slider init -> init: while j < slideNodes.length: slideNodes.length:' +slideNodes.length) #WORKS 
+          console.log('Slider - inside slider init -> init: while j < slideNodes.length: j:' +j)
+          console.log('Slider - inside slider init -> init: while j < slideNodes.length: slideNodes.length:' +slideNodes.length) #WORKS 
           slideNodeWidths[j] = $(slideNodes[j]).width()
           slideNodeOuterWidths[j] = $(slideNodes[j]).outerWidth(true)
           newWidth = slideNodeOuterWidths[j]
@@ -810,7 +810,7 @@ class Slider extends Spine.Controller
           centeredSlideOffset = 0  if settings.responsiveSlides and (slideNodeOuterWidths[0] > stageWidth)
         sliderAbsMax[sliderNumber] = sliderMax[sliderNumber] * 2
         j = 0
-        console.log('inside slider init -> init: j:' + j) # WORKS so far so good
+        console.log('Slider - inside slider init -> init: j:' + j) # WORKS so far so good
         
         #START TRACING AGAIN FROM HERE.. ESPECIALLY FOR helpers.setSliderOffset
 
@@ -820,8 +820,8 @@ class Slider extends Spine.Controller
           if centeredSlideOffset is `undefined` # WORKS ! NOW THE SLIDES GET A MATRIX, BUT THE SLIDER NOT YET... FIX IT
             centeredSlideOffset = 0
           
-          console.log('inside slider init -> init: while j < slideNodes.length: centeredSlideOffset: ' + centeredSlideOffset) # The centeredSlideOffset is currently undefined.. FIX IT
-          console.log('inside slider init -> init: while j < slideNodes.length: childrenOffsets[j] * -1 + sliderMax[sliderNumber] + centeredSlideOffset: ' +(childrenOffsets[j] * -1 + sliderMax[sliderNumber] + centeredSlideOffset))
+          console.log('Slider - inside slider init -> init: while j < slideNodes.length: centeredSlideOffset: ' + centeredSlideOffset) # The centeredSlideOffset is currently undefined.. FIX IT
+          console.log('Slider - inside slider init -> init: while j < slideNodes.length: childrenOffsets[j] * -1 + sliderMax[sliderNumber] + centeredSlideOffset: ' +(childrenOffsets[j] * -1 + sliderMax[sliderNumber] + centeredSlideOffset))
           helpers.setSliderOffset $(slideNodes[j]), childrenOffsets[j] * -1 + sliderMax[sliderNumber] + centeredSlideOffset
           childrenOffsets[j] = childrenOffsets[j] - sliderMax[sliderNumber]
           j++
@@ -846,9 +846,9 @@ class Slider extends Spine.Controller
           
           
         if isFirstInit
-          console.log('inside slider init -> init: if isFirstInit')
+          console.log('Slider - inside slider init -> init: if isFirstInit')
           settings.startAtSlide = (if (iosSliderSettings[sliderNumber].startAtSlide > childrenOffsets.length) then childrenOffsets.length else iosSliderSettings[sliderNumber].startAtSlide)
-          console.log('inside slider init -> init: settings.startAtSlide: ' +settings.startAtSlide)
+          console.log('Slider - inside slider init -> init: settings.startAtSlide: ' +settings.startAtSlide)
           if settings.infiniteSlider
             settings.startAtSlide = (iosSliderSettings[sliderNumber].startAtSlide - 1 + numberOfSlides) % numberOfSlides
             activeChildOffsets[sliderNumber] = (iosSliderSettings[sliderNumber].startAtSlide)
@@ -877,7 +877,7 @@ class Slider extends Spine.Controller
         helpers.setSliderOffset scrollerNode, childrenOffsets[activeChildOffsets[sliderNumber]] # WORKS!
         
         if settings.infiniteSlider and not shortContent
-          console.log('inside slider init -> init: if settings.infiniteSlider and not shortContent')
+          console.log('Slider - inside slider init -> init: if settings.infiniteSlider and not shortContent')
           currentScrollOffset = helpers.getSliderOffset($(scrollerNode), "x")
           count = (infiniteSliderOffset[sliderNumber] + numberOfSlides) % numberOfSlides * -1
           while count < 0
@@ -928,23 +928,23 @@ class Slider extends Spine.Controller
             infiniteSliderOffset[sliderNumber]++
             activeChildOffsets[sliderNumber]--
         #eof if    
-        console.log('inside slider init -> init: scrollerNode: '+ scrollerNode)
-        console.log('inside slider init -> init: sliderNumber: '+ sliderNumber)
-        console.log('inside slider init -> init: activeChildOffsets[sliderNumber]: '+ activeChildOffsets[sliderNumber]) # WORKS
-        console.log('inside slider init -> init: childrenOffsets[activeChildOffsets[sliderNumber]]: '+ childrenOffsets[activeChildOffsets[sliderNumber]])
+        console.log('Slider - inside slider init -> init: scrollerNode: '+ scrollerNode)
+        console.log('Slider - inside slider init -> init: sliderNumber: '+ sliderNumber)
+        console.log('Slider - inside slider init -> init: activeChildOffsets[sliderNumber]: '+ activeChildOffsets[sliderNumber]) # WORKS
+        console.log('Slider - inside slider init -> init: childrenOffsets[activeChildOffsets[sliderNumber]]: '+ childrenOffsets[activeChildOffsets[sliderNumber]])
         
         helpers.setSliderOffset scrollerNode, childrenOffsets[activeChildOffsets[sliderNumber]] # WORKS!
         
-        console.log('inside slider init -> init: settings.desktopClickDrag: '+ settings.desktopClickDrag)
+        console.log('Slider - inside slider init -> init: settings.desktopClickDrag: '+ settings.desktopClickDrag)
         
         $(scrollerNode).css cursor: "default"  unless settings.desktopClickDrag
         
-        console.log('inside slider : around line 910') # WE ARE HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        console.log('Slider - inside slider : around line 910') # WE ARE HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         
-        console.log('inside slider init -> init: settings.scrollbar: '+ settings.scrollbar)
+        console.log('Slider - inside slider init -> init: settings.scrollbar: '+ settings.scrollbar)
         
         if settings.scrollbar
-          console.log('inside slider init -> init: if settings.scrollbar: ')
+          console.log('Slider - inside slider init -> init: if settings.scrollbar: ')
           $("." + scrollbarBlockClass).css
             margin: settings.scrollbarMargin
             overflow: "hidden"
@@ -963,7 +963,7 @@ class Slider extends Spine.Controller
             margin: settings.scrollbarMargin
 
           if settings.scrollbarLocation is "top"
-            console.log('inside slider init -> init: if settings.scrollbarLocation is "top"')
+            console.log('Slider - inside slider init -> init: if settings.scrollbarLocation is "top"')
             $("." + scrollbarBlockClass).css "top", "0"
           else
             $("." + scrollbarBlockClass).css "bottom", "0"
@@ -981,23 +981,23 @@ class Slider extends Spine.Controller
             filter: "alpha(opacity:" + (scrollbarStartOpacity * 100) + ")"
             boxShadow: settings.scrollbarShadow
 
-          console.log('inside slider init -> init: if settings.scrollbar: $("." + scrollbarBlockClass + " ." + scrollbarClass): '+$("." + scrollbarBlockClass + " ." + scrollbarClass))
-          console.log('inside slider init -> init: if settings.scrollbar: Math.floor((childrenOffsets[activeChildOffsets[sliderNumber]] * -1 - sliderMin[sliderNumber] + centeredSlideOffset) / (sliderMax[sliderNumber] - sliderMin[sliderNumber] + centeredSlideOffset) * (scrollbarStageWidth - scrollMargin - scrollbarWidth)): '+(Math.floor((childrenOffsets[activeChildOffsets[sliderNumber]] * -1 - sliderMin[sliderNumber] + centeredSlideOffset) / (sliderMax[sliderNumber] - sliderMin[sliderNumber] + centeredSlideOffset) * (scrollbarStageWidth - scrollMargin - scrollbarWidth))))
+          console.log('Slider - inside slider init -> init: if settings.scrollbar: $("." + scrollbarBlockClass + " ." + scrollbarClass): '+$("." + scrollbarBlockClass + " ." + scrollbarClass))
+          console.log('Slider - inside slider init -> init: if settings.scrollbar: Math.floor((childrenOffsets[activeChildOffsets[sliderNumber]] * -1 - sliderMin[sliderNumber] + centeredSlideOffset) / (sliderMax[sliderNumber] - sliderMin[sliderNumber] + centeredSlideOffset) * (scrollbarStageWidth - scrollMargin - scrollbarWidth)): '+(Math.floor((childrenOffsets[activeChildOffsets[sliderNumber]] * -1 - sliderMin[sliderNumber] + centeredSlideOffset) / (sliderMax[sliderNumber] - sliderMin[sliderNumber] + centeredSlideOffset) * (scrollbarStageWidth - scrollMargin - scrollbarWidth))))
           #WORKS!
 
           helpers.setSliderOffset $("." + scrollbarBlockClass + " ." + scrollbarClass), Math.floor((childrenOffsets[activeChildOffsets[sliderNumber]] * -1 - sliderMin[sliderNumber] + centeredSlideOffset) / (sliderMax[sliderNumber] - sliderMin[sliderNumber] + centeredSlideOffset) * (scrollbarStageWidth - scrollMargin - scrollbarWidth))
           $("." + scrollbarBlockClass).css display: "block"
           scrollbarNode = $("." + scrollbarBlockClass + " ." + scrollbarClass)
-          console.log('inside slider init -> init: if settings.scrollbar: scrollbarNode: '+scrollbarNode) #WORKS
+          console.log('Slider - inside slider init -> init: if settings.scrollbar: scrollbarNode: '+scrollbarNode) #WORKS
           scrollbarBlockNode = $("." + scrollbarBlockClass)
-          console.log('inside slider init -> init: if settings.scrollbar: scrollbarBlockNode: '+scrollbarBlockNode) #WORKS
+          console.log('Slider - inside slider init -> init: if settings.scrollbar: scrollbarBlockNode: '+scrollbarBlockNode) #WORKS
           
         # WE ARE HERE .... !!!!!!!!!!!!!  
           
         $("." + scrollbarBlockClass + " ." + scrollbarClass).css cursor: grabOutCursor  if settings.scrollbarDrag and not shortContent
         infiniteSliderWidth = (sliderMax[sliderNumber] + stageWidth) / 3  if settings.infiniteSlider
         
-        console.log('inside slider init -> init: settings.navSlideSelector: '+settings.navSlideSelector)
+        console.log('Slider - inside slider init -> init: settings.navSlideSelector: '+settings.navSlideSelector)
         
         unless settings.navSlideSelector is ""
           $(settings.navSlideSelector).each (j) ->
@@ -1012,8 +1012,8 @@ class Slider extends Spine.Controller
               
               
               #WARNING below line added by wvh in case centeredSlideOffset is 'undefined'
-              console.log('inside slider : around line 984') 
-              console.log('inside slider : centeredSlideOffset: '+centeredSlideOffset) 
+              console.log('Slider - inside slider : around line 984') 
+              console.log('Slider - inside slider : centeredSlideOffset: '+centeredSlideOffset) 
               if centeredSlideOffset is `undefined`
                 centeredSlideOffset = 0
               
@@ -1021,7 +1021,7 @@ class Slider extends Spine.Controller
               
               helpers.changeSlide j, scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings
 
-        console.log('inside slider init -> init: settings.navPrevSelector: '+settings.navPrevSelector)      
+        console.log('Slider - inside slider init -> init: settings.navPrevSelector: '+settings.navPrevSelector)      
 
         unless settings.navPrevSelector is ""
           $(settings.navPrevSelector).css cursor: "pointer"
@@ -1035,15 +1035,15 @@ class Slider extends Spine.Controller
             
             
             #WARNING below line added by wvh in case centeredSlideOffset is 'undefined'
-            console.log('inside slider : around line 996') 
-            console.log('inside slider : centeredSlideOffset: '+centeredSlideOffset) 
+            console.log('Slider - inside slider : around line 996') 
+            console.log('Slider - inside slider : centeredSlideOffset: '+centeredSlideOffset) 
             if centeredSlideOffset is `undefined`
               centeredSlideOffset = 0
               
             
             helpers.changeSlide slide - 1, scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings  if (slide > 0) or settings.infiniteSlider
 
-        console.log('inside slider init -> init: settings.navNextSelector: '+settings.navNextSelector)
+        console.log('Slider - inside slider init -> init: settings.navNextSelector: '+settings.navNextSelector)
 
         unless settings.navNextSelector is ""
           $(settings.navNextSelector).css cursor: "pointer"
@@ -1059,8 +1059,8 @@ class Slider extends Spine.Controller
             
             
             #WARNING below line added by wvh in case centeredSlideOffset is 'undefined'
-            console.log('inside slider : around line 1011') 
-            console.log('inside slider : centeredSlideOffset: '+centeredSlideOffset) 
+            console.log('Slider - inside slider : around line 1011') 
+            console.log('Slider - inside slider : centeredSlideOffset: '+centeredSlideOffset) 
             if centeredSlideOffset is `undefined`
               centeredSlideOffset = 0
             
@@ -1068,7 +1068,7 @@ class Slider extends Spine.Controller
             
             helpers.changeSlide slide + 1, scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings  if (slide < childrenOffsets.length - 1) or settings.infiniteSlider
 
-        console.log('inside slider init -> init: settings.autoSlide: '+settings.autoSlide)
+        console.log('Slider - inside slider init -> init: settings.autoSlide: '+settings.autoSlide)
 
         if settings.autoSlide and not shortContent
           unless settings.autoSlideToggleSelector is ""
@@ -1098,7 +1098,7 @@ class Slider extends Spine.Controller
           $(stageNode).bind "touchend.iosSliderEvent", ->
             helpers.autoSlide scrollerNode, slideNodes, scrollTimeouts, scrollbarClass, scrollbarWidth, stageWidth, scrollbarStageWidth, scrollMargin, scrollBorder, originalOffsets, childrenOffsets, slideNodeOuterWidths, sliderNumber, infiniteSliderWidth, numberOfSlides, centeredSlideOffset, settings  if not isAutoSlideToggleOn and not shortContent
 
-        console.log('inside slider : around line 966')
+        console.log('Slider - inside slider : around line 1101')
 
         $(stageNode).data "iosslider",
           obj: $this
@@ -1108,7 +1108,7 @@ class Slider extends Spine.Controller
           numberOfSlides: numberOfSlides
           centeredSlideOffset: centeredSlideOffset
           sliderNumber: sliderNumber
-          console.log('inside slider : sliderNumber' + sliderNumber)
+          console.log('Slider - inside slider : sliderNumber' + sliderNumber)
           
           originalOffsets: originalOffsets
           childrenOffsets: childrenOffsets
@@ -1120,18 +1120,18 @@ class Slider extends Spine.Controller
           scrollMargin: scrollMargin
           scrollBorder: scrollBorder
           infiniteSliderOffset: infiniteSliderOffset[sliderNumber]
-          console.log('inside slider : infiniteSliderOffset' + infiniteSliderOffset)
+          console.log('Slider - inside slider : infiniteSliderOffset' + infiniteSliderOffset)
           
           infiniteSliderWidth: infiniteSliderWidth
           slideNodeOuterWidths: slideNodeOuterWidths
 
         isFirstInit = false
         
-        console.log('inside slider : isFirstInit ' + isFirstInit)
+        console.log('Slider - inside slider : isFirstInit ' + isFirstInit)
         
         true
         
-        console.log('inside slider : end of init -> init') 
+        console.log('Slider - inside slider : end of init -> init') 
         
       #eof init -> init
       scrollbarNumber++
@@ -1206,33 +1206,33 @@ class Slider extends Spine.Controller
         settings.scrollbarHide = false
       $this = $(domElement) # WAS $(this)
       
-      console.log('$this: '+$this) # EXISTS, GREAT
-      console.log('$this.data: '+$this.data) # EXISTS..IS A FUNCTION, GREAT
-      console.log('$this.data("iosslider"): '+$this.data("iosslider")) # OOOPS ... THIS RESULTS IN UNDEFINED
+      console.log('Slider - $this: '+$this) # EXISTS, GREAT
+      console.log('Slider - $this.data: '+$this.data) # EXISTS..IS A FUNCTION, GREAT
+      console.log('Slider - $this.data("iosslider"): '+$this.data("iosslider")) # OOOPS ... THIS RESULTS IN UNDEFINED
       
       data = $this.data("iosslider")
-      console.log('data: '+data) #data IS CURRENTLY UNDEFINED...
+      console.log('Slider - data: '+data) #data IS CURRENTLY UNDEFINED...
       return true  unless data is `undefined`  #FIRST TIME ROUND data IS UNDEFINED SO WE ARE NOT RETURNING YET
       #WAS $(this).find("img").bind "dragstart.iosSliderEvent", (event) ->
       $(domElement).find("img").bind "dragstart.iosSliderEvent", (event) ->
         event.preventDefault()
 
-      console.log('inside slider : around line 1076')
+      console.log('Slider - inside slider : around line 1076')
 
       settings.scrollbar = false  if settings.infiniteSlider
 
-      console.log('inside slider : around line 1080')
+      console.log('Slider - inside slider : around line 1080')
 
       if settings.scrollbar
         unless settings.scrollbarContainer is ""
           $(settings.scrollbarContainer).append "<div class = '" + scrollbarBlockClass + "'><div class = '" + scrollbarClass + "'></div></div>"
         else
           $(scrollerNode).parent().append "<div class = '" + scrollbarBlockClass + "'><div class = '" + scrollbarClass + "'></div></div>"
-      console.log('inside slider : around line 1087')
-      console.log('init: ' +init()) #init() CURRENTLY RETURNS 'UNDEFINED'... INSPECT THIS
+      console.log('Slider - inside slider : around line 1087')
+      console.log('Slider - init: ' +init()) #init() CURRENTLY RETURNS 'UNDEFINED'... INSPECT THIS
       return true  unless init()
       
-      console.log('inside slider : around line 1090')     
+      console.log('Slider - inside slider : around line 1090')     
       
       #WAS $(this).find("a").bind "mousedown", helpers.preventDrag
       $(domElement).find("a").bind "mousedown", helpers.preventDrag
@@ -1241,7 +1241,7 @@ class Slider extends Spine.Controller
         #WAS $(this).data "onclick", @onclick
         $(domElement).data "onclick", @onclick
 
-      console.log('inside slider : around line 1096') 
+      console.log('Slider - inside slider : around line 1096') 
 
       newChildOffset = helpers.calcActiveOffset(settings, helpers.getSliderOffset($(scrollerNode), "x"), childrenOffsets, stageWidth, infiniteSliderOffset[sliderNumber], numberOfSlides, `undefined`, sliderNumber)
       tempOffset = (newChildOffset + infiniteSliderOffset[sliderNumber] + numberOfSlides) % numberOfSlides
@@ -1250,7 +1250,7 @@ class Slider extends Spine.Controller
       settings.onSliderLoaded args  unless settings.onSliderLoaded is ""
       onChangeEventLastFired[sliderNumber] = tempOffset
       
-      console.log('inside slider : around line 1105')     
+      console.log('Slider - inside slider : around line 1105')     
       
       if iosSliderSettings[sliderNumber].responsiveSlides or iosSliderSettings[sliderNumber].responsiveSlideContainer
         orientationEvent = (if supportsOrientationChange then "orientationchange" else "resize")
@@ -1268,8 +1268,8 @@ class Slider extends Spine.Controller
             
             
             #WARNING below line added by wvh in case centeredSlideOffset is 'undefined'
-            console.log('inside slider : around line 1208') 
-            console.log('inside slider : centeredSlideOffset: '+centeredSlideOffset) 
+            console.log('Slider - inside slider : around line 1208') 
+            console.log('Slider - inside slider : centeredSlideOffset: '+centeredSlideOffset) 
             if centeredSlideOffset is `undefined`
               centeredSlideOffset = 0           
             
@@ -1282,8 +1282,8 @@ class Slider extends Spine.Controller
             
             
             #WARNING below line added by wvh in case centeredSlideOffset is 'undefined'
-            console.log('inside slider : around line 1221') 
-            console.log('inside slider : centeredSlideOffset: '+centeredSlideOffset)    
+            console.log('Slider - inside slider : around line 1221') 
+            console.log('Slider - inside slider : centeredSlideOffset: '+centeredSlideOffset)    
             if centeredSlideOffset is `undefined`
               centeredSlideOffset = 0
             
@@ -1585,7 +1585,7 @@ class Slider extends Spine.Controller
     #eof init
     #sof destroy
     destroy: (clearStyle, node) ->
-      console.log('inside slider destroy')
+      console.log('Slider - inside slider destroy')
       node = this  if node is `undefined`
       $(node).each ->
         $this = $(this)
@@ -1622,7 +1622,7 @@ class Slider extends Spine.Controller
     #eof destroy
     #sof update
     update: (node) ->
-      console.log('inside slider update')
+      console.log('Slider - inside slider update')
       node = this  if node is `undefined`
       $(node).each ->
         $this = $(this)
@@ -1638,7 +1638,7 @@ class Slider extends Spine.Controller
     #eof update
     #sof addSlide
     addSlide: (slideNode, slidePosition) ->
-      console.log('inside slider addSlide')
+      console.log('Slider - inside slider addSlide')
       @each ->
         $this = $(this)
         data = $this.data("iosslider")
@@ -1664,7 +1664,7 @@ class Slider extends Spine.Controller
     #eof addSlide
     #sof removeSlide
     removeSlide: (slideNumber) ->
-      console.log('inside slider removeSlide')
+      console.log('Slider - inside slider removeSlide')
       @each ->
         $this = $(this)
         data = $this.data("iosslider")
@@ -1675,7 +1675,7 @@ class Slider extends Spine.Controller
     #eof removeSlide
     #sof goToSlide
     goToSlide: (slide, node) ->
-      console.log('inside slider goToSlide')
+      console.log('Slider - inside slider goToSlide')
       node = this  if node is `undefined`
       $(node).each ->
         $this = $(this)
@@ -1685,8 +1685,8 @@ class Slider extends Spine.Controller
         
         
         #WARNING below line added by wvh in case centeredSlideOffset is 'undefined'
-        console.log('inside slider : around line 1670') 
-        console.log('inside slider : data.centeredSlideOffset: '+data.centeredSlideOffset) 
+        console.log('Slider - inside slider : around line 1670') 
+        console.log('Slider - inside slider : data.centeredSlideOffset: '+data.centeredSlideOffset) 
         if data.centeredSlideOffset is `undefined`
           data.centeredSlideOffset = 0
         
@@ -1696,7 +1696,7 @@ class Slider extends Spine.Controller
     #eof goToSlide
     #sof lock
     lock: ->
-      console.log('inside slider lock')
+      console.log('Slider - inside slider lock')
       @each ->
         $this = $(this)
         data = $this.data("iosslider")
@@ -1705,7 +1705,7 @@ class Slider extends Spine.Controller
     #eof lock
     #sof unlock
     unlock: ->
-      console.log('inside slider unlock')
+      console.log('Slider - inside slider unlock')
       @each ->
         $this = $(this)
         data = $this.data("iosslider")
@@ -1714,7 +1714,7 @@ class Slider extends Spine.Controller
     #eof unlock
     #sof getData
     getData: ->
-      console.log('inside slider getData')
+      console.log('Slider - inside slider getData')
       @each ->
         $this = $(this)
         data = $this.data("iosslider")
@@ -1723,7 +1723,7 @@ class Slider extends Spine.Controller
     #eof getData
     #sof autoSlidePause
     autoSlidePause: ->
-      console.log('inside slider autoSlidePause')
+      console.log('Slider - inside slider autoSlidePause')
       @each ->
         $this = $(this)
         data = $this.data("iosslider")
@@ -1733,7 +1733,7 @@ class Slider extends Spine.Controller
     #eof autoSlidePause
     #sof autoSlidePlay
     autoSlidePlay: ->
-      console.log('inside slider autoSlidePlay')
+      console.log('Slider - inside slider autoSlidePlay')
       @each ->
         $this = $(this)
         data = $this.data("iosslider")
@@ -1743,5 +1743,5 @@ class Slider extends Spine.Controller
         data
     #eof autoSlidePlay
   #eof methods
-console.log('module.exports = Slider')
+console.log('Slider - module.exports = Slider')
 module.exports = Slider
