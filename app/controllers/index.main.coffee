@@ -46,7 +46,8 @@ class Show extends Spine.Controller
     if $(a.currentTarget).attr('sign') == '▲' 
       $(a.currentTarget).attr('sign', '▼')
     else
-      $(a.currentTarget).attr('sign', '▲') 
+      $(a.currentTarget).attr('sign', '▲')
+    @slidingPane.toggle()
 
   ruler: (a) ->
     @log('Index Main Show  - call to ruler received')
