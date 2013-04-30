@@ -26,7 +26,7 @@ class SlidingPane extends Spine.Controller
     @log("SlidingPane Initialized")
 
   slidingpane: (config) ->
-    console.log("inside slidingpane: config: "+config)
+    console.log("SlidingPane - inside slidingpane: config: "+config)
 
     # Internal use, but exposed in case you want to query it 
     @targetElement = null
@@ -55,7 +55,7 @@ class SlidingPane extends Spine.Controller
     visiblePaneWrapper = null
     
     @setSide = (s) ->
-      console.log("inside setSide: s: "+s)
+      console.log("SlidingPane - inside setSide: s: "+s)
       me = this
       if ["top", "right", "bottom", "left"].indexOf(s) > -1
         me.side = s
@@ -63,7 +63,7 @@ class SlidingPane extends Spine.Controller
       me
 
     @getTranslate = (s, w) ->
-      console.log("inside getTranslate")     
+      console.log("SlidingPane - inside getTranslate")     
       t = ""
       switch s
         when "top"
@@ -78,7 +78,7 @@ class SlidingPane extends Spine.Controller
       t
 
     @open = ->
-      console.log("inside open")    
+      console.log("SlidingPane - inside open")    
       me = this
       s = boxShadowStyle + ";" + transitionStyle + ";" + dimensionStyle
       t = me.getTranslate(me.side, me.width)
@@ -87,7 +87,7 @@ class SlidingPane extends Spine.Controller
       me
 
     @close = ->
-      console.log("inside close")     
+      console.log("SlidingPane - inside close")     
       me = this
       s = boxShadowStyle + ";" + transitionStyle + ";" + dimensionStyle
       t = me.getTranslate(me.side, 0)
@@ -96,7 +96,7 @@ class SlidingPane extends Spine.Controller
       me
 
     @toggle = ->
-      console.log("inside toggle")    
+      console.log("SlidingPane - inside toggle")    
       me = this
       if me.isOpen
         me.close()
@@ -105,7 +105,7 @@ class SlidingPane extends Spine.Controller
       me
 
     @init = ->
-      console.log("inside init: this: "+this)
+      console.log("SlidingPane - inside init: this: "+this)
       me = this
       me.hiddenPaneElement = $("#" + me.id) or document.createElement("div")
       me.targetElement = $("#" + me.targetId)
@@ -116,6 +116,8 @@ class SlidingPane extends Spine.Controller
       hiddenPaneWrapper.id = me.id + "-wrapper"
       visiblePaneWrapper.id = me.targetId + "-wrapper"
       me.hiddenPaneElement.id = me.id
+
+      console.log("SlidingPane - inside init: me.targetElement: "+me.targetElement)
 
       # Before we start, get parent node of target element 
       parentElement = me.targetElement.parentNode
@@ -149,10 +151,11 @@ class SlidingPane extends Spine.Controller
       me.close()
 
     @constructor = (c) ->
-      console.log("inside constructor: c: "+c)
+      console.log("SlidingPane - inside constructor: c: "+c)
       c = c or {}
       for p of c
         this[p] = c[p]
+        @log("SlidingPane - inside constructor: this[p]: "+this[p])
       @init()
 
     @constructor config

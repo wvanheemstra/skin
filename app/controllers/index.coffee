@@ -26,6 +26,7 @@ class Index extends Spine.Controller
       '/index/:id': (params) ->
         @sidebar.active(params)
         @main.show.active(params)
+        @log('Index - inside routes after call to @main.show.active(params)')
         
     divide = $('<div><a /></div>').addClass('vdivide')
     
@@ -116,7 +117,9 @@ class Index extends Spine.Controller
 #    )
 
     LoadTimeApp.fetch()
-    LoadTimeData.fetch()
+    LoadTimeData.fetch()   
+    
+    @sidebar.selectFirst()
   
   resize: ->
     @sidebar.resize()

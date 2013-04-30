@@ -55,6 +55,20 @@
                 var App = require("index");
                 exports.app = new App({el: $("#article")});
 
+                var SlidingPane = app.index.main.show.slidingPane;
+                SlidingPane.slidingpane({
+                    id: 'my-div-to-hide',
+                    targetId: 'my-div',
+                    side: 'bottom',
+                    width: 650,
+                    duration: 0.75,
+                    timingFunction: 'ease'
+                });/* eof SlidingPane */
+                // Add various handlers
+                document.querySelector('#toggle').addEventListener('click', function () {
+                  SlidingPane.toggle();
+                });
+                
                 var Slider = app.slider;
                 /* Initiate the Slider for the DOM element */
                 Slider.domElement = document.getElementById('iosSlider');
@@ -76,19 +90,6 @@
                 Tabs.domElement = document.getElementById('Dummy%202');
                 Tabs.tabs({});/* eof Tabs */
 
-                var SlidingPane = app.slidingpane;
-                SlidingPane.slidingpane({
-                    id: 'my-div-to-hide',
-                    targetId: 'my-div',
-                    side: 'bottom',
-                    width: 650,
-                    duration: 0.75,
-                    timingFunction: 'ease'
-                });/* eof SlidingPane */
-                // Add various handlers
-                document.querySelector('#toggle').addEventListener('click', function () {
-                  SlidingPane.toggle();
-                });
 
                 $('#login-trigger').click(function() {
                     $(this).next('#login-content').slideToggle();
@@ -99,8 +100,6 @@
                         $(this).find('span').html('&#x25BC;')
                 })/* eof login-trigger */
                 
-                var Sidebar = app.index.sidebar;
-                Sidebar.selectFirst(); /* select the first item in the list */
             });
         </script>
         <script>
