@@ -1,7 +1,13 @@
-skin
+Title: README  
+Author: Willem van Heemstra  
+Affiliation: van Heemstra Systems  
+Copyright: All rights reserved - van Heemstra Systems
+
+#skin/README.md
 ====
 
-The layout layer.
+##About skin
+Skin is the **layout** layer.
 
 *See [skin readme] [1] in the docs skin docs subfolder.*
 [1]: ../../../docs/blob/master/skin/README.md "skin readme"
