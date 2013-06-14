@@ -1,13 +1,15 @@
 {
-  "name": "skin",
+  "name": "skin_app",
+  "description": "Skin Application",
   "version": "1.0.0",
   "dependencies": {
-    "serveup": "~0.0.5",
-    "hem": "~0.1.8",
-    "es5-shimify": "~0.0.1",
-    "json2ify": "~0.0.1",
-    "jqueryify": "~0.0.1",
-    "spine": "~1.0.7",
-    "stylus": "~0.0.1"
+      "serveup": "~0.0.5",
+      "hem": "~0.1.8",
+      "es5-shimify": "~0.0.1",
+      "json2ify": "~0.0.1",
+      "jqueryify": "~0.0.1",
+      "spine": "~1.0.7",
+      "stylus": "~0.0.1",
+      "mocha": "~1.11.0"
   }
 }
