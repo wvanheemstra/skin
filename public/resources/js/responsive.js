@@ -1,4 +1,4 @@
-var defaultURL = 'google.com'; //<---- CHANGE TO YOUR WEBSITE URL
+var defaultURL = 'http://vanheemstrapictures.com/skin/public/'; //<---- CHANGE TO YOUR WEBSITE URL
 
 //show loading graphic
 function showLoader(id) {
