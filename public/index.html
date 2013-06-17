@@ -20,9 +20,19 @@
       exports.app = new App({el: $("#app")});
     });
   </script>
-  
+  <script>
+      function BlockMove(event) {
+          // Tell Safari not to move the window.
+          event.preventDefault();
+      }
+  </script>
 </head>
-<body>
-	<article id="app"></article>
+<body ontouchmove="BlockMove(event);">
+	<div id="warning">
+        <p>Please view in landscape mode.</p>
+    </div><!-- eof #warning -->
+	<div id="wrapper">
+		<article id="app"></article>
+	</div><!-- eof #wrapper -->
 </body>
 </html>
