@@ -1,0 +1,4 @@
+/**
+ * app
+ * Ext.app.Application
+ */;
