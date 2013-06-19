@@ -1,0 +1,322 @@
+/* index.scss */
+* {
+	margin:0;
+	padding:0;
+	-moz-box-sizing: border-box; 
+	-webkit-box-sizing: border-box; 
+	box-sizing: border-box;
+}
+/* type a - Smartphone */
+$type-a-min-device-width: 320px;
+$type-a-min-width: 321px;
+$type-a-max-device-width: 480px;
+$type-a-max-width: 320px;
+/* type b - iPhone 3 */
+$type-b-max-width: 480px;
+/* type c - iPad */
+$type-c-min-device-width: 768px;
+$type-c-max-device-width: 1024px;
+/* type d - Desktop or Laptop */
+$type-d-min-width: 1224px;
+/* type e - Large Screen */
+$type-e-min-width: 1824px;
+
+#wrap {
+	@media only screen 
+	and (min-device-width: $type-a-min-device-width)
+	and (max-device-width: $type-a-max-device-width) {
+		p:after{
+			content: "Smartphone (incl. iPhone 3) portrait and landscape";	
+		}
+	}
+	@media only screen 
+	and (min-width: $type-a-min-width) {
+		p:after{
+			content: "Smartphone (incl. iPhone 3) landscape";	
+		}
+	}
+	@media only screen 
+	and (max-width: $type-a-max-width) {
+		p:after{
+			content: "Smartphone (incl. iPhone 3) portrait";	
+		}
+	}
+	@media only screen 
+	and (max-width: $type-b-max-width)
+	and (orientation: portrait) {
+		p:after{
+			content: "iPhone 3 portrait";	
+		}
+		#header {
+			float: left;
+			width: 100%;
+		}
+		#content {
+			float:left;
+			width:100%;
+			position:relative;
+			left:0px;
+		}
+		#side {
+			float:left;
+			width:300px;
+			position:relative;
+			right:0px;
+			left: 10px;
+			padding-bottom:20px;
+		}	
+		#main {
+			float:left;		
+			width:300px;
+			position:relative;
+			right:0px;
+			left: 10px;
+			padding:20px 0;
+		}
+		#footer {
+			clear:both;
+			float:left;
+			width:100%;
+		}		
+	}
+	@media only screen 
+	and (max-width: $type-b-max-width)
+	and (orientation: landscape) {
+		p:after{
+			content: "iPhone 3 landscape";	
+		}
+		#header {
+			float: left;
+			width: 100%;
+		}
+		#content {
+			float:left;
+			width:100%;
+			position:relative;
+			left:0px;
+		}
+		#side {
+			float:left;
+			width:460px;
+			position:relative;
+			right:0px;
+			left: 10px;
+			padding-bottom:20px;
+		}
+		#main {
+			float:left;		
+			width:460px;
+			position:relative;
+			right:0px;
+			left: 10px;
+			padding:20px 0;
+		}		
+		#footer {
+			clear:both;
+			float:left;
+			width:100%;
+		}		
+	}
+	@media only screen
+	and (min-device-width: $type-c-min-device-width) 
+	and (max-device-width: $type-c-max-device-width) {
+		p:after{
+			content: "iPad portrait and landscape";
+		}		
+	}
+	@media only screen 
+	and (min-device-width: $type-c-min-device-width) 
+	and (max-device-width: $type-c-max-device-width) 
+	and (orientation: landscape) {
+		margin: 0 auto;
+		width: 100%;
+		position: relative;
+		overflow: hidden;
+		p:after{
+			content: "iPad landscape";
+		}
+		#header {
+			float: left;
+			width: 100%;
+		}
+		#content {
+			float:left;
+			width:100%;
+			position:relative;
+			left:0px;
+		}
+		#side {
+			float:right;
+			width:216px;
+			position:relative;
+			right:788px;
+			padding-bottom:20px;
+		}
+		#sidea,
+		#sideb,
+		#sidec {
+			clear:left;
+			float:left;
+			width:216px;
+		}
+		#main {
+			float:right;
+			width:729px;
+			position:relative;
+			right:0px;
+			left: 180px;
+			padding:20px 0;
+		}
+		#footer {
+			clear:both;
+			float:left;
+			width:100%;
+		}	
+	}
+	@media only screen 
+	and (min-device-width: $type-c-min-device-width) 
+	and (max-device-width: $type-c-max-device-width) 
+	and (orientation : portrait) {
+		margin: 0 auto;
+		width: 100%;
+		position: relative;
+		overflow: hidden;
+		text-align: left;
+		p:after{
+			content: "iPad portrait";
+		}
+		#header {
+			float: left;
+			width: 100%;
+		}
+		#content {
+			float:left;
+			width:100%;
+			position:relative;
+			left:0px;
+		}
+		#side {
+			float:right;
+			width:216px;
+			position:relative;
+			right:530px;
+			padding-bottom:20px;
+		}
+		#sidea,
+		#sideb,
+		#sidec {
+			clear:left;
+			float:left;
+			width:216px;
+		}
+		#main {
+			float:right;
+			width:473px;
+			position:relative;
+			right:0px;
+			left: 183px;
+			padding:20px 0;
+		}
+		#footer {
+			clear:both;
+			float:left;
+			width:100%;
+		}
+	}
+	@media only screen 
+	and (min-width: $type-d-min-width) {
+		margin: 0 auto;
+		width: 100%;
+		position: relative;
+		overflow: hidden;
+		text-align: left;
+		p:after{
+			content: "Desktop or Laptop";
+		}
+		#header {
+			float: left;
+			width: 100%;
+		}
+		#content {
+			float:left;
+			width:100%;
+			position:relative;
+			left:0px;
+		}
+		#main {
+			float:right;
+			width:1200px;
+			position:relative;
+			right:0px;
+			left: 0px;
+			padding:20px 0;
+		}	
+		#side {
+			float:left;
+			width:216px;
+			position:relative;
+			left:10px;
+			padding-bottom:20px;
+		}
+		#sidea,
+		#sideb,
+		#sidec {
+			clear:left;
+			float:left;
+			width:216px;
+		}		
+		#footer {
+			clear:both;
+			float:left;
+			width:100%;
+		}
+	}
+	@media only screen 
+	and (min-width: $type-e-min-width) {
+		margin: 0 auto;
+		width: 100%;
+		position: relative;
+		overflow: hidden;
+		text-align: left;
+		p:after{
+			content: "Large Screens";
+		}
+		#header {
+			float: left;
+			width: 100%;
+		}
+		#content {
+			float:left;
+			width:100%;
+			position:relative;
+			left:0px;
+		}
+		#main {
+			float:right;
+			width:1200px;
+			position:relative;
+			right:0px;
+			left: 0px;
+			padding:20px 0;
+		}	
+		#side {
+			float:left;
+			width:216px;
+			position:relative;
+			left:10px;
+			padding-bottom:20px;
+		}
+		#sidea,
+		#sideb,
+		#sidec {
+			clear:left;
+			float:left;
+			width:216px;
+		}			
+		#footer {
+			clear:both;
+			float:left;
+			width:100%;
+		}	
+	}	 
+}
