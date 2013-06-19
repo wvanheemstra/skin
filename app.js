@@ -1,6 +1,0 @@
-/**
- * app
- * Ext.app.Application
- */
-
-
