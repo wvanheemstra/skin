@@ -10,9 +10,20 @@ Ext.Loader.setPath({
 
 });
 
+
+// FOR TESTING ONLY
+//Ext.application({
+//    launch: function () {
+//        Ext.create('Ext.Panel', {
+//            fullscreen: true,
+//            html: 'Hello World!'
+//        });
+//    }
+//});
+
 Ext.application({
   name: 'skin',
-  appFolder: '../../../app',
+  appFolder: '../app',
   profiles: ['Phone','Tablet','Desktop'],
   views: [], // views are loaded automatically
   controllers: [], // limited to the generic controllers, as profile controllers get loaded automatically
