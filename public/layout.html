@@ -7,125 +7,102 @@
 <!-- Consider adding an manifest.appcache: h5bp.com/d/Offline -->
 <!--[if gt IE 9]><!--> <html class="no-js" lang="en" itemscope itemtype="http://schema.org/Product"> <!--<![endif]-->
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-	<!-- Use the .htaccess and remove these lines to avoid edge case issues.
-			 More info: h5bp.com/b/378 -->
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+                     More info: h5bp.com/b/378 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-	<title>Your Company</title>
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-	<meta name="author" content="humans.txt">
+    <title>Your Company</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="humans.txt">
 
-	<link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
 
-	<!-- Facebook Metadata /-->
-	<meta property="fb:page_id" content="" />
-	<meta property="og:image" content="" />
-	<meta property="og:description" content=""/>
-	<meta property="og:title" content=""/>
+    <!-- Facebook Metadata /-->
+    <meta property="fb:page_id" content="" />
+    <meta property="og:image" content="" />
+    <meta property="og:description" content=""/>
+    <meta property="og:title" content=""/>
 
-	<!-- Google+ Metadata /-->
-	<meta itemprop="name" content="">
-	<meta itemprop="description" content="">
-	<meta itemprop="image" content="">
+    <!-- Google+ Metadata /-->
+    <meta itemprop="name" content="">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="">
 
-	<meta name="apple-touch-fullscreen" content="yes">
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="apple-mobile-web-app-status-bar-style" content="default" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
 
-	<!-- We highly recommend you use SASS and write your custom styles in sass/_custom.scss.
-			 However, there is a blank style.css in the css directory should you prefer -->
-	<link rel="stylesheet" href="resources/css/gumby.css">
-	<!-- <link rel="stylesheet" href="resources/css/style.css"> -->
+    <!-- We highly recommend you use SASS and write your custom styles in sass/_custom.scss.
+                     However, there is a blank style.css in the css directory should you prefer -->
+    <link rel="stylesheet" href="resources/css/gumby.css">
+    <!-- <link rel="stylesheet" href="resources/css/style.css"> -->
 
-	<script src="resources/js/libs/modernizr-2.6.2.min.js"></script>
-	<script>
+    <script src="resources/js/libs/modernizr-2.6.2.min.js"></script>
+    <script>
       function BlockMove(event) {
           // Tell Safari not to move the window.
           event.preventDefault();
       }
     </script>
 </head>
-
-<style>
-	.btn,.drawer { margin-bottom:10px; }
-	.drawer { text-align: center; }
-	h1.lead { border-bottom: 1px dotted #ccc; margin-bottom: 30px; }
-	h4.lead { margin-bottom:10px; }
-	#icon_map ul li { font-size: 16px; }
-	.smallify { font-size: 13px; }
-	.modal h2, .modal .btn { margin: 5% 0 20px; }
-</style>
-
 <body ontouchmove="BlockMove(event);">
-<!--
-	<div class="navbar" id="nav1">
-		<div class="row">
-			<a class="toggle" gumby-trigger="#nav1 > .row > ul" href="#"><i class="icon-menu"></i></a>
-			<h1 class="four columns logo">
-				<a href="#">
-					<img src="resources/img/your_company_mainlogo.png" gumby-retina />
-				</a>
-			</h1>
-			<ul class="eight columns">
-			</ul>
-		</div>
-	</div>
--->
-	<div class="container" id="meta-nav">
-	</div>
-	
-	<header class="container fixed" id="main-nav" gumby-fixed="top">
-	  <div class="row">
-	    <a href="/" class="four columns" id="logo">
-	      Your Company
-	    </a>
-	    <nav class="eight columns main">
-	    </nav>
-	    <nav class="eight columns mobile">
-	      <a href="#" class="toggle circle-link red large" gumby-trigger="#main-nav .mobile &gt; ul"><i class="icon-menu"></i></a>
-	    </nav>
-	  </div>
-	</header>
+    <div class="container" id="meta-nav">
+    </div>
 
-	<div id="hero">
-	</div>
-	
-	<!-- start #panels -->	
-	<section id="panels">
-            <!-- start .first panel -->
-            <article class="first">
-              <div class="container">
-                <section class="row blocks">
+    <header class="container fixed" id="main-nav" gumby-fixed="top">
+      <div class="sixteen colgrid">  
+          <div class="row">
+            <a href="/" class="four columns" id="logo">
+              Your Company
+            </a>
+            <nav class="twelve columns main">
+            </nav>
+            <nav class="twelve columns mobile">
+              <a href="#" class="toggle circle-link red large" gumby-trigger="#main-nav .mobile &gt; ul"><i class="icon-menu"></i></a>
+            </nav>
+          </div>
+      </div>    
+    </header>
 
-                  <article class="first">
-                      <div class="sixteen colgrid">
-                        <div class="row">
-                          <div class="four columns">
-                            <p>4 columns</p>
-                          </div>
-                          <div class="twelve columns">
-                            <p>12 columns</p>
-                          </div>
-                        </div>
+    <div id="hero">
+    </div>
+
+    <!-- start #panels -->	
+    <section id="panels">
+        <!-- start .first panel -->
+        <article class="first">
+          <div class="container">
+            <section class="row blocks">
+
+              <article class="first">
+                  <div class="sixteen colgrid">
+                    <div class="row">
+                      <div class="four columns">
+                        <p>4 columns</p>
                       </div>
-                  </article>
+                      <div class="twelve columns">
+                        <p>12 columns</p>
+                      </div>
+                    </div>
+                  </div>
+              </article>
 
-                </section>
-              </div>
-            </article>
-            <!-- end .first panel -->
-	</section>
-	<!-- end #panels -->
-	
-	<nav class="container" id="foot-nav">
-	</nav>
-	
-	<footer class="container">
-	</footer>
+            </section>
+          </div>
+        </article>
+        <!-- end .first panel -->
+    </section>
+    <!-- end #panels -->
+
+    <nav class="container" id="foot-nav">
+    </nav>
+
+    <footer class="container">
+    </footer>
 
   <!-- Grab Google CDN's jQuery, fall back to local if offline -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
