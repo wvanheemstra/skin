@@ -26,7 +26,7 @@ Ext.application({
       console.log('I am a Tablet.');
     }
     else if (Ext.os.deviceType==='Phone') {
-      console.log('I am a Phone.');    
+      console.log('I am a Phone.');
     }
   }//eof launch
 });
