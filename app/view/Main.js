@@ -6,7 +6,7 @@
 Ext.define('skin.view.Main', {
   extend: 'Ext.Panel',
   alias: 'widget.mainview',
-  //requires: ['skin.view.Landscape', 'skin.view.Portrait', 'skin.view.MainMenu'],
+  requires: ['skin.view.Landscape', 'skin.view.Portrait', 'skin.view.MainMenu'],
   config: {
     title: 'Generic version', // for testing only
     fullscreen: true,

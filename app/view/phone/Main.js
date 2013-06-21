@@ -5,7 +5,7 @@
 Ext.define('skin.view.phone.Main', {
   extend: 'skin.view.Main',
   alias: 'widget.mainphoneview',
-  //requires: ['skin.view.phone.Landscape', 'skin.view.phone.Portrait', 'skin.view.phone.MainMenu'],
+  requires: ['skin.view.phone.Landscape', 'skin.view.phone.Portrait', 'skin.view.phone.MainMenu'],
   config: {
     title: 'Phone-specific version', // for testing only
     fullscreen: true,

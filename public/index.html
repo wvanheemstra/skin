@@ -6,7 +6,7 @@
 <!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
 <!-- Consider adding an manifest.appcache: h5bp.com/d/Offline -->
 <!--[if gt IE 9]><!--> 
-<html class="no-js" lang="en" itemscope itemtype="http://schema.org/Product"> 
+<html class="no-js" lang="en"> 
 <!--<![endif]-->
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -46,9 +46,10 @@
     <link rel="stylesheet" href="resources/css/gumby.css">
     <!-- <link rel="stylesheet" href="resources/css/style.css"> -->
 
-    <script src="resources/js/libs/modernizr-2.6.2.min.js"></script>
-    
-    <script type="text/javascript" charset="utf-8" src="http://cdn.sencha.io/touch/sencha-touch-2.1.0/sencha-touch-all.js"></script>
+    <!-- FOR DEVELOPMENT -->
+    <script type="text/javascript" charset="utf-8" src="http://cdn.sencha.io/touch/sencha-touch-2.1.0/sencha-touch-all-debug.js"></script>
+    <!-- FOR PRODUCTION -->
+    <!--<script type="text/javascript" charset="utf-8" src="http://cdn.sencha.io/touch/sencha-touch-2.1.0/sencha-touch-all.js"></script>-->
     <!-- Trouble happens when loading both ext and touch -->
     <!-- script type="text/javascript" charset="utf-8" src="http://cdn.sencha.io/ext-4.2.0-gpl/ext-all.js"></script -->
     
@@ -58,16 +59,101 @@
           event.preventDefault();
       }
     </script>
+    <script type='text/javascript'>
+        function init()
+        {
+                housekeeping();
+                var mvcLoaderScript = document.getElementById('skin.mvcLoaderScript');
+                // determine client details and load suitable mvc
+                var clientWidth = document.body.clientWidth;
+                if (clientWidth < 768) {
+                        mvcLoaderScript.setAttribute('src', 'app.php?app=controller/skin.mvc.loader.small.js');
+                        window.globalClientWidth = 'small'; // set the value globally
+                } 
+                else if (clientWidth < 1280) {
+                        mvcLoaderScript.setAttribute('src', 'app.php?app=controller/skin.mvc.loader.medium.js');
+                        window.globalClientWidth = 'medium'; // set the value globally
+                }
+                else if (clientWidth < 1441) {
+                        mvcLoaderScript.setAttribute('src', 'app.php?app=controller/skin.mvc.loader.large.js');
+                        window.globalClientWidth = 'large'; // set the value globally
+                }
+                else {
+                        mvcLoaderScript.setAttribute('src', 'app.php?app=controller/skin.mvc.loader.veryLarge.js');
+                        window.globalClientWidth = 'very large'; // set the value globally
+            }
+        }
+        function resize()
+        {
+                if(document.body.clientWidth<768 && window.globalClientWidth != 'small') {
+                        //alert('Change to small!');
+                        housekeeping();
+                        var mvcLoaderScript= document.getElementById('skin.mvcLoaderScript');
+                        mvcLoaderScript.src='app.php?app=controller/skin.mvc.loader.small.js';		
+                        window.globalClientWidth = 'small';
+                }
+                if(document.body.clientWidth<1280 && document.body.clientWidth>767 && window.globalClientWidth != 'medium') {
+                        //alert('Change to medium!');
+                        housekeeping();
+                        var mvcLoaderScript= document.getElementById('skin.mvcLoaderScript');
+                        mvcLoaderScript.src='app.php?app=controller/skin.mvc.loader.medium.js';
+                        window.globalClientWidth = 'medium';
+                }
+                if(document.body.clientWidth<1441 && document.body.clientWidth>1279 && window.globalClientWidth != 'large') {
+                        //alert('Change to large!');
+                        housekeeping();
+                        var mvcLoaderScript= document.getElementById('skin.mvcLoaderScript');
+                        mvcLoaderScript.src='app.php?app=controller/skin.mvc.loader.large.js';
+                        window.globalClientWidth = 'large';
+                }
+                if(document.body.clientWidth>1440 && window.globalClientWidth != 'very large') {
+                        //alert('Change to very large!');
+                        housekeeping();
+                        var mvcLoaderScript= document.getElementById('skin.mvcLoaderScript');
+                        mvcLoaderScript.src='app.php?app=controller/skin.mvc.loader.veryLarge.js';
+                        window.globalClientWidth = 'very large';
+                }
+        }
+        function housekeeping() {
+                var headElement = document.getElementsByTagName('head')[0];
+                var bodyElement = document.getElementsByTagName('body')[0];
+                var mvcElements = document.getElementsByTagName('mvc');
+                for (var i = 0; i < mvcElements.length; i++) {
+                        if(mvcElements[i]) { bodyElement.removeChild(mvcElements[i]) }; // remove every mvc element that exists
+                }
+                // As we are removing items from our collection, we have to do this twice
+                for (var i = 0; i < mvcElements.length; i++) {
+                        if(mvcElements[i]) { bodyElement.removeChild(mvcElements[i]) }; // remove every mvc element that exists
+                }	
+                var mvcLoaderScript = document.getElementById('skin.mvcLoaderScript');
+                var foundationStyle = document.getElementById('skin.foundationStyle');
+                if(mvcLoaderScript) { headElement.removeChild(mvcLoaderScript) }; // remove mvc loader script if it exists
+                if(foundationStyle) { headElement.removeChild(foundationStyle) }; // remove foundation style if it exists
+                var mvcLoaderScript= document.createElement('script'); // recreate the mvc loader script
+                mvcLoaderScript.setAttribute('type', 'text/javascript');
+                mvcLoaderScript.setAttribute('id', 'skin.mvcLoaderScript');
+                appendToHead(mvcLoaderScript);
+        }
+        function appendToHead(el){
+                var headElement = document.getElementsByTagName('head')[0];
+                headElement.appendChild(el);	
+        }
+        </script>
 </head>
-<body ontouchmove="BlockMove(event);">
+<body ontouchmove='BlockMove(event);' onload='init();' onresize='resize();'>
 
-  <!-- Skin specific script -->
-  <script type="text/javascript" src="../app/app.min.js"></script>
-  
+  <div id='appEl' style='border:1px solid blue'>empty</div>  
+    
+  <!-- Skin specific script, retrieved from outside of the web root -->
+  <script type="text/javascript" src="app.php?app=app.min.js" /></script>
   <!-- Grab Google CDN's jQuery, fall back to local if offline -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="resources/js/libs/jquery-1.9.1.min.js"><\/script>')</script>
-
+  <script src="resources/js/libs/modernizr-2.6.2.min.js"></script>
+  <!-- AFTER jQuery -->
+  <script src="resources/js/can/can.jquery.min.js"></script>
+  <script src="resources/js/can/can.fixture.js"></script>
+  
   <!--
   Include gumby.js followed by UI modules.
   Or concatenate and minify into a single file
