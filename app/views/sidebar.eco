@@ -1,9 +1,0 @@
-<header>
-  <input type="search" placeholder="Filter" results="0" incremental="true">
-</header>
-
-<div class="items"></div>
-
-<footer>
-  <a class="add" sign="&#043;"/>
-</footer>

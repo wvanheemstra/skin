@@ -1,193 +1,94 @@
-<!doctype html>
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
-<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
-<!-- Consider adding an manifest.appcache: h5bp.com/d/Offline -->
-<!--[if gt IE 9]><!--> 
-<html class="no-js" lang="en"> 
-<!--<![endif]-->
+<!DOCTYPE HTML>
+<html manifest="" lang="en-GB">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-    <!-- Use the .htaccess and remove these lines to avoid edge case issues.
-                     More info: h5bp.com/b/378 -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
     <title>Your Company</title>
+    
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <meta name="author" content="humans.txt">
 
-    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
-
-    <!-- Facebook Metadata /-->
-    <meta property="fb:page_id" content="" />
-    <meta property="og:image" content="" />
-    <meta property="og:description" content=""/>
-    <meta property="og:title" content=""/>
-
-    <!-- Google+ Metadata /-->
-    <meta itemprop="name" content="">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="">
-
-    <meta name="apple-touch-fullscreen" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
-
-    <link rel="stylesheet" href="resources/css/ext-all-debug.css" type="text/css" charset="utf-8">
-    <link rel="stylesheet" href="resources/css/sencha-touch.css" type="text/css" charset="utf-8"/>    
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />    
     
-    <!-- We highly recommend you use SASS and write your custom styles in sass/_custom.scss.
-                     However, there is a blank style.css in the css directory should you prefer -->
-    <link rel="stylesheet" href="resources/css/gumby.css">
-    <!-- <link rel="stylesheet" href="resources/css/style.css"> -->
+    <style type="text/css">
+         /**
+         * Example of an initial loading indicator.
+         * It is recommended to keep this as minimal as possible to provide instant feedback
+         * while other resources are still being loaded for the first time
+         */
+        html, body {
+            height: 100%;
+            background-color: #1985D0
+        }
 
-    <!-- FOR DEVELOPMENT -->
-    <script type="text/javascript" charset="utf-8" src="http://cdn.sencha.io/touch/sencha-touch-2.1.0/sencha-touch-all-debug.js"></script>
-    <!-- FOR PRODUCTION -->
-    <!--<script type="text/javascript" charset="utf-8" src="http://cdn.sencha.io/touch/sencha-touch-2.1.0/sencha-touch-all.js"></script>-->
-    <!-- Trouble happens when loading both ext and touch -->
-    <!-- script type="text/javascript" charset="utf-8" src="http://cdn.sencha.io/ext-4.2.0-gpl/ext-all.js"></script -->
-    
-    <script>
-      function BlockMove(event) {
-          // Tell Safari not to move the window.
-          event.preventDefault();
-      }
-    </script>
-    <script type='text/javascript'>
-        function init()
-        {
-                housekeeping();
-                var mvcLoaderScript = document.getElementById('skin.mvcLoaderScript');
-                // determine client details and load suitable mvc
-                var clientWidth = document.body.clientWidth;
-                if (clientWidth < 768) {
-                        mvcLoaderScript.setAttribute('src', 'app.php?app=controller/skin.mvc.loader.small.js');
-                        window.globalClientWidth = 'small'; // set the value globally
-                } 
-                else if (clientWidth < 1280) {
-                        mvcLoaderScript.setAttribute('src', 'app.php?app=controller/skin.mvc.loader.medium.js');
-                        window.globalClientWidth = 'medium'; // set the value globally
-                }
-                else if (clientWidth < 1441) {
-                        mvcLoaderScript.setAttribute('src', 'app.php?app=controller/skin.mvc.loader.large.js');
-                        window.globalClientWidth = 'large'; // set the value globally
-                }
-                else {
-                        mvcLoaderScript.setAttribute('src', 'app.php?app=controller/skin.mvc.loader.veryLarge.js');
-                        window.globalClientWidth = 'very large'; // set the value globally
+        #appLoadingIndicator {
+            position: absolute;
+            top: 50%;
+            margin-top: -15px;
+            text-align: center;
+            width: 100%;
+            height: 30px;
+            -webkit-animation-name: appLoadingIndicator;
+            -webkit-animation-duration: 0.5s;
+            -webkit-animation-iteration-count: infinite;
+            -webkit-animation-direction: linear;
+        }
+
+        #appLoadingIndicator > * {
+            background-color: #FFFFFF;
+            display: inline-block;
+            height: 30px;
+            -webkit-border-radius: 15px;
+            margin: 0 5px;
+            width: 30px;
+            opacity: 0.8;
+        }
+
+        @-webkit-keyframes appLoadingIndicator{
+            0% {
+                opacity: 0.8
+            }
+            50% {
+                opacity: 0
+            }
+            100% {
+                opacity: 0.8
             }
         }
-        function resize()
-        {
-                if(document.body.clientWidth<768 && window.globalClientWidth != 'small') {
-                        //alert('Change to small!');
-                        housekeeping();
-                        var mvcLoaderScript= document.getElementById('skin.mvcLoaderScript');
-                        mvcLoaderScript.src='app.php?app=controller/skin.mvc.loader.small.js';		
-                        window.globalClientWidth = 'small';
-                }
-                if(document.body.clientWidth<1280 && document.body.clientWidth>767 && window.globalClientWidth != 'medium') {
-                        //alert('Change to medium!');
-                        housekeeping();
-                        var mvcLoaderScript= document.getElementById('skin.mvcLoaderScript');
-                        mvcLoaderScript.src='app.php?app=controller/skin.mvc.loader.medium.js';
-                        window.globalClientWidth = 'medium';
-                }
-                if(document.body.clientWidth<1441 && document.body.clientWidth>1279 && window.globalClientWidth != 'large') {
-                        //alert('Change to large!');
-                        housekeeping();
-                        var mvcLoaderScript= document.getElementById('skin.mvcLoaderScript');
-                        mvcLoaderScript.src='app.php?app=controller/skin.mvc.loader.large.js';
-                        window.globalClientWidth = 'large';
-                }
-                if(document.body.clientWidth>1440 && window.globalClientWidth != 'very large') {
-                        //alert('Change to very large!');
-                        housekeeping();
-                        var mvcLoaderScript= document.getElementById('skin.mvcLoaderScript');
-                        mvcLoaderScript.src='app.php?app=controller/skin.mvc.loader.veryLarge.js';
-                        window.globalClientWidth = 'very large';
-                }
-        }
-        function housekeeping() {
-                var headElement = document.getElementsByTagName('head')[0];
-                var bodyElement = document.getElementsByTagName('body')[0];
-                var mvcElements = document.getElementsByTagName('mvc');
-                for (var i = 0; i < mvcElements.length; i++) {
-                        if(mvcElements[i]) { bodyElement.removeChild(mvcElements[i]) }; // remove every mvc element that exists
-                }
-                // As we are removing items from our collection, we have to do this twice
-                for (var i = 0; i < mvcElements.length; i++) {
-                        if(mvcElements[i]) { bodyElement.removeChild(mvcElements[i]) }; // remove every mvc element that exists
-                }	
-                var mvcLoaderScript = document.getElementById('skin.mvcLoaderScript');
-                var foundationStyle = document.getElementById('skin.foundationStyle');
-                if(mvcLoaderScript) { headElement.removeChild(mvcLoaderScript) }; // remove mvc loader script if it exists
-                if(foundationStyle) { headElement.removeChild(foundationStyle) }; // remove foundation style if it exists
-                var mvcLoaderScript= document.createElement('script'); // recreate the mvc loader script
-                mvcLoaderScript.setAttribute('type', 'text/javascript');
-                mvcLoaderScript.setAttribute('id', 'skin.mvcLoaderScript');
-                appendToHead(mvcLoaderScript);
-        }
-        function appendToHead(el){
-                var headElement = document.getElementsByTagName('head')[0];
-                headElement.appendChild(el);	
-        }
-        </script>
+    </style>
+    <!-- Grab Google CDN's jQuery, fall back to local if offline -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="resources/js/libs/jquery-1.9.1.min.js"><\/script>')</script>
+    <script src="resources/js/libs/modernizr-2.6.2.min.js"></script>
+    <!-- The line below must be kept intact for Sencha Command to build your application -->
+    <script id="microloader" type="text/javascript" src="resources/js/touch/microloader/development.js"></script>
 </head>
-<body ontouchmove='BlockMove(event);' onload='init();' onresize='resize();'>
-
-  <div id='appEl' style='border:1px solid blue'>empty</div>  
+<body>
+    <div id="appLoadingIndicator">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
     
-  <!-- Skin specific script, retrieved from outside of the web root -->
-  <script type="text/javascript" src="app.php?app=app.min.js" /></script>
-  <!-- Grab Google CDN's jQuery, fall back to local if offline -->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="resources/js/libs/jquery-1.9.1.min.js"><\/script>')</script>
-  <script src="resources/js/libs/modernizr-2.6.2.min.js"></script>
-  <!-- AFTER jQuery -->
-  <script src="resources/js/can/can.jquery.min.js"></script>
-  <script src="resources/js/can/can.fixture.js"></script>
-  
-  <!--
-  Include gumby.js followed by UI modules.
-  Or concatenate and minify into a single file
-  <script src="resources/js/libs/gumby.js"></script>
-  <script src="resources/js/libs/ui/gumby.retina.js"></script>
-  <script src="resources/js/libs/ui/gumby.fixed.js"></script>
-  <script src="resources/js/libs/ui/gumby.skiplink.js"></script>
-  <script src="resources/js/libs/ui/gumby.toggleswitch.js"></script>
-  <script src="resources/js/libs/ui/gumby.checkbox.js"></script>
-  <script src="resources/js/libs/ui/gumby.radiobtn.js"></script>
-  <script src="resources/js/libs/ui/gumby.tabs.js"></script>
-  <script src="resources/js/libs/ui/gumby.navbar.js"></script>
-  <script src="resources/js/libs/ui/gumby.fittext.js"></script>
-  <script src="resources/js/libs/ui/jquery.validation.js"></script>
-  <script src="resources/js/libs/gumby.init.js"></script>-->
-  
-  <script src="resources/js/libs/gumby.min.js"></script>
-  <script src="resources/js/plugins.js"></script>
-  <script src="resources/js/main.js"></script>
+    <!--
+      Include gumby.js followed by UI modules.
+      Or concatenate and minify into a single file
+      <script src="resources/js/libs/gumby.js"></script>
+      <script src="resources/js/libs/ui/gumby.retina.js"></script>
+      <script src="resources/js/libs/ui/gumby.fixed.js"></script>
+      <script src="resources/js/libs/ui/gumby.skiplink.js"></script>
+      <script src="resources/js/libs/ui/gumby.toggleswitch.js"></script>
+      <script src="resources/js/libs/ui/gumby.checkbox.js"></script>
+      <script src="resources/js/libs/ui/gumby.radiobtn.js"></script>
+      <script src="resources/js/libs/ui/gumby.tabs.js"></script>
+      <script src="resources/js/libs/ui/gumby.navbar.js"></script>
+      <script src="resources/js/libs/ui/gumby.fittext.js"></script>
+      <script src="resources/js/libs/ui/jquery.validation.js"></script>
+      <script src="resources/js/libs/gumby.init.js"></script>
+    -->
 
-  <!-- Change UA-XXXXX-X to be your site's ID -->
-  <!--<script>
-    window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];
-    Modernizr.load({
-      load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
-    });
-  </script>-->
-
-  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
-       chromium.org/developers/how-tos/chrome-frame-getting-started -->
-  <!--[if lt IE 7 ]>
-    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
-    <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
-  <![endif]-->
-
-  </body>
+    <script src="resources/js/libs/gumby.min.js"></script>
+    <script src="resources/js/plugins.js"></script>
+    <script src="resources/js/main.js"></script>
+</body>
 </html>
