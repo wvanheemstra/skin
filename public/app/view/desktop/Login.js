@@ -59,10 +59,11 @@ Ext.define('skin.view.desktop.Login', {
         ui: 'action',
         padding: '10px',
         text: 'Log In',
+        bubbleEvents: ['processLogInButton'],
         listeners: {
             tap: function() {
                 console.log("You tapped logInButtonDesktop");
-                this.parent.fireEvent('processLogInButton', this);
+                this.fireEvent('processLogInButton', this);
             }
         }
       }
@@ -92,39 +93,6 @@ Ext.define('skin.view.desktop.Login', {
           });
           task.delay(500);          
       }//eof processingLogInButton
-              
-//      tap: {
-//        element: 'element',
-//        delegate: '#logInButtonDesktop',
-//        fn: function(e) {
-//          console.log('Element with id "logInButtonDesktop" was tapped!');
-//          var me = this; //  The 'this' variable is a reference to the Window object, 
-//          // while the 'me' variable is a reference to the Login view, which is a Form panel
-//          var referenceField = me.down('#referenceTextFieldDesktop');
-//          var userNameField = me.down('#userNameTextFieldDesktop');
-//          var passwordField = me.down('#passwordTextFieldDesktop');
-//          var logInFailedLabel = me.down('#logInFailedLabelDesktop');
-//          logInFailedLabel.hide();
-//          var reference = referenceField.getValue();
-//          var userName = userNameField.getValue();
-//          var password = passwordField.getValue();
-//          // using a delayed task in order 
-//          // to give the hide animation above time 
-//          // to finish before executing the next steps.
-//          var task = Ext.create('Ext.util.DelayedTask', function() {
-//            logInFailedLabel.setHtml('');
-//            me.fireEvent('logInCommand', me, reference, userName, password);
-//            console.log('Fired logInCommand for reference: ' + reference + ' userName: ' + userName + ' password: ' + password + '.');
-//            userNameField.setValue('');
-//            passwordField.setValue('');
-//          });
-//          task.delay(500);
-//        } // eof onLogInButtonDesktopTap
-//      } // eof tap
-      
-      
-      
-      
     }// eof listeners
   },// eof config
   showLogInFailedMessage: function (message) {

@@ -18,19 +18,22 @@ Ext.define('skin.view.phone.MainMenu', {
           xtype: 'button',
           text: 'Log Out',
           itemId: 'logOutButtonPhone',
-          align: 'right'
+          align: 'right',
+          bubbleEvents: ['processLogOutButton'],
+          listeners: {
+            tap: function() {
+                console.log("You tapped logOutButtonPhone");
+                this.fireEvent('processLogOutButton', this);
+            }
+          }
         }
       ]
     }],
     listeners: {
-      tap: {
-        element: 'element',
-        delegate: '#logOutButtonPhone',
-        fn: function(e) {
-          console.log('Element with id "logOutButtonPhone" was tapped!');
-          this.fireEvent('logOutCommand');
-        } // eof onLogInButtonTap
-      } // eof tap
+      processLogOutButton: function(){
+        console.log("Processing LogOutButton");
+        this.fireEvent('logOutCommand');
+      }//eof processLogOutButton
     }// eof listeners
   }
 });

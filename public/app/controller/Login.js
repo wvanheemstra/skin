@@ -59,7 +59,7 @@ Ext.define('skin.controller.Login', {
       message: 'Logging In...'
     });
     Ext.Ajax.request({
-      url: 'http://vanheemstrapictures.com/skin/api/services/login/',
+      url: 'http://vanheemstrapictures.com/skin/api/services/login/', // make dynamic
       method: 'post',
       params: {}, // no params, but JSON instead
       jsonData: {
@@ -110,7 +110,7 @@ Ext.define('skin.controller.Login', {
       var mainView = me.getMainTabletView();
     }
     Ext.Ajax.request({
-      url: 'api.php?api=services/logout/', // make for real
+      url: 'http://vanheemstrapictures.com/skin/api/services/logout/', // make dynamic
       method: 'post',
       params: {
         sessionToken: me.sessionToken

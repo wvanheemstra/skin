@@ -59,10 +59,11 @@ Ext.define('skin.view.phone.Login', {
         ui: 'action',
         padding: '10px',
         text: 'Log In',
+        bubbleEvents: ['processLogInButton'],
         listeners: {
             tap: function() {
                 console.log("You tapped logInButtonPhone");
-                this.parent.fireEvent('processLogInButton', this);
+                this.fireEvent('processLogInButton', this);
             }
         }        
       }
