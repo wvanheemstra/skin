@@ -5,13 +5,17 @@
 Ext.define('skin.view.desktop.MainMenu', {
   extend: 'skin.view.MainMenu',
   alias: 'widget.mainmenudesktopview',
-  /* requires: ['skin.view.desktop.Header', 'skin.view.desktop.Landscape', 'skin.view.desktop.Portrait', 'skin.view.desktop.Main'], */
-
-  
-  
+  requires: ['skin.view.desktop.Header', 'skin.view.desktop.Landscape', 'skin.view.desktop.Portrait'],
   config: {
+    cls: 'desktop-mainmenu',  
+    title: 'Desktop-specific version', // for testing only
+    fullscreen: true,       
     layout: {
-      type: 'fit'
+      type: 'vbox' // WAS fit
+    },
+    defaults: {
+      margin: '0 0 0 0',        
+      scrollable: false
     },
     items: [{
       xtype: 'titlebar',

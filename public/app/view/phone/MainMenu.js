@@ -5,12 +5,18 @@
 Ext.define('skin.view.phone.MainMenu', {
   extend: 'skin.view.MainMenu',
   alias: 'widget.mainmenuphoneview',
-  /* requires: ['skin.view.phone.Header', 'skin.view.phone.Landscape', 'skin.view.phone.Portrait', 'skin.view.phone.Main'], */
-  
+  requires: ['skin.view.phone.Header', 'skin.view.phone.Landscape', 'skin.view.phone.Portrait'],
   config: {
+    cls: 'phone-mainmenu',     
+    title: 'Phone-specific version', // for testing only
+    fullscreen: true,       
     layout: {
-      type: 'fit'
+      type: 'vbox' // WAS fit
     },
+    defaults: {
+      margin: '0 0 0 0',        
+      scrollable: false
+    },    
     items: [{
       xtype: 'titlebar',
       title: 'Main Phone Menu',

@@ -5,12 +5,18 @@
 Ext.define('skin.view.tablet.MainMenu', {
   extend: 'skin.view.MainMenu',
   alias: 'widget.mainmenutabletview',
-  /* requires: ['skin.view.tablet.Header', 'skin.view.tablet.Landscape', 'skin.view.tablet.Portrait', 'skin.view.tablet.Main'], */
-  
+  requires: ['skin.view.tablet.Header', 'skin.view.tablet.Landscape', 'skin.view.tablet.Portrait'],
   config: {
+    cls: 'tablet-mainmenu',      
+    title: 'Tablet-specific version', // for testing only
+    fullscreen: true,        
     layout: {
-      type: 'fit'
+      type: 'vbox' // WAS fit
     },
+    defaults: {
+      margin: '0 0 0 0',        
+      scrollable: false
+    },    
     items: [{
       xtype: 'titlebar',
       title: 'Main Tablet Menu',
