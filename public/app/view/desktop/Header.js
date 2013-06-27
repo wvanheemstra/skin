@@ -6,7 +6,8 @@ Ext.define('skin.view.desktop.Header', {
     extend: 'skin.view.Header',
     alias : 'widget.headerdesktopview',
     requires: [
-        'skin.view.desktop.Layout0'
+        'skin.view.desktop.Layout0',
+        'skin.view.desktop.Layout9'
     ],
     config: {
         cls: 'desktop-header',

@@ -15,28 +15,14 @@ Ext.define('skin.view.tablet.MainMenu', {
     },
     defaults: {
       margin: '0 0 0 0',        
-      scrollable: false
+      scrollable: null
     },    
-    items: [{
-      xtype: 'titlebar',
-      title: 'Main Tablet Menu',
-      docked: 'top',
-      items: [
+    items: [
         {
-          xtype: 'button',
-          text: 'Log Out',
-          itemId: 'logOutButtonTablet',
-          align: 'right',
-          bubbleEvents: ['processLogOutButton'],
-          listeners: {
-            tap: function() {
-                console.log("You tapped logOutButtonTablet");
-                this.fireEvent('processLogOutButton', this);
-            }
-          }
+            //xtype: 'headertabletview',  
+            //xtype: 'landscapetabletview'
         }
-      ]
-    }],
+    ],//eof items
     listeners: {
       processLogOutButton: function(){
         console.log("Processing LogOutButton");
@@ -44,27 +30,4 @@ Ext.define('skin.view.tablet.MainMenu', {
       }//eof processLogOutButton
     }// eof listeners
   }
-  
-  
-  /*
-  config: {
-    cls: 'tablet-mainmenu',      
-    title: 'Tablet-specific version', // for testing only
-    fullscreen: true,      
-    layout: {
-      type: 'vbox' // WAS fit
-    },
-    defaults: {
-      margin: '0 0 0 0',        
-      scrollable: false
-    },
-    //html: 'I\'m the Main Menu Tablet View',
-    items: [
-      {
-        //xtype: 'headertabletview',  
-        //xtype: 'landscapetabletview'
-      }
-    ]
-  }
-  */
 });

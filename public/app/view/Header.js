@@ -6,7 +6,8 @@ Ext.define('skin.view.Header', {
     extend: 'Ext.form.Panel',
     alias : 'widget.headerview',
     requires: [
-        'skin.view.Layout0'
+        'skin.view.Layout0',
+        'skin.view.Layout9'
     ],
     config: {
         cls: 'header',  

@@ -55,29 +55,17 @@ Ext.define('skin.controller.SetLayout', {
     this.getMyContainer().removeAll(false,false);
     //add the landscape panel based on orientation 
     if(orientation === 'landscape'){
-      headerView.add([layout0View]);
-      //console.log(landscapeView.getItems());
-      if(this.isLoggedIn) { // PUT CHECK FOR LOGGED IN USER HERE, OTHERWISE SHOW LOGIN VIEW
-        landscapeView.add([layout1View,layout2View]);
-      }
-      else {
-        landscapeView.add([layout1View,loginView]);
-      }
-      this.getMyContainer().add([headerView, landscapeView]); //ORIGINAL
-      //this.getMyContainer().add([headerView]);
+      //remove all the items from the landscape panel
+      landscapeView.removeAll(false,false);
+      landscapeView.add(portraitView.items); // MOVE THE items FROM Portrait TO Landscape VIEW
+      this.getMyContainer().add([headerView, landscapeView]);
     }
     //add the portrait panel based on orientation 
-    if(orientation === 'portrait'){
-      headerView.add([layout0View]);  
-      //console.log(portraitView.getItems());
-      if(this.isLoggedIn) { // PUT CHECK FOR LOGGED IN USER HERE, OTHERWISE SHOW LOGIN VIEW
-        portraitView.add([layout1View,layout2View]);
-      }
-      else {
-        portraitView.add([layout1View,loginView]); 
-      }
-      this.getMyContainer().add([headerView, portraitView]); // ORIGINAL
-      //this.getMyContainer().add([headerView]);
+    if(orientation === 'portrait'){ 
+      //remove all the items from the portrait panel
+      portraitView.removeAll(false,false);
+      portraitView.add(landscapeView.items); // MOVE THE items FROM Landscape TO Portrait VIEW
+      this.getMyContainer().add([headerView, portraitView]);
     }
   },
   launch: function() {
@@ -92,7 +80,7 @@ Ext.define('skin.controller.SetLayout', {
       layout0View = Ext.widget('layout0desktopview');  
       layout1View = Ext.widget('layout1desktopview');
       layout2View = Ext.widget('layout2desktopview');
-      /* layout9View = Ext.widget('layout9desktopview'); */
+      layout9View = Ext.widget('layout9desktopview');
       loginView = Ext.widget('logindesktopview');
       mainMenuView = Ext.widget('mainmenudesktopview');
       headerView = Ext.widget('headerdesktopview');
@@ -102,7 +90,7 @@ Ext.define('skin.controller.SetLayout', {
       layout0View = Ext.widget('layout0phoneview');  
       layout1View = Ext.widget('layout1phoneview'); 
       layout2View = Ext.widget('layout2phoneview');
-      /* layout9View = Ext.widget('layout9phoneview'); */
+      layout9View = Ext.widget('layout9phoneview');
       loginView = Ext.widget('loginphoneview'); 
       mainMenuView = Ext.widget('mainmenuphoneview');
       headerView = Ext.widget('headerphoneview');
@@ -112,7 +100,7 @@ Ext.define('skin.controller.SetLayout', {
       layout0View = Ext.widget('layout0tabletview');  
       layout1View = Ext.widget('layout1tabletview'); 
       layout2View = Ext.widget('layout2tabletview');
-      /* layout9View = Ext.widget('layout9tabletview'); */
+      layout9View = Ext.widget('layout9tabletview');
       loginView = Ext.widget('logintabletview');
       mainMenuView = Ext.widget('mainmenutabletview');
       headerView = Ext.widget('headertabletview');
@@ -142,27 +130,29 @@ Ext.define('skin.controller.SetLayout', {
     //set panels inside the main Panel based on orientation
     if(orientation === 'landscape'){  
       if(this.isLoggedIn) { // PUT CHECK FOR LOGGED IN USER HERE, OTHERWISE SHOW LOGIN VIEW
+        console.log('I\'m Logged In');  
         headerView.add([layout0View]);  
         landscapeView.add([layout1View,layout2View]);
       }
       else {
-        headerView.add([layout0View]);  
+        console.log('I\'m not Logged In');   
+        headerView.add([layout0View]); 
         landscapeView.add([layout1View,loginView]);
       }
-      this.getMyContainer().add([headerView, landscapeView]); // ORIGINAL
-      //this.getMyContainer().add([headerView]);
+      this.getMyContainer().add([headerView, landscapeView]);
     }
     if(orientation === 'portrait'){
       if(this.isLoggedIn) { // PUT CHECK FOR LOGGED IN USER HERE, OTHERWISE SHOW LOGIN VIEW
+        console.log('I\'m Logged In');   
         headerView.add([layout0View]);  
         portraitView.add([layout1View,layout2View]);
       }
       else {
+        console.log('I\'m not Logged In');   
         headerView.add([layout0View]);  
         portraitView.add([layout1View,loginView]);
       }
-      this.getMyContainer().add([headerView, portraitView]); // ORIGINAL
-      //this.getMyContainer().add([headerView]);
+      this.getMyContainer().add([headerView, portraitView]);
     }
   }     
 });

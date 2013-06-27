@@ -6,7 +6,8 @@ Ext.define('skin.view.tablet.Header', {
     extend: 'skin.view.Header',
     alias : 'widget.headertabletview',
     requires: [
-        'skin.view.tablet.Layout0'
+        'skin.view.tablet.Layout0',
+        'skin.view.tablet.Layout9'
     ],
     config: {
         cls: 'tablet-header',   

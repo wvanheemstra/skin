@@ -15,28 +15,14 @@ Ext.define('skin.view.desktop.MainMenu', {
     },
     defaults: {
       margin: '0 0 0 0',        
-      scrollable: false
+      scrollable: null
     },
-    items: [{
-      xtype: 'titlebar',
-      title: 'Main Desktop Menu',
-      docked: 'top',
-      items: [
+    items: [
         {
-          xtype: 'button',
-          text: 'Log Out',
-          itemId: 'logOutButtonDesktop',
-          align: 'right',
-          bubbleEvents: ['processLogOutButton'],
-          listeners: {
-            tap: function() {
-                console.log("You tapped logOutButtonDesktop");
-                this.fireEvent('processLogOutButton', this);
-            }
-          }
+            //xtype: 'headerdesktopview',  
+            //xtype: 'landscapedesktopview'
         }
-      ]
-    }],//eof items
+    ],//eof items
     listeners: {
       processLogOutButton: function(){
         console.log("Processing LogOutButton");
@@ -44,29 +30,4 @@ Ext.define('skin.view.desktop.MainMenu', {
       }//eof processLogOutButton
     }// eof listeners
   }
-  
-    
-  
-  
-  /*
-  config: {
-    cls: 'desktop-mainmenu',  
-    title: 'Desktop-specific version', // for testing only
-    fullscreen: true,      
-    layout: {
-      type: 'vbox' // WAS fit
-    },
-    defaults: {
-      margin: '0 0 0 0',        
-      scrollable: false
-    },
-    //html: 'I\'m the Main Menu Desktop View',
-    items: [
-      {
-        //xtype: 'headerdesktopview',  
-        //xtype: 'landscapedesktopview'
-      }
-    ]
-  }
-  */
 });

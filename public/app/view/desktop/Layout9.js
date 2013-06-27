@@ -12,33 +12,26 @@ Ext.define('skin.view.desktop.Layout9', {
         },
         flex: 1,
         defaults: {
-            margin: '0 0 0 0'
+            margin: '0 0 0 0',
+            labelWidth: '125'
         },
-        items: [{                
-          xtype: 'titlebar',
-          title: 'Desktop Layout 9',
-          docked: 'top',
-          items: [
+        items: [
             {
-              xtype: 'button',
-              text: 'Log Out',
-              itemId: 'logOutButtonDesktop',
-              align: 'right',
-              bubbleEvents: ['processLogOutButton'],
-              listeners: {
-                tap: function() {
-                    console.log("You tapped logOutButtonDesktop");
-                    this.fireEvent('processLogOutButton', this);
-                }
-              }
+                xtype: 'label',
+                html: 'Your Company [logged in]'
+            },{
+                xtype: 'button',
+                text: 'Log Out',
+                itemId: 'logOutButtonDesktop',
+                align: 'right',
+                bubbleEvents: ['processLogOutButton'],
+                listeners: {
+                    tap: function() {
+                        console.log("You tapped logOutButtonDesktop");
+                        this.fireEvent('processLogOutButton', this);
+                    }
+                }                
             }
-          ]
-        }],//eof items
-        listeners: {
-          processLogOutButton: function(){
-            console.log("Processing LogOutButton");
-            this.fireEvent('logOutCommand');
-          }//eof processLogOutButton
-        }// eof listeners        
-    }
+        ]//eof items       
+    }//eof config
 });

@@ -15,55 +15,19 @@ Ext.define('skin.view.phone.MainMenu', {
     },
     defaults: {
       margin: '0 0 0 0',        
-      scrollable: false
+      scrollable: null
     },    
-    items: [{
-      xtype: 'titlebar',
-      title: 'Main Phone Menu',
-      docked: 'top',
-      items: [
+    items: [
         {
-          xtype: 'button',
-          text: 'Log Out',
-          itemId: 'logOutButtonPhone',
-          align: 'right',
-          bubbleEvents: ['processLogOutButton'],
-          listeners: {
-            tap: function() {
-                console.log("You tapped logOutButtonPhone");
-                this.fireEvent('processLogOutButton', this);
-            }
-          }
+            //xtype: 'headerphoneview',  
+            //xtype: 'landscapephoneview'
         }
-      ]
-    }],
+    ],//eof items
     listeners: {
       processLogOutButton: function(){
         console.log("Processing LogOutButton");
         this.fireEvent('logOutCommand');
       }//eof processLogOutButton
     }// eof listeners
-  }  
-  
-  /*
-  config: {
-    cls: 'phone-mainmenu',     
-    title: 'Phone-specific version', // for testing only
-    fullscreen: true,      
-    layout: {
-      type: 'vbox' // WAS fit
-    },
-    defaults: {
-      margin: '0 0 0 0',        
-      scrollable: false
-    },
-    //html: 'I\'m the Main Menu Phone View',
-    items: [
-      {
-        //xtype: 'headerphoneview',  
-        //xtype: 'landscapephoneview'
-      }
-    ]
   }
-  */
 });

@@ -9,6 +9,27 @@ Ext.define('skin.controller.Login', {
       loginDesktopView: 'logindesktopview',
       loginPhoneView: 'loginphoneview',
       loginTabletView: 'logintabletview',
+      landscapeDesktopView: 'landscapedesktopview',
+      landscapePhoneView: 'landscapephoneview',
+      landscapeTabletView: 'landscapetabletview',
+      portraitDesktopView: 'portraitdesktopview',
+      portraitPhoneView: 'portraitphoneview',
+      portraitTabletView: 'portraittabletview',
+      headerDesktopView: 'headerdesktopview',
+      headerPhoneView: 'headerphoneview',
+      headerTabletView: 'headertabletview',
+      layout0DesktopView: 'layout0desktopview',
+      layout0PhoneView: 'layout0phoneview',
+      layout0TabletView: 'layout0tabletview',
+      layout1DesktopView: 'layout1desktopview',
+      layout1PhoneView: 'layout1phoneview',
+      layout1TabletView: 'layout1tabletview',       
+      layout2DesktopView: 'layout2desktopview',
+      layout2PhoneView: 'layout2phoneview',
+      layout2TabletView: 'layout2tabletview',
+      layout9DesktopView: 'layout9desktopview',
+      layout9PhoneView: 'layout9phoneview',
+      layout9TabletView: 'layout9tabletview',
       mainMenuDesktopView: 'mainmenudesktopview',
       mainMenuPhoneView: 'mainmenuphoneview',
       mainMenuTabletView: 'mainmenutabletview',
@@ -99,16 +120,103 @@ Ext.define('skin.controller.Login', {
   onLogOutCommand: function() {
     console.log('Logged out.');
     var me = this;
-    if(Ext.os.is.Desktop) {
-      var loginView = me.getLoginDesktopView();
-      var mainView = me.getMainDesktopView();
-    } else if(Ext.os.is.Phone) {
-      var loginView = me.getLoginPhoneView();
-      var mainView = me.getMainPhoneView();     
-    } else if (Ext.os.is.Tablet) {
-      var loginView = me.getLoginTabletView();
-      var mainView = me.getMainTabletView();
+    //get the device orientation
+    var orientation = Ext.Viewport.getOrientation();
+    //Ext.Msg.alert("Orientation",orientation, Ext.emptyFn);
+        
+    //you can also get the height and width and determine the
+    //orientation. This code just to show how to do it. You can
+    // use either approach
+    var height = Ext.Viewport.getWindowHeight();
+    var width = Ext.Viewport.getWindowWidth();
+    console.log('height: ' + height);
+    console.log('width: ' + width);
+    if(width > height){
+      orientation = 'landscape';
     }
+    else {
+      orientation = 'portrait';
+    } 
+    if(Ext.os.is.Desktop) {
+      console.log('I\'m a Desktop.');  
+      var loginView = me.getLoginDesktopView();
+      var headerView = me.getHeaderDesktopView();
+      var layout0View = me.getLayout0DesktopView();
+      var layout1View = me.getLayout1DesktopView();
+      var layout2View = me.getLayout2DesktopView();   
+      var landscapeView = me.getLandscapeDesktopView();
+      var portraitView = me.getPortraitDesktopView();      
+      var mainView = me.getMainDesktopView();
+      //remove all the items from the header panel
+      headerView.removeAll(false,false);
+      headerView.add([layout0View]);
+      if(orientation === 'landscape'){
+        console.log('I\'m landscape.');
+        //remove all the items from the landscape panel
+        landscapeView.removeAll(false,false);  
+        landscapeView.add([layout1View, loginView]);
+        mainView.add([headerView, landscapeView]);
+      } else if(orientation === 'portrait'){
+        console.log('I\'m portrait.');
+        //remove all the items from the portrait panel
+        portraitView.removeAll(false,false);  
+        portraitView.add([layout1View, loginView]);
+        mainView.add([headerView, portraitView]);
+      }
+    } else if(Ext.os.is.Phone) {
+      console.log('I\'m a Phone.');
+      var loginView = me.getLoginPhoneView();
+      var headerView = me.getHeaderPhoneView();
+      var layout0View = me.getLayout0PhoneView();
+      var layout1View = me.getLayout1PhoneView();
+      var layout2View = me.getLayout2PhoneView();   
+      var landscapeView = me.getLandscapePhoneView();
+      var portraitView = me.getPortraitPhoneView();
+      var mainView = me.getMainPhoneView(); 
+      //remove all the items from the header panel
+      headerView.removeAll(false,false);
+      headerView.add([layout0View]);
+      if(orientation === 'landscape'){
+        console.log('I\'m landscape.');
+        //remove all the items from the landscape panel
+        landscapeView.removeAll(false,false);  
+        landscapeView.add([layout1View, loginView]);
+        mainView.add([headerView, landscapeView]);
+      } else if(orientation === 'portrait'){
+        console.log('I\'m portrait.');
+        //remove all the items from the portrait panel
+        portraitView.removeAll(false,false);  
+        portraitView.add([layout1View, loginView]);
+        mainView.add([headerView, portraitView]);
+      }
+    } else if (Ext.os.is.Tablet) {
+      console.log('I\'m a Tablet.');
+      var loginView = me.getLoginTabletView();
+      var headerView = me.getHeaderTabletView();
+      var layout0View = me.getLayout0TabletView();
+      var layout1View = me.getLayout1TabletView();
+      var layout2View = me.getLayout2TabletView();   
+      var landscapeView = me.getLandscapeTabletView();
+      var portraitView = me.getPortraitTabletView();
+      var mainView = me.getMainTabletView();
+      //remove all the items from the header panel
+      headerView.removeAll(false,false);
+      headerView.add([layout0View]);
+      if(orientation === 'landscape'){
+        console.log('I\'m landscape.');
+        //remove all the items from the landscape panel
+        landscapeView.removeAll(false,false);  
+        landscapeView.add([layout1View, loginView]);
+        mainView.add([headerView, landscapeView]);
+      } else if(orientation === 'portrait'){
+        console.log('I\'m portrait.');
+        //remove all the items from the portrait panel
+        portraitView.removeAll(false,false);  
+        portraitView.add([layout1View, loginView]);
+        mainView.add([headerView, portraitView]);
+      }
+    }
+    
     Ext.Ajax.request({
       url: 'http://vanheemstrapictures.com/skin/api/services/logout/', // make dynamic
       method: 'post',
@@ -131,15 +239,95 @@ Ext.define('skin.controller.Login', {
   logInSuccess: function() {
     console.log('Logged in.');
     var me = this;
+    //get the device orientation
+    var orientation = Ext.Viewport.getOrientation();
+    //Ext.Msg.alert("Orientation",orientation, Ext.emptyFn);
+        
+    //you can also get the height and width and determine the
+    //orientation. This code just to show how to do it. You can
+    // use either approach
+    var height = Ext.Viewport.getWindowHeight();
+    var width = Ext.Viewport.getWindowWidth();
+    console.log('height: ' + height);
+    console.log('width: ' + width);
+    if(width > height){
+      orientation = 'landscape';
+    }
+    else {
+      orientation = 'portrait';
+    }
     if(Ext.os.is.Desktop) {
+      console.log('I\'m a Desktop.');
       var loginView = me.getLoginDesktopView();
+      var headerView = me.getHeaderDesktopView();
+      var layout9View = me.getLayout9DesktopView();
+      var landscapeView = me.getLandscapeDesktopView();
+      var portraitView = me.getPortraitDesktopView();
       var mainMenuView = me.getMainMenuDesktopView();
+      //remove all the items from the header panel
+      headerView.removeAll(false,false);
+      headerView.add([layout9View]);
+      if(orientation === 'landscape'){
+          console.log('I\'m landscape.');
+          //remove all the items from the landscape panel
+          landscapeView.removeAll(false,false);  
+          //landscapeView.add([]); // TO DO: add a layout(s)
+          mainMenuView.add([headerView, landscapeView]);
+      } else if(orientation === 'portrait'){
+          console.log('I\'m portrait.');
+          //remove all the items from the portrait panel
+          portraitView.removeAll(false,false);  
+          //portraitView.add([]); // TO DO: add a layout(s)
+          mainMenuView.add([headerView, portraitView]);
+      }
     } else if(Ext.os.is.Phone) {
+      console.log('I\'m a Phone.');   
       var loginView = me.getLoginPhoneView();
-      var mainMenuView = me.getMainMenuPhoneView();      
+      var headerView = me.getHeaderPhoneView();
+      var layout9View = me.getLayout9PhoneView();
+      var landscapeView = me.getLandscapePhoneView();
+      var portraitView = me.getPortraitPhoneView();
+      var mainMenuView = me.getMainMenuPhoneView();
+      //remove all the items from the header panel
+      headerView.removeAll(false,false);
+      headerView.add([layout9View]);
+      if(orientation === 'landscape'){
+          console.log('I\'m landscape.');
+          //remove all the items from the landscape panel
+          landscapeView.removeAll(false,false);  
+          //landscapeView.add([]); // TO DO: add a layout(s)
+          mainMenuView.add([headerView, landscapeView]);
+      } else if(orientation === 'portrait'){
+          console.log('I\'m portrait.');
+          //remove all the items from the portrait panel
+          portraitView.removeAll(false,false);  
+          //portraitView.add([]); // TO DO: add a layout(s)
+          mainMenuView.add([headerView, portraitView]);
+      }
     } else if (Ext.os.is.Tablet) {
+      console.log('I\'m a Tablet.');   
       var loginView = me.getLoginTabletView();
+      var headerView = me.getHeaderTabletView();
+      var layout9View = me.getLayout9TabletView();
+      var landscapeView = me.getLandscapeTabletView();
+      var portraitView = me.getPortraitTabletView();
       var mainMenuView = me.getMainMenuTabletView();
+      //remove all the items from the header panel
+      headerView.removeAll(false,false);
+      headerView.add([layout9View]);
+      if(orientation === 'landscape'){
+          console.log('I\'m landscape.');
+          //remove all the items from the landscape panel
+          landscapeView.removeAll(false,false);  
+          //landscapeView.add([]); // TO DO: add a layout(s)
+          mainMenuView.add([headerView, landscapeView]);
+      } else if(orientation === 'portrait'){
+          console.log('I\'m portrait.');
+          //remove all the items from the portrait panel
+          portraitView.removeAll(false,false);  
+          //portraitView.add([]); // TO DO: add a layout(s)
+          mainMenuView.add([headerView, portraitView]);
+      }
     }
     loginView.setMasked(false);
     

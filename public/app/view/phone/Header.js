@@ -6,7 +6,8 @@ Ext.define('skin.view.phone.Header', {
     extend: 'skin.view.Header',
     alias : 'widget.headerphoneview',   
     requires: [
-        'skin.view.phone.Layout0'
+        'skin.view.phone.Layout0',
+        'skin.view.phone.Layout9'
     ],
     config: {
         cls: 'phone-header', 
