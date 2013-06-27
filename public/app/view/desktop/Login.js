@@ -4,11 +4,13 @@
  */
 Ext.define('skin.view.desktop.Login', {
   extend: 'skin.view.Login',
-  alias: 'widget.logindesktopview',
+  alias: 'widget.logindesktopview', 
   requires: ['Ext.util.DelayedTask'],
   config: {
+    cls: 'desktop-login', 
     title: 'Login',
     flex: 2,
+    /*style: 'border: 1px solid red',*/
     items: [
       {
         xtype: 'image',

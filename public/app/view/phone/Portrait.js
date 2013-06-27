@@ -4,12 +4,13 @@
  */
 Ext.define('skin.view.phone.Portrait', {
     extend: 'skin.view.Portrait',
-    alias : 'widget.portraitphoneview',
+    alias : 'widget.portraitphoneview',  
     requires: [
         'skin.view.phone.Layout1',
         'skin.view.phone.Layout2'
     ],
     config: {
+      cls: 'phone-portrait',    
         //layout: {
         //    type: 'vbox'
         //},
@@ -24,6 +25,7 @@ Ext.define('skin.view.phone.Portrait', {
         	duration: 1000
         }
       },
+      flex: 1,
       defaults: {
         margin: '0 0 0 0'
       }

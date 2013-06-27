@@ -5,6 +5,10 @@
 Ext.define('skin.view.desktop.MainMenu', {
   extend: 'skin.view.MainMenu',
   alias: 'widget.mainmenudesktopview',
+  /* requires: ['skin.view.desktop.Header', 'skin.view.desktop.Landscape', 'skin.view.desktop.Portrait', 'skin.view.desktop.Main'], */
+
+  
+  
   config: {
     layout: {
       type: 'fit'
@@ -36,4 +40,29 @@ Ext.define('skin.view.desktop.MainMenu', {
       }//eof processLogOutButton
     }// eof listeners
   }
+  
+    
+  
+  
+  /*
+  config: {
+    cls: 'desktop-mainmenu',  
+    title: 'Desktop-specific version', // for testing only
+    fullscreen: true,      
+    layout: {
+      type: 'vbox' // WAS fit
+    },
+    defaults: {
+      margin: '0 0 0 0',        
+      scrollable: false
+    },
+    //html: 'I\'m the Main Menu Desktop View',
+    items: [
+      {
+        //xtype: 'headerdesktopview',  
+        //xtype: 'landscapedesktopview'
+      }
+    ]
+  }
+  */
 });

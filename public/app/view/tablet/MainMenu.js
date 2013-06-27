@@ -5,6 +5,8 @@
 Ext.define('skin.view.tablet.MainMenu', {
   extend: 'skin.view.MainMenu',
   alias: 'widget.mainmenutabletview',
+  /* requires: ['skin.view.tablet.Header', 'skin.view.tablet.Landscape', 'skin.view.tablet.Portrait', 'skin.view.tablet.Main'], */
+  
   config: {
     layout: {
       type: 'fit'
@@ -36,4 +38,27 @@ Ext.define('skin.view.tablet.MainMenu', {
       }//eof processLogOutButton
     }// eof listeners
   }
+  
+  
+  /*
+  config: {
+    cls: 'tablet-mainmenu',      
+    title: 'Tablet-specific version', // for testing only
+    fullscreen: true,      
+    layout: {
+      type: 'vbox' // WAS fit
+    },
+    defaults: {
+      margin: '0 0 0 0',        
+      scrollable: false
+    },
+    //html: 'I\'m the Main Menu Tablet View',
+    items: [
+      {
+        //xtype: 'headertabletview',  
+        //xtype: 'landscapetabletview'
+      }
+    ]
+  }
+  */
 });

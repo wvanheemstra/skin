@@ -55,6 +55,7 @@ Ext.define('skin.controller.SetLayout', {
     this.getMyContainer().removeAll(false,false);
     //add the landscape panel based on orientation 
     if(orientation === 'landscape'){
+      headerView.add([layout0View]);
       //console.log(landscapeView.getItems());
       if(this.isLoggedIn) { // PUT CHECK FOR LOGGED IN USER HERE, OTHERWISE SHOW LOGIN VIEW
         landscapeView.add([layout1View,layout2View]);
@@ -62,10 +63,12 @@ Ext.define('skin.controller.SetLayout', {
       else {
         landscapeView.add([layout1View,loginView]);
       }
-      this.getMyContainer().add([landscapeView]);
+      this.getMyContainer().add([headerView, landscapeView]); //ORIGINAL
+      //this.getMyContainer().add([headerView]);
     }
     //add the portrait panel based on orientation 
     if(orientation === 'portrait'){
+      headerView.add([layout0View]);  
       //console.log(portraitView.getItems());
       if(this.isLoggedIn) { // PUT CHECK FOR LOGGED IN USER HERE, OTHERWISE SHOW LOGIN VIEW
         portraitView.add([layout1View,layout2View]);
@@ -73,7 +76,8 @@ Ext.define('skin.controller.SetLayout', {
       else {
         portraitView.add([layout1View,loginView]); 
       }
-      this.getMyContainer().add([portraitView]);
+      this.getMyContainer().add([headerView, portraitView]); // ORIGINAL
+      //this.getMyContainer().add([headerView]);
     }
   },
   launch: function() {
@@ -85,24 +89,33 @@ Ext.define('skin.controller.SetLayout', {
     //screen when the device orientation without you saving and restoring
     //each component
     if(Ext.os.is.Desktop){
+      layout0View = Ext.widget('layout0desktopview');  
       layout1View = Ext.widget('layout1desktopview');
       layout2View = Ext.widget('layout2desktopview');
+      /* layout9View = Ext.widget('layout9desktopview'); */
       loginView = Ext.widget('logindesktopview');
       mainMenuView = Ext.widget('mainmenudesktopview');
+      headerView = Ext.widget('headerdesktopview');
       landscapeView = Ext.widget('landscapedesktopview');
       portraitView = Ext.widget('portraitdesktopview');
     } else if(Ext.os.is.Phone) {
+      layout0View = Ext.widget('layout0phoneview');  
       layout1View = Ext.widget('layout1phoneview'); 
       layout2View = Ext.widget('layout2phoneview');
+      /* layout9View = Ext.widget('layout9phoneview'); */
       loginView = Ext.widget('loginphoneview'); 
       mainMenuView = Ext.widget('mainmenuphoneview');
+      headerView = Ext.widget('headerphoneview');
       landscapeView = Ext.widget('landscapephoneview'); 
       portraitView = Ext.widget('portraitphoneview'); 
     } else if(Ext.os.is.Tablet) {
+      layout0View = Ext.widget('layout0tabletview');  
       layout1View = Ext.widget('layout1tabletview'); 
       layout2View = Ext.widget('layout2tabletview');
+      /* layout9View = Ext.widget('layout9tabletview'); */
       loginView = Ext.widget('logintabletview');
       mainMenuView = Ext.widget('mainmenutabletview');
+      headerView = Ext.widget('headertabletview');
       landscapeView = Ext.widget('landscapetabletview');
       portraitView = Ext.widget('portraittabletview'); 
     }
@@ -127,23 +140,29 @@ Ext.define('skin.controller.SetLayout', {
     console.log('Orientation is ' + orientation);
         
     //set panels inside the main Panel based on orientation
-    if(orientation === 'landscape'){
+    if(orientation === 'landscape'){  
       if(this.isLoggedIn) { // PUT CHECK FOR LOGGED IN USER HERE, OTHERWISE SHOW LOGIN VIEW
+        headerView.add([layout0View]);  
         landscapeView.add([layout1View,layout2View]);
       }
       else {
+        headerView.add([layout0View]);  
         landscapeView.add([layout1View,loginView]);
       }
-      this.getMyContainer().add([landscapeView]);
+      this.getMyContainer().add([headerView, landscapeView]); // ORIGINAL
+      //this.getMyContainer().add([headerView]);
     }
     if(orientation === 'portrait'){
       if(this.isLoggedIn) { // PUT CHECK FOR LOGGED IN USER HERE, OTHERWISE SHOW LOGIN VIEW
+        headerView.add([layout0View]);  
         portraitView.add([layout1View,layout2View]);
       }
       else {
+        headerView.add([layout0View]);  
         portraitView.add([layout1View,loginView]);
       }
-      this.getMyContainer().add([portraitView]);
+      this.getMyContainer().add([headerView, portraitView]); // ORIGINAL
+      //this.getMyContainer().add([headerView]);
     }
   }     
 });

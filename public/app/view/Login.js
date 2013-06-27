@@ -11,6 +11,7 @@ Ext.define('skin.view.Login', {
            'Ext.TitleBar'
        ],
   config: {
+    cls: 'login',   
     title: 'Login',
     flex: 2,
     items: []// eof items

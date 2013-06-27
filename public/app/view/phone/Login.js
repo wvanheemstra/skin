@@ -4,9 +4,10 @@
  */
 Ext.define('skin.view.phone.Login', {
   extend: 'skin.view.Login',
-  alias: 'widget.loginphoneview',
+  alias: 'widget.loginphoneview',  
   requires: ['Ext.util.DelayedTask'],
   config: {
+    cls: 'phone-login',       
     title: 'Login',
     flex: 2,
     items: [

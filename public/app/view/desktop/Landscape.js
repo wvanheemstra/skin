@@ -10,11 +10,13 @@ Ext.define('skin.view.desktop.Landscape', {
         'skin.view.desktop.Layout2'
     ],
     config: {
+        cls: 'desktop-landscape',
         layout: {
             type: 'hbox'
         },
+        flex: 1,
         defaults: {
-            margin: '3 3 3 3',
-        },
+            margin: '3 3 3 3'
+        }
     }
 });
