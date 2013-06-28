@@ -18,8 +18,21 @@ Ext.define('skin.view.Layout0', {
         items: [
             {
                 xtype: 'label',
-                html: 'This is Layout0'
+                cls: 'status',
+                html: '.'
             }
-        ]
+        ],
+        listeners: {
+        	'showOnline': function() {
+        		console.log("Layout0 detected showOnline");
+        		this.items.first().removeCls('offline');
+        		this.items.first().addCls('online');        		
+        	},
+        	'showOffline': function() {
+        		console.log("Layout0 detected showOffline");
+        		this.items.first().removeCls('online');
+        		this.items.first().addCls('offline');        		
+        	}
+        }//eof listeners
     }
 });

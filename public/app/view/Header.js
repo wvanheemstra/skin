@@ -19,13 +19,16 @@ Ext.define('skin.view.Header', {
             margin: '0 0 0 0',
             scrollable: false
         },
+        items: [],//eof items
         listeners: {
         	'statusOnline': function() {
         		console.log("Header detected statusOnline");
+        		this.items.first().fireEvent('showOnline', this);
         	},
         	'statusOffline': function() {
         		console.log("Header detected statusOffline");
+        		this.items.first().fireEvent('showOffline', this);
         	}
-        }
+        }//eof listeners
     }
 });

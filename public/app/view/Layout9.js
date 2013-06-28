@@ -12,14 +12,26 @@ Ext.define('skin.view.Layout9', {
         },
         flex: 1,
         defaults: {
-            margin: '0 0 5 0',
-            labelWidth: '125'
+            margin: '0 0 0 0'
         },
         items: [
             {
                 xtype: 'label',
-                html: 'This is Layout9'
+                cls: 'status',
+                html: '.'
             }
-        ]
+        ],//eof items
+        listeners: {
+        	'showOnline': function() {
+        		console.log("Layout9 detected showOnline");
+        		this.items.first().removeCls('offline');
+        		this.items.first().addCls('online');        		
+        	},
+        	'showOffline': function() {
+        		console.log("Layout9 detected showOffline");
+        		this.items.first().removeCls('online');
+        		this.items.first().addCls('offline');        		
+        	}
+        }//eof listeners
     }
 });

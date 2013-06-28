@@ -231,7 +231,23 @@
         }
         .tablet-mainmenu div {
             background: transparent !important;
-        }        
+        }
+        .status > * {
+        	margin: 4px auto;
+        	width: 3px !important;
+        	height: 8px;
+        	border-radius: 50%;
+        	background-color: #A90 !important;
+        	box-shadow: rgba(129, 129, 129, 0.5) 0 -1px 4px 1px, inset #A90 0 -1px 6px, rgba(245, 255, 0, 0.5) 0 2px 2px;
+        } 
+        .status.online > * {
+    		background-color: #690 !important;
+    		box-shadow: rgba(129, 129, 129, 0.5) 0 -1px 4px 1px, inset #460 0 -1px 6px, rgba(119, 221, 0, 0.5) 0 2px 2px;
+		}
+		.status.offline > * {
+		    background-color: #940 !important;
+		    box-shadow: rgba(129, 129, 129, 0.5) 0 -1px 4px 1px, inset #600 0 -1px 6px, rgba(255, 0, 0, 0.5) 0 2px 2px;
+		}      
     </style>
     <!-- Grab Google CDN's jQuery, fall back to local if offline -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

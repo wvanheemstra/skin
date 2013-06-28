@@ -21,12 +21,15 @@ Ext.define('skin.view.phone.Header', {
             height: 40,            
             scrollable: false
         },
+        items: [],//eof items
         listeners: {
         	'statusOnline': function() {
         		console.log("Phone Header detected statusOnline");
+        		this.items.first().fireEvent('showOnline', this);
         	},
         	'statusOffline': function() {
         		console.log("Phone Header detected statusOffline");
+        		this.items.first().fireEvent('showOffline', this);
         	}
         }//eof listeners
     }
