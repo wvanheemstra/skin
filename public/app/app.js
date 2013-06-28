@@ -19,7 +19,8 @@ Ext.Loader.setConfig({
 
 //<debug>
 Ext.Loader.setPath({
-    'Ext': 'resources/js/touch/src'
+    'Ext': 'resources/js/touch/src',
+    'Ext.ux': 'resources/js/touch-custom/src/ux'
 });
 //</debug>
 
@@ -27,7 +28,8 @@ Ext.application({
     name: 'skin',
     appFolder: 'app',
     requires: [
-        'Ext.MessageBox'
+        'Ext.MessageBox',
+        'Ext.ux.util.OnlineManager'
     ],
     profiles: ['Phone','Tablet','Desktop'],
     views: [], // views are loaded automatically

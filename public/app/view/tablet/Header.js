@@ -20,6 +20,14 @@ Ext.define('skin.view.tablet.Header', {
             margin: '0 0 0 0',
             height: 40,            
             scrollable: false
-        }
+        },
+        listeners: {
+        	'statusOnline': function() {
+        		console.log("Tablet Header detected statusOnline");
+        	},
+        	'statusOffline': function() {
+        		console.log("Tablet Header detected statusOffline");
+        	}
+        }//eof listeners
     }
 });

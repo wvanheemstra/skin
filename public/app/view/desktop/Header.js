@@ -20,6 +20,14 @@ Ext.define('skin.view.desktop.Header', {
             margin: '0 0 0 0',
             height: 40,
             scrollable: false
-        }
+        },
+        listeners: {
+        	'statusOnline': function() {
+        		console.log("Desktop Header detected statusOnline");
+        	},
+        	'statusOffline': function() {
+        		console.log("Desktop Header detected statusOffline");
+        	}
+        }//eof listeners
     }
 });

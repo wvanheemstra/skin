@@ -18,6 +18,14 @@ Ext.define('skin.view.Header', {
         defaults: {
             margin: '0 0 0 0',
             scrollable: false
+        },
+        listeners: {
+        	'statusOnline': function() {
+        		console.log("Header detected statusOnline");
+        	},
+        	'statusOffline': function() {
+        		console.log("Header detected statusOffline");
+        	}
         }
     }
 });

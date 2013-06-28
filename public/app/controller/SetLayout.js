@@ -5,6 +5,7 @@
 Ext.define('skin.controller.SetLayout', {
   extend : 'Ext.app.Controller',
   config: {
+  	requires: ['Ext.ux.util.OnlineManager'],
     profile: Ext.os.deviceType.toLowerCase(),
     refs: {
       myContainer: 'mainview'
@@ -154,5 +155,20 @@ Ext.define('skin.controller.SetLayout', {
       }
       this.getMyContainer().add([headerView, portraitView]);
     }
-  }     
+    var onlineManager = Ext.ux.util.OnlineManager;
+    onlineManager.setUrl('online.php');
+    onlineManager.on({
+	    'onlinechange': function(mode) {// Action callback
+	        if (mode) {
+	        	headerView.fireEvent('statusOnline', this);
+	            //console.log('We are online');
+	        } else {
+	        	headerView.fireEvent('statusOffline', this);
+	            //console.log('We are offline');
+	        }
+	    }
+	});
+	onlineManager.start();
+  }//eof launch     
 });
+
