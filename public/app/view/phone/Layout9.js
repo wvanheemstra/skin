@@ -21,7 +21,9 @@ Ext.define('skin.view.phone.Layout9', {
                 html: '.'
             },{
                 xtype: 'label',
-                html: 'Your Company [logged in]'
+                html: 'Your Company'
+            },{
+                xtype: 'spacer'
             },{
                 xtype: 'button',
                 text: 'Log Out',

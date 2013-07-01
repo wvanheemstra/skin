@@ -334,7 +334,7 @@ Ext.define('skin.controller.Login', {
     //console.log('this: '+ this); // for testing only
     //alert("Viewport: " + Ext.Viewport.toSource()); // for testing only
     //console.log(Ext.Viewport.getActiveItem()); // for testing only
-    
+    headerView.fireEvent('statusOnline', this); // Force an update of the online status
     Ext.Viewport.animateActiveItem(mainMenuView, this.getSlideLeftTransition()); // this slides the whole viewport
     
     // WE MAY WANT TO CHANGE THIS BEHAVIOUR TO ONLY SLIDE THE LOGIN PART AND NOT THE WHOLE VIEWPORT

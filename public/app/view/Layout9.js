@@ -19,6 +19,8 @@ Ext.define('skin.view.Layout9', {
                 xtype: 'label',
                 cls: 'status',
                 html: '.'
+            },{
+                xtype: 'spacer'
             }
         ],//eof items
         listeners: {

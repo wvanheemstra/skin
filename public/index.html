@@ -137,8 +137,8 @@
             font-size: 14px;
             font-style: normal;          
             font-variant: normal;
-            font-weight: normal;
-            line-height: 18px;            
+            font-weight: normal !important;
+            line-height: 18px  !important;            
             overflow-x: hidden;
             overflow-y: hidden;           
             padding-bottom: 7px;               
@@ -147,6 +147,10 @@
             padding-top: 1px;             
             text-align: center;
             z-index: auto;
+        }
+        .desktop-header div .x-button-label {
+        	font-weight: normal;
+        	line-height: 18px;
         }
         .phone-header {
             background-color: rgb(255, 255, 255) !important;
@@ -234,7 +238,7 @@
         }
         .status > * {
         	margin: 4px auto;
-        	width: 3px !important;
+        	width: 2px !important;
         	height: 8px;
         	border-radius: 50%;
         	background-color: #A90 !important;
