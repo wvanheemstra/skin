@@ -7,7 +7,7 @@ var port = process.env.PORT || 3000;
 app.configure(function(){
     app.set('view engine', 'ejs');
     app.set('view options', { layout: true });
-    app.set('views', __dirname + '/views');
+    app.set('views', __dirname + '/../public');
     
     app.use(express.bodyParser());
     app.use(express.methodOverride());
