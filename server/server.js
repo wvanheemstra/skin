@@ -21,7 +21,7 @@ app.configure(function(){
 });
 
 app.get('/', function(req, res) {
-    res.render('index', { title: 'Testing express-device', layout: false });
+    res.render('index', { title: 'Your Company', layout: false });
 });
 
 app.get('/2', function(req, res) {

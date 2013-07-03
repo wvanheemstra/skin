@@ -295,16 +295,11 @@
     <% } %>
 </head>
 <body>
-    <h1>SKIN LAYOUT</h1>
-    <h3>Hello World!</h3>
-    <% if (is_desktop) { %>
-    <p>You're using a desktop</p>
-    <% } %>
-    <% if (is_phone) { %>
-    <p>You're using a phone</p>
-    <% } %>
-    <% if (is_tablet) { %>
-    <p>You're using a tablet</p>
-    <% } %>
+    <div id="appLoadingIndicator">
+        <p>LOADING</p>
+        <div id="first"></div>
+        <div id="second"></div>
+        <div id="third"></div>
+    </div>
 </body>
 </html>
