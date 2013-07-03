@@ -44,6 +44,17 @@
             "x-bootstrap": true
         },
         {
+            "path": "app/app-loader.js",
+            "bundle": true,  /* Force the build to include necessary Touch classes */
+            "update": "delta"
+        },
+        {
+            "path": "resources/js/deft/deft-debug.js"
+        },
+        {
+            "path": "resources/js/flow-mvc/flowmvc-debug.js"
+        },
+        {
             "path": "app/app.js",
             "bundle": true,  /* Indicates that all class dependencies are concatenated into this file when build */
             "update": "delta"
