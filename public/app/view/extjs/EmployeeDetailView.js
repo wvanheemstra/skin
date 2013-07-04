@@ -23,7 +23,7 @@
  * application or business logic; this is all done in the view's corresponding mediator.
  * </p>
  */
-Ext.define("CafeTownsend.view.touch.EmployeeDetailView", {
+Ext.define("CafeTownsend.view.extjs.EmployeeDetailView", {
     extend: "Ext.form.Panel",
     alias: "widget.employeeDetailView",
     controller: "CafeTownsend.mediator.extjs.EmployeeDetailMediator",

@@ -87,7 +87,23 @@ app.use(function(req, res, next) {
     var new_location = req.protocol + "://" + req.host + web_root + req.url;
     console.log('New resources location: '+ new_location);
     res.redirect(302, new_location);
+  }
+  // redirect all requests for app/service/mock directory in the web root to e.g. /skin/public/app/service/mock/ 
+  else if(req.url.substr(0,18) === '/app/service/mock/'){
+    console.log('Received a request for app/service/mock redirect: '+ req.url);
+    // 302 - Moved temporarily
+    var new_location = req.protocol + "://" + req.host + web_root + req.url;
+    console.log('New app/service/mock location: '+ new_location);
+    res.redirect(302, new_location);  	
   }  
+  // redirect all requests for app/service directory in the web root to e.g. /skin/public/app/service/ 
+  else if(req.url.substr(0,13) === '/app/service/'){
+    console.log('Received a request for app/service redirect: '+ req.url);
+    // 302 - Moved temporarily
+    var new_location = req.protocol + "://" + req.host + web_root + req.url;
+    console.log('New app/service location: '+ new_location);
+    res.redirect(302, new_location);  	
+  }    
   // redirect all requests for app directory in the web root to e.g. /skin/public/app/ 
   else if(req.url.substr(0,5) === '/app/'){
     console.log('Received a request for app redirect: '+ req.url);
@@ -111,7 +127,15 @@ app.use(function(req, res, next) {
     var new_location = req.protocol + "://" + req.host + web_root + '/resources/js/deft' + req.url;
     console.log('New Deft location: '+ new_location);
     res.redirect(302, new_location);  	
-  }    
+  }
+  // redirect all requests for FlowMVC directory in the web root to e.g. /skin/public/resources/js/flow-mvc/FlowMVC/ 
+  else if(req.url.substr(0,9) === '/FlowMVC/'){
+    console.log('Received a request for FlowMVC redirect: '+ req.url);
+    // 302 - Moved temporarily
+    var new_location = req.protocol + "://" + req.host + web_root + '/resources/js/flow-mvc' + req.url;
+    console.log('New FlowMVC location: '+ new_location);
+    res.redirect(302, new_location);  	
+  }        
   // redirect all requests for a file in the web root to e.g. /skin/public/ 
   else if(req.url.substr(0,1) === '/'){
     console.log('Received a request for file redirect: '+ req.url);
