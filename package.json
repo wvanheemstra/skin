@@ -10,6 +10,7 @@
   "dependencies": {
       "express": ">=3.0.0",
       "express-partials": ">=0.1.1",
+      "express-redirect": ">=1.1.0",
       "serveup": "~0.0.5",
       "hem": "~0.1.8",
       "es5-shimify": "~0.0.1",

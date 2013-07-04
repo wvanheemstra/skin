@@ -3,7 +3,6 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title><%= title %></title>
-	<base href="<PUT YOUR WEB ROOT HERE>"></base>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <meta name="author" content="humans.txt">
@@ -280,8 +279,20 @@
     <% if (is_tablet) { %>
     	<script type="text/javascript" src="resources/js/touch/sencha-touch-debug.js"></script>
     <% } %>
-    <!--<script type="text/javascript" src="resources/js/log4javascript/log4javascript.js"></script>-->
-    <script type="text/javascript" src="app/app-loader.js"></script>
+    <script type="text/javascript" src="resources/js/log4javascript/log4javascript.js"></script>
+    <% if (is_desktop) { %>
+    	<!-- Load the missing but required classes of ext before the app-loader-extjs -->
+    	<script type="text/javascript" src="http://<%= host %><%= web_root %>/resources/js/ext/src/Component.js"></script>
+    	<script type="text/javascript" src="http://vanheemstrapictures.com/skin/public/resources/js/ext/src/ComponentManager.js"></script>
+    	<script type="text/javascript" src="http://vanheemstrapictures.com/skin/public/resources/js/ext/src/ComponentQuery.js"></script>        
+    	<script type="text/javascript" src="app/app-loader-extjs.js"></script>
+    <% } %>	 
+    <% if (is_phone) { %>
+    	<script type="text/javascript" src="app/app-loader-touch.js"></script>
+    <% } %>
+    <% if (is_tablet) { %>
+    	<script type="text/javascript" src="app/app-loader-touch.js"></script>
+    <% } %>
     <script type="text/javascript" src="resources/js/deft/deft-debug.js"></script>
     <script type="text/javascript" src="resources/js/flow-mvc/flowmvc-debug.js"></script>
     <% if (is_desktop) { %>

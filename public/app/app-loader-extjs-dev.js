@@ -2,11 +2,11 @@
 Ext.Loader.setConfig({
 	enabled: true,
 	paths: {
-		"MyAppNamespace": "app",
-		"Ext": "resources/js/touch/src",
-		"FlowMVC":          "resources/js/flow-mvc/flow-mvc/FlowMVC",
-    	"Deft":             "resources/js/deft/Deft",
-    	"nineam":           "resources/js/locale/nineam",
+		"CafeTownsend": "app",
+		"Ext": "resources/js/ext/src",
+		"FlowMVC": "resources/js/flow-mvc/flow-mvc/FlowMVC",
+    	"Deft": "resources/js/deft/Deft",
+    	"nineam": "resources/js/locale/nineam",
     	enabled:            true,
     	disableCaching:     true
 	}
@@ -18,7 +18,11 @@ Ext.Loader.setConfig({
  * DeftJS library is loaded.
  */
 // Include dependent Sencha classes
-Ext.syncRequire(["Ext.Component", "Ext.ComponentManager", "Ext.ComponentQuery"]);
+Ext.syncRequire([
+//    "Ext.Component", 
+//    "Ext.ComponentManager", 
+//    "Ext.ComponentQuery"
+]);
 
 /**
 * DeftJS core classes. These might only need to be required for dev.
