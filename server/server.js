@@ -80,6 +80,14 @@ else {
 
 // re-directing to directories
 app.use(function(req, res, next) {
+  // redirect all requests for resources/js/locale/nineam directory in the web root to e.g. /skin/public/resources/js/locale/nineam/
+  if (req.url.substr(0,28) === '/resources/js/locale/nineam/') {   
+    console.log('Received a request for resources/js/locale/nineam redirect: '+ req.url);    
+    // 302 - Moved temporarily
+    var new_location = req.protocol + "://" + req.host + web_root + req.url;
+    console.log('New resources/js/locale/nineam location: '+ new_location);
+    res.redirect(302, new_location);
+  }
   // redirect all requests for resources directory in the web root to e.g. /skin/public/resources/
   if (req.url.substr(0,11) === '/resources/') {   
     console.log('Received a request for resources redirect: '+ req.url);    
@@ -120,6 +128,14 @@ app.use(function(req, res, next) {
     console.log('New locale location: '+ new_location);
     res.redirect(302, new_location);  	
   }
+  // redirect all requests for data directory in the web root to e.g. /skin/public/data/ 
+  else if(req.url.substr(0,6) === '/data/'){
+    console.log('Received a request for data redirect: '+ req.url);
+    // 302 - Moved temporarily
+    var new_location = req.protocol + "://" + req.host + web_root + '/data' + req.url;
+    console.log('New data location: '+ new_location);
+    res.redirect(302, new_location);  	
+  }
   // redirect all requests for Deft directory in the web root to e.g. /skin/public/resources/js/deft/Deft/ 
   else if(req.url.substr(0,6) === '/Deft/'){
     console.log('Received a request for Deft redirect: '+ req.url);
@@ -134,6 +150,14 @@ app.use(function(req, res, next) {
     // 302 - Moved temporarily
     var new_location = req.protocol + "://" + req.host + web_root + '/resources/js/flow-mvc' + req.url;
     console.log('New FlowMVC location: '+ new_location);
+    res.redirect(302, new_location);  	
+  }  
+  // redirect all requests for nineam directory in the web root to e.g. /skin/public/resources/js/locale/nineam/ 
+  else if(req.url.substr(0,8) === '/nineam/'){
+    console.log('Received a request for nineam redirect: '+ req.url);
+    // 302 - Moved temporarily
+    var new_location = req.protocol + "://" + req.host + web_root + '/resources/js/locale' + req.url;
+    console.log('New nineam location: '+ new_location);
     res.redirect(302, new_location);  	
   }        
   // redirect all requests for a file in the web root to e.g. /skin/public/ 
