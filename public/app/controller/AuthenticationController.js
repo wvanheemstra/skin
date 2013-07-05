@@ -128,7 +128,7 @@ Ext.define("CafeTownsend.controller.AuthenticationController", {
      * @param {Object} response The response data packet from the failed service call.
      */
     loginFailure: function(response) {
-        this.logger.warn("loginFailure");
+        console.warn("loginFailure");//WAS this.logger.warn("loginFailure");
 
         this.resetSessionData();
 

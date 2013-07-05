@@ -28,7 +28,7 @@ api.configure(function(){
 api.all('*', function(req, res, next){
   if (!req.get('Origin')) return next();
   // use "*" here to accept any origin
-  res.set('Access-Control-Allow-Origin', 'http://localhost:3000, http://vanheemstrapictures.com:3000'); // Accepts requests coming from app
+  res.set('Access-Control-Allow-Origin', '*'); // Accepts requests coming from app
   res.set('Access-Control-Allow-Methods', 'GET, PUT, POST');
   res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
   // res.set('Access-Control-Allow-Max-Age', 3600);
@@ -55,6 +55,10 @@ app.configure(function(){
     app.enableViewRouting();
 
     app.use(app.router);
+
+    app.use('/resources', express.static(__dirname + '/../public/resources'));
+    app.use('/app', express.static(__dirname + '/../public/app'));
+    app.use(express.static(__dirname + '/../public')); // Fall back to this as a last resort
 });
 
 if(typeof configs.title === 'undefined'){
@@ -78,101 +82,6 @@ else {
 	var host = configs.host;
 }
 
-// re-directing to directories
-app.use(function(req, res, next) {
-  // redirect all requests for resources/js/locale/nineam directory in the web root to e.g. /skin/public/resources/js/locale/nineam/
-  if (req.url.substr(0,28) === '/resources/js/locale/nineam/') {   
-    console.log('Received a request for resources/js/locale/nineam redirect: '+ req.url);    
-    // 302 - Moved temporarily
-    var new_location = req.protocol + "://" + req.host + web_root + req.url;
-    console.log('New resources/js/locale/nineam location: '+ new_location);
-    res.redirect(302, new_location);
-  }
-  // redirect all requests for resources directory in the web root to e.g. /skin/public/resources/
-  if (req.url.substr(0,11) === '/resources/') {   
-    console.log('Received a request for resources redirect: '+ req.url);    
-    // 302 - Moved temporarily
-    var new_location = req.protocol + "://" + req.host + web_root + req.url;
-    console.log('New resources location: '+ new_location);
-    res.redirect(302, new_location);
-  }
-  // redirect all requests for app/service/mock directory in the web root to e.g. /skin/public/app/service/mock/ 
-  else if(req.url.substr(0,18) === '/app/service/mock/'){
-    console.log('Received a request for app/service/mock redirect: '+ req.url);
-    // 302 - Moved temporarily
-    var new_location = req.protocol + "://" + req.host + web_root + req.url;
-    console.log('New app/service/mock location: '+ new_location);
-    res.redirect(302, new_location);  	
-  }  
-  // redirect all requests for app/service directory in the web root to e.g. /skin/public/app/service/ 
-  else if(req.url.substr(0,13) === '/app/service/'){
-    console.log('Received a request for app/service redirect: '+ req.url);
-    // 302 - Moved temporarily
-    var new_location = req.protocol + "://" + req.host + web_root + req.url;
-    console.log('New app/service location: '+ new_location);
-    res.redirect(302, new_location);  	
-  }    
-  // redirect all requests for app directory in the web root to e.g. /skin/public/app/ 
-  else if(req.url.substr(0,5) === '/app/'){
-    console.log('Received a request for app redirect: '+ req.url);
-    // 302 - Moved temporarily
-    var new_location = req.protocol + "://" + req.host + web_root + req.url;
-    console.log('New app location: '+ new_location);
-    res.redirect(302, new_location);  	
-  }
-  // redirect all requests for locale directory in the web root to e.g. /skin/public/locale/ 
-  else if(req.url.substr(0,8) === '/locale/'){
-    console.log('Received a request for locale redirect: '+ req.url);
-    // 302 - Moved temporarily
-    var new_location = req.protocol + "://" + req.host + web_root + req.url;
-    console.log('New locale location: '+ new_location);
-    res.redirect(302, new_location);  	
-  }
-  // redirect all requests for data directory in the web root to e.g. /skin/public/data/ 
-  else if(req.url.substr(0,6) === '/data/'){
-    console.log('Received a request for data redirect: '+ req.url);
-    // 302 - Moved temporarily
-    var new_location = req.protocol + "://" + req.host + web_root + '/data' + req.url;
-    console.log('New data location: '+ new_location);
-    res.redirect(302, new_location);  	
-  }
-  // redirect all requests for Deft directory in the web root to e.g. /skin/public/resources/js/deft/Deft/ 
-  else if(req.url.substr(0,6) === '/Deft/'){
-    console.log('Received a request for Deft redirect: '+ req.url);
-    // 302 - Moved temporarily
-    var new_location = req.protocol + "://" + req.host + web_root + '/resources/js/deft' + req.url;
-    console.log('New Deft location: '+ new_location);
-    res.redirect(302, new_location);  	
-  }
-  // redirect all requests for FlowMVC directory in the web root to e.g. /skin/public/resources/js/flow-mvc/FlowMVC/ 
-  else if(req.url.substr(0,9) === '/FlowMVC/'){
-    console.log('Received a request for FlowMVC redirect: '+ req.url);
-    // 302 - Moved temporarily
-    var new_location = req.protocol + "://" + req.host + web_root + '/resources/js/flow-mvc' + req.url;
-    console.log('New FlowMVC location: '+ new_location);
-    res.redirect(302, new_location);  	
-  }  
-  // redirect all requests for nineam directory in the web root to e.g. /skin/public/resources/js/locale/nineam/ 
-  else if(req.url.substr(0,8) === '/nineam/'){
-    console.log('Received a request for nineam redirect: '+ req.url);
-    // 302 - Moved temporarily
-    var new_location = req.protocol + "://" + req.host + web_root + '/resources/js/locale' + req.url;
-    console.log('New nineam location: '+ new_location);
-    res.redirect(302, new_location);  	
-  }        
-  // redirect all requests for a file in the web root to e.g. /skin/public/ 
-  else if(req.url.substr(0,1) === '/'){
-    console.log('Received a request for file redirect: '+ req.url);
-    // 302 - Moved temporarily
-    var new_location = req.protocol + "://" + req.host + web_root + req.url;
-    console.log('New file location: '+ new_location);
-    res.redirect(302, new_location);  	
-  }  
-  else {
-    next();
-  }
-});
-
 // routing to pages
 app.get('/', function(req, res) {
     res.render('index', { title: title, host: host, web_root: web_root, layout: false });
@@ -193,6 +102,9 @@ app.get('/4', function(req, res) {
 app.get('/5', function(req, res) {
     res.render('index3', { title: 'Your Company with layout' });
 });
+
+
+
 
 app.listen(app_port);
 api.listen(api_port);

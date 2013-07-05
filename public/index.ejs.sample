@@ -6,7 +6,8 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <meta name="author" content="humans.txt">
-
+    <meta http-equiv="Access-Control-Allow-Origin" content="*"><!-- TO DO: change the * for a restricted set of domains -->
+	<meta http-equiv="Access-Control-Allow-Methods" content="GET, POST, PUT">    
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
 
     <!-- CSS -->
@@ -281,16 +282,6 @@
     <% } %>
     <script type="text/javascript" src="resources/js/log4javascript/log4javascript.js"></script>
     <% if (is_desktop) { %>
-    	<!-- Load the missing but required classes of ext before the app-loader-extjs -->
-    	<script type="text/javascript" src="http://<%= host %><%= web_root %>/resources/js/ext/src/Component.js"></script>
-    	<script type="text/javascript" src="http://<%= host %><%= web_root %>/resources/js/ext/src/ComponentManager.js"></script>
-    	<script type="text/javascript" src="http://<%= host %><%= web_root %>/resources/js/ext/src/ComponentQuery.js"></script>
-    	<script type="text/javascript" src="http://<%= host %><%= web_root %>/app/service/AuthenticationService.js"></script>
-    	<script type="text/javascript" src="http://<%= host %><%= web_root %>/app/service/mock/AuthenticationServiceMock.js"></script>
-    	<script type="text/javascript" src="http://<%= host %><%= web_root %>/app/service/mock/EmployeeServiceMock.js"></script> 
-    	<script type="text/javascript" src="http://<%= host %><%= web_root %>/app/store/EmployeeStore.js"></script>
-    	<!--<script type="text/javascript" src="http://<%= host %><%= web_root %>/resources/js/locale/nineam/locale/LocaleManager.js"></script>-->
-        <!--<script type="text/javascript" src="http://<%= host %><%= web_root %>/resources/js/locale/nineam/locale/plugin/extjs/LocalePlugin.js"></script>-->
     	<script type="text/javascript" src="app/app-loader-extjs.js"></script>
     <% } %>	 
     <% if (is_phone) { %>
@@ -299,8 +290,6 @@
     <% if (is_tablet) { %>
     	<script type="text/javascript" src="app/app-loader-touch.js"></script>
     <% } %>
-    <script type="text/javascript" src="resources/js/deft/deft-debug.js"></script>
-    <script type="text/javascript" src="resources/js/flow-mvc/flowmvc-debug.js"></script>
     <% if (is_desktop) { %>
     	<script type="text/javascript" src="app-extjs.js"></script>
     <% } %>	
