@@ -283,12 +283,18 @@
     <script type="text/javascript" src="resources/js/log4javascript/log4javascript.js"></script>
     <% if (is_desktop) { %>
     	<script type="text/javascript" src="app/app-loader-extjs.js"></script>
+		<script type="text/javascript" src="resources/js/deft/deft-debug.js"></script>
+	    <script type="text/javascript" src="resources/js/flow-mvc/flowmvc-debug.js"></script>
     <% } %>	 
     <% if (is_phone) { %>
     	<script type="text/javascript" src="app/app-loader-touch.js"></script>
+		<script type="text/javascript" src="resources/js/deft/deft-debug.js"></script>
+	    <script type="text/javascript" src="resources/js/flow-mvc/flowmvc-debug.js"></script>
     <% } %>
     <% if (is_tablet) { %>
     	<script type="text/javascript" src="app/app-loader-touch.js"></script>
+		<script type="text/javascript" src="resources/js/deft/deft-debug.js"></script>
+	    <script type="text/javascript" src="resources/js/flow-mvc/flowmvc-debug.js"></script>
     <% } %>
     <% if (is_desktop) { %>
     	<script type="text/javascript" src="app-extjs.js"></script>

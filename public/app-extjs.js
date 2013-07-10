@@ -45,8 +45,8 @@ Ext.onReady(function () {
      * Locale Manager core classes. These might only need to be required for dev.
      */
     Ext.syncRequire([
-//        "nineam.locale.LocaleManager",
-//        "nineam.locale.plugin.extjs.LocalePlugin"
+        "nineam.locale.LocaleManager",
+        "nineam.locale.plugin.extjs.LocalePlugin"
     ]);
 
     // Configure the DeftJS IoC container
