@@ -181,7 +181,7 @@ Ext.define('nineam.locale.LocaleManager', {
      * @param {Object} clientModel
      */
     //TODO: Create nineam.model.ClientModel
-    registerClient: function(clientModel) {
+    registerClient: function(clientModel) {	
         console.log("LocaleManager.registerClient");
         this._clients.push(clientModel);
 
