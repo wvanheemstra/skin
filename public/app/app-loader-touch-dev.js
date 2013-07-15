@@ -2,7 +2,7 @@
 Ext.Loader.setConfig({
 	enabled: true,
 	paths: {
-		"CafeTownsend": "app",
+		"Skin": "app",
 		"Ext": "resources/js/touch/src",
 		"FlowMVC": "resources/js/flow-mvc/flow-mvc/FlowMVC",
     	"Deft": "resources/js/deft/Deft",

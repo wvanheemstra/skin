@@ -23,16 +23,16 @@
  * application or business logic; this is all done in the view's corresponding mediator.
  * </p>
  */
-Ext.define("CafeTownsend.view.extjs.Viewport", {
+Ext.define("Skin.view.extjs.Viewport", {
     extend: "Ext.container.Viewport",
     alias: "widget.viewport",
-    controller: "CafeTownsend.mediator.extjs.ViewportMediator",
+    controller: "Skin.mediator.extjs.ViewportMediator",
     width: 800,
 
     requires: [
-        "CafeTownsend.view.extjs.LoginView",
-        "CafeTownsend.view.extjs.EmployeeListView",
-        "CafeTownsend.view.extjs.EmployeeDetailView"
+        "Skin.view.extjs.LoginView",
+        "Skin.view.extjs.EmployeeListView",
+        "Skin.view.extjs.EmployeeDetailView"
     ],
 
     config: {

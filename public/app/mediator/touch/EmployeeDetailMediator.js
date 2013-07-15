@@ -18,12 +18,12 @@
 /**
  * The employee list mediator essentially fulfills the passive view pattern for the employee list view.
  */
-Ext.define("CafeTownsend.mediator.touch.EmployeeDetailMediator", {
-    extend: "CafeTownsend.mediator.AbstractMediator",
+Ext.define("Skin.mediator.touch.EmployeeDetailMediator", {
+    extend: "Skin.mediator.AbstractMediator",
 
     requires: [
-        "CafeTownsend.event.EmployeeEvent",
-        "CafeTownsend.event.NavigationEvent"
+        "Skin.event.EmployeeEvent",
+        "Skin.event.NavigationEvent"
     ],
 
     inject: [
@@ -60,9 +60,9 @@ Ext.define("CafeTownsend.mediator.touch.EmployeeDetailMediator", {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
 
-        this.eventBus.addGlobalEventListener(CafeTownsend.event.EmployeeEvent.CREATE_EMPLOYEE_SUCCESS, this.onCreateEmployeeSuccess, this);
-        this.eventBus.addGlobalEventListener(CafeTownsend.event.EmployeeEvent.UPDATE_EMPLOYEE_SUCCESS, this.onUpdateEmployeeSuccess, this);
-        this.eventBus.addGlobalEventListener(CafeTownsend.event.EmployeeEvent.DELETE_EMPLOYEE_SUCCESS, this.onDeleteEmployeeSuccess, this);
+        this.eventBus.addGlobalEventListener(Skin.event.EmployeeEvent.CREATE_EMPLOYEE_SUCCESS, this.onCreateEmployeeSuccess, this);
+        this.eventBus.addGlobalEventListener(Skin.event.EmployeeEvent.UPDATE_EMPLOYEE_SUCCESS, this.onUpdateEmployeeSuccess, this);
+        this.eventBus.addGlobalEventListener(Skin.event.EmployeeEvent.DELETE_EMPLOYEE_SUCCESS, this.onDeleteEmployeeSuccess, this);
     },
 
     /**
@@ -82,10 +82,10 @@ Ext.define("CafeTownsend.mediator.touch.EmployeeDetailMediator", {
             var id = employee.id;
 
             if( (id != null) && (id != "") ) {
-                evt = Ext.create("CafeTownsend.event.EmployeeEvent", CafeTownsend.event.EmployeeEvent.UPDATE_EMPLOYEE);
+                evt = Ext.create("Skin.event.EmployeeEvent", Skin.event.EmployeeEvent.UPDATE_EMPLOYEE);
                 msg = nineam.locale.LocaleManager.getProperty("employeeDetail.updatingEmployee");
             } else {
-                evt = Ext.create("CafeTownsend.event.EmployeeEvent", CafeTownsend.event.EmployeeEvent.CREATE_EMPLOYEE);
+                evt = Ext.create("Skin.event.EmployeeEvent", Skin.event.EmployeeEvent.CREATE_EMPLOYEE);
                 msg = nineam.locale.LocaleManager.getProperty("employeeDetail.creatingEmployee");
             }
 
@@ -114,7 +114,7 @@ Ext.define("CafeTownsend.mediator.touch.EmployeeDetailMediator", {
                 message: nineam.locale.LocaleManager.getProperty("employeeDetail.deletingEmployee")
             });
 
-            var evt = Ext.create("CafeTownsend.event.EmployeeEvent", CafeTownsend.event.EmployeeEvent.DELETE_EMPLOYEE);
+            var evt = Ext.create("Skin.event.EmployeeEvent", Skin.event.EmployeeEvent.DELETE_EMPLOYEE);
             evt.employee = employee;
 
             this.eventBus.dispatchGlobalEvent(evt);
@@ -127,7 +127,7 @@ Ext.define("CafeTownsend.mediator.touch.EmployeeDetailMediator", {
     backToEmployeeList: function() {
         this.logger.debug("backToEmployeeList");
 
-        this.navigate(CafeTownsend.event.NavigationEvent.ACTION_BACK_SHOW_EMPLOYEE_LIST);
+        this.navigate(Skin.event.NavigationEvent.ACTION_BACK_SHOW_EMPLOYEE_LIST);
     },
 
     /**
@@ -179,8 +179,8 @@ Ext.define("CafeTownsend.mediator.touch.EmployeeDetailMediator", {
      * Handles the change of the selected record in the employee store. Loads the appropriate record in the view or
      * resets it if the record is null.
      *
-     * @param {CafeTownsend.store.EmployeeStore} store The store that ahs the selected record.
-     * @param {CafeTownsend.model.EmployeeModel} record The selected record of the store.
+     * @param {Skin.store.EmployeeStore} store The store that ahs the selected record.
+     * @param {Skin.model.EmployeeModel} record The selected record of the store.
      */
     onSelectedRecordChange: function(store, record) {
         var logMsg = (record != null)

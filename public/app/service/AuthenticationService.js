@@ -18,7 +18,7 @@
 /**
  * The authentication service object. Contains concrete Ajax calls.
  */
-Ext.define("CafeTownsend.service.AuthenticationService", {
+Ext.define("Skin.service.AuthenticationService", {
     extend: "FlowMVC.mvc.service.AbstractService",
 
     inject: [

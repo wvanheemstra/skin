@@ -18,7 +18,7 @@
 /**
  * The employee list mediator essentially fulfills the passive view pattern for the employee list view.
  */
-Ext.define("Skin.mediator.touch.EmployeeListMediator", {
+Ext.define("Skin.mediator.touch.EmployeeTileMediator", {
     extend: "Skin.mediator.AbstractMediator",
 
     requires: [

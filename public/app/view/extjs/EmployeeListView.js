@@ -23,17 +23,17 @@
  * application or business logic; this is all done in the view's corresponding mediator.
  * </p>
  */
-Ext.define("CafeTownsend.view.extjs.EmployeeListView", {
+Ext.define("Skin.view.extjs.EmployeeListView", {
     extend: "Ext.Panel",
     alias: "widget.employeeListView",
-    controller: "CafeTownsend.mediator.extjs.EmployeeListMediator",
+    controller: "Skin.mediator.extjs.EmployeeListMediator",
     header: false,
 
     requires: [
         "Ext.data.*",
         "Ext.util.*",
         "Ext.view.View",
-        "CafeTownsend.view.extjs.component.LiveSearchGridPanel",
+        "Skin.view.extjs.component.LiveSearchGridPanel",
         "nineam.locale.LocaleManager"
     ],
 

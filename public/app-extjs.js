@@ -31,11 +31,11 @@ Ext.onReady(function () {
 
     // pull all of this in so they can be injected
     Ext.syncRequire([
-	    "CafeTownsend.view.extjs.Viewport",
-        "CafeTownsend.service.AuthenticationService",
-        "CafeTownsend.service.mock.AuthenticationServiceMock",
-        "CafeTownsend.service.mock.EmployeeServiceMock",
-        "CafeTownsend.store.EmployeeStore",
+	    "Skin.view.extjs.Viewport",
+        "Skin.service.AuthenticationService",
+        "Skin.service.mock.AuthenticationServiceMock",
+        "Skin.service.mock.EmployeeServiceMock",
+        "Skin.store.EmployeeStore",
 
         "FlowMVC.mvc.event.EventDispatcher",
         "FlowMVC.logger.Logger"
@@ -66,23 +66,23 @@ Ext.onReady(function () {
         // IMPL
         ////////////////////////////////////////////
 //        authenticationService: "CafeTownsend.service.AuthenticationService",
-        employeeStore:          "CafeTownsend.store.EmployeeStore",
+        employeeStore:          "Skin.store.EmployeeStore",
 
         ////////////////////////////////////////////
         // MOCKS
         ////////////////////////////////////////////
-        authenticationService:  "CafeTownsend.service.mock.AuthenticationServiceMock",
-        employeeService:        "CafeTownsend.service.mock.EmployeeServiceMock",
+        authenticationService:  "Skin.service.mock.AuthenticationServiceMock",
+        employeeService:        "Skin.service.mock.EmployeeServiceMock",
 
         authenticationServiceClass: {
-            value: "CafeTownsend.service.mock.AuthenticationServiceMock"
+            value: "Skin.service.mock.AuthenticationServiceMock"
         }
     });
 });
 
 Ext.application({
 
-    name: "CafeTownsend",
+    name: "Skin",
 
     ////////////////////////////////////////////
     // MODELS
@@ -95,10 +95,10 @@ Ext.application({
     // VIEWS
     ////////////////////////////////////////////
     views: [
-        "CafeTownsend.view.extjs.Viewport",
-        "CafeTownsend.view.extjs.LoginView",
-        "CafeTownsend.view.extjs.EmployeeListView",
-        "CafeTownsend.view.extjs.EmployeeDetailView"
+        "Skin.view.extjs.Viewport",
+        "Skin.view.extjs.LoginView",
+        "Skin.view.extjs.EmployeeListView",
+        "Skin.view.extjs.EmployeeDetailView"
     ],
 
     ////////////////////////////////////////////
@@ -121,6 +121,6 @@ Ext.application({
 
         // Set up QuickTips and create the Viewport
         Ext.tip.QuickTipManager.init();
-        Ext.create("CafeTownsend.view.extjs.Viewport");
+        Ext.create("Skin.view.extjs.Viewport");
     }
 });

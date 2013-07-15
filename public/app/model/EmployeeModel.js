@@ -18,7 +18,7 @@
 /**
  * The domain object representing an employee.
  */
-Ext.define("CafeTownsend.model.EmployeeModel", {
+Ext.define("Skin.model.EmployeeModel", {
     extend: "Ext.data.Model",
 
     idProperty: "id",

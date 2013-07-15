@@ -19,7 +19,7 @@
  * The BootstrapController acts like a service controller with asynchronous callback methods for successful
  * and failed authentication service calls.
  */
-Ext.define("CafeTownsend.controller.BootstrapController", {
+Ext.define("Skin.controller.BootstrapController", {
     extend: "FlowMVC.mvc.controller.AbstractController",
 
     requires: [
@@ -32,7 +32,7 @@ Ext.define("CafeTownsend.controller.BootstrapController", {
     ],
 
     /**
-     * @event CafeTownsend.event.AuthenticationEvent.LOGIN_SUCCESS
+     * @event Skin.event.AuthenticationEvent.LOGIN_SUCCESS
      * Fired when the login service is successful.
      */
 
@@ -55,8 +55,8 @@ Ext.define("CafeTownsend.controller.BootstrapController", {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
 
-//        this.eventBus.addGlobalEventListener(CafeTownsend.event.AuthenticationEvent.LOGIN, this.onLogin, this);
-//        this.eventBus.addGlobalEventListener(CafeTownsend.event.AuthenticationEvent.LOGOUT, this.onLogout, this);
+//        this.eventBus.addGlobalEventListener(Skin.event.AuthenticationEvent.LOGIN, this.onLogin, this);
+//        this.eventBus.addGlobalEventListener(Skin.event.AuthenticationEvent.LOGOUT, this.onLogout, this);
     },
 
     /**

@@ -23,10 +23,10 @@
  * application or business logic; this is all done in the view"s corresponding mediator.
  * </p>
  */
-Ext.define("CafeTownsend.view.extjs.LoginView", {
+Ext.define("Skin.view.extjs.LoginView", {
     extend: "Ext.Container",
     alias: "widget.loginView",
-    controller: "CafeTownsend.mediator.extjs.LoginMediator",
+    controller: "Skin.mediator.extjs.LoginMediator",
 
     layout: {
         type: "vbox",

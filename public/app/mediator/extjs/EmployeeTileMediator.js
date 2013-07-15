@@ -18,7 +18,7 @@
 /**
  * The employee list mediator essentially fulfills the passive view pattern for the employee list view.
  */
-Ext.define("Skin.mediator.touch.EmployeeListMediator", {
+Ext.define("Skin.mediator.extjs.EmployeeListMediator", {
     extend: "Skin.mediator.AbstractMediator",
 
     requires: [
@@ -33,20 +33,13 @@ Ext.define("Skin.mediator.touch.EmployeeListMediator", {
     // set up view event to mediator mapping
     control: {
         logoutButton: {
-            tap: "onLogoutButtonTap"
+            click: "onLogoutButtonClick"
         },
-
         newEmployeeButton: {
-            tap: "onNewEmployeeButtonTap"
+            click: "onNewEmployeeButtonClick"
         },
-
-        searchInput :{
-            keyup:          "onSearchKeyUp",
-            clearicontap:   "onSearchClearIconTap"
-        },
-
         list: {
-            disclose: "onListDisclose"
+            itemclick: "onListSelect"
         }
     },
 
@@ -61,6 +54,9 @@ Ext.define("Skin.mediator.touch.EmployeeListMediator", {
 
         this.eventBus.addGlobalEventListener(Skin.event.EmployeeEvent.GET_EMPLOYEE_LIST_SUCCESS, this.onGetEmployeeListSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.EmployeeEvent.GET_EMPLOYEE_LIST_FAILURE, this.onGetEmployeeListFailure, this);
+        this.eventBus.addGlobalEventListener(Skin.event.EmployeeEvent.UPDATE_EMPLOYEE_SUCCESS, this.onGetEmployeeListSuccess, this);
+        this.eventBus.addGlobalEventListener(Skin.event.EmployeeEvent.DELETE_EMPLOYEE_SUCCESS, this.onDeleteEmployeeSuccess, this);
+        this.eventBus.addGlobalEventListener(Skin.event.EmployeeEvent.CREATE_EMPLOYEE_SUCCESS, this.onCreateEmployeeSuccess, this);
     },
 
     /**
@@ -69,10 +65,7 @@ Ext.define("Skin.mediator.touch.EmployeeListMediator", {
     getEmployeeListData: function() {
         this.logger.debug("getEmployeeListData");
 
-        this.getView().setMasked({
-            xtype: "loadmask",
-            message: nineam.locale.LocaleManager.getProperty("employeeList.loading")
-        });
+        this.getView().setLoading(nineam.locale.LocaleManager.getProperty("employeeList.loading"));
 
         var evt = Ext.create("Skin.event.EmployeeEvent", Skin.event.EmployeeEvent.GET_EMPLOYEE_LIST);
         this.eventBus.dispatchGlobalEvent(evt);
@@ -88,11 +81,11 @@ Ext.define("Skin.mediator.touch.EmployeeListMediator", {
     showEmployeeDetail: function(record) {
         var logMsg = (record != null)
             ? ": id = " + record.get("id") + ", employee = " + record.get("firstName")
-            : "new employee";
-        this.logger.debug("showEmployeeDetail = " + logMsg);
+            : "";
+        this.logger.debug("showEmployeeDetail = ", logMsg);
 
-        this.navigate(Skin.event.NavigationEvent.ACTION_SHOW_EMPLOYEE_DETAIL);
         this.employeeStore.setSelectedRecord(record);
+        this.navigate(Skin.event.NavigationEvent.ACTION_SHOW_EMPLOYEE_DETAIL);
     },
 
     ////////////////////////////////////////////////
@@ -106,7 +99,7 @@ Ext.define("Skin.mediator.touch.EmployeeListMediator", {
     onLoginSuccess: function() {
         this.logger.debug("onLoginSuccess");
 
-        this.navigate(Skin.event.AuthenticationEvent.LOGIN_SUCCESS);
+        this.navigate(CafeTownsend.event.AuthenticationEvent.LOGIN_SUCCESS);
         this.getEmployeeListData();
     },
 
@@ -116,8 +109,8 @@ Ext.define("Skin.mediator.touch.EmployeeListMediator", {
     onGetEmployeeListSuccess: function() {
         this.logger.debug("onGetEmployeeListSuccess");
 
-        this.getView().setMasked(false);
-        this.getList().setStore(this.employeeStore);
+        this.getView().setLoading(false);
+        this.getList().getStore().loadRecords(this.employeeStore.getRange());
     },
 
     /**
@@ -126,7 +119,25 @@ Ext.define("Skin.mediator.touch.EmployeeListMediator", {
     onGetEmployeeListFailure: function() {
         this.logger.debug("onGetEmployeeListFailure");
 
-        this.getView().setMasked(false);
+        this.getView().setLoading(false);
+    },
+
+    /**
+     * Handles the delete of an employee by refreshing the grid
+     * Touch takes care of this for you, not so ext
+     */
+    onDeleteEmployeeSuccess: function() {
+        this.logger.debug("onDeleteEmployeeSuccess");
+        this.getList().getStore().loadRecords(this.employeeStore.getRange());
+    },
+
+    /**
+     * Handles teh add of an employee by refreshing the grid
+     * Touch takes care of this for you, not so ext
+     */
+    onCreateEmployeeSuccess: function() {
+        this.logger.debug("onCreateEmployeeSuccess");
+        this.getList().getStore().loadRecords(this.employeeStore.getRange());
     },
 
     ////////////////////////////////////////////////
@@ -136,8 +147,8 @@ Ext.define("Skin.mediator.touch.EmployeeListMediator", {
     /**
      * Handles the tap of the logout button. Dispatches the logout application-level event.
      */
-    onLogoutButtonTap: function() {
-        this.logger.debug("onLogoutButtonTap");
+    onLogoutButtonClick: function() {
+        this.logger.debug("onLogoutButtonClick");
 
         var evt = Ext.create("Skin.event.AuthenticationEvent", Skin.event.AuthenticationEvent.LOGOUT);
         this.eventBus.dispatchGlobalEvent(evt);
@@ -146,10 +157,10 @@ Ext.define("Skin.mediator.touch.EmployeeListMediator", {
     /**
      * Handles the tap of the new employee button. Shows the employee detail view.
      */
-    onNewEmployeeButtonTap: function() {
-        this.logger.debug("onNewEmployeeButtonTap");
+    onNewEmployeeButtonClick: function() {
+        this.logger.debug("onNewEmployeeButtonClick");
 
-        this.showEmployeeDetail();
+        this.showEmployeeDetail(null);
     },
 
     /**
@@ -158,27 +169,24 @@ Ext.define("Skin.mediator.touch.EmployeeListMediator", {
      *
      * @param {Ext.dataview.List} list  Reference to the visual list component.
      * @param {Object/Ext.data.Model} record Reference to the selected item in the list.
-     * @param {Object} target The item in the list that's selected.
      * @param {Number} index The index of the selected item.
-     * @param {Object/Event} evt the event that triggered the handler.
      * @param {Object} options ???
      */
-    onListDisclose: function(list, record, target, index, evt, options) {
-        this.logger.debug("onListDisclose");
+    onListSelect: function(list, record, index, options) {
+        this.logger.debug("onListSelect");
 
-        this.employeeStore.setSelectedRecord(record);
         this.showEmployeeDetail(record);
-    },
+    }
 
     /**
      * Handles the clear icon tap event on the search field. Clears all filter on the list's store.
      */
-    onSearchClearIconTap: function() {
-        this.logger.debug("onSearchClearIconTap");
-
-        var store = this.getList().getStore();
-        store.clearFilter();
-    },
+//    onSearchClearIconTap: function() {
+//        this.logger.debug("onSearchClearIconTap");
+//
+//        var store = this.getView().getStore();
+//        store.clearFilter();
+//    },
 
     /**
      * Handles the key up event on the search field. Filters the list component's store by the value in the
@@ -188,58 +196,63 @@ Ext.define("Skin.mediator.touch.EmployeeListMediator", {
      *
      * TODO: BMR: 02/28/13: clean this up. pulled directly from another example with minor changes: http://www.phs4j.com/2012/05/add-a-searchfield-to-a-sencha-touch-2-list-mvc/
      */
-    onSearchKeyUp: function(field) {
-        this.logger.debug("onSearchKeyUp");
-
-        //get the store and the value of the field
-        var value = field.getValue();
-        var store = this.getList().getStore();
-
-        //first clear any current filters on the store
-        store.clearFilter();
-
-        //check if a value is set first, as if it isn't we don't have to do anything
-        if (value) {
-            //the user could have entered spaces, so we must split them so we can loop through them all
-            var searches = value.split(" "),
-                regexps = [],
-                i;
-
-            //loop them all
-            for (i = 0; i < searches.length; i++) {
-                //if it is nothing, continue
-                if (!searches[i]) continue;
-
-
-                //if found, create a new regular expression which is case insenstive
-                regexps.push(new RegExp(searches[i], "i"));
-            }
-
-            //now filter the store by passing a method
-            //the passed method will be called for each record in the store
-            store.filter(function(record) {
-                var matched = [];
-
-                //loop through each of the regular expressions
-                for (i = 0; i < regexps.length; i++) {
-                    var search = regexps[i],
-                        didMatch = record.get("firstName").match(search) ||
-                            record.get("lastName").match(search);
-
-                    //if it matched the first or last name, push it into the matches array
-                    matched.push(didMatch);
-                }
-
-                //if nothing was found, return false (dont so in the store)
-                if (regexps.length > 1 && matched.indexOf(false) != -1) {
-                    return false;
-                } else {
-                    //else true true (show in the store)
-                    return matched[0];
-                }
-            });
-        }
-    }
+//    onSearchKeyUp: function(field) {
+//        this.logger.debug("onSearchKeyUp");
+//
+//        //get the store and the value of the field
+//        var value = field.getValue();
+//        var store = this.getView().getStore();
+//
+//        //first clear any current filters on the store
+//        store.clearFilter();
+//
+//        //check if a value is set first, as if it isn't we don't have to do anything
+//        if (value) {
+//            //the user could have entered spaces, so we must split them so we can loop through them all
+//            var searches = value.split(' '),
+//                regexps = [],
+//                i;
+//
+//
+//            //loop them all
+//            for (i = 0; i < searches.length; i++) {
+//                //if it is nothing, continue
+//                if (!searches[i]) continue;
+//
+//
+//                //if found, create a new regular expression which is case insenstive
+//                regexps.push(new RegExp(searches[i], "i"));
+//            }
+//
+//
+//            //now filter the store by passing a method
+//            //the passed method will be called for each record in the store
+//            store.filter(function(record) {
+//                var matched = [];
+//
+//
+//                //loop through each of the regular expressions
+//                for (i = 0; i < regexps.length; i++) {
+//                    var search = regexps[i],
+//                        didMatch = record.get("firstName").match(search) ||
+//                            record.get("lastName").match(search);
+//
+//
+//                    //if it matched the first or last name, push it into the matches array
+//                    matched.push(didMatch);
+//                }
+//
+//
+//                //if nothing was found, return false (dont so in the store)
+//                if (regexps.length > 1 && matched.indexOf(false) != -1) {
+//                    return false;
+//                } else {
+//                    //else true true (show in the store)
+//                    return matched[0];
+//                }
+//            });
+//        }
+//    },
 
 });
 

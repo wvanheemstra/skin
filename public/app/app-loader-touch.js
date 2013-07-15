@@ -2,7 +2,7 @@
 Ext.Loader.setConfig({
 	enabled: true,
 	paths: {
-		"CafeTownsend": "app",
+		"Skin": "app",
 		"Ext": "resources/js/touch/src",
 		"nineam": "resources/js/locale/nineam",
 		enabled: true,

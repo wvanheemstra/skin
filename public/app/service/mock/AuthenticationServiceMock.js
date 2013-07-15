@@ -18,7 +18,7 @@
 /**
  * The mock authentication service object.
  */
-Ext.define("CafeTownsend.service.mock.AuthenticationServiceMock", {
+Ext.define("Skin.service.mock.AuthenticationServiceMock", {
     extend: "FlowMVC.mvc.service.mock.AbstractServiceMock",
 
     inject: [

@@ -2,7 +2,7 @@
  * A GridPanel class with live search support.
  * @author Nicolas Ferrero
  */
-Ext.define("CafeTownsend.view.extjs.component.LiveSearchGridPanel", {
+Ext.define("Skin.view.extjs.component.LiveSearchGridPanel", {
     extend: "Ext.grid.Panel",
     alias: "widget.livesearchgridpanel",
     header: false,

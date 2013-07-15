@@ -18,7 +18,7 @@
 /**
  * The mock authentication service object.
  */
-Ext.define("CafeTownsend.service.mock.EmployeeServiceMock", {
+Ext.define("Skin.service.mock.EmployeeServiceMock", {
     extend: "FlowMVC.mvc.service.mock.AbstractServiceMock",
 
     inject: [
@@ -71,7 +71,7 @@ Ext.define("CafeTownsend.service.mock.EmployeeServiceMock", {
             }
         };
 
-        response = Ext.create("CafeTownsend.model.EmployeeModel", response.employee);
+        response = Ext.create("Skin.model.EmployeeModel", response.employee);
         return this.delayedSuccess(response);
     },
 
@@ -93,7 +93,7 @@ Ext.define("CafeTownsend.service.mock.EmployeeServiceMock", {
             }
         };
 
-        response = Ext.create("CafeTownsend.model.EmployeeModel", response.employee);
+        response = Ext.create("Skin.model.EmployeeModel", response.employee);
         return this.delayedSuccess(response);
     },
 
@@ -115,7 +115,7 @@ Ext.define("CafeTownsend.service.mock.EmployeeServiceMock", {
             }
         };
 
-        response = Ext.create("CafeTownsend.model.EmployeeModel", response.employee);
+        response = Ext.create("Skin.model.EmployeeModel", response.employee);
         return this.delayedSuccess(response);
     }
 });

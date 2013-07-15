@@ -23,10 +23,10 @@
  * application or business logic; this is all done in the view's corresponding mediator.
  * </p>
  */
-Ext.define("CafeTownsend.view.touch.LoginView", {
+Ext.define("Skin.view.touch.LoginView", {
     extend: "Ext.form.Panel",
     alias: "widget.loginView",
-    controller: "CafeTownsend.mediator.touch.LoginMediator",
+    controller: "Skin.mediator.touch.LoginMediator",
 
     requires: [
         "Ext.form.FieldSet",

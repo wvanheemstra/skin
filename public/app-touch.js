@@ -30,10 +30,10 @@ Ext.onReady(function () {
 //    console.log("app.onReady");
 
     Ext.require([
-        "CafeTownsend.service.AuthenticationService",
-        "CafeTownsend.service.mock.AuthenticationServiceMock",
-        "CafeTownsend.service.mock.EmployeeServiceMock",
-        "CafeTownsend.store.EmployeeStore",
+        "Skin.service.AuthenticationService",
+        "Skin.service.mock.AuthenticationServiceMock",
+        "Skin.service.mock.EmployeeServiceMock",
+        "Skin.store.EmployeeStore",
 
         "nineam.locale.LocaleManager",
         "nineam.locale.plugin.touch.LocalePlugin"
@@ -56,16 +56,16 @@ Ext.onReady(function () {
         ////////////////////////////////////////////
         // IMPL
         ////////////////////////////////////////////
-        employeeStore:          "CafeTownsend.store.EmployeeStore",
+        employeeStore:          "Skin.store.EmployeeStore",
 
 //        ////////////////////////////////////////////
 //        // MOCKS
 //        ////////////////////////////////////////////
-        authenticationService:  "CafeTownsend.service.mock.AuthenticationServiceMock",
-        employeeService:        "CafeTownsend.service.mock.EmployeeServiceMock",
+        authenticationService:  "Skin.service.mock.AuthenticationServiceMock",
+        employeeService:        "Skin.service.mock.EmployeeServiceMock",
 
         authenticationServiceClass: {
-            value: "CafeTownsend.service.mock.AuthenticationServiceMock"
+            value: "Skin.service.mock.AuthenticationServiceMock"
         }
     });
 
@@ -73,7 +73,7 @@ Ext.onReady(function () {
 
 Ext.application({
 
-    name: "CafeTownsend",
+    name: "Skin",
 
     ////////////////////////////////////////////
     // MODELS
@@ -86,9 +86,9 @@ Ext.application({
     // VIEWS
     ////////////////////////////////////////////
     views: [
-        "CafeTownsend.view.touch.LoginView",
-        "CafeTownsend.view.touch.EmployeeListView",
-        "CafeTownsend.view.touch.EmployeeDetailView"
+        "Skin.view.touch.LoginView",
+        "Skin.view.touch.EmployeeListView",
+        "Skin.view.touch.EmployeeDetailView"
     ],
 
     ////////////////////////////////////////////
@@ -110,7 +110,7 @@ Ext.application({
         console.log("app.launch");
 
         //since there's no view associated with it
-        var viewportMediator = Ext.create("CafeTownsend.mediator.touch.ViewportMediator");
+        var viewportMediator = Ext.create("Skin.mediator.touch.ViewportMediator");
         viewportMediator.init();
 
         Ext.Viewport.add([

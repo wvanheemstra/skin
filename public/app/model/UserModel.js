@@ -18,7 +18,7 @@
 /**
  * The domain object representing a user.
  */
-Ext.define("CafeTownsend.model.UserModel", {
+Ext.define("Skin.model.UserModel", {
     extend: "Ext.data.Model",
 
     config: {

@@ -18,11 +18,11 @@
 /**
  * The employee list mediator essentially fulfills the passive view pattern for the employee list view.
  */
-Ext.define("CafeTownsend.mediator.extjs.EmployeeListMediator", {
-    extend: "CafeTownsend.mediator.AbstractMediator",
+Ext.define("Skin.mediator.extjs.EmployeeListMediator", {
+    extend: "Skin.mediator.AbstractMediator",
 
     requires: [
-        "CafeTownsend.event.EmployeeEvent"
+        "Skin.event.EmployeeEvent"
     ],
 
     inject: [
@@ -50,13 +50,13 @@ Ext.define("CafeTownsend.mediator.extjs.EmployeeListMediator", {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
 
-        this.eventBus.addGlobalEventListener(CafeTownsend.event.AuthenticationEvent.LOGIN_SUCCESS, this.onLoginSuccess, this);
+        this.eventBus.addGlobalEventListener(Skin.event.AuthenticationEvent.LOGIN_SUCCESS, this.onLoginSuccess, this);
 
-        this.eventBus.addGlobalEventListener(CafeTownsend.event.EmployeeEvent.GET_EMPLOYEE_LIST_SUCCESS, this.onGetEmployeeListSuccess, this);
-        this.eventBus.addGlobalEventListener(CafeTownsend.event.EmployeeEvent.GET_EMPLOYEE_LIST_FAILURE, this.onGetEmployeeListFailure, this);
-        this.eventBus.addGlobalEventListener(CafeTownsend.event.EmployeeEvent.UPDATE_EMPLOYEE_SUCCESS, this.onGetEmployeeListSuccess, this);
-        this.eventBus.addGlobalEventListener(CafeTownsend.event.EmployeeEvent.DELETE_EMPLOYEE_SUCCESS, this.onDeleteEmployeeSuccess, this);
-        this.eventBus.addGlobalEventListener(CafeTownsend.event.EmployeeEvent.CREATE_EMPLOYEE_SUCCESS, this.onCreateEmployeeSuccess, this);
+        this.eventBus.addGlobalEventListener(Skin.event.EmployeeEvent.GET_EMPLOYEE_LIST_SUCCESS, this.onGetEmployeeListSuccess, this);
+        this.eventBus.addGlobalEventListener(Skin.event.EmployeeEvent.GET_EMPLOYEE_LIST_FAILURE, this.onGetEmployeeListFailure, this);
+        this.eventBus.addGlobalEventListener(Skin.event.EmployeeEvent.UPDATE_EMPLOYEE_SUCCESS, this.onGetEmployeeListSuccess, this);
+        this.eventBus.addGlobalEventListener(Skin.event.EmployeeEvent.DELETE_EMPLOYEE_SUCCESS, this.onDeleteEmployeeSuccess, this);
+        this.eventBus.addGlobalEventListener(Skin.event.EmployeeEvent.CREATE_EMPLOYEE_SUCCESS, this.onCreateEmployeeSuccess, this);
     },
 
     /**
@@ -67,7 +67,7 @@ Ext.define("CafeTownsend.mediator.extjs.EmployeeListMediator", {
 
         this.getView().setLoading(nineam.locale.LocaleManager.getProperty("employeeList.loading"));
 
-        var evt = Ext.create("CafeTownsend.event.EmployeeEvent", CafeTownsend.event.EmployeeEvent.GET_EMPLOYEE_LIST);
+        var evt = Ext.create("Skin.event.EmployeeEvent", Skin.event.EmployeeEvent.GET_EMPLOYEE_LIST);
         this.eventBus.dispatchGlobalEvent(evt);
     },
 
@@ -85,7 +85,7 @@ Ext.define("CafeTownsend.mediator.extjs.EmployeeListMediator", {
         this.logger.debug("showEmployeeDetail = ", logMsg);
 
         this.employeeStore.setSelectedRecord(record);
-        this.navigate(CafeTownsend.event.NavigationEvent.ACTION_SHOW_EMPLOYEE_DETAIL);
+        this.navigate(Skin.event.NavigationEvent.ACTION_SHOW_EMPLOYEE_DETAIL);
     },
 
     ////////////////////////////////////////////////
@@ -99,7 +99,7 @@ Ext.define("CafeTownsend.mediator.extjs.EmployeeListMediator", {
     onLoginSuccess: function() {
         this.logger.debug("onLoginSuccess");
 
-        this.navigate(CafeTownsend.event.AuthenticationEvent.LOGIN_SUCCESS);
+        this.navigate(Skin.event.AuthenticationEvent.LOGIN_SUCCESS);
         this.getEmployeeListData();
     },
 
@@ -150,7 +150,7 @@ Ext.define("CafeTownsend.mediator.extjs.EmployeeListMediator", {
     onLogoutButtonClick: function() {
         this.logger.debug("onLogoutButtonClick");
 
-        var evt = Ext.create("CafeTownsend.event.AuthenticationEvent", CafeTownsend.event.AuthenticationEvent.LOGOUT);
+        var evt = Ext.create("Skin.event.AuthenticationEvent", Skin.event.AuthenticationEvent.LOGOUT);
         this.eventBus.dispatchGlobalEvent(evt);
     },
 

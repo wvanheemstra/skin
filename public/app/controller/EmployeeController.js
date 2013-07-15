@@ -19,11 +19,11 @@
  * The EmployeeController acts as the command with asynchronous callback methods for successful
  * and failed employee service calls.eError: "undefined" is not a function(evaluating "controller.getStores()")
  */
-Ext.define("CafeTownsend.controller.EmployeeController", {
+Ext.define("Skin.controller.EmployeeController", {
     extend: "FlowMVC.mvc.controller.AbstractController",
 
     requires: [
-        "CafeTownsend.event.EmployeeEvent",
+        "Skin.event.EmployeeEvent",
         "FlowMVC.mvc.service.rpc.Responder"
     ],
 
@@ -49,12 +49,12 @@ Ext.define("CafeTownsend.controller.EmployeeController", {
 //    },
 
     /**
-     * @event CafeTownsend.event.EmployeeEvent.GET_EMPLOYEE_LIST_SUCCESS
+     * @event Skin.event.EmployeeEvent.GET_EMPLOYEE_LIST_SUCCESS
      * Fired when the get employee service is successful.
      */
 
     /**
-     * @event CafeTownsend.event.AuthenticationEvent.GET_EMPLOYEE_LIST_FAILURE
+     * @event Skin.event.AuthenticationEvent.GET_EMPLOYEE_LIST_FAILURE
      * Fired when the get employee service fails.
      */
 
@@ -66,10 +66,10 @@ Ext.define("CafeTownsend.controller.EmployeeController", {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
 
-        this.eventBus.addGlobalEventListener(CafeTownsend.event.EmployeeEvent.GET_EMPLOYEE_LIST, this.onGetEmployeeList, this);
-        this.eventBus.addGlobalEventListener(CafeTownsend.event.EmployeeEvent.CREATE_EMPLOYEE, this.onCreateEmployee, this);
-        this.eventBus.addGlobalEventListener(CafeTownsend.event.EmployeeEvent.UPDATE_EMPLOYEE, this.onUpdateEmployee, this);
-        this.eventBus.addGlobalEventListener(CafeTownsend.event.EmployeeEvent.DELETE_EMPLOYEE, this.onDeleteEmployee, this);
+        this.eventBus.addGlobalEventListener(Skin.event.EmployeeEvent.GET_EMPLOYEE_LIST, this.onGetEmployeeList, this);
+        this.eventBus.addGlobalEventListener(Skin.event.EmployeeEvent.CREATE_EMPLOYEE, this.onCreateEmployee, this);
+        this.eventBus.addGlobalEventListener(Skin.event.EmployeeEvent.UPDATE_EMPLOYEE, this.onUpdateEmployee, this);
+        this.eventBus.addGlobalEventListener(Skin.event.EmployeeEvent.DELETE_EMPLOYEE, this.onDeleteEmployee, this);
     },
 
     /**
@@ -86,7 +86,7 @@ Ext.define("CafeTownsend.controller.EmployeeController", {
      * Performs create employee by using the referenced service and sets up the service success and failure
      * callback handlers.
      *
-     * @param {CafeTownsend.model.EmployeeModel} employee The employee to create.
+     * @param {Skin.model.EmployeeModel} employee The employee to create.
      */
     createEmployee: function(employee) {
         this.logger.debug("createEmployee");
@@ -98,7 +98,7 @@ Ext.define("CafeTownsend.controller.EmployeeController", {
      * Performs update employee by using the referenced service and sets up the service success and failure
      * callback handlers.
      *
-     * @param {CafeTownsend.model.EmployeeModel} employee The employee to update.
+     * @param {Skin.model.EmployeeModel} employee The employee to update.
      */
     updateEmployee: function(employee) {
         this.logger.debug("updateEmployee");
@@ -110,7 +110,7 @@ Ext.define("CafeTownsend.controller.EmployeeController", {
      * Performs delete employee by using the referenced service and sets up the service success and failure
      * callback handlers.
      *
-     * @param {CafeTownsend.model.EmployeeModel} employee The employee to delete.
+     * @param {Skin.model.EmployeeModel} employee The employee to delete.
      */
     deleteEmployee: function(employee) {
         this.logger.debug("deleteEmployee");
@@ -133,7 +133,7 @@ Ext.define("CafeTownsend.controller.EmployeeController", {
 
         this.employeeStore.setData(response.employeeList);
 
-        var evt = Ext.create("CafeTownsend.event.EmployeeEvent", CafeTownsend.event.EmployeeEvent.GET_EMPLOYEE_LIST_SUCCESS);
+        var evt = Ext.create("Skin.event.EmployeeEvent", Skin.event.EmployeeEvent.GET_EMPLOYEE_LIST_SUCCESS);
         this.eventBus.dispatchGlobalEvent(evt);
     },
 
@@ -146,7 +146,7 @@ Ext.define("CafeTownsend.controller.EmployeeController", {
     getEmployeeListFailure: function(response) {
         this.logger.warn("getEmployeeListFailure");
 
-        var evt = Ext.create("CafeTownsend.event.EmployeeEvent", CafeTownsend.event.EmployeeEvent.GET_EMPLOYEE_LIST_FAILURE);
+        var evt = Ext.create("Skin.event.EmployeeEvent", Skin.event.EmployeeEvent.GET_EMPLOYEE_LIST_FAILURE);
         this.eventBus.dispatchGlobalEvent(evt);
     },
 
@@ -161,7 +161,7 @@ Ext.define("CafeTownsend.controller.EmployeeController", {
 
         this.employeeStore.add(response);
 
-        var evt = Ext.create("CafeTownsend.event.EmployeeEvent", CafeTownsend.event.EmployeeEvent.CREATE_EMPLOYEE_SUCCESS);
+        var evt = Ext.create("Skin.event.EmployeeEvent", Skin.event.EmployeeEvent.CREATE_EMPLOYEE_SUCCESS);
         this.eventBus.dispatchGlobalEvent(evt);
     },
 
@@ -174,7 +174,7 @@ Ext.define("CafeTownsend.controller.EmployeeController", {
     createEmployeeFailure: function(response) {
         this.logger.warn("createEmployeeFailure");
 
-        var evt = Ext.create("CafeTownsend.event.EmployeeEvent", CafeTownsend.event.EmployeeEvent.CREATE_EMPLOYEE_FAILURE);
+        var evt = Ext.create("Skin.event.EmployeeEvent", Skin.event.EmployeeEvent.CREATE_EMPLOYEE_FAILURE);
         this.eventBus.dispatchGlobalEvent(evt);
     },
 
@@ -189,7 +189,7 @@ Ext.define("CafeTownsend.controller.EmployeeController", {
 
         this.employeeStore.update(response);
 
-        var evt = Ext.create("CafeTownsend.event.EmployeeEvent", CafeTownsend.event.EmployeeEvent.UPDATE_EMPLOYEE_SUCCESS);
+        var evt = Ext.create("Skin.event.EmployeeEvent", Skin.event.EmployeeEvent.UPDATE_EMPLOYEE_SUCCESS);
         this.eventBus.dispatchGlobalEvent(evt);
     },
 
@@ -202,7 +202,7 @@ Ext.define("CafeTownsend.controller.EmployeeController", {
     updateEmployeeFailure: function(response) {
         this.logger.warn("updateEmployeeFailure");
 
-        var evt = Ext.create("CafeTownsend.event.EmployeeEvent", CafeTownsend.event.EmployeeEvent.UPDATE_EMPLOYEE_FAILURE);
+        var evt = Ext.create("Skin.event.EmployeeEvent", Skin.event.EmployeeEvent.UPDATE_EMPLOYEE_FAILURE);
         this.eventBus.dispatchGlobalEvent(evt);
     },
 
@@ -219,7 +219,7 @@ Ext.define("CafeTownsend.controller.EmployeeController", {
         var employee = this.employeeStore.findRecord("id", response.data.id);
         this.employeeStore.remove(employee);
 
-        var evt = Ext.create("CafeTownsend.event.EmployeeEvent", CafeTownsend.event.EmployeeEvent.DELETE_EMPLOYEE_SUCCESS);
+        var evt = Ext.create("Skin.event.EmployeeEvent", Skin.event.EmployeeEvent.DELETE_EMPLOYEE_SUCCESS);
         this.eventBus.dispatchGlobalEvent(evt);
     },
 
@@ -232,7 +232,7 @@ Ext.define("CafeTownsend.controller.EmployeeController", {
     deleteEmployeeFailure: function(response) {
         this.logger.warn("deleteEmployeeFailure");
 
-        var evt = Ext.create("CafeTownsend.event.EmployeeEvent", CafeTownsend.event.EmployeeEvent.DELETE_EMPLOYEE_FAILURE);
+        var evt = Ext.create("Skin.event.EmployeeEvent", Skin.event.EmployeeEvent.DELETE_EMPLOYEE_FAILURE);
         this.eventBus.dispatchGlobalEvent(evt);
     },
 
@@ -244,7 +244,7 @@ Ext.define("CafeTownsend.controller.EmployeeController", {
      * Handles the get employee event on the application-level event bus. Calls a functional method that's more
      * testable than this event handler.
      *
-     * @param {CafeTownsend.event.EmployeeEvent} event Reference to the employee event.
+     * @param {Skin.event.EmployeeEvent} event Reference to the employee event.
      */
     onGetEmployeeList: function(event) {
         this.logger.debug("onGetEmployeeList");
@@ -256,7 +256,7 @@ Ext.define("CafeTownsend.controller.EmployeeController", {
      * Handles the create employee event on the application-level event bus. Calls a functional method that's more
      * testable than this event handler.
      *
-     * @param {CafeTownsend.event.EmployeeEvent} event Reference to the employee event. Contains a reference to the
+     * @param {Skin.event.EmployeeEvent} event Reference to the employee event. Contains a reference to the
      * employee.
      */
     onCreateEmployee: function(event) {
@@ -269,7 +269,7 @@ Ext.define("CafeTownsend.controller.EmployeeController", {
      * Handles the update employee event on the application-level event bus. Calls a functional method that's more
      * testable than this event handler.
      *
-     * @param {CafeTownsend.event.EmployeeEvent} event Reference to the employee event. Contains a reference to the
+     * @param {Skin.event.EmployeeEvent} event Reference to the employee event. Contains a reference to the
      * employee.
      */
     onUpdateEmployee: function(event) {
@@ -282,7 +282,7 @@ Ext.define("CafeTownsend.controller.EmployeeController", {
      * Handles the delete employee event on the application-level event bus. Calls a functional method that's more
      * testable than this event handler.
      *
-     * @param {CafeTownsend.event.EmployeeEvent} event Reference to the employee event. Contains a reference to the
+     * @param {Skin.event.EmployeeEvent} event Reference to the employee event. Contains a reference to the
      * employee.
      */
     onDeleteEmployee: function(event) {

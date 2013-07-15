@@ -19,11 +19,11 @@
  * The AuthenticationController acts like a service controller with asynchronous callback methods for successful
  * and failed authentication service calls.
  */
-Ext.define("CafeTownsend.controller.AuthenticationController", {
+Ext.define("Skin.controller.AuthenticationController", {
     extend: "FlowMVC.mvc.controller.AbstractController",
 
     requires: [
-        "CafeTownsend.event.AuthenticationEvent",
+        "Skin.event.AuthenticationEvent",
         "FlowMVC.mvc.service.rpc.Responder"
     ],
 
@@ -35,22 +35,22 @@ Ext.define("CafeTownsend.controller.AuthenticationController", {
     ],
 
     /**
-     * @event CafeTownsend.event.AuthenticationEvent.LOGIN_SUCCESS
+     * @event Skin.event.AuthenticationEvent.LOGIN_SUCCESS
      * Fired when the login service is successful.
      */
 
     /**
-     * @event CafeTownsend.event.AuthenticationEvent.LOGIN_FAILURE
+     * @event Skin.event.AuthenticationEvent.LOGIN_FAILURE
      * Fired when the login service fails.
      */
 
     /**
-     * @event CafeTownsend.event.AuthenticationEvent.LOGOUT_SUCCESS
+     * @event Skin.event.AuthenticationEvent.LOGOUT_SUCCESS
      * Fired when the logout service is successful.
      */
 
     /**
-     * @event CafeTownsend.event.AuthenticationEvent.LOGOUT_FAILURE
+     * @event Skin.event.AuthenticationEvent.LOGOUT_FAILURE
      * Fired when the logout service fails.
      */
 
@@ -62,8 +62,8 @@ Ext.define("CafeTownsend.controller.AuthenticationController", {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
 
-        this.eventBus.addGlobalEventListener(CafeTownsend.event.AuthenticationEvent.LOGIN, this.onLogin, this);
-        this.eventBus.addGlobalEventListener(CafeTownsend.event.AuthenticationEvent.LOGOUT, this.onLogout, this);
+        this.eventBus.addGlobalEventListener(Skin.event.AuthenticationEvent.LOGIN, this.onLogin, this);
+        this.eventBus.addGlobalEventListener(Skin.event.AuthenticationEvent.LOGOUT, this.onLogout, this);
     },
 
     /**
@@ -117,7 +117,7 @@ Ext.define("CafeTownsend.controller.AuthenticationController", {
         // The server will send a token that can be used throughout the app to confirm that the user is authenticated.
         this.setSessionToken(response.sessionToken);
 
-        var evt = Ext.create("CafeTownsend.event.AuthenticationEvent", CafeTownsend.event.AuthenticationEvent.LOGIN_SUCCESS);
+        var evt = Ext.create("Skin.event.AuthenticationEvent", Skin.event.AuthenticationEvent.LOGIN_SUCCESS);
         this.eventBus.dispatchGlobalEvent(evt);
     },
 
@@ -132,7 +132,7 @@ Ext.define("CafeTownsend.controller.AuthenticationController", {
 
         this.resetSessionData();
 
-        var evt = Ext.create("CafeTownsend.event.AuthenticationEvent", CafeTownsend.event.AuthenticationEvent.LOGIN_FAILURE);
+        var evt = Ext.create("Skin.event.AuthenticationEvent", Skin.event.AuthenticationEvent.LOGIN_FAILURE);
         this.eventBus.dispatchGlobalEvent(evt);
     },
 
@@ -147,7 +147,7 @@ Ext.define("CafeTownsend.controller.AuthenticationController", {
 
         this.resetSessionData();
 
-        var evt = Ext.create("CafeTownsend.event.AuthenticationEvent", CafeTownsend.event.AuthenticationEvent.LOGOUT_SUCCESS);
+        var evt = Ext.create("Skin.event.AuthenticationEvent", Skin.event.AuthenticationEvent.LOGOUT_SUCCESS);
         this.eventBus.dispatchGlobalEvent(evt);
     },
 
@@ -162,7 +162,7 @@ Ext.define("CafeTownsend.controller.AuthenticationController", {
 
         this.resetSessionData();
 
-        var evt = Ext.create("CafeTownsend.event.AuthenticationEvent", CafeTownsend.event.AuthenticationEvent.LOGOUT_FAILURE);
+        var evt = Ext.create("Skin.event.AuthenticationEvent", Skin.event.AuthenticationEvent.LOGOUT_FAILURE);
         this.eventBus.dispatchGlobalEvent(evt);
     },
 
@@ -174,7 +174,7 @@ Ext.define("CafeTownsend.controller.AuthenticationController", {
      * Handles the login event on the application-level event bus. Grabs the username and password
      * and calls a functional method that's more testable than this event handler.
      *
-     * @param {CafeTownsend.event.AuthenticationEvent} event Reference to the login event. Contains the username and password.
+     * @param {Skin.event.AuthenticationEvent} event Reference to the login event. Contains the username and password.
      */
     onLogin: function(event) {
         var username = event.username;
@@ -188,7 +188,7 @@ Ext.define("CafeTownsend.controller.AuthenticationController", {
      * Handles the simple logout event on the application-level event bus and calls a functional method that's more
      * testable than this event handler.
      *
-     * @param {CafeTownsend.event.AuthenticationEvent} event Reference to the logout event.
+     * @param {Skin.event.AuthenticationEvent} event Reference to the logout event.
      */
     onLogout: function(event) {
         this.logger.debug("onLogout");

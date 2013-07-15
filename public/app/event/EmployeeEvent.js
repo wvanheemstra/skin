@@ -18,7 +18,7 @@
 /**
  * The employee event contains data and event types to perform CRUD operations on employees.
  */
-Ext.define("CafeTownsend.event.EmployeeEvent", {
+Ext.define("Skin.event.EmployeeEvent", {
     extend: "FlowMVC.mvc.event.AbstractEvent",
     
     statics: {
@@ -106,7 +106,7 @@ Ext.define("CafeTownsend.event.EmployeeEvent", {
     id: null,
 
     /**
-     * @property {CafeTownsend.model.EmployeeModel} employee [readOnly=false]
+     * @property {Skin.model.EmployeeModel} employee [readOnly=false]
      * An employee to perform CRUD actions on.
      */
     employee: null,
@@ -116,7 +116,7 @@ Ext.define("CafeTownsend.event.EmployeeEvent", {
      *
      * @param {String} type The event type.
      * @param {Number} id The id of the employee the CRUD operation is acting on.
-     * @param {CafeTownsend.model.EmployeeModel} employee The employee the CRUD operation is acting on.
+     * @param {Skin.model.EmployeeModel} employee The employee the CRUD operation is acting on.
      */
     constructor: function(type, id, employee) {
         this.callParent(arguments);

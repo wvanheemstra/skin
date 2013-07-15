@@ -21,11 +21,11 @@
  * It is expected that different form factors may require a new mediator implementation as the events could be
  * different; eg, a login button on a desktop app could be click whereas mobile could be tap.
  */
-Ext.define("CafeTownsend.mediator.extjs.LoginMediator", {
-    extend: "CafeTownsend.mediator.AbstractMediator",
+Ext.define("Skin.mediator.extjs.LoginMediator", {
+    extend: "Skin.mediator.AbstractMediator",
 
     requires: [
-        "CafeTownsend.event.AuthenticationEvent"
+        "Skin.event.AuthenticationEvent"
     ],
 
     inject: [
@@ -63,9 +63,9 @@ Ext.define("CafeTownsend.mediator.extjs.LoginMediator", {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
 
-        this.eventBus.addGlobalEventListener(CafeTownsend.event.AuthenticationEvent.LOGIN_SUCCESS, this.onLoginSuccess, this);
-        this.eventBus.addGlobalEventListener(CafeTownsend.event.AuthenticationEvent.LOGIN_FAILURE, this.onLoginFailure, this);
-        this.eventBus.addGlobalEventListener(CafeTownsend.event.AuthenticationEvent.LOGOUT_SUCCESS, this.onLogoutSuccess, this);
+        this.eventBus.addGlobalEventListener(Skin.event.AuthenticationEvent.LOGIN_SUCCESS, this.onLoginSuccess, this);
+        this.eventBus.addGlobalEventListener(Skin.event.AuthenticationEvent.LOGIN_FAILURE, this.onLoginFailure, this);
+        this.eventBus.addGlobalEventListener(Skin.event.AuthenticationEvent.LOGOUT_SUCCESS, this.onLogoutSuccess, this);
     },
 
     /**
@@ -83,7 +83,7 @@ Ext.define("CafeTownsend.mediator.extjs.LoginMediator", {
 
         view.setLoading(nineam.locale.LocaleManager.getProperty("login.signingIn"));
 
-        var evt = Ext.create("CafeTownsend.event.AuthenticationEvent", CafeTownsend.event.AuthenticationEvent.LOGIN, username, password);
+        var evt = Ext.create("Skin.event.AuthenticationEvent", Skin.event.AuthenticationEvent.LOGIN, username, password);
         this.eventBus.dispatchGlobalEvent(evt);
     },
 
@@ -143,7 +143,7 @@ Ext.define("CafeTownsend.mediator.extjs.LoginMediator", {
         var view = this.getView();
         view.setLoading(false);
 
-        this.navigate(CafeTownsend.event.AuthenticationEvent.LOGOUT_SUCCESS);
+        this.navigate(Skin.event.AuthenticationEvent.LOGOUT_SUCCESS);
     },
 
     /**

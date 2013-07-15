@@ -16,39 +16,47 @@
  */
 
 /**
- * The employee details view for the application.
+ * The list of employees view for the application.
  *
  * <p>
  * All views are purely layout and don't contain event handling,
  * application or business logic; this is all done in the view's corresponding mediator.
  * </p>
  */
-Ext.define("Skin.view.extjs.EmployeeDetailView", {
-    extend: "Ext.form.Panel",
-    alias: "widget.employeeDetailView",
-    controller: "Skin.mediator.extjs.EmployeeDetailMediator",
-    submitEmptyText: false,
+Ext.define("Skin.view.extjs.EmployeeTileView", {
+    extend: "Ext.Panel",
+    alias: "widget.employeeTileView",
+    controller: "Skin.mediator.extjs.EmployeeTileMediator",
+    header: false,
 
     requires: [
-        "Ext.form.FieldSet",
-        "Ext.Toolbar"
+        "Ext.data.*",
+        "Ext.util.*",
+        "Ext.view.View",
+        "Skin.view.extjs.component.LiveSearchGridPanel",
+        "nineam.locale.LocaleManager"
     ],
 
+//    layout: {
+//        type: "fit" // WHY DOES 'fit' NOT WORK AS DESIGNED ??
+//    },
+
+    height: 330,
+	width: 400,
+	
     items: [
         {
             xtype: "toolbar",
-//            title: "Employee",
-            docked: "top",
             width: 400,
 
             items: [
                 {
-                    itemId: "backButton",
+                    itemId: "logoutButton",
                     plugins: [
                         {
                             ptype: "localization",
                             method: "setText",
-                            key: "employeeDetail.back"
+                            key: "employeeList.logOff"
                         }
                     ]
                 },
@@ -60,86 +68,66 @@ Ext.define("Skin.view.extjs.EmployeeDetailView", {
                     plugins: [
                         {
                             ptype: "localization",
-                            method: "setTitle",
-                            key: "employeeDetail.title"
+                            method: "setText",
+                            key: "employeeList.title"
                         }
                     ]
+
                 },
                 {
                     xtype: "tbfill"
                 },
                 {
-                    itemId: "saveEmployeeButton",
+                    itemId: "newEmployeeButton",
                     plugins: [
                         {
                             ptype: "localization",
                             method: "setText",
-                            key: "employeeDetail.save"
+                            key: "employeeList.new"
                         }
                     ]
                 }
             ]
         },
         {
-            xtype: "fieldset",
-            itemId: "fieldset",
-            items: [
+            xtype: "livesearchgridpanel",
+            store: null,
+            itemId: "list",
+            forceFit: true,
+            autoScroll: true,
+            height: 300,
+            viewConfig: {
+                stripeRows: true
+            },
+            columns: [
                 {
-                    xtype: "textfield",
-                    itemId: "firstNameTextField",
-                    name: "firstName",
-                    required: true,
-                    plugins: [
-                        {
-                            ptype: "localization",
-                            method: "emptyText",
-                            key: "employeeDetail.firstName"
-                        }
-                    ]
-                },
-                {
-                    xtype: "textfield",
-                    itemId: "lastNameTextField",
-                    name: "lastName",
-                    required: true,
-                    plugins: [
-                        {
-                            ptype: "localization",
-                            method: "emptyText",
-                            key: "employeeDetail.lastName"
-                        }
-                    ]
-                },
-                {
-                    xtype: "textfield",
-                    itemId: "phoneNumberTextField",
-                    name: "phoneNumber",
-                    required: true,
-                    plugins: [
-                        {
-                            ptype: "localization",
-                            method: "emptyText",
-                            key: "employeeDetail.phoneNumber"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            xtype: "toolbar",
-            items: [
-                {
-                    itemId: "deleteButton",
+                    dataIndex:  "firstName",
                     plugins: [
                         {
                             ptype: "localization",
                             method: "setText",
-                            key: "employeeDetail.delete"
+                            key: "employeeList.firstName"
+                        }
+                    ]
+                },
+                {
+                    dataIndex:  "lastName",
+                    plugins: [
+                        {
+                            ptype: "localization",
+                            method: "setText",
+                            key: "employeeList.lastName"
                         }
                     ]
                 }
+            ],
+            plugins: [
+                {
+                    ptype: "localization",
+                    method: "setTitle",
+                    key: "employeeList.search"
+                }
             ]
-
         }
     ]
 });

@@ -18,10 +18,10 @@
 /**
  * Contains the list of employee domain objects.
  */
-Ext.define("CafeTownsend.store.EmployeeStore", {
+Ext.define("Skin.store.EmployeeStore", {
     extend: "FlowMVC.mvc.store.AbstractStore",
 
-    model: "CafeTownsend.model.EmployeeModel",
+    model: "Skin.model.EmployeeModel",
 
     sorters: "lastName",
 

@@ -23,12 +23,12 @@
  *
  * TODO: BMR: 02/22/13: Don't add all the views to the stage at once. Do it on demand.
  */
-Ext.define("CafeTownsend.mediator.touch.ViewportMediator", {
-    extend: "CafeTownsend.mediator.AbstractMediator",
+Ext.define("Skin.mediator.touch.ViewportMediator", {
+    extend: "Skin.mediator.AbstractMediator",
 
     requires: [
-        "CafeTownsend.event.AuthenticationEvent",
-        "CafeTownsend.event.NavigationEvent"
+        "Skin.event.AuthenticationEvent",
+        "Skin.event.NavigationEvent"
     ],
 
     inject: [
@@ -61,7 +61,7 @@ Ext.define("CafeTownsend.mediator.touch.ViewportMediator", {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
 
-        this.eventBus.addGlobalEventListener(CafeTownsend.event.NavigationEvent.NAVIGATE, this.onNavigate, this);
+        this.eventBus.addGlobalEventListener(Skin.event.NavigationEvent.NAVIGATE, this.onNavigate, this);
     },
 
     /**
@@ -77,22 +77,22 @@ Ext.define("CafeTownsend.mediator.touch.ViewportMediator", {
         var direction;
 
         switch(action) {
-            case CafeTownsend.event.AuthenticationEvent.LOGIN_SUCCESS:
+            case Skin.event.AuthenticationEvent.LOGIN_SUCCESS:
                 view = this.getEmployeeListView();
                 direction = this.getSlideLeftTransition();
                 break;
 
-            case CafeTownsend.event.AuthenticationEvent.LOGOUT_SUCCESS:
+            case Skin.event.AuthenticationEvent.LOGOUT_SUCCESS:
                 view = this.getLoginView();
                 direction = this.getSlideRightTransition();
                 break;
 
-            case CafeTownsend.event.NavigationEvent.ACTION_SHOW_EMPLOYEE_DETAIL:
+            case Skin.event.NavigationEvent.ACTION_SHOW_EMPLOYEE_DETAIL:
                 view = this.getEmployeeDetailView();
                 direction = this.getSlideLeftTransition();
                 break;
 
-            case CafeTownsend.event.NavigationEvent.ACTION_BACK_SHOW_EMPLOYEE_LIST:
+            case Skin.event.NavigationEvent.ACTION_BACK_SHOW_EMPLOYEE_LIST:
                 view = this.getEmployeeListView();
                 direction = this.getSlideRightTransition();
                 break;

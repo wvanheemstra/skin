@@ -18,7 +18,7 @@
 /**
  * The authentication event contains data and event types to login/out the user.
  */
-Ext.define("CafeTownsend.event.AuthenticationEvent", {
+Ext.define("Skin.event.AuthenticationEvent", {
     extend: "FlowMVC.mvc.event.AbstractEvent",
 
     statics: {

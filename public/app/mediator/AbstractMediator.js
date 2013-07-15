@@ -21,11 +21,11 @@
  * Most notable is the navigate method which broadcasts a navigate event that dives the screen/view creation
  * and show/hide.
  */
-Ext.define("CafeTownsend.mediator.AbstractMediator", {
+Ext.define("Skin.mediator.AbstractMediator", {
     extend: "FlowMVC.mvc.mediator.AbstractMediator",
 
     requires: [
-        "CafeTownsend.event.NavigationEvent"
+        "Skin.event.NavigationEvent"
     ],
 
     inject: [
@@ -40,7 +40,7 @@ Ext.define("CafeTownsend.mediator.AbstractMediator", {
     navigate: function(action) {
         this.logger.debug("navigate");
 
-        var evt = Ext.create("CafeTownsend.event.NavigationEvent", CafeTownsend.event.NavigationEvent.NAVIGATE, action);
+        var evt = Ext.create("Skin.event.NavigationEvent", Skin.event.NavigationEvent.NAVIGATE, action);
         this.eventBus.dispatchGlobalEvent(evt);
     }
 
