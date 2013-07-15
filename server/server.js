@@ -55,7 +55,6 @@ app.configure(function(){
     app.enableViewRouting();
 
     app.use(app.router);
-
     app.use('/resources', express.static(__dirname + '/../public/resources'));
     app.use('/app', express.static(__dirname + '/../public/app'));
     app.use(express.static(__dirname + '/../public')); // Fall back to this as a last resort
@@ -103,7 +102,9 @@ app.get('/5', function(req, res) {
     res.render('index3', { title: 'Your Company with layout' });
 });
 
-
+app.get('/page-analyzer', function(req, res) {
+    res.render('page-analyzer', { title: 'Page Analyzer' });
+});
 
 
 app.listen(app_port);

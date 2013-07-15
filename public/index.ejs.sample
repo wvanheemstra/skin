@@ -6,8 +6,8 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <meta name="author" content="humans.txt">
-    <meta http-equiv="Access-Control-Allow-Origin" content="*"><!-- TO DO: change the * for a restricted set of domains -->
-	<meta http-equiv="Access-Control-Allow-Methods" content="GET, POST, PUT">    
+	<meta http-equiv="Access-Control-Allow-Origin" content="*"><!-- TO DO: change the * for a restricted set of domains -->
+	<meta http-equiv="Access-Control-Allow-Methods" content="GET, POST, PUT">
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
 
     <!-- CSS -->
@@ -31,7 +31,7 @@
             background-image: url('resources/bg/noise.png') !important;
             background-color: rgb(217, 219, 222);
         }
-
+    <!-- 
         #appLoadingIndicator {
             position: absolute;
             top: 50%;
@@ -267,51 +267,46 @@
 		.status.offline > * {
 		    background-color: #940 !important;
 		    box-shadow: rgba(129, 129, 129, 0.5) 0 -1px 4px 1px, inset #600 0 -1px 6px, rgba(255, 0, 0, 0.5) 0 2px 2px;
-		}      
-    </style>
+		}  
+-->    
+    </style> 
 
     <!-- Libraries, Loader, Application -->
     <% if (is_desktop) { %>
-    	<script type="text/javascript" src="resources/js/ext/ext-dev.js"></script>
-    <% } %>	
-    <% if (is_phone) { %>
-    	<script type="text/javascript" src="resources/js/touch/sencha-touch-debug.js"></script>
-    <% } %>
-    <% if (is_tablet) { %>
-    	<script type="text/javascript" src="resources/js/touch/sencha-touch-debug.js"></script>
-    <% } %>
-    <script type="text/javascript" src="resources/js/log4javascript/log4javascript.js"></script>
-    <% if (is_desktop) { %>
+    	<!--<script type="text/javascript" src="resources/js/ext/ext-dev.js"></script>-->
+    	
+		<!-- FOR TESTING ONLY -->
+		<script type="text/javascript" src="resources/js/ext/ext-all-dev.js"></script>
+		<script type="text/javascript" src="resources/js/ext/src/diag/layout/Context.js"></script>
+		<script type="text/javascript" src="resources/js/ext/src/diag/layout/ContextItem.js"></script>
+
+    	<!--<script type="text/javascript" src="resources/js/log4javascript/log4javascript.js"></script>-->
     	<script type="text/javascript" src="app/app-loader-extjs.js"></script>
 		<script type="text/javascript" src="resources/js/deft/deft-debug.js"></script>
 	    <script type="text/javascript" src="resources/js/flow-mvc/flowmvc-debug.js"></script>
-    <% } %>	 
-    <% if (is_phone) { %>
-    	<script type="text/javascript" src="app/app-loader-touch.js"></script>
-		<script type="text/javascript" src="resources/js/deft/deft-debug.js"></script>
-	    <script type="text/javascript" src="resources/js/flow-mvc/flowmvc-debug.js"></script>
-    <% } %>
-    <% if (is_tablet) { %>
-    	<script type="text/javascript" src="app/app-loader-touch.js"></script>
-		<script type="text/javascript" src="resources/js/deft/deft-debug.js"></script>
-	    <script type="text/javascript" src="resources/js/flow-mvc/flowmvc-debug.js"></script>
-    <% } %>
-    <% if (is_desktop) { %>
     	<script type="text/javascript" src="app-extjs.js"></script>
     <% } %>	
     <% if (is_phone) { %>
+    	<script type="text/javascript" src="resources/js/touch/sencha-touch-debug.js"></script>
+    	<script type="text/javascript" src="app/app-loader-touch.js"></script>
+		<script type="text/javascript" src="resources/js/deft/deft-debug.js"></script>
+	    <script type="text/javascript" src="resources/js/flow-mvc/flowmvc-debug.js"></script>
     	<script type="text/javascript" src="app-touch.js"></script>
     <% } %>
     <% if (is_tablet) { %>
+    	<script type="text/javascript" src="resources/js/touch/sencha-touch-debug.js"></script>
+    	<script type="text/javascript" src="app/app-loader-touch.js"></script>
+		<script type="text/javascript" src="resources/js/deft/deft-debug.js"></script>
+	    <script type="text/javascript" src="resources/js/flow-mvc/flowmvc-debug.js"></script>
     	<script type="text/javascript" src="app-touch.js"></script>
     <% } %>
 </head>
 <body>
-    <div id="appLoadingIndicator">
+    <!-- <div id="appLoadingIndicator">
         <p>LOADING</p>
         <div id="first"></div>
         <div id="second"></div>
         <div id="third"></div>
-    </div>
+    </div> -->
 </body>
 </html>

@@ -2,10 +2,7 @@
 Ext.Loader.setConfig({
 	enabled: true,
 	paths: {
-		"CafeTownsend": "app",
-		"Ext": "resources/js/ext/src",
-		"FlowMVC": "resources/js/flow-mvc/FlowMVC",
-    	"Deft": "resources/js/deft/Deft",		
+		"CafeTownsend": "app",	
 		"nineam": "resources/js/locale/nineam",
 		enabled: true,
 		disableCaching: true
@@ -22,24 +19,4 @@ Ext.syncRequire([
     "Ext.Component", 
     "Ext.ComponentManager", 
     "Ext.ComponentQuery"
-]);
-
-/**
-* DeftJS core classes. These might only need to be required for dev.
-*/
-Ext.syncRequire([
-    "Deft.core.Class",
-    "Deft.event.LiveEventBus", // may not be needed
-    "Deft.mixin.Controllable",
-    "Deft.mixin.Injectable",
-    "Deft.mvc.ComponentSelectorListener", // may not be needed
-    "Deft.util.Function", // may not be needed
-    "Deft.promise.Deferred"
-]);
-
-/**
- * FlowMVC core classes. These might only need to be required for dev.
- */
-Ext.syncRequire([
-    "FlowMVC.logger.Logger"
 ]);

@@ -37,10 +37,13 @@ Ext.define("CafeTownsend.view.extjs.EmployeeListView", {
         "nineam.locale.LocaleManager"
     ],
 
-    layout: {
-        type: "fit"
-    },
+//    layout: {
+//        type: "fit" // WHY DOES 'fit' NOT WORK AS DESIGNED ??
+//    },
 
+    height: 330,
+	width: 400,
+	
     items: [
         {
             xtype: "toolbar",
