@@ -65,7 +65,6 @@ Ext.onReady(function () {
         ////////////////////////////////////////////
         // IMPL
         ////////////////////////////////////////////
-//        authenticationService: "CafeTownsend.service.AuthenticationService",
         employeeStore:          "Skin.store.EmployeeStore",
 
         ////////////////////////////////////////////

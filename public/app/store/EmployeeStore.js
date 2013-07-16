@@ -20,13 +20,25 @@
  */
 Ext.define("Skin.store.EmployeeStore", {
     extend: "FlowMVC.mvc.store.AbstractStore",
-
+    // Touch uses properties inside of config
+	config: {
+	    model: "Skin.model.EmployeeModel",
+	    sorters: "lastName",
+	    isAutoUpdate: true,
+	    grouper: {
+	        groupFn: function(record) {
+	            try {
+	                return record.get("lastName")[0];
+	            } catch(err) {
+	
+	            }
+	        }
+	    }
+	},//eof config
+	// Ext requires properties outside of config
     model: "Skin.model.EmployeeModel",
-
     sorters: "lastName",
-
     isAutoUpdate: true,
-
     grouper: {
         groupFn: function(record) {
             try {
@@ -35,5 +47,5 @@ Ext.define("Skin.store.EmployeeStore", {
 
             }
         }
-    }
+    }	
 });

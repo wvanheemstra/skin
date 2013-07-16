@@ -27,7 +27,7 @@
  * </ul>
  */
 Ext.onReady(function () {
-//    console.log("app.onReady");
+    console.log("app.onReady");
 
     Ext.require([
         "Skin.service.AuthenticationService",
@@ -35,9 +35,16 @@ Ext.onReady(function () {
         "Skin.service.mock.EmployeeServiceMock",
         "Skin.store.EmployeeStore",
 
+        "FlowMVC.mvc.event.EventDispatcher",
+        "FlowMVC.logger.Logger"
+    ]);
+
+    /**
+     * Locale Manager core classes. These might only need to be required for dev.
+     */
+    Ext.syncRequire([
         "nineam.locale.LocaleManager",
         "nineam.locale.plugin.touch.LocalePlugin"
-
     ]);
 
     // Configure the DeftJS IoC container
@@ -58,9 +65,9 @@ Ext.onReady(function () {
         ////////////////////////////////////////////
         employeeStore:          "Skin.store.EmployeeStore",
 
-//        ////////////////////////////////////////////
-//        // MOCKS
-//        ////////////////////////////////////////////
+        ////////////////////////////////////////////
+        // MOCKS
+        ////////////////////////////////////////////
         authenticationService:  "Skin.service.mock.AuthenticationServiceMock",
         employeeService:        "Skin.service.mock.EmployeeServiceMock",
 

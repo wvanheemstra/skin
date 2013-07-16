@@ -4,7 +4,7 @@ Ext.Loader.setConfig({
 	paths: {
 		"Skin": "app",
 		"Ext": "resources/js/touch/src",
-		"FlowMVC": "resources/js/flow-mvc/flow-mvc/FlowMVC",
+		"FlowMVC": "resources/js/flow-mvc/FlowMVC",
     	"Deft": "resources/js/deft/Deft",
     	"nineam": "resources/js/locale/nineam",
     	enabled:            true,
@@ -19,9 +19,9 @@ Ext.Loader.setConfig({
  */
 // Include dependent Sencha classes
 Ext.syncRequire([
-//    "Ext.Component", 
-//    "Ext.ComponentManager", 
-//    "Ext.ComponentQuery"
+    "Ext.Component", 
+    "Ext.ComponentManager", 
+    "Ext.ComponentQuery"
 ]);
 
 /**

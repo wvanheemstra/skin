@@ -3,7 +3,6 @@ Ext.Loader.setConfig({
 	enabled: true,
 	paths: {
 		"Skin": "app",
-		"Ext": "resources/js/touch/src",
 		"nineam": "resources/js/locale/nineam",
 		enabled: true,
 		disableCaching: true
@@ -17,7 +16,7 @@ Ext.Loader.setConfig({
  */
 // Include dependent Sencha classes
 Ext.syncRequire([
-//    "Ext.Component", 
-//    "Ext.ComponentManager", 
-//    "Ext.ComponentQuery"
+    "Ext.Component", 
+    "Ext.ComponentManager", 
+    "Ext.ComponentQuery"
 ]);

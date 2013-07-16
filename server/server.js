@@ -106,6 +106,9 @@ app.get('/page-analyzer', function(req, res) {
     res.render('page-analyzer', { title: 'Page Analyzer' });
 });
 
+app.get('/touch', function(req, res) {
+    res.render('index-touch', { title: title, host: host, web_root: web_root, layout: false });
+});
 
 app.listen(app_port);
 api.listen(api_port);
