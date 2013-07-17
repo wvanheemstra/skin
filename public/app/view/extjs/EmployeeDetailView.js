@@ -26,7 +26,7 @@
 Ext.define("Skin.view.extjs.EmployeeDetailView", {
     extend: "Ext.form.Panel",
     alias: "widget.employeeDetailView",
-    controller: "Skin.mediator.extjs.EmployeeDetailMediator",
+    controller: "Skin.mediator.extjs.employee.detail.Mediator",
     submitEmptyText: false,
 
     requires: [

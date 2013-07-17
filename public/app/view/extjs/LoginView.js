@@ -26,7 +26,7 @@
 Ext.define("Skin.view.extjs.LoginView", {
     extend: "Ext.Container",
     alias: "widget.loginView",
-    controller: "Skin.mediator.extjs.LoginMediator",
+    controller: "Skin.mediator.extjs.login.Mediator",
 
     layout: {
         type: "vbox",

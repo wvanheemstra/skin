@@ -26,7 +26,7 @@
 Ext.define("Skin.view.extjs.EmployeeTileView", {
     extend: "Ext.Panel",
     alias: "widget.employeeTileView",
-    controller: "Skin.mediator.extjs.EmployeeTileMediator",
+    controller: "Skin.mediator.extjs.employee.tile.Mediator",
     header: false,
 
     requires: [
@@ -56,7 +56,7 @@ Ext.define("Skin.view.extjs.EmployeeTileView", {
                         {
                             ptype: "localization",
                             method: "setText",
-                            key: "employeeList.logOff"
+                            key: "employeeTile.logOff"
                         }
                     ]
                 },
@@ -69,7 +69,7 @@ Ext.define("Skin.view.extjs.EmployeeTileView", {
                         {
                             ptype: "localization",
                             method: "setText",
-                            key: "employeeList.title"
+                            key: "employeeTile.title"
                         }
                     ]
 
@@ -83,7 +83,7 @@ Ext.define("Skin.view.extjs.EmployeeTileView", {
                         {
                             ptype: "localization",
                             method: "setText",
-                            key: "employeeList.new"
+                            key: "employeeTile.new"
                         }
                     ]
                 }
@@ -92,7 +92,7 @@ Ext.define("Skin.view.extjs.EmployeeTileView", {
         {
             xtype: "livesearchgridpanel",
             store: null,
-            itemId: "list",
+            itemId: "tile",
             forceFit: true,
             autoScroll: true,
             height: 300,
@@ -106,7 +106,7 @@ Ext.define("Skin.view.extjs.EmployeeTileView", {
                         {
                             ptype: "localization",
                             method: "setText",
-                            key: "employeeList.firstName"
+                            key: "employeeTile.firstName"
                         }
                     ]
                 },
@@ -116,7 +116,7 @@ Ext.define("Skin.view.extjs.EmployeeTileView", {
                         {
                             ptype: "localization",
                             method: "setText",
-                            key: "employeeList.lastName"
+                            key: "employeeTile.lastName"
                         }
                     ]
                 }
@@ -125,7 +125,7 @@ Ext.define("Skin.view.extjs.EmployeeTileView", {
                 {
                     ptype: "localization",
                     method: "setTitle",
-                    key: "employeeList.search"
+                    key: "employeeTile.search"
                 }
             ]
         }

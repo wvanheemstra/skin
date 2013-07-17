@@ -26,7 +26,7 @@
 Ext.define("Skin.view.touch.EmployeeTileView", {
     extend: "Ext.Panel",
     alias: "widget.employeeTileView",
-    controller: "Skin.mediator.touch.EmployeeTileMediator",
+    controller: "Skin.mediator.touch.employee.tile.Mediator",
 
     requires: [
         "Ext.TitleBar",
@@ -48,7 +48,7 @@ Ext.define("Skin.view.touch.EmployeeTileView", {
                     {
                         type: "localization",
                         method: "setTitle",
-                        key: "employeeList.title"
+                        key: "employeeTile.title"
                     }
                 ],
                 items: [
@@ -60,7 +60,7 @@ Ext.define("Skin.view.touch.EmployeeTileView", {
                             {
                                 type: "localization",
                                 method: "setText",
-                                key: "employeeList.logOff"
+                                key: "employeeTile.logOff"
                             }
                         ]
                     },
@@ -73,7 +73,7 @@ Ext.define("Skin.view.touch.EmployeeTileView", {
                             {
                                 type: "localization",
                                 method: "setText",
-                                key: "employeeList.new"
+                                key: "employeeTile.new"
                             }
                         ]
                     }
@@ -81,7 +81,7 @@ Ext.define("Skin.view.touch.EmployeeTileView", {
             },
             {
                 xtype: "list",
-                itemId: "list",
+                itemId: "tile",
                 fullscreen: true,
                 itemTpl: "<div class='contact'>{firstName} <strong>{lastName}</strong></div>",
                 grouped: true,
@@ -90,12 +90,12 @@ Ext.define("Skin.view.touch.EmployeeTileView", {
                     {
                         type: "localization",
                         method: "setLoadingText",
-                        key: "employeeList.loading"
+                        key: "employeeTile.loading"
                     },
                     {
                         type: "localization",
                         method: "setEmptyText",
-                        key: "employeeList.noEmployees"
+                        key: "employeeTile.noEmployees"
                     }
                 ],
 

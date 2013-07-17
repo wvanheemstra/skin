@@ -23,10 +23,10 @@
  * application or business logic; this is all done in the view's corresponding mediator.
  * </p>
  */
-Ext.define("CafeTownsend.view.touch.EmployeeListView", {
+Ext.define("Skin.view.touch.EmployeeListView", {
     extend: "Ext.Panel",
     alias: "widget.employeeListView",
-    controller: "CafeTownsend.mediator.touch.EmployeeListMediator",
+    controller: "Skin.mediator.touch.employee.list.Mediator",
 
     requires: [
         "Ext.TitleBar",

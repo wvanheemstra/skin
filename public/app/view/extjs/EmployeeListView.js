@@ -26,7 +26,7 @@
 Ext.define("Skin.view.extjs.EmployeeListView", {
     extend: "Ext.Panel",
     alias: "widget.employeeListView",
-    controller: "Skin.mediator.extjs.EmployeeListMediator",
+    controller: "Skin.mediator.extjs.employee.list.Mediator",
     header: false,
 
     requires: [

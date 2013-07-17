@@ -26,7 +26,7 @@
 Ext.define("Skin.view.touch.EmployeeDetailView", {
     extend: "Ext.form.Panel",
     alias: "widget.employeeDetailView",
-    controller: "Skin.mediator.touch.EmployeeDetailMediator",
+    controller: "Skin.mediator.touch.employee.detail.Mediator",
 
     requires: [
         "Ext.form.FieldSet",

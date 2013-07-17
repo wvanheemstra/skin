@@ -32,10 +32,10 @@ Ext.onReady(function () {
     // pull all of this in so they can be injected
     Ext.syncRequire([
 	    "Skin.view.extjs.Viewport",
-        "Skin.service.AuthenticationService",
-        "Skin.service.mock.AuthenticationServiceMock",
-        "Skin.service.mock.EmployeeServiceMock",
-        "Skin.store.EmployeeStore",
+        "Skin.service.authentication.Service",
+        "Skin.service.authentication.mock.Service",
+        "Skin.service.employee.mock.Service",
+        "Skin.store.employee.Store",
 
         "FlowMVC.mvc.event.EventDispatcher",
         "FlowMVC.logger.Logger"
@@ -65,16 +65,16 @@ Ext.onReady(function () {
         ////////////////////////////////////////////
         // IMPL
         ////////////////////////////////////////////
-        employeeStore:          "Skin.store.EmployeeStore",
+        employeeStore:          "Skin.store.employee.Store",
 
         ////////////////////////////////////////////
         // MOCKS
         ////////////////////////////////////////////
-        authenticationService:  "Skin.service.mock.AuthenticationServiceMock",
-        employeeService:        "Skin.service.mock.EmployeeServiceMock",
+        authenticationService:  "Skin.service.authentication.mock.Service",
+        employeeService:        "Skin.service.employee.mock.Service",
 
         authenticationServiceClass: {
-            value: "Skin.service.mock.AuthenticationServiceMock"
+            value: "Skin.service.authentication.mock.Service"
         }
     });
 });
@@ -87,7 +87,7 @@ Ext.application({
     // MODELS
     ////////////////////////////////////////////
     models: [
-        "EmployeeModel"
+        "employee.Model"
     ],
 
     ////////////////////////////////////////////
@@ -105,9 +105,9 @@ Ext.application({
     // CONTROLLERS
     ////////////////////////////////////////////
     controllers:[
-        "BootstrapController",
-        "AuthenticationController",
-        "EmployeeController"
+        "bootstrap.Controller",
+        "authentication.Controller",
+        "employee.Controller"
     ],
 
     /**

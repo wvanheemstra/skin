@@ -26,7 +26,7 @@
 Ext.define("Skin.view.extjs.Viewport", {
     extend: "Ext.container.Viewport",
     alias: "widget.viewport",
-    controller: "Skin.mediator.extjs.ViewportMediator",
+    controller: "Skin.mediator.extjs.viewport.Mediator",
     width: 800,
 
     requires: [

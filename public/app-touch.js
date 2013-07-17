@@ -30,10 +30,10 @@ Ext.onReady(function () {
     console.log("app.onReady");
 
     Ext.require([
-        "Skin.service.AuthenticationService",
-        "Skin.service.mock.AuthenticationServiceMock",
-        "Skin.service.mock.EmployeeServiceMock",
-        "Skin.store.EmployeeStore",
+        "Skin.service.authentication.Service",
+        "Skin.service.authentication.mock.Service",
+        "Skin.service.employee.mock.Service",
+        "Skin.store.employee.Store",
 
         "nineam.locale.LocaleManager",
         "nineam.locale.plugin.touch.LocalePlugin"
@@ -56,16 +56,16 @@ Ext.onReady(function () {
         ////////////////////////////////////////////
         // IMPL
         ////////////////////////////////////////////
-        employeeStore:          "Skin.store.EmployeeStore",
+        employeeStore:          "Skin.store.employee.Store",
 
 //        ////////////////////////////////////////////
 //        // MOCKS
 //        ////////////////////////////////////////////
-        authenticationService:  "Skin.service.mock.AuthenticationServiceMock",
-        employeeService:        "Skin.service.mock.EmployeeServiceMock",
+        authenticationService:  "Skin.service.authentication.mock.Service",
+        employeeService:        "Skin.service.employee.mock.Service",
 
         authenticationServiceClass: {
-            value: "Skin.service.mock.AuthenticationServiceMock"
+            value: "Skin.service.authentication.mock.Service"
         }
     });
 
@@ -79,7 +79,7 @@ Ext.application({
     // MODELS
     ////////////////////////////////////////////
     models: [
-        "EmployeeModel"
+        "employee.Model"
     ],
 
     ////////////////////////////////////////////
@@ -96,9 +96,9 @@ Ext.application({
     // CONTROLLERS
     ////////////////////////////////////////////
     controllers:[
-        "BootstrapController",
-        "AuthenticationController",
-        "EmployeeController"
+        "bootstrap.Controller",
+        "authentication.Controller",
+        "employee.Controller"
     ],
 
     /**
@@ -111,7 +111,7 @@ Ext.application({
         console.log("app.launch");
 
         //since there's no view associated with it
-        var viewportMediator = Ext.create("Skin.mediator.touch.ViewportMediator");
+        var viewportMediator = Ext.create("Skin.mediator.touch.viewport.Mediator");
         viewportMediator.init();
 
         Ext.Viewport.add([

@@ -29,6 +29,20 @@
     },
 
     /////////////////////////////////////////////
+    // EMPLOYEE TILE
+    /////////////////////////////////////////////
+    "employeeTile": {
+        "title": "Employees",
+        "logOff": "Log Off",
+        "new": "New",
+        "search": "live search",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "loading": "Loading Employees...",
+        "noEmployees": "No Employees found."
+    },
+
+    /////////////////////////////////////////////
     // EMPLOYEE DETAIL
     /////////////////////////////////////////////
     "employeeDetail": {

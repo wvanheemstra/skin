@@ -26,7 +26,7 @@
 Ext.define("Skin.view.touch.LoginView", {
     extend: "Ext.form.Panel",
     alias: "widget.loginView",
-    controller: "Skin.mediator.touch.LoginMediator",
+    controller: "Skin.mediator.touch.login.Mediator",
 
     requires: [
         "Ext.form.FieldSet",
