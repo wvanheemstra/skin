@@ -54,7 +54,7 @@ Ext.define("Skin.view.touch.LoginView", {
 //            },
             {
                 xtype: "fieldset",
-                title: "Cafe Townsend",
+                title: "Your Company",
                 items: [
                     {
                         xtype: "textfield",
