@@ -18,7 +18,7 @@
 /**
  * The employee list mediator essentially fulfills the passive view pattern for the employee list view.
  */
-Ext.define("Skin.mediator.extjs.EmployeeListMediator", {
+Ext.define("Skin.mediator.extjs.EmployeeTileMediator", {
     extend: "Skin.mediator.AbstractMediator",
 
     requires: [
@@ -99,7 +99,7 @@ Ext.define("Skin.mediator.extjs.EmployeeListMediator", {
     onLoginSuccess: function() {
         this.logger.debug("onLoginSuccess");
 
-        this.navigate(CafeTownsend.event.AuthenticationEvent.LOGIN_SUCCESS);
+        this.navigate(Skin.event.AuthenticationEvent.LOGIN_SUCCESS);
         this.getEmployeeListData();
     },
 

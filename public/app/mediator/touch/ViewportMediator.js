@@ -39,7 +39,8 @@ Ext.define("Skin.mediator.touch.ViewportMediator", {
         // create references to this mediator's views so we can listen to events and grab data from them
         loginView:              "loginView",
         employeeListView:       "employeeListView",
-        employeeDetailView:     "employeeDetailView"
+        employeeDetailView:     "employeeDetailView",
+        employeeTileView:       "employeeTileView"
     },
 
     ////////////////////////////////////////////////

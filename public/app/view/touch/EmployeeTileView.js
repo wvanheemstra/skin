@@ -25,8 +25,8 @@
  */
 Ext.define("Skin.view.touch.EmployeeTileView", {
     extend: "Ext.Panel",
-    alias: "widget.employeeListView",
-    controller: "Skin.mediator.touch.EmployeeListMediator",
+    alias: "widget.employeeTileView",
+    controller: "Skin.mediator.touch.EmployeeTileMediator",
 
     requires: [
         "Ext.TitleBar",

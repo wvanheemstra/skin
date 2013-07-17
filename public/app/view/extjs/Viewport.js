@@ -32,7 +32,8 @@ Ext.define("Skin.view.extjs.Viewport", {
     requires: [
         "Skin.view.extjs.LoginView",
         "Skin.view.extjs.EmployeeListView",
-        "Skin.view.extjs.EmployeeDetailView"
+        "Skin.view.extjs.EmployeeDetailView",
+        "Skin.view.extjs.EmployeeTileView"
     ],
 
     config: {
@@ -60,6 +61,11 @@ Ext.define("Skin.view.extjs.Viewport", {
         {
             xtype: "employeeDetailView",
             itemId: "empdetaiil",
+            hidden: true
+        },
+        {
+            xtype: "employeeTileView",
+            itemId: "emptile",
             hidden: true
         }
     ],

@@ -1,4 +1,6 @@
-// Configure Loader paths
+/**
+ * Configure Loader
+ */
 Ext.Loader.setConfig({
 	enabled: true,
 	paths: {

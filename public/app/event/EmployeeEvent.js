@@ -37,6 +37,21 @@ Ext.define("Skin.event.EmployeeEvent", {
          * The get employee list failure event type.
          */
         GET_EMPLOYEE_LIST_FAILURE:  "getEmployeeListFailure",
+        
+        /**
+         * The get employee tile event type.
+         */
+        GET_EMPLOYEE_TILE:          "getEmployeeTile",
+
+        /**
+         * The get employee tile success event type.
+         */
+        GET_EMPLOYEE_TILE_SUCCESS:  "getEmployeeTileSuccess",
+
+        /**
+         * The get employee tile failure event type.
+         */
+        GET_EMPLOYEE_TILE_FAILURE:  "getEmployeeTileFailure",
 
         /**
          * The get employee event type.

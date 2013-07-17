@@ -35,16 +35,9 @@ Ext.onReady(function () {
         "Skin.service.mock.EmployeeServiceMock",
         "Skin.store.EmployeeStore",
 
-        "FlowMVC.mvc.event.EventDispatcher",
-        "FlowMVC.logger.Logger"
-    ]);
-
-    /**
-     * Locale Manager core classes. These might only need to be required for dev.
-     */
-    Ext.syncRequire([
         "nineam.locale.LocaleManager",
         "nineam.locale.plugin.touch.LocalePlugin"
+
     ]);
 
     // Configure the DeftJS IoC container
@@ -65,9 +58,9 @@ Ext.onReady(function () {
         ////////////////////////////////////////////
         employeeStore:          "Skin.store.EmployeeStore",
 
-        ////////////////////////////////////////////
-        // MOCKS
-        ////////////////////////////////////////////
+//        ////////////////////////////////////////////
+//        // MOCKS
+//        ////////////////////////////////////////////
         authenticationService:  "Skin.service.mock.AuthenticationServiceMock",
         employeeService:        "Skin.service.mock.EmployeeServiceMock",
 
@@ -95,7 +88,8 @@ Ext.application({
     views: [
         "Skin.view.touch.LoginView",
         "Skin.view.touch.EmployeeListView",
-        "Skin.view.touch.EmployeeDetailView"
+        "Skin.view.touch.EmployeeDetailView",
+        "Skin.view.touch.EmployeeTileView"
     ],
 
     ////////////////////////////////////////////
@@ -123,7 +117,8 @@ Ext.application({
         Ext.Viewport.add([
             { xtype: "loginView" },
             { xtype: "employeeListView" },
-            { xtype: "employeeDetailView" }
+            { xtype: "employeeDetailView" },
+            { xtype: "employeeTileView" }
         ]);
     }
 });

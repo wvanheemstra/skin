@@ -97,7 +97,8 @@ Ext.application({
         "Skin.view.extjs.Viewport",
         "Skin.view.extjs.LoginView",
         "Skin.view.extjs.EmployeeListView",
-        "Skin.view.extjs.EmployeeDetailView"
+        "Skin.view.extjs.EmployeeDetailView",
+        "Skin.view.extjs.EmployeeTileView"
     ],
 
     ////////////////////////////////////////////

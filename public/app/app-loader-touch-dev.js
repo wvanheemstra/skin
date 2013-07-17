@@ -1,14 +1,16 @@
-// Configure Loader paths
+/**
+ * Configure Loader
+ */
 Ext.Loader.setConfig({
 	enabled: true,
 	paths: {
 		"Skin": "app",
 		"Ext": "resources/js/touch/src",
 		"FlowMVC": "resources/js/flow-mvc/FlowMVC",
-    	"Deft": "resources/js/deft/Deft",
-    	"nineam": "resources/js/locale/nineam",
-    	enabled:            true,
-    	disableCaching:     true
+    	"Deft": "resources/js/deft/Deft",	
+		"nineam": "resources/js/locale/nineam",
+		enabled: true,
+		disableCaching: true
 	}
 });
 
@@ -17,11 +19,10 @@ Ext.Loader.setConfig({
  * not part of the ext.js file, so you'll need to ensure that these classes are loaded and available before the
  * DeftJS library is loaded.
  */
-// Include dependent Sencha classes
 Ext.syncRequire([
-    "Ext.Component", 
-    "Ext.ComponentManager", 
-    "Ext.ComponentQuery"
+	"Ext.Component",
+	"Ext.ComponentManager",
+	"Ext.ComponentQuery"
 ]);
 
 /**
