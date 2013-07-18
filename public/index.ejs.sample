@@ -273,14 +273,7 @@
 
     <!-- Libraries, Loader, Application -->
     <% if (is_desktop) { %>
-    	<!--<script type="text/javascript" src="resources/js/ext/ext-dev.js"></script>-->
-    	
-		<!-- FOR TESTING ONLY -->
-		<script type="text/javascript" src="resources/js/ext/ext-all-dev.js"></script>
-		<script type="text/javascript" src="resources/js/ext/src/diag/layout/Context.js"></script>
-		<script type="text/javascript" src="resources/js/ext/src/diag/layout/ContextItem.js"></script>
-
-    	<!--<script type="text/javascript" src="resources/js/log4javascript/log4javascript.js"></script>-->
+    	<script type="text/javascript" src="resources/js/ext/ext-all.js"></script>
     	<script type="text/javascript" src="app/app-loader-extjs.js"></script>
 		<script type="text/javascript" src="resources/js/deft/deft.js"></script>
 	    <script type="text/javascript" src="resources/js/flow-mvc/flowmvc.js"></script>

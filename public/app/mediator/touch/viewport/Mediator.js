@@ -79,9 +79,11 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
 
         switch(action) {
             case Skin.event.authentication.Event.LOGIN_SUCCESS:
-            	// HERE WE SET WHICH VIEW TO GO TO
-                // WAS view = this.getEmployeeListView();
-                view = this.getEmployeeTileView();
+            	// HERE WE GET WHICH VIEW TO GO TO
+                console.log("next view: "+ Skin.config.global.Config.getNextView()); // added by wvh, for testing only
+                
+                // WAS view = this.getEmployeeTileView();
+                view = this.getViewByXType(Skin.config.global.Config.getNextView());
                 direction = this.getSlideLeftTransition();
                 break;
 
@@ -91,6 +93,7 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
                 break;
 
             case Skin.event.navigation.Event.ACTION_SHOW_EMPLOYEE_DETAIL:
+            	Skin.config.global.Config.setPreviousView('employeeTileView'); // added by wvh, make this dynamic
                 view = this.getEmployeeDetailView();
                 direction = this.getSlideLeftTransition();
                 break;

@@ -60,7 +60,7 @@ Ext.define("Skin.view.extjs.viewport.View", {
         },
         {
             xtype: "employeeDetailView",
-            itemId: "empdetaiil",
+            itemId: "empdetail",
             hidden: true
         },
         {
