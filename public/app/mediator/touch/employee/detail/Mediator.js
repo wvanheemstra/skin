@@ -122,12 +122,35 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
     },
 
     /**
+     * Simple navigation method used to navigate back, depending on the previous view.
+     */
+    backToPrevious: function() {
+        switch(Skin.config.global.Config.getPreviousView()) {
+            case 'employeeListView':
+            	this.backToEmployeeList();
+                break;
+            case 'employeeTileView':
+            	this.backToEmployeeTile();
+                break;               
+        }
+    },
+
+    /**
      * Simple navigation method used to navigate back to the employee list view.
      */
     backToEmployeeList: function() {
         this.logger.debug("backToEmployeeList");
 
         this.navigate(Skin.event.navigation.Event.ACTION_BACK_SHOW_EMPLOYEE_LIST);
+    },
+
+    /**
+     * Simple navigation method used to navigate back to the employee tile view.
+     */
+    backToEmployeeTile: function() {
+        this.logger.debug("backToEmployeeTile");
+
+        this.navigate(Skin.event.navigation.Event.ACTION_BACK_SHOW_EMPLOYEE_TILE);
     },
 
     /**
@@ -152,7 +175,7 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
         this.logger.debug("onCreateEmployeeSuccess");
 
         this.getView().setMasked(false);
-        this.backToEmployeeList();
+        this.backToPrevious(); // WAS this.backToEmployeeList();
     },
 
     /**
@@ -162,7 +185,7 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
         this.logger.debug("onUpdateEmployeeSuccess");
 
         this.getView().setMasked(false);
-        this.backToEmployeeList();
+        this.backToPrevious(); // WAS this.backToEmployeeList();
     },
 
     /**
@@ -172,7 +195,7 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
         this.logger.debug("onDeleteEmployeeSuccess");
 
         this.reset();
-        this.backToEmployeeList();
+        this.backToPrevious(); // WAS this.backToEmployeeList();
     },
 
     /**
@@ -205,7 +228,7 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
     onBackButtonTap: function() {
         this.logger.debug("onBackButtonTap");
 
-        this.backToEmployeeList();
+        this.backToPrevious(); // WAS this.backToEmployeeList();
     },
 
     /**
