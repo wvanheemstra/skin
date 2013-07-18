@@ -6,6 +6,7 @@ Ext.Loader.setConfig({
 	paths: {
 		"Skin": "app",	
 		"nineam": "resources/js/locale/nineam",
+		"Ext.ux": "resources/js/touch-custom/src/ux",
 		enabled: true,
 		disableCaching: true
 	}

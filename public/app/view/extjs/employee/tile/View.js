@@ -33,7 +33,8 @@ Ext.define("Skin.view.extjs.employee.tile.View", {
         "Ext.data.*",
         "Ext.util.*",
         "Ext.view.View",
-        "Skin.view.extjs.component.LiveSearchGridPanel",
+        //"Skin.view.extjs.component.LiveSearchGridPanel",
+        "Skin.view.extjs.component.TileView",
         "nineam.locale.LocaleManager"
     ],
 
@@ -90,6 +91,14 @@ Ext.define("Skin.view.extjs.employee.tile.View", {
             ]
         },
         {
+                xtype: "tileview",
+                itemId: "tile",
+                itemTpl: "{firstName} {lastName}",
+                autoScroll: true,
+                emptyText: "No Employees"
+        }
+/*        
+        {
             xtype: "livesearchgridpanel",
             store: null,
             itemId: "tile",
@@ -129,5 +138,6 @@ Ext.define("Skin.view.extjs.employee.tile.View", {
                 }
             ]
         }
+*/        
     ]
 });

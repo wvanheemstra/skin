@@ -13,12 +13,15 @@
     <!-- CSS -->
     <% if (is_desktop) { %>
     	<link rel="stylesheet" type="text/css" href="resources/js/ext/resources/css/ext-all.css" />
+		<link rel="stylesheet" type="text/css" href="resources/css/app.css" />
     <% } %>
     <% if (is_phone) { %>
     	<link rel="stylesheet" type="text/css" href="resources/js/touch/resources/css/sencha-touch.css" />
+		<link rel="stylesheet" type="text/css" href="resources/css/app.css" />
     <% } %>	
     <% if (is_tablet) { %>
     	<link rel="stylesheet" type="text/css" href="resources/js/touch/resources/css/sencha-touch.css" />
+		<link rel="stylesheet" type="text/css" href="resources/css/app.css" />
     <% } %> 
     <style type="text/css">
          /**

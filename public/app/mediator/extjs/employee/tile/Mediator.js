@@ -98,9 +98,10 @@ Ext.define("Skin.mediator.extjs.employee.tile.Mediator", {
      */
     onLoginSuccess: function() {
         this.logger.debug("onLoginSuccess");
-
-        this.navigate(Skin.event.authentication.Event.LOGIN_SUCCESS);
-        this.getEmployeeTileData();
+		if(Skin.config.global.Config.getNextView()==='employeeTileView') {
+        	this.navigate(Skin.event.authentication.Event.LOGIN_SUCCESS);
+        	this.getEmployeeTileData();
+		}
     },
 
     /**

@@ -31,7 +31,8 @@ Ext.define("Skin.view.touch.employee.tile.View", {
     requires: [
         "Ext.TitleBar",
         "Ext.dataview.List",
-        "Ext.field.Search"
+        //"Ext.field.Search",
+        "Skin.view.touch.component.TileView"
     ],
 
     config: {
@@ -39,7 +40,7 @@ Ext.define("Skin.view.touch.employee.tile.View", {
         layout: {
             type: "fit"
         },
-
+        
         items: [
             {
                 xtype: "titlebar",
@@ -80,6 +81,14 @@ Ext.define("Skin.view.touch.employee.tile.View", {
                 ]
             },
             {
+                xtype: "tileview",
+                itemId: "tile",
+                itemTpl: "{firstName} {lastName}",
+                autoScroll: true,
+                emptyText: "No Employees"        	
+            }
+ /*
+            {
                 xtype: "list",
                 itemId: "tile",
                 fullscreen: true,
@@ -115,7 +124,8 @@ Ext.define("Skin.view.touch.employee.tile.View", {
                         ]
                     }
                 ]
-            }
+            }// eof list
+ */           
         ]
     }
 });

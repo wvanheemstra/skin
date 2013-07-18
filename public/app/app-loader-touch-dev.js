@@ -6,6 +6,7 @@ Ext.Loader.setConfig({
 	paths: {
 		"Skin": "app",
 		"Ext": "resources/js/touch/src",
+		"Ext.ux": "resources/js/touch-custom/src/ux",
 		"FlowMVC": "resources/js/flow-mvc/FlowMVC",
     	"Deft": "resources/js/deft/Deft",	
 		"nineam": "resources/js/locale/nineam",

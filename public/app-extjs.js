@@ -84,6 +84,13 @@ Ext.application({
     name: "Skin",
     
     ////////////////////////////////////////////
+    // Ext
+    ////////////////////////////////////////////    
+    requires: [
+    	"Ext.MessageBox"
+    ],    
+    
+    ////////////////////////////////////////////
     // CONFIG
     ////////////////////////////////////////////    
     requires: [
@@ -125,9 +132,22 @@ Ext.application({
      */
     launch: function () {
         console.log("app.launch");
+        
+    	// Destroy the #appLoadingIndicator element
+    	Ext.fly('appLoadingIndicator').destroy();        
 
         // Set up QuickTips and create the Viewport
         Ext.tip.QuickTipManager.init();
         Ext.create("Skin.view.extjs.viewport.View");
+    },
+    
+    onUpdated: function() {
+        Ext.Msg.confirm(
+            "Application Update",
+            "This application has just successfully been updated to the latest version. Reload now?",
+            function() {
+                window.location.reload();
+            }
+        );
     }
 });

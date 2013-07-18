@@ -105,9 +105,10 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
      */
     onLoginSuccess: function() {
         this.logger.debug("onLoginSuccess");
-
-        this.navigate(Skin.event.authentication.Event.LOGIN_SUCCESS);
-        this.getEmployeeListData();
+		if(Skin.config.global.Config.getNextView()==='employeeListView') {
+        	this.navigate(Skin.event.authentication.Event.LOGIN_SUCCESS);
+        	this.getEmployeeListData();
+		}
     },
 
     /**

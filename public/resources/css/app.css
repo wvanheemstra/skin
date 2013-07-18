@@ -7013,3 +7013,40 @@ body.x-desktop {
   background-image: linear-gradient(top, #bababa, #c7c7c7 10%, #d3d3d3 65%, #d5d5d5);
   color: black;
 }
+
+
+// EXTJS
+/* Target the custom baseCls we specified below. */
+.skin-tile-view {
+    padding: 0 10px 10px 0;
+    text-align: center;
+}
+/* Target the tile view item. Make it float using inline-block. */
+.skin-tile-view .x-dataview-item {
+    background: #eee;
+    width: 150px;
+    height: 150px;
+    display: inline-block;
+    margin: 10px 0 0 10px;
+}
+.skin-tile-view .x-item-selected {
+
+}
+
+// TOUCH
+/* Target the custom baseCls we specified below. */
+.skin-tile-view-container {
+    padding: 0 10px 10px 0;
+    text-align: center;
+}
+/* Target the tile view item. Make it float using inline-block. */
+.skin-tile-view-container .skin-tile-view-item {
+    background: #eee;
+    width: 150px;
+    height: 150px;
+    display: inline-block;
+    margin: 10px 0 0 10px;
+}
+.skin-tile-view-container .x-item-selected {
+
+}

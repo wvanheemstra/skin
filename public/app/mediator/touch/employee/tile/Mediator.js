@@ -40,10 +40,11 @@ Ext.define("Skin.mediator.touch.employee.tile.Mediator", {
             tap: "onNewEmployeeButtonTap"
         },
 
-        searchInput :{
-            keyup:          "onSearchKeyUp",
-            clearicontap:   "onSearchClearIconTap"
-        },
+// CURRENTLY WE DO NOT HAVE A SEARCH IN THE TILE VIEW
+//        searchInput :{
+//            keyup:          "onSearchKeyUp",
+//            clearicontap:   "onSearchClearIconTap"
+//        },
         
         tile: {
             disclose: "onTileDisclose"
@@ -105,9 +106,15 @@ Ext.define("Skin.mediator.touch.employee.tile.Mediator", {
      */
     onLoginSuccess: function() {
         this.logger.debug("onLoginSuccess");
-
-        this.navigate(Skin.event.authentication.Event.LOGIN_SUCCESS);
-        this.getEmployeeTileData();
+        
+        
+        console.log("next view: " + Skin.config.global.Config.getNextView()); // added by wvh, for testing only
+                
+        
+		if(Skin.config.global.Config.getNextView()==='employeeTileView') {
+        	this.navigate(Skin.event.authentication.Event.LOGIN_SUCCESS);
+        	this.getEmployeeTileData();
+		}
     },
 
     /**
