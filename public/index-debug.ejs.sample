@@ -2,7 +2,7 @@
 <html manifest="" lang="en-GB">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title><%= title %></title>
+    <title><%= title %> - debug</title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <meta name="author" content="humans.txt">
@@ -282,22 +282,22 @@
 
     	<!--<script type="text/javascript" src="resources/js/log4javascript/log4javascript.js"></script>-->
     	<script type="text/javascript" src="app/app-loader-extjs.js"></script>
-		<script type="text/javascript" src="resources/js/deft/deft.js"></script>
-	    <script type="text/javascript" src="resources/js/flow-mvc/flowmvc.js"></script>
+		<script type="text/javascript" src="resources/js/deft/deft-debug.js"></script>
+	    <script type="text/javascript" src="resources/js/flow-mvc/flowmvc-debug.js"></script>
     	<script type="text/javascript" src="app-extjs.js"></script>
     <% } %>	
     <% if (is_phone) { %>
-    	<script type="text/javascript" src="resources/js/touch/sencha-touch.js"></script>
+    	<script type="text/javascript" src="resources/js/touch/sencha-touch-debug.js"></script>
     	<script type="text/javascript" src="app/app-loader-touch.js"></script>
-		<script type="text/javascript" src="resources/js/deft/deft.js"></script>
-	    <script type="text/javascript" src="resources/js/flow-mvc/flowmvc.js"></script>
+		<script type="text/javascript" src="resources/js/deft/deft-debug.js"></script>
+	    <script type="text/javascript" src="resources/js/flow-mvc/flowmvc-debug.js"></script>
     	<script type="text/javascript" src="app-touch.js"></script>
     <% } %>
     <% if (is_tablet) { %>
-    	<script type="text/javascript" src="resources/js/touch/sencha-touch.js"></script>
+    	<script type="text/javascript" src="resources/js/touch/sencha-touch-debug.js"></script>
     	<script type="text/javascript" src="app/app-loader-touch.js"></script>
-		<script type="text/javascript" src="resources/js/deft/deft.js"></script>
-	    <script type="text/javascript" src="resources/js/flow-mvc/flowmvc.js"></script>
+		<script type="text/javascript" src="resources/js/deft/deft-debug.js"></script>
+	    <script type="text/javascript" src="resources/js/flow-mvc/flowmvc-debug.js"></script>
     	<script type="text/javascript" src="app-touch.js"></script>
     <% } %>
 </head>

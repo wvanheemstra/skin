@@ -86,10 +86,10 @@ Ext.application({
     // VIEWS
     ////////////////////////////////////////////
     views: [
-        "Skin.view.touch.LoginView",
-        "Skin.view.touch.EmployeeListView",
-        "Skin.view.touch.EmployeeDetailView",
-        "Skin.view.touch.EmployeeTileView"
+        "Skin.view.touch.login.View",
+        "Skin.view.touch.employee.list.View",
+        "Skin.view.touch.employee.detail.View",
+        "Skin.view.touch.employee.tile.View"
     ],
 
     ////////////////////////////////////////////

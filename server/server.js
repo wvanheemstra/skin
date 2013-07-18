@@ -102,6 +102,10 @@ app.get('/5', function(req, res) {
     res.render('index3', { title: 'Your Company with layout' });
 });
 
+app.get('/debug', function(req, res) {
+    res.render('index-debug', { title: title, host: host, web_root: web_root, layout: false });
+});
+
 app.get('/page-analyzer', function(req, res) {
     res.render('page-analyzer', { title: 'Page Analyzer' });
 });

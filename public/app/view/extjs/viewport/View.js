@@ -23,17 +23,17 @@
  * application or business logic; this is all done in the view's corresponding mediator.
  * </p>
  */
-Ext.define("Skin.view.extjs.Viewport", {
+Ext.define("Skin.view.extjs.viewport.View", {
     extend: "Ext.container.Viewport",
-    alias: "widget.viewport",
+    alias: "widget.viewportView",
     controller: "Skin.mediator.extjs.viewport.Mediator",
     width: 800,
 
     requires: [
-        "Skin.view.extjs.LoginView",
-        "Skin.view.extjs.EmployeeListView",
-        "Skin.view.extjs.EmployeeDetailView",
-        "Skin.view.extjs.EmployeeTileView"
+        "Skin.view.extjs.login.View",
+        "Skin.view.extjs.employee.list.View",
+        "Skin.view.extjs.employee.detail.View",
+        "Skin.view.extjs.employee.tile.View"
     ],
 
     config: {

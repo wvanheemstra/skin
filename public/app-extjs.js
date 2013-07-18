@@ -31,7 +31,7 @@ Ext.onReady(function () {
 
     // pull all of this in so they can be injected
     Ext.syncRequire([
-	    "Skin.view.extjs.Viewport",
+	    "Skin.view.extjs.viewport.View",
         "Skin.service.authentication.Service",
         "Skin.service.authentication.mock.Service",
         "Skin.service.employee.mock.Service",
@@ -94,11 +94,11 @@ Ext.application({
     // VIEWS
     ////////////////////////////////////////////
     views: [
-        "Skin.view.extjs.Viewport",
-        "Skin.view.extjs.LoginView",
-        "Skin.view.extjs.EmployeeListView",
-        "Skin.view.extjs.EmployeeDetailView",
-        "Skin.view.extjs.EmployeeTileView"
+        "Skin.view.extjs.viewport.View",
+        "Skin.view.extjs.login.View",
+        "Skin.view.extjs.employee.list.View",
+        "Skin.view.extjs.employee.detail.View",
+        "Skin.view.extjs.employee.tile.View"
     ],
 
     ////////////////////////////////////////////
@@ -121,6 +121,6 @@ Ext.application({
 
         // Set up QuickTips and create the Viewport
         Ext.tip.QuickTipManager.init();
-        Ext.create("Skin.view.extjs.Viewport");
+        Ext.create("Skin.view.extjs.viewport.View");
     }
 });

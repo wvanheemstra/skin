@@ -23,7 +23,7 @@
  * application or business logic; this is all done in the view's corresponding mediator.
  * </p>
  */
-Ext.define("Skin.view.touch.EmployeeListView", {
+Ext.define("Skin.view.touch.employee.list.View", {
     extend: "Ext.Panel",
     alias: "widget.employeeListView",
     controller: "Skin.mediator.touch.employee.list.Mediator",
