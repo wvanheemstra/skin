@@ -15,6 +15,46 @@
     },
 
     /////////////////////////////////////////////
+    // MAIN LIST
+    /////////////////////////////////////////////
+    "mainList": {
+        "title": "Mains",
+        "logOff": "Log Off",
+        "new": "New",
+        "search": "live search",
+        "Name": "Name",
+        "loading": "Loading Mains...",
+        "noMains": "No Mains found."
+    },
+
+    /////////////////////////////////////////////
+    // MAIN TILE
+    /////////////////////////////////////////////
+    "mainTile": {
+        "title": "Mains",
+        "logOff": "Log Off",
+        "new": "New",
+        "search": "live search",
+        "Name": "Name",
+        "loading": "Loading Mains...",
+        "noMains": "No Mains found."
+    },
+
+    /////////////////////////////////////////////
+    // MAIN DETAIL
+    /////////////////////////////////////////////
+    "mainDetail": {
+        "title": "Main",
+        "back": "Back",
+        "save": "Save",
+        "name": "Name",
+        "delete": "Delete",
+        "creatingMain": "Creating Main...",
+        "updatingMain": "Updating Main...",
+        "deletingMain": "Deleting Main..."
+    },
+
+    /////////////////////////////////////////////
     // EMPLOYEE LIST
     /////////////////////////////////////////////
     "employeeList": {

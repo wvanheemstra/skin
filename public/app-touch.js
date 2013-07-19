@@ -35,6 +35,7 @@ Ext.onReady(function () {
         "Skin.service.main.Service",
         "Skin.service.main.mock.Service",        
         "Skin.service.employee.mock.Service",
+        "Skin.store.main.Store",
         "Skin.store.employee.Store",
 
         "nineam.locale.LocaleManager",
@@ -58,11 +59,12 @@ Ext.onReady(function () {
         ////////////////////////////////////////////
         // IMPL
         ////////////////////////////////////////////
+        mainStore:				"Skin.store.main.Store",
         employeeStore:          "Skin.store.employee.Store",
 
-//        ////////////////////////////////////////////
-//        // MOCKS
-//        ////////////////////////////////////////////
+        ////////////////////////////////////////////
+        // MOCKS
+        ////////////////////////////////////////////
         authenticationService:  "Skin.service.authentication.mock.Service",
         mainService:			"Skin.service.main.mock.Service",
         employeeService:        "Skin.service.employee.mock.Service",
@@ -96,6 +98,7 @@ Ext.application({
     // MODELS
     ////////////////////////////////////////////
     models: [
+    	"main.Model",
         "employee.Model"
     ],
 
@@ -104,10 +107,12 @@ Ext.application({
     ////////////////////////////////////////////
     views: [
         "Skin.view.touch.login.View",
-        "Skin.view.touch.main.View",
+        "Skin.view.touch.main.list.View",
+        "Skin.view.touch.main.tile.View",
+        "Skin.view.touch.main.detail.View",
         "Skin.view.touch.employee.list.View",
-        "Skin.view.touch.employee.detail.View",
-        "Skin.view.touch.employee.tile.View"
+        "Skin.view.touch.employee.tile.View",
+        "Skin.view.touch.employee.detail.View"
     ],
 
     ////////////////////////////////////////////
@@ -162,10 +167,12 @@ Ext.application({
 
         Ext.Viewport.add([
             { xtype: "loginView" },
-            { xtype: "mainView" },
+            { xtype: "mainListView" },
+            { xtype: "mainTileView" },
+            { xtype: "mainDetailView" },
             { xtype: "employeeListView" },
-            { xtype: "employeeDetailView" },
-            { xtype: "employeeTileView" }
+            { xtype: "employeeTileView" },
+            { xtype: "employeeDetailView" }            
         ]);
     },
     

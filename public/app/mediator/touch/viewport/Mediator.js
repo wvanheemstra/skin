@@ -38,9 +38,12 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
     config: {
         // create references to this mediator's views so we can listen to events and grab data from them
         loginView:              "loginView",
+        mainListView:			"mainListView",
+        mainTileView:			"mainTileView",
+        mainDetailView:			"mainDetailView",
         employeeListView:       "employeeListView",
-        employeeDetailView:     "employeeDetailView",
-        employeeTileView:       "employeeTileView"
+        employeeTileView:       "employeeTileView",
+        employeeDetailView:     "employeeDetailView"
     },
 
     ////////////////////////////////////////////////
@@ -89,6 +92,22 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
 
             case Skin.event.authentication.Event.LOGOUT_SUCCESS:
                 view = this.getLoginView();
+                direction = this.getSlideRightTransition();
+                break;
+
+            case Skin.event.navigation.Event.ACTION_SHOW_MAIN_DETAIL:
+            	Skin.config.global.Config.setPreviousView('mainTileView'); // added by wvh, make this dynamic
+                view = this.getMainDetailView();
+                direction = this.getSlideLeftTransition();
+                break;
+
+            case Skin.event.navigation.Event.ACTION_BACK_SHOW_MAIN_LIST:
+                view = this.getMainListView();
+                direction = this.getSlideRightTransition();
+                break;
+                
+            case Skin.event.navigation.Event.ACTION_BACK_SHOW_MAIN_TILE:
+                view = this.getMainTileView();
                 direction = this.getSlideRightTransition();
                 break;
 

@@ -16,7 +16,7 @@
  */
 
 /**
- * The employee list mediator essentially fulfills the passive view pattern for the employee list view.
+ * The employee detail mediator essentially fulfills the passive view pattern for the employee detail view.
  */
 Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
     extend: "Skin.mediator.abstract.Mediator",
