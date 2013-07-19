@@ -32,6 +32,8 @@ Ext.onReady(function () {
     Ext.require([
         "Skin.service.authentication.Service",
         "Skin.service.authentication.mock.Service",
+        "Skin.service.main.Service",
+        "Skin.service.main.mock.Service",        
         "Skin.service.employee.mock.Service",
         "Skin.store.employee.Store",
 
@@ -62,6 +64,7 @@ Ext.onReady(function () {
 //        // MOCKS
 //        ////////////////////////////////////////////
         authenticationService:  "Skin.service.authentication.mock.Service",
+        mainService:			"Skin.service.main.mock.Service",
         employeeService:        "Skin.service.employee.mock.Service",
 
         authenticationServiceClass: {
@@ -101,6 +104,7 @@ Ext.application({
     ////////////////////////////////////////////
     views: [
         "Skin.view.touch.login.View",
+        "Skin.view.touch.main.View",
         "Skin.view.touch.employee.list.View",
         "Skin.view.touch.employee.detail.View",
         "Skin.view.touch.employee.tile.View"
@@ -112,6 +116,7 @@ Ext.application({
     controllers:[
         "bootstrap.Controller",
         "authentication.Controller",
+        "main.Controller",
         "employee.Controller"
     ],
 
@@ -157,6 +162,7 @@ Ext.application({
 
         Ext.Viewport.add([
             { xtype: "loginView" },
+            { xtype: "mainView" },
             { xtype: "employeeListView" },
             { xtype: "employeeDetailView" },
             { xtype: "employeeTileView" }
