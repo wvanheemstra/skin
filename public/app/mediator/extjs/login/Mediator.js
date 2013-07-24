@@ -129,6 +129,8 @@ Ext.define("Skin.mediator.extjs.login.Mediator", {
     onLoginSuccess: function() {
         this.logger.debug("onLoginSuccess");
 
+		Skin.config.global.Config.setNextView('employeeTileView'); // added by wvh, sets the next view to go to from here
+
         var view = this.getView();
         view.setLoading(false);
     },

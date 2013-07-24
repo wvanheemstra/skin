@@ -123,7 +123,7 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
     onLoginSuccess: function() {
         this.logger.debug("onLoginSuccess");
 
-		Skin.config.global.Config.setNextView('mainTileView'); // added by wvh, sets the next view to go to from here
+		Skin.config.global.Config.setNextView('mainListView'); // added by wvh, sets the next view to go to from here
 
         var view = this.getView();
         view.setMasked(false);

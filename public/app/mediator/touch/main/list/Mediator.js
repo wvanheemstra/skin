@@ -19,13 +19,13 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
 
     // set up view event to mediator mapping
     control: {
-//        logoutButton: {
-//            tap: "onLogoutButtonTap"
-//        },
+       logoutButton: {
+           tap: "onLogoutButtonTap"
+       },
 
-//        newMainButton: {
-//            tap: "onNewMainButtonTap"
-//        },
+       newMainButton: {
+           tap: "onNewMainButtonTap"
+       },
 
 // CURRENTLY WE DO NOT HAVE A SEARCH IN THE TILE VIEW
 //        searchInput :{
@@ -78,7 +78,7 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
             ? ": id = " + record.get("id") + ", main = " + record.get("name")
             : "new main";
         this.logger.debug("showMainDetail = " + logMsg);
-
+		Skin.config.global.Config.setPreviousView('mainListView');
         this.navigate(Skin.event.navigation.Event.ACTION_SHOW_MAIN_DETAIL);
         this.mainStore.setSelectedRecord(record);
     },
@@ -157,69 +157,70 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
      */
     onListDisclose: function(list, record, target, index, evt, options) {
         this.logger.debug("onListDisclose");
-
         this.mainStore.setSelectedRecord(record);
         this.showMainDetail(record);
     },
 
-    config: {
-        refs: {
-            slideNav:                   'mainListView'//,
-            //moviePosterListContainer:   'slidenavigationview container[title="Item 8"]'
-        },
+//TEMPORARILY COMMENTED OUT
 
-        control: {
-            /**
-             *  Here are examples of the various events you can listen for.
-             */
-            slideNav: {
-                open: function(nav, position, duration) {
-                    console.log('Container open (position='+position+',duration='+duration+')');
-                },
-
-                close: function(nav, position, duration) {
-                    console.log('Container close (position='+position+',duration='+duration+')');
-                },
-
-                select: function(nav, item, index) {
-                    console.log('Selected item (index='+index+')');
-                },
-
-                opened: function(nav) {
-                    console.log('Container opened');
-                },
-
-                closed: function(nav) {
-                    console.log('Container closed');
-                },
-
-                slideend: function(nav) {
-                    console.log('Container slideend');
-                },
-
-                slidestart: function(nav) {
-                    console.log('Container slidestart');
-                },
-
-                dragstart: function(nav) {
-                    console.log('Container dragstart');
-                },
-
-                dragend: function(nav) {
-                    console.log('Container dragend');
-                }
-            }//,
-
-            /**
-             *  The 'activate' event fires on the container, not the child
-             *  element.
-             *
-             */
-            //moviePosterListContainer: {
-            //    activate: function(container) {
-            //        console.log('Activate moviePosterListContainer');
-            //    }
-            //}
-        }
-    }
+    // config: {
+    //     refs: {
+    //         slideNav:                   'mainListView'//,
+    //         //moviePosterListContainer:   'slidenavigationview container[title="Item 8"]'
+    //     },
+    // 
+    //     control: {
+    //         /**
+    //          *  Here are examples of the various events you can listen for.
+    //          */
+    //         slideNav: {
+    //             open: function(nav, position, duration) {
+    //                 console.log('Container open (position='+position+',duration='+duration+')');
+    //             },
+    // 
+    //             close: function(nav, position, duration) {
+    //                 console.log('Container close (position='+position+',duration='+duration+')');
+    //             },
+    // 
+    //             select: function(nav, item, index) {
+    //                 console.log('Selected item (index='+index+')');
+    //             },
+    // 
+    //             opened: function(nav) {
+    //                 console.log('Container opened');
+    //             },
+    // 
+    //             closed: function(nav) {
+    //                 console.log('Container closed');
+    //             },
+    // 
+    //             slideend: function(nav) {
+    //                 console.log('Container slideend');
+    //             },
+    // 
+    //             slidestart: function(nav) {
+    //                 console.log('Container slidestart');
+    //             },
+    // 
+    //             dragstart: function(nav) {
+    //                 console.log('Container dragstart');
+    //             },
+    // 
+    //             dragend: function(nav) {
+    //                 console.log('Container dragend');
+    //             }
+    //         }//,
+    // 
+    //         /**
+    //          *  The 'activate' event fires on the container, not the child
+    //          *  element.
+    //          *
+    //          */
+    //         //moviePosterListContainer: {
+    //         //    activate: function(container) {
+    //         //        console.log('Activate moviePosterListContainer');
+    //         //    }
+    //         //}
+    //     }
+    // }
 });

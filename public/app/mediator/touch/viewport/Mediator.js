@@ -96,7 +96,6 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
                 break;
 
             case Skin.event.navigation.Event.ACTION_SHOW_MAIN_DETAIL:
-            	Skin.config.global.Config.setPreviousView('mainTileView'); // added by wvh, make this dynamic
                 view = this.getMainDetailView();
                 direction = this.getSlideLeftTransition();
                 break;
@@ -112,7 +111,6 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
                 break;
 
             case Skin.event.navigation.Event.ACTION_SHOW_EMPLOYEE_DETAIL:
-            	Skin.config.global.Config.setPreviousView('employeeTileView'); // added by wvh, make this dynamic
                 view = this.getEmployeeDetailView();
                 direction = this.getSlideLeftTransition();
                 break;

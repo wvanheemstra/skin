@@ -106,8 +106,7 @@ Ext.define("Skin.mediator.touch.employee.tile.Mediator", {
      */
     onLoginSuccess: function() {
         this.logger.debug("onLoginSuccess");
-        
-        
+
         console.log("next view: " + Skin.config.global.Config.getNextView()); // added by wvh, for testing only
                 
         

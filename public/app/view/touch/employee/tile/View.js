@@ -31,7 +31,7 @@ Ext.define("Skin.view.touch.employee.tile.View", {
     requires: [
         "Ext.TitleBar",
         "Ext.dataview.List",
-        //"Ext.field.Search",
+        "Ext.field.Search",
         "Skin.view.touch.component.TileView"
     ],
 
@@ -79,7 +79,7 @@ Ext.define("Skin.view.touch.employee.tile.View", {
                         ]
                     }
                 ]
-            },
+            },           
             {
                 xtype: "tileview",
                 itemId: "tile",
@@ -124,8 +124,8 @@ Ext.define("Skin.view.touch.employee.tile.View", {
                         ]
                     }
                 ]
-            }// eof list
- */           
+            }// eof list 
+*/                      
         ]
     }
 });

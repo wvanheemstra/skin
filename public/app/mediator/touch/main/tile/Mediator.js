@@ -13,6 +13,10 @@ Ext.define("Skin.mediator.touch.main.tile.Mediator", {
         "logger"
     ],
 
+	// refs: {
+	// 	slideNav:  'slidenavigationview'		
+	// },
+
     // set up view event to mediator mapping
     control: {
         logoutButton: {
@@ -31,7 +35,8 @@ Ext.define("Skin.mediator.touch.main.tile.Mediator", {
         
         tile: {
             disclose: "onTileDisclose"
-        }
+        },
+
     },
 
     /**
@@ -74,7 +79,7 @@ Ext.define("Skin.mediator.touch.main.tile.Mediator", {
             ? ": id = " + record.get("id") + ", main = " + record.get("name")
             : "new main";
         this.logger.debug("showMainDetail = " + logMsg);
-
+		Skin.config.global.Config.setPreviousView('mainTileView');
         this.navigate(Skin.event.navigation.Event.ACTION_SHOW_MAIN_DETAIL);
         this.mainStore.setSelectedRecord(record);
     },
@@ -153,10 +158,12 @@ Ext.define("Skin.mediator.touch.main.tile.Mediator", {
      */
     onTileDisclose: function(tile, record, target, index, evt, options) {
         this.logger.debug("onTileDisclose");
-
         this.mainStore.setSelectedRecord(record);
         this.showMainDetail(record);
-    }// TEMPORARILY COMMENTED OUT ,
+    }
+
+
+// TEMPORARILY COMMENTED OUT
     
 //    config: {
 //        refs: {

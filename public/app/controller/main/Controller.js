@@ -56,7 +56,7 @@ Ext.define("Skin.controller.main.Controller", {
      * Performs create main by using the referenced service and sets up the service success and failure
      * callback handlers.
      *
-     * @param {Skin.model.MainModel} main The main to create.
+     * @param {Skin.model.main.Model} main The main to create.
      */
     createMain: function(main) {
         this.logger.debug("createMain");
@@ -68,7 +68,7 @@ Ext.define("Skin.controller.main.Controller", {
      * Performs update main by using the referenced service and sets up the service success and failure
      * callback handlers.
      *
-     * @param {Skin.model.MainModel} main The main to update.
+     * @param {Skin.model.main.Model} main The main to update.
      */
     updateMain: function(main) {
         this.logger.debug("updateMain");
@@ -80,7 +80,7 @@ Ext.define("Skin.controller.main.Controller", {
      * Performs delete main by using the referenced service and sets up the service success and failure
      * callback handlers.
      *
-     * @param {Skin.model.MainModel} main The main to delete.
+     * @param {Skin.model.main.Model} main The main to delete.
      */
     deleteMain: function(main) {
         this.logger.debug("deleteMain");
@@ -242,7 +242,7 @@ Ext.define("Skin.controller.main.Controller", {
      * Handles the get main event on the application-level event bus. Calls a functional method that's more
      * testable than this event handler.
      *
-     * @param {Skin.event.MainEvent} event Reference to the main event.
+     * @param {Skin.event.main.Event} event Reference to the main event.
      */
     onGetMainList: function(event) {
         this.logger.debug("onGetMainList");
@@ -254,7 +254,7 @@ Ext.define("Skin.controller.main.Controller", {
      * Handles the get main event on the application-level event bus. Calls a functional method that's more
      * testable than this event handler.
      *
-     * @param {Skin.event.MainEvent} event Reference to the main event.
+     * @param {Skin.event.main.Event} event Reference to the main event.
      */
     onGetMainTile: function(event) {
         this.logger.debug("onGetMainTile");
@@ -266,7 +266,7 @@ Ext.define("Skin.controller.main.Controller", {
      * Handles the create main event on the application-level event bus. Calls a functional method that's more
      * testable than this event handler.
      *
-     * @param {Skin.event.MainEvent} event Reference to the main event. Contains a reference to the
+     * @param {Skin.event.main.Event} event Reference to the main event. Contains a reference to the
      * main.
      */
     onCreateMain: function(event) {
@@ -279,7 +279,7 @@ Ext.define("Skin.controller.main.Controller", {
      * Handles the update main event on the application-level event bus. Calls a functional method that's more
      * testable than this event handler.
      *
-     * @param {Skin.event.MainEvent} event Reference to the main event. Contains a reference to the
+     * @param {Skin.event.main.Event} event Reference to the main event. Contains a reference to the
      * main.
      */
     onUpdateMain: function(event) {
@@ -292,7 +292,7 @@ Ext.define("Skin.controller.main.Controller", {
      * Handles the delete main event on the application-level event bus. Calls a functional method that's more
      * testable than this event handler.
      *
-     * @param {Skin.event.MainEvent} event Reference to the main event. Contains a reference to the
+     * @param {Skin.event.main.Event} event Reference to the main event. Contains a reference to the
      * main.
      */
     onDeleteMain: function(event) {

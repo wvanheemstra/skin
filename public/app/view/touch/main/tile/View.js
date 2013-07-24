@@ -121,14 +121,12 @@ Ext.define("Skin.view.touch.main.tile.View", {
         defaults: {
             style: 'background: #fff',
             xtype: 'container'
-        }, 
+        },
 
         items: [
         	{
 	            title: 'Item 1',
 	            group: 'Group 1',
-		        // Mask this item when the container is opened
-	            maskOnOpen: true,
 	            // Enable the slide button using the defaults defined above in
 	            // `slideButtonDefaults`.
 	            slideButton: true,
@@ -163,43 +161,46 @@ Ext.define("Skin.view.touch.main.tile.View", {
 				                   }
 				               ]
 				           }//eof newMainButton
-				       ],//eof items
+				       ]//eof items 
 	            	},
-		            {
-		               xtype: "tileview",
-		               itemId: "tile",
-		               itemTpl: "{name}",
-		               autoScroll: true,
-		               emptyText: "No Mains"        	
-		            }
-//	            	,{
-//		                xtype: 'panel',
-//		                html: '<img src="resources/img/guide.jpg" width="100%" />',
-//		
-//		                // Mask this item when the container is opened
-//		                maskOnOpen: true
-//	            	}
+//		            ,{
+//		               xtype: "tileview",
+//		               itemId: "tile",
+//		               itemTpl: "<div class='contact'>{name}</div>",
+//		               onItemDisclosure: true,
+//		               autoScroll: true,
+//		               emptyText: "No Mains"       	
+//		            },// eof tileview
+	            	{
+		                xtype: 'panel',
+		                html: '<img src="resources/img/guide.jpg" width="100%" />',
+//						items:[{
+//			               xtype: "tileview",
+//			               itemId: "tile",
+//			               itemTpl: "{name}",
+//			               autoScroll: true,
+//			               emptyText: "No Mains"						
+//						}],
+		                // Mask this item when the container is opened
+		                maskOnOpen: true
+	            	}
             	]//eof items
         	},//eof Item 1
             {
 	            title: 'Item 2',
-	            group: 'Group 1',
-	            maskOnOpen: true        	
+	            group: 'Group 1'        	
         	},//eof Item 2
             {
 	            title: 'Item 3',
-	            group: 'Group 2',
-	            maskOnOpen: true        	
+	            group: 'Group 2'        	
         	},//eof Item 3
             {
 	            title: 'Item 4',
-	            group: 'Group 2',
-	            maskOnOpen: true        	
+	            group: 'Group 2'        	
         	},//eof Item 4 
             {
 	            title: 'Item 5',
 	            group: 'Group 3',
-	            maskOnOpen: true,
 	            slideButton: {
 	                selector: 'container',
 	                iconMask: false,
@@ -212,8 +213,7 @@ Ext.define("Skin.view.touch.main.tile.View", {
         	},//eof Item 5
             {
 	            title: 'Item 6',
-	            group: 'Group 3',
-	            maskOnOpen: true        	
+	            group: 'Group 3'        	
         	}//eof Item 6        	        	       	
         ]//eof items
     }//eof config
