@@ -41,7 +41,21 @@ api.post('/login', function(req, res){
   res.send(201);
 });
 
-app.configure(function(){
+/*
+ * DEVELOPMENT
+ *
+ * .bash_profile contains 
+ * NODE_ENV=development
+ *
+ * or start server as follows
+ * NODE_ENV=development node server.js
+ *
+ * on Windows use
+ * set NODE_ENV=development
+ * check with
+ * echo %NODE_ENV% 
+ */
+app.configure('development', function(){
     app.set('view engine', 'ejs');
     app.set('view options', { layout: true });
     app.set('views', __dirname + '/../public');
@@ -58,7 +72,46 @@ app.configure(function(){
     app.use('/resources', express.static(__dirname + '/../public/resources'));
     app.use('/app', express.static(__dirname + '/../public/app'));
     app.use(express.static(__dirname + '/../public')); // Fall back to this as a last resort
+    
+    app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); // specific for development
 });
+
+/*
+ * PRODUCTION
+ *
+ * .bash_profile contains
+ * NODE_ENV=production
+ *
+ * or start server as follows
+ * NODE_ENV=production node server.js
+ *
+ * on Windows use
+ * set NODE_ENV=production
+ * check with
+ * echo %NODE_ENV% 
+ */
+app.configure('production', function(){
+    app.set('view engine', 'ejs');
+    app.set('view options', { layout: true });
+    app.set('views', __dirname + '/../public');
+    
+    app.use(express.bodyParser());
+    app.use(express.methodOverride());
+    app.use(express.cookieParser());
+    app.use(device.capture());
+    
+    app.enableDeviceHelpers();
+    app.enableViewRouting();
+
+    app.use(app.router);
+    app.use('/resources', express.static(__dirname + '/../public/resources'));
+    app.use('/app', express.static(__dirname + '/../public/app'));
+    app.use(express.static(__dirname + '/../public')); // Fall back to this as a last resort
+    
+    app.use(express.errorHandler()); // specific for production
+});
+
+
 
 if(typeof configs.title === 'undefined'){
 	var title = 'Untitled';
