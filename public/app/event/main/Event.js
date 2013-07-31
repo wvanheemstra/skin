@@ -1,5 +1,5 @@
 /**
- * The main event contains data and event types to perform CRUD operations on ... .
+ * The main event contains data and event types to perform CRUD operations on mains.
  */
 Ext.define("Skin.event.main.Event", {
     extend: "FlowMVC.mvc.event.AbstractEvent",
@@ -95,7 +95,6 @@ Ext.define("Skin.event.main.Event", {
          * The delete main failure event type.
          */
         DELETE_MAIN_FAILURE:    "deleteMainFailure"
-    	
     },
 
     /**
@@ -105,7 +104,7 @@ Ext.define("Skin.event.main.Event", {
     id: null,
 
     /**
-     * @property {Skin.model.MainModel} main [readOnly=false]
+     * @property {Skin.model.main.Model} main [readOnly=false]
      * A main to perform CRUD actions on.
      */
     main: null,
@@ -115,7 +114,7 @@ Ext.define("Skin.event.main.Event", {
      *
      * @param {String} type The event type.
      * @param {Number} id The id of the main the CRUD operation is acting on.
-     * @param {Skin.model.MainModel} main The main the CRUD operation is acting on.     
+     * @param {Skin.model.main.Model} main The main the CRUD operation is acting on.     
      */
     constructor: function(type, id, main) {
         this.callParent(arguments);

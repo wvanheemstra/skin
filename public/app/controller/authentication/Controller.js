@@ -29,7 +29,7 @@ Ext.define("Skin.controller.authentication.Controller", {
 
     inject: [
         "authenticationService",
-        "mainStore",
+//        "mainStore",
         "employeeStore",
         "authenticationServiceClass",
         "logger"
@@ -99,7 +99,7 @@ Ext.define("Skin.controller.authentication.Controller", {
         this.logger.info("resetSessionData");
 
         this.setSessionToken(null);
-        this.mainStore.setData(null);
+//        this.mainStore.setData(null);
         this.employeeStore.setData(null);
     },
 
@@ -130,7 +130,7 @@ Ext.define("Skin.controller.authentication.Controller", {
      * @param {Object} response The response data packet from the failed service call.
      */
     loginFailure: function(response) {
-        console.warn("loginFailure");//WAS this.logger.warn("loginFailure");
+        this.logger.warn("loginFailure");
 
         this.resetSessionData();
 

@@ -38,6 +38,7 @@ Ext.define("Skin.view.touch.employee.detail.View", {
         items: [
             {
                 xtype: "titlebar",
+                itemId: "titlebar",
                 docked: "top",
                 plugins: [
                     {

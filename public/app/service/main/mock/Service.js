@@ -116,6 +116,5 @@ Ext.define("Skin.service.main.mock.Service", {
 
         response = Ext.create("Skin.model.main.Model", response.main);
         return this.delayedSuccess(response);
-    }    
-       
+    }      
 });

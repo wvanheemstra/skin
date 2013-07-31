@@ -32,10 +32,10 @@ Ext.onReady(function () {
     Ext.require([
         "Skin.service.authentication.Service",
         "Skin.service.authentication.mock.Service",
-        "Skin.service.main.Service",
-        "Skin.service.main.mock.Service",        
+//        "Skin.service.main.Service",
+//        "Skin.service.main.mock.Service",        
         "Skin.service.employee.mock.Service",
-        "Skin.store.main.Store",
+//        "Skin.store.main.Store",
         "Skin.store.employee.Store",
 
         "nineam.locale.LocaleManager",
@@ -59,14 +59,14 @@ Ext.onReady(function () {
         ////////////////////////////////////////////
         // IMPL
         ////////////////////////////////////////////
-        mainStore:				"Skin.store.main.Store",
+//        mainStore:				"Skin.store.main.Store",
         employeeStore:          "Skin.store.employee.Store",
 
         ////////////////////////////////////////////
         // MOCKS
         ////////////////////////////////////////////
         authenticationService:  "Skin.service.authentication.mock.Service",
-        mainService:			"Skin.service.main.mock.Service",
+//        mainService:			"Skin.service.main.mock.Service",
         employeeService:        "Skin.service.employee.mock.Service",
 
         authenticationServiceClass: {
@@ -98,7 +98,7 @@ Ext.application({
     // MODELS
     ////////////////////////////////////////////
     models: [
-    	"main.Model",
+//    	"main.Model",
         "employee.Model"
     ],
 
@@ -107,9 +107,9 @@ Ext.application({
     ////////////////////////////////////////////
     views: [
         "Skin.view.touch.login.View",
-        "Skin.view.touch.main.list.View",
-        "Skin.view.touch.main.tile.View",
-        "Skin.view.touch.main.detail.View",
+//        "Skin.view.touch.main.list.View",
+//        "Skin.view.touch.main.tile.View",
+//        "Skin.view.touch.main.detail.View",
         "Skin.view.touch.employee.list.View",
         "Skin.view.touch.employee.tile.View",
         "Skin.view.touch.employee.detail.View"
@@ -121,7 +121,7 @@ Ext.application({
     controllers:[
         "bootstrap.Controller",
         "authentication.Controller",
-        "main.Controller",
+//        "main.Controller",
         "employee.Controller"
     ],
 
@@ -167,9 +167,9 @@ Ext.application({
 
         Ext.Viewport.add([
             { xtype: "loginView" },
-            { xtype: "mainListView" },
-            { xtype: "mainTileView" },
-            { xtype: "mainDetailView" },
+//            { xtype: "mainListView" },
+//            { xtype: "mainTileView" },
+//            { xtype: "mainDetailView" },
             { xtype: "employeeListView" },
             { xtype: "employeeTileView" },
             { xtype: "employeeDetailView" }            

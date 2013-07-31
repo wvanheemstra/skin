@@ -32,6 +32,11 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
 
     // set up view event to mediator mapping
     control: {
+    	
+    	titlebar: {
+    		painted: "onPainted"
+    	},
+    	    	
         logoutButton: {
             tap: "onLogoutButtonTap"
         },
@@ -90,7 +95,7 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
             ? ": id = " + record.get("id") + ", employee = " + record.get("firstName")
             : "new employee";
         this.logger.debug("showEmployeeDetail = " + logMsg);
-
+		Skin.config.global.Config.setPreviousView('employeeListView');
         this.navigate(Skin.event.navigation.Event.ACTION_SHOW_EMPLOYEE_DETAIL);
         this.employeeStore.setSelectedRecord(record);
     },
@@ -100,11 +105,23 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
     ////////////////////////////////////////////////
 
     /**
+     * Handles the painted application-level event. Set the employee list view
+     * as the current view.
+     */    
+    onPainted: function() {
+    	Skin.config.global.Config.setCurrentView('employeeListView');
+    	this.logger.debug("current view: " + Skin.config.global.Config.getCurrentView());
+    },
+
+    /**
      * Handles the login success application-level event. Slide the employee list view
      * onto stage.
      */
     onLoginSuccess: function() {
         this.logger.debug("onLoginSuccess");
+        
+        console.log("next view: " + Skin.config.global.Config.getNextView()); // added by wvh, for testing only
+        
 		if(Skin.config.global.Config.getNextView()==='employeeListView') {
         	this.navigate(Skin.event.authentication.Event.LOGIN_SUCCESS);
         	this.getEmployeeListData();
@@ -116,7 +133,7 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
      */
     onGetEmployeeListSuccess: function() {
         this.logger.debug("onGetEmployeeListSuccess");
-
+		Skin.config.global.Config.setCurrentView('employeeListView');
         this.getView().setMasked(false);
         this.getList().setStore(this.employeeStore);
     },
@@ -138,19 +155,23 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
      * Handles the tap of the logout button. Dispatches the logout application-level event.
      */
     onLogoutButtonTap: function() {
-        this.logger.debug("onLogoutButtonTap");
-
-        var evt = Ext.create("Skin.event.authentication.Event", Skin.event.authentication.Event.LOGOUT);
-        this.eventBus.dispatchGlobalEvent(evt);
+    	if(Skin.config.global.Config.getCurrentView()==='employeeListView') {      	
+	        this.logger.debug("onLogoutButtonTap");
+	
+	        var evt = Ext.create("Skin.event.authentication.Event", Skin.event.authentication.Event.LOGOUT);
+	        this.eventBus.dispatchGlobalEvent(evt);
+    	}//eof if	        
     },
 
     /**
      * Handles the tap of the new employee button. Shows the employee detail view.
      */
     onNewEmployeeButtonTap: function() {
-        this.logger.debug("onNewEmployeeButtonTap");
-
-        this.showEmployeeDetail();
+    	if(Skin.config.global.Config.getCurrentView()==='employeeListView') {     	
+	        this.logger.debug("onNewEmployeeButtonTap");
+	
+	        this.showEmployeeDetail();
+    	}//eof if
     },
 
     /**
@@ -165,20 +186,24 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
      * @param {Object} options ???
      */
     onListDisclose: function(list, record, target, index, evt, options) {
-        this.logger.debug("onListDisclose");
-
-        this.employeeStore.setSelectedRecord(record);
-        this.showEmployeeDetail(record);
+    	if(Skin.config.global.Config.getCurrentView()==='employeeListView') {      	
+	        this.logger.debug("onListDisclose");
+	
+	        this.employeeStore.setSelectedRecord(record);
+	        this.showEmployeeDetail(record);
+    	}//eof if
     },
 
     /**
      * Handles the clear icon tap event on the search field. Clears all filter on the list's store.
      */
     onSearchClearIconTap: function() {
-        this.logger.debug("onSearchClearIconTap");
-
-        var store = this.getList().getStore();
-        store.clearFilter();
+    	if(Skin.config.global.Config.getCurrentView()==='employeeListView') {    	
+	        this.logger.debug("onSearchClearIconTap");
+	
+	        var store = this.getList().getStore();
+	        store.clearFilter();
+    	}//eof if        
     },
 
     /**
@@ -190,57 +215,58 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
      * TODO: BMR: 02/28/13: clean this up. pulled directly from another example with minor changes: http://www.phs4j.com/2012/05/add-a-searchfield-to-a-sencha-touch-2-list-mvc/
      */
     onSearchKeyUp: function(field) {
-        this.logger.debug("onSearchKeyUp");
-
-        //get the store and the value of the field
-        var value = field.getValue();
-        var store = this.getList().getStore();
-
-        //first clear any current filters on the store
-        store.clearFilter();
-
-        //check if a value is set first, as if it isn't we don't have to do anything
-        if (value) {
-            //the user could have entered spaces, so we must split them so we can loop through them all
-            var searches = value.split(" "),
-                regexps = [],
-                i;
-
-            //loop them all
-            for (i = 0; i < searches.length; i++) {
-                //if it is nothing, continue
-                if (!searches[i]) continue;
-
-
-                //if found, create a new regular expression which is case insenstive
-                regexps.push(new RegExp(searches[i], "i"));
-            }
-
-            //now filter the store by passing a method
-            //the passed method will be called for each record in the store
-            store.filter(function(record) {
-                var matched = [];
-
-                //loop through each of the regular expressions
-                for (i = 0; i < regexps.length; i++) {
-                    var search = regexps[i],
-                        didMatch = record.get("firstName").match(search) ||
-                            record.get("lastName").match(search);
-
-                    //if it matched the first or last name, push it into the matches array
-                    matched.push(didMatch);
-                }
-
-                //if nothing was found, return false (dont so in the store)
-                if (regexps.length > 1 && matched.indexOf(false) != -1) {
-                    return false;
-                } else {
-                    //else true true (show in the store)
-                    return matched[0];
-                }
-            });
-        }
+    	if(Skin.config.global.Config.getCurrentView()==='employeeListView') {
+	        this.logger.debug("onSearchKeyUp");
+	
+	        //get the store and the value of the field
+	        var value = field.getValue();
+	        var store = this.getList().getStore();
+	
+	        //first clear any current filters on the store
+	        store.clearFilter();
+	
+	        //check if a value is set first, as if it isn't we don't have to do anything
+	        if (value) {
+	            //the user could have entered spaces, so we must split them so we can loop through them all
+	            var searches = value.split(" "),
+	                regexps = [],
+	                i;
+	
+	            //loop them all
+	            for (i = 0; i < searches.length; i++) {
+	                //if it is nothing, continue
+	                if (!searches[i]) continue;
+	
+	
+	                //if found, create a new regular expression which is case insenstive
+	                regexps.push(new RegExp(searches[i], "i"));
+	            }
+	
+	            //now filter the store by passing a method
+	            //the passed method will be called for each record in the store
+	            store.filter(function(record) {
+	                var matched = [];
+	
+	                //loop through each of the regular expressions
+	                for (i = 0; i < regexps.length; i++) {
+	                    var search = regexps[i],
+	                        didMatch = record.get("firstName").match(search) ||
+	                            record.get("lastName").match(search);
+	
+	                    //if it matched the first or last name, push it into the matches array
+	                    matched.push(didMatch);
+	                }
+	
+	                //if nothing was found, return false (dont so in the store)
+	                if (regexps.length > 1 && matched.indexOf(false) != -1) {
+	                    return false;
+	                } else {
+	                    //else true true (show in the store)
+	                    return matched[0];
+	                }
+	            });
+	        }
+    	}//eof if
     }
-
 });
 

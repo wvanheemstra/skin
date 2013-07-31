@@ -31,7 +31,8 @@ Ext.define("Skin.view.touch.employee.list.View", {
     requires: [
         "Ext.TitleBar",
         "Ext.dataview.List",
-        "Ext.field.Search"
+        "Ext.field.Search",
+        "Skin.view.touch.component.ListView"
     ],
 
     config: {
@@ -43,6 +44,7 @@ Ext.define("Skin.view.touch.employee.list.View", {
         items: [
             {
                 xtype: "titlebar",
+                itemId: "titlebar",
                 docked: "top",
                 plugins: [
                     {
@@ -81,10 +83,11 @@ Ext.define("Skin.view.touch.employee.list.View", {
             },
             {
                 xtype: "list",
+                //xtype: "listview",
                 itemId: "list",
                 fullscreen: true,
                 itemTpl: "<div class='contact'>{firstName} <strong>{lastName}</strong></div>",
-                grouped: true,
+                grouped: false,// WAS true, grouped currently causes an error
                 onItemDisclosure: true,
                 plugins: [
                     {

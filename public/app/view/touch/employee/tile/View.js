@@ -32,7 +32,7 @@ Ext.define("Skin.view.touch.employee.tile.View", {
         "Ext.TitleBar",
         "Ext.dataview.List",
         "Ext.field.Search",
-        "Skin.view.touch.component.TileView"
+        //"Skin.view.touch.component.TileView"
     ],
 
     config: {
@@ -44,6 +44,7 @@ Ext.define("Skin.view.touch.employee.tile.View", {
         items: [
             {
                 xtype: "titlebar",
+                itemId: "titlebar",
                 docked: "top",
                 plugins: [
                     {
@@ -79,7 +80,8 @@ Ext.define("Skin.view.touch.employee.tile.View", {
                         ]
                     }
                 ]
-            },           
+            }, 
+/*                      
             {
                 xtype: "tileview",
                 itemId: "tile",
@@ -87,13 +89,13 @@ Ext.define("Skin.view.touch.employee.tile.View", {
                 autoScroll: true,
                 emptyText: "No Employees"        	
             }
- /*
+ */           
             {
                 xtype: "list",
                 itemId: "tile",
                 fullscreen: true,
                 itemTpl: "<div class='contact'>{firstName} <strong>{lastName}</strong></div>",
-                grouped: true,
+                grouped: false, // WAS true, but this causes an error
                 onItemDisclosure: true,
                 plugins: [
                     {
@@ -124,8 +126,8 @@ Ext.define("Skin.view.touch.employee.tile.View", {
                         ]
                     }
                 ]
-            }// eof list 
-*/                      
+            }// eof list                      
         ]
-    }
+    }// eof config
+
 });

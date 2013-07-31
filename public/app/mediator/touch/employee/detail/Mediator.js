@@ -33,6 +33,11 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
 
     // set up view event to mediator mapping
     control: {
+    	
+    	titlebar: {
+    		painted: "onPainted"
+    	},    	
+    	
         backButton: {
             tap: "onBackButtonTap"
         },
@@ -125,6 +130,9 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
      * Simple navigation method used to navigate back, depending on the previous view.
      */
     backToPrevious: function() {
+    	
+    	this.logger.debug("previous view: "+Skin.config.global.Config.getPreviousView());
+    	
         switch(Skin.config.global.Config.getPreviousView()) {
             case 'employeeListView':
             	this.backToEmployeeList();
@@ -169,6 +177,15 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
     ////////////////////////////////////////////////
 
     /**
+     * Handles the painted application-level event. Set the employee detail view
+     * as the current view.
+     */    
+    onPainted: function() {
+    	Skin.config.global.Config.setCurrentView('employeeDetailView');
+    	this.logger.debug("current view: " + Skin.config.global.Config.getCurrentView());
+    },
+
+    /**
      * Handles the create employee success application-level event. Navigates back to the employee list view.
      */
     onCreateEmployeeSuccess: function() {
@@ -195,7 +212,7 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
         this.logger.debug("onDeleteEmployeeSuccess");
 
         this.reset();
-        this.backToPrevious(); // WAS this.backToEmployeeList();
+        this.backToPrevious();
     },
 
     /**

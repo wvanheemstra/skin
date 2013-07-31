@@ -35,7 +35,7 @@ Ext.define("Skin.mediator.touch.main.tile.Mediator", {
         
         tile: {
             disclose: "onTileDisclose"
-        },
+        }
 
     },
 

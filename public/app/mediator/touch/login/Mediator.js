@@ -36,7 +36,8 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
     // set up view event to mediator mapping
     control: {
         logInButton: {
-            tap: "onLoginButtonTap"
+            tap: "onLoginButtonTap",
+            painted: "onPainted"
         },
         usernameTextField:      true,
         passwordTextField:      true,
@@ -118,12 +119,21 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
     ////////////////////////////////////////////////
 
     /**
+     * Handles the painted application-level event. Set the login view
+     * as the current view.
+     */    
+    onPainted: function() {
+    	Skin.config.global.Config.setCurrentView('loginView');
+    	this.logger.debug("current view: " + Skin.config.global.Config.getCurrentView());
+    },
+
+    /**
      * Handles the login success event from the login controller. Removes the loading mask from the view.
      */
     onLoginSuccess: function() {
         this.logger.debug("onLoginSuccess");
 
-		Skin.config.global.Config.setNextView('mainListView'); // added by wvh, sets the next view to go to from here
+		Skin.config.global.Config.setNextView('employeeTileView'); // added by wvh, sets the next view to go to from here
 
         var view = this.getView();
         view.setMasked(false);
