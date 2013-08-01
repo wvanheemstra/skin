@@ -1,5 +1,5 @@
 /**
- * The list of mains view for the application.
+ * The list of tile view for the application.
  *
  * <p>
  * All views are purely layout and don't contain event handling,
@@ -15,7 +15,7 @@ Ext.define("Skin.view.touch.main.tile.View", {
         "Ext.TitleBar",
         "Ext.dataview.List",
         "Ext.field.Search",
-        "Skin.view.touch.component.TileView"
+        //"Skin.view.touch.component.TileView"
     ],
 
     config: {
@@ -23,10 +23,11 @@ Ext.define("Skin.view.touch.main.tile.View", {
         layout: {
             type: "fit"
         },
-
+        
         items: [
             {
                 xtype: "titlebar",
+                itemId: "titlebar",
                 docked: "top",
                 plugins: [
                     {
@@ -62,15 +63,54 @@ Ext.define("Skin.view.touch.main.tile.View", {
                         ]
                     }
                 ]
-            },           
+            }, 
+/*                      
             {
                 xtype: "tileview",
                 itemId: "tile",
                 itemTpl: "{name}",
                 autoScroll: true,
-                emptyText: "No Mains"      	
+                emptyText: "No Mains"        	
             }
-                     
+ */           
+            {
+                xtype: "list",
+                itemId: "tile",
+                fullscreen: true,
+                itemTpl: "<div class='contact'>{name}</div>",
+                grouped: false, // WAS true, but this causes an error
+                onItemDisclosure: true,
+                plugins: [
+                    {
+                        type: "localization",
+                        method: "setLoadingText",
+                        key: "mainTile.loading"
+                    },
+                    {
+                        type: "localization",
+                        method: "setEmptyText",
+                        key: "mainTile.noMains"
+                    }
+                ],
+
+                items: [
+                    {
+                        xtype: "titlebar" ,
+                        itemId:"titlebar",
+                        id:"titlebar",
+                        docked: "top",
+
+                        items: [
+                            {
+                                xtype: "searchfield" ,
+                                itemId:"searchInput",
+                                id:"searchInput"
+                            }
+                        ]
+                    }
+                ]
+            }// eof list                      
         ]
-    }
+    }// eof config
+
 });

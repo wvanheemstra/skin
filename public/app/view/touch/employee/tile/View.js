@@ -45,6 +45,7 @@ Ext.define("Skin.view.touch.employee.tile.View", {
             {
                 xtype: "titlebar",
                 itemId: "titlebar",
+                ui: "neutral",
                 docked: "top",
                 plugins: [
                     {
@@ -70,7 +71,7 @@ Ext.define("Skin.view.touch.employee.tile.View", {
                         xtype: "button",
                         itemId: "newEmployeeButton",
                         align: "right",
-                        ui: "action",
+                        ui: "neutral", // WAS action
                         plugins: [
                             {
                                 type: "localization",
@@ -93,6 +94,7 @@ Ext.define("Skin.view.touch.employee.tile.View", {
             {
                 xtype: "list",
                 itemId: "tile",
+                ui: "neutral",
                 fullscreen: true,
                 itemTpl: "<div class='contact'>{firstName} <strong>{lastName}</strong></div>",
                 grouped: false, // WAS true, but this causes an error
@@ -116,6 +118,7 @@ Ext.define("Skin.view.touch.employee.tile.View", {
                         itemId:"titlebar",
                         id:"titlebar",
                         docked: "top",
+                        ui: "neutral",
 
                         items: [
                             {

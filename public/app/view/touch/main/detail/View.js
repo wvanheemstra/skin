@@ -21,6 +21,7 @@ Ext.define("Skin.view.touch.main.detail.View", {
         items: [
             {
                 xtype: "titlebar",
+                itemId: "titlebar",
                 docked: "top",
                 plugins: [
                     {

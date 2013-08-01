@@ -39,6 +39,7 @@ Ext.define("Skin.view.touch.employee.detail.View", {
             {
                 xtype: "titlebar",
                 itemId: "titlebar",
+                ui: "neutral",
                 docked: "top",
                 plugins: [
                     {
@@ -64,7 +65,7 @@ Ext.define("Skin.view.touch.employee.detail.View", {
                         xtype: "button",
                         itemId: "saveEmployeeButton",
                         align: "right",
-                        ui: "action",
+                        ui: "neutral", // WAS action
                         plugins: [
                             {
                                 type: "localization",
@@ -124,7 +125,7 @@ Ext.define("Skin.view.touch.employee.detail.View", {
                 xtype: "button",
                 itemId: "deleteButton",
                 align: "center",
-                ui: "action",
+                ui: "neutral", // WAS action
                 plugins: [
                     {
                         type: "localization",

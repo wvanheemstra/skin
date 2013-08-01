@@ -62,6 +62,8 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
 
+        this.eventBus.addGlobalEventListener(Skin.event.ui.Event.SET_UI_SUCCESS, this.onSetUISuccess, this);
+
         this.eventBus.addGlobalEventListener(Skin.event.authentication.Event.LOGIN_SUCCESS, this.onLoginSuccess, this);
 
         this.eventBus.addGlobalEventListener(Skin.event.employee.Event.GET_EMPLOYEE_LIST_SUCCESS, this.onGetEmployeeListSuccess, this);
@@ -99,6 +101,15 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
         this.navigate(Skin.event.navigation.Event.ACTION_SHOW_EMPLOYEE_DETAIL);
         this.employeeStore.setSelectedRecord(record);
     },
+    
+    /**
+     * Handles the set UI event. 
+     *
+     */
+    setUI: function() {
+    	Ext.getCmp('titlebar').ui = Skin.config.global.Config.getUi();
+    	this.logger.debug("current ui: " + Skin.config.global.Config.getUi());
+    },     
 
     ////////////////////////////////////////////////
     // EVENT BUS HANDLERS
@@ -120,7 +131,7 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
     onLoginSuccess: function() {
         this.logger.debug("onLoginSuccess");
         
-        console.log("next view: " + Skin.config.global.Config.getNextView()); // added by wvh, for testing only
+        this.logger.debug("next view: " + Skin.config.global.Config.getNextView()); // added by wvh, for testing only
         
 		if(Skin.config.global.Config.getNextView()==='employeeListView') {
         	this.navigate(Skin.event.authentication.Event.LOGIN_SUCCESS);
@@ -129,11 +140,20 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
     },
 
     /**
+     * Handles the set ui success application-level event. Update the components for the ui.
+     */
+    onSetUISuccess: function() {
+        this.logger.debug("onSetUISuccess");
+        this.logger.debug("ui: " + Skin.config.global.Config.getUi()); // added by wvh, for testing only
+        this.setUI();
+    },
+
+    /**
      * Handles the get employees application-level event.
      */
     onGetEmployeeListSuccess: function() {
         this.logger.debug("onGetEmployeeListSuccess");
-		Skin.config.global.Config.setCurrentView('employeeListView');
+
         this.getView().setMasked(false);
         this.getList().setStore(this.employeeStore);
     },

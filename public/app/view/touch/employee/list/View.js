@@ -45,6 +45,7 @@ Ext.define("Skin.view.touch.employee.list.View", {
             {
                 xtype: "titlebar",
                 itemId: "titlebar",
+                ui: "neutral",
                 docked: "top",
                 plugins: [
                     {
@@ -70,7 +71,7 @@ Ext.define("Skin.view.touch.employee.list.View", {
                         xtype: "button",
                         itemId: "newEmployeeButton",
                         align: "right",
-                        ui: "action",
+                        ui: "neutral", // WAS action
                         plugins: [
                             {
                                 type: "localization",
@@ -86,6 +87,7 @@ Ext.define("Skin.view.touch.employee.list.View", {
                 //xtype: "listview",
                 itemId: "list",
                 fullscreen: true,
+                ui: "neutral",
                 itemTpl: "<div class='contact'>{firstName} <strong>{lastName}</strong></div>",
                 grouped: false,// WAS true, grouped currently causes an error
                 onItemDisclosure: true,
@@ -107,13 +109,14 @@ Ext.define("Skin.view.touch.employee.list.View", {
                         xtype: "titlebar" ,
                         itemId:"titlebar",
                         id:"titlebar",
+                        ui: "neutral",
                         docked: "top",
 
                         items: [
                             {
                                 xtype: "searchfield" ,
                                 itemId:"searchInput",
-                                id:"searchInput"
+                                id: "searchInput"
                             }
                         ]
                     }

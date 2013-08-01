@@ -63,6 +63,8 @@ Ext.define("Skin.mediator.touch.employee.tile.Mediator", {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
 
+		this.eventBus.addGlobalEventListener(Skin.event.ui.Event.SET_UI_SUCCESS, this.onSetUISuccess, this);
+		
         this.eventBus.addGlobalEventListener(Skin.event.authentication.Event.LOGIN_SUCCESS, this.onLoginSuccess, this);
 
         this.eventBus.addGlobalEventListener(Skin.event.employee.Event.GET_EMPLOYEE_TILE_SUCCESS, this.onGetEmployeeTileSuccess, this);
@@ -100,10 +102,29 @@ Ext.define("Skin.mediator.touch.employee.tile.Mediator", {
         this.navigate(Skin.event.navigation.Event.ACTION_SHOW_EMPLOYEE_DETAIL);
         this.employeeStore.setSelectedRecord(record);
     },
+    
+    /**
+     * Handles the set UI event. 
+     *
+     */
+    setUI: function() {
+    	Ext.getCmp('titlebar').ui = Skin.config.global.Config.getUi();
+    	this.logger.debug("current ui: " + Skin.config.global.Config.getUi());
+    },    
 
     ////////////////////////////////////////////////
     // EVENT BUS HANDLERS
     ////////////////////////////////////////////////
+
+    /**
+     * Handles the initialize application-level event. Set the ui of the component(s).
+     * 
+     */    
+    onInitialize: function() {
+    	//Ext.getCmp('titlebar').ui = Skin.config.global.Config.getUi();
+    	alert('Hello.. the toolbar is initialized!!');
+    	this.logger.debug("current ui: " + Skin.config.global.Config.getUi());
+    },
 
     /**
      * Handles the painted application-level event. Set the employee tile view
@@ -124,11 +145,25 @@ Ext.define("Skin.mediator.touch.employee.tile.Mediator", {
         console.log("next view: " + Skin.config.global.Config.getNextView()); // added by wvh, for testing only
                 
 		if(Skin.config.global.Config.getNextView()==='employeeTileView') {
+			
+			
+			this.setUI('titlebar');
+			
+			
         	this.navigate(Skin.event.authentication.Event.LOGIN_SUCCESS);
         	this.getEmployeeTileData();
 		}
     },
-
+    
+    /**
+     * Handles the set ui success application-level event. Update the components for the ui.
+     */
+    onSetUISuccess: function() {
+        this.logger.debug("onSetUISuccess");
+        this.logger.debug("ui: " + Skin.config.global.Config.getUi()); // added by wvh, for testing only
+        this.setUI();
+    },    
+    
     /**
      * Handles the get employees application-level event.
      */

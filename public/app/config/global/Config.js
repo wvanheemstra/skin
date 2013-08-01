@@ -11,10 +11,11 @@
 Ext.define("Skin.config.global.Config",{
     singleton : true,
     config : {
-        myLastCustomer : 0,   // initialize to 0
+        //myLastCustomer : 0,   // initialize to 0
         previousView : '',    // initialize to empty
         currentView : '',     // initialize to empty
-        nextView : ''         // initialize to empty
+        nextView : '',        // initialize to empty
+        ui: '',        	  	  // initialize to empty
     },
     constructor : function(config){
         this.initConfig(config);

@@ -28,12 +28,12 @@ Ext.define("Skin.event.navigation.Event", {
         LEFT:                               "navigateLeft",
 
         ACTION_BACK_SHOW_EMPLOYEE_LIST:     "actionBackShowEmployeeList",
-//        ACTION_BACK_SHOW_EMPLOYEE_TILE:     "actionBackShowEmployeeTile",
-        ACTION_SHOW_EMPLOYEE_DETAIL:        "actionShowEmployeeDetail"//,
+        ACTION_BACK_SHOW_EMPLOYEE_TILE:     "actionBackShowEmployeeTile",
+        ACTION_SHOW_EMPLOYEE_DETAIL:        "actionShowEmployeeDetail",
         
-//        ACTION_BACK_SHOW_MAIN_LIST:     "actionBackShowMainList",
-//        ACTION_BACK_SHOW_MAIN_TILE:     "actionBackShowMainTile",
-//        ACTION_SHOW_MAIN_DETAIL:        "actionShowMainDetail"        
+        ACTION_BACK_SHOW_MAIN_LIST:     "actionBackShowMainList",
+        ACTION_BACK_SHOW_MAIN_TILE:     "actionBackShowMainTile",
+        ACTION_SHOW_MAIN_DETAIL:        "actionShowMainDetail"        
     },
 
     action: "",

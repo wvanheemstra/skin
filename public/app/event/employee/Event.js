@@ -121,7 +121,7 @@ Ext.define("Skin.event.employee.Event", {
     id: null,
 
     /**
-     * @property {Skin.model.EmployeeModel} employee [readOnly=false]
+     * @property {Skin.model.employee.Model} employee [readOnly=false]
      * An employee to perform CRUD actions on.
      */
     employee: null,
@@ -130,8 +130,8 @@ Ext.define("Skin.event.employee.Event", {
      * Constructor. Allows the username and password for authentication to be set on the event.
      *
      * @param {String} type The event type.
-     * @param {Number} id The id of the employee the CRUD operation is acting on.
-     * @param {Skin.model.EmployeeModel} employee The employee the CRUD operation is acting on.
+     * @param {Number} id The id of the employee or ui the CRUD operation is acting on.
+     * @param {Skin.model.employee.Model} employee The employee the CRUD operation is acting on.
      */
     constructor: function(type, id, employee) {
         this.callParent(arguments);

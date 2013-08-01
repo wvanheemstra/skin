@@ -1,5 +1,5 @@
 /**
- * The list of mains view for the application.
+ * The list of main view for the application.
  *
  * <p>
  * All views are purely layout and don't contain event handling,
@@ -14,91 +14,94 @@ Ext.define("Skin.view.touch.main.list.View", {
     requires: [
         "Ext.TitleBar",
         "Ext.dataview.List",
-        "Ext.field.Search"
+        "Ext.field.Search",
+        "Skin.view.touch.component.ListView"
     ],
 
     config: {
 
         layout: {
-             type: "fit"
+            type: "fit"
         },
 
-		items: [
-	        {
-	            xtype: "titlebar",
-	            docked: "top",
-	            plugins: [
-	                {
-	                    type: "localization",
-	                    method: "setTitle",
-	                    key: "mainList.title"
-	                }
-	            ],
-	            items: [
-	                {
-	                    xtype: "button",
-	                    itemId: "logoutButton",
-	                    align: "left",
-	                    plugins: [
-	                        {
-	                            type: "localization",
-	                            method: "setText",
-	                            key: "mainList.logOff"
-	                        }
-	                    ]
-	                },
-	                {
-	                    xtype: "button",
-	                    itemId: "newMainButton",
-	                    align: "right",
-	                    ui: "action",
-	                    plugins: [
-	                        {
-	                            type: "localization",
-	                            method: "setText",
-	                            key: "mainList.new"
-	                        }
-	                    ]
-	                }
-	            ]
-	        },
-	        {
-	            xtype: "list",
-	            itemId: "list",
-	            fullscreen: true,
-	            itemTpl: "<div class='contact'>{name}</div>",
-	            grouped: true,
-	            onItemDisclosure: true,
-	            plugins: [
-	                {
-	                    type: "localization",
-	                    method: "setLoadingText",
-	                    key: "mainList.loading"
-	                },
-	                {
-	                    type: "localization",
-	                    method: "setEmptyText",
-	                    key: "mainList.noMains"
-	                }
-	            ],
+        items: [
+            {
+                xtype: "titlebar",
+                itemId: "titlebar",
+                docked: "top",
+                plugins: [
+                    {
+                        type: "localization",
+                        method: "setTitle",
+                        key: "mainList.title"
+                    }
+                ],
+                items: [
+                    {
+                        xtype: "button",
+                        itemId: "logoutButton",
+                        align: "left",
+                        plugins: [
+                            {
+                                type: "localization",
+                                method: "setText",
+                                key: "mainList.logOff"
+                            }
+                        ]
+                    },
+                    {
+                        xtype: "button",
+                        itemId: "newMainButton",
+                        align: "right",
+                        ui: "action",
+                        plugins: [
+                            {
+                                type: "localization",
+                                method: "setText",
+                                key: "mainList.new"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                xtype: "list",
+                //xtype: "listview",
+                itemId: "list",
+                fullscreen: true,
+                itemTpl: "<div class='contact'>{name}</div>",
+                grouped: false,// WAS true, grouped currently causes an error
+                onItemDisclosure: true,
+                plugins: [
+                    {
+                        type: "localization",
+                        method: "setLoadingText",
+                        key: "mainList.loading"
+                    },
+                    {
+                        type: "localization",
+                        method: "setEmptyText",
+                        key: "mainList.noMains"
+                    }
+                ],
 
-	            items: [
-	                {
-	                    xtype: "titlebar" ,
-	                    itemId:"titlebar",
-	                    id:"titlebar",
-	                    docked: "top",
+                items: [
+                    {
+                        xtype: "titlebar" ,
+                        itemId:"titlebar",
+                        id:"titlebar",
+                        docked: "top",
 
-	                    items: [
-	                        {
-	                            xtype: "searchfield" ,
-	                            itemId:"searchInput",
-	                            id:"searchInput"
-	                        }
-	                    ]
-	                }
-	            ]
-	        }
-	    ]
-	}
+                        items: [
+                            {
+                                xtype: "searchfield" ,
+                                itemId:"searchInput",
+                                id:"searchInput"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
 });

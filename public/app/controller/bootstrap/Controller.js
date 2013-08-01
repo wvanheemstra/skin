@@ -65,14 +65,22 @@ Ext.define("Skin.controller.bootstrap.Controller", {
 
         var locales = Ext.create("nineam.locale.store.LocalesStore", {
             data: [
-                {id: "en_us", label: "English", url: "locale/en_us.json"},
-                {id: "es_us", label: "Spanish", url: "locale/es_us.json"}
+                {id: "en_uk", label: "English UK", url: "locale/en_uk.json"},
+                {id: "en_us", label: "English US", url: "locale/en_us.json"},
+                {id: "es_us", label: "Spanish", url: "locale/es_us.json"},
+                {id: "nl_nl", label: "Dutch", url: "locale/nl_nl.json"},
+                {id: "de_de", label: "Deutsch", url: "locale/de_de.json"}
             ]
         });
         lm.setLocales(locales);
 
         var locale = lm.getPersistedLocale();
-        locale = locale ? locale : "en_us";
+        
+        
+        this.logger.debug("locale: " + locale);
+        
+        
+        locale = locale ? locale : "en_uk";
         this.logger.debug("initLocaleManager: locale = " + locale);
         lm.setLocale(locale);
     },

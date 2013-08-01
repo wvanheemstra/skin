@@ -29,7 +29,7 @@ Ext.define("Skin.controller.authentication.Controller", {
 
     inject: [
         "authenticationService",
-//        "mainStore",
+        "mainStore",
         "employeeStore",
         "authenticationServiceClass",
         "logger"
@@ -99,7 +99,7 @@ Ext.define("Skin.controller.authentication.Controller", {
         this.logger.info("resetSessionData");
 
         this.setSessionToken(null);
-//        this.mainStore.setData(null);
+        this.mainStore.setData(null);
         this.employeeStore.setData(null);
     },
 

@@ -16,6 +16,11 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
 
     // set up view event to mediator mapping
     control: {
+	
+    	titlebar: {
+    		painted: "onPainted"
+    	},
+	
         backButton: {
             tap: "onBackButtonTap"
         },
@@ -108,6 +113,9 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
      * Simple navigation method used to navigate back, depending on the previous view.
      */
     backToPrevious: function() {
+	
+    	this.logger.debug("previous view: "+Skin.config.global.Config.getPreviousView());	
+	
         switch(Skin.config.global.Config.getPreviousView()) {
             case 'mainListView':
             	this.backToMainList();
@@ -150,6 +158,15 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
     ////////////////////////////////////////////////
     // EVENT BUS HANDLERS
     ////////////////////////////////////////////////
+
+    /**
+     * Handles the painted application-level event. Set the main detail view
+     * as the current view.
+     */    
+    onPainted: function() {
+    	Skin.config.global.Config.setCurrentView('mainDetailView');
+    	this.logger.debug("current view: " + Skin.config.global.Config.getCurrentView());
+    },
 
     /**
      * Handles the create main success application-level event. Navigates back to the main view.

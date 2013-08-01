@@ -27,6 +27,7 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
     extend: "Skin.mediator.abstract.Mediator",
 
     requires: [
+        "Skin.event.ui.Event",    
         "Skin.event.authentication.Event",
         "Skin.event.navigation.Event"
     ],
@@ -38,9 +39,9 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
     config: {
         // create references to this mediator's views so we can listen to events and grab data from them
         loginView:              "loginView",
-//        mainListView:			"mainListView",
-//        mainTileView:			"mainTileView",
-//        mainDetailView:		"mainDetailView",
+        mainListView:			"mainListView",
+        mainTileView:			"mainTileView",
+        mainDetailView:		    "mainDetailView",
         employeeListView:       "employeeListView",
         employeeTileView:       "employeeTileView",
         employeeDetailView:     "employeeDetailView"
@@ -69,7 +70,7 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
     },
 
     /**
-     * Maps the current application action like login, logout, show a view, etc and navigates to a
+     * Maps the current application action like ui, login, logout, show a view, etc and navigates to a
      * corresponding view.
      *
      * @param action    The current application-level action.
@@ -81,6 +82,10 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
         var direction;
 
         switch(action) {
+            case Skin.event.ui.Event.SET_UI_SUCCESS:
+                console.log("ui: "+ Skin.config.global.Config.getUi());
+                break;        	
+
             case Skin.event.authentication.Event.LOGIN_SUCCESS:
             	// HERE WE GET WHICH VIEW TO GO TO
                 console.log("next view: "+ Skin.config.global.Config.getNextView()); // added by wvh, for testing only
@@ -96,20 +101,20 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
                 direction = this.getSlideRightTransition();
                 break;
 
-//            case Skin.event.navigation.Event.ACTION_SHOW_MAIN_DETAIL:
-//                view = this.getMainDetailView();
-//                direction = this.getSlideLeftTransition();
-//                break;
-//
-//            case Skin.event.navigation.Event.ACTION_BACK_SHOW_MAIN_LIST:
-//                view = this.getMainListView();
-//                direction = this.getSlideRightTransition();
-//                break;
-//                
-//            case Skin.event.navigation.Event.ACTION_BACK_SHOW_MAIN_TILE:
-//                view = this.getMainTileView();
-//                direction = this.getSlideRightTransition();
-//                break;
+            case Skin.event.navigation.Event.ACTION_SHOW_MAIN_DETAIL:
+                view = this.getMainDetailView();
+                direction = this.getSlideLeftTransition();
+                break;
+
+            case Skin.event.navigation.Event.ACTION_BACK_SHOW_MAIN_LIST:
+                view = this.getMainListView();
+                direction = this.getSlideRightTransition();
+                break;
+                
+            case Skin.event.navigation.Event.ACTION_BACK_SHOW_MAIN_TILE:
+                view = this.getMainTileView();
+                direction = this.getSlideRightTransition();
+                break;
 
             case Skin.event.navigation.Event.ACTION_SHOW_EMPLOYEE_DETAIL:
                 view = this.getEmployeeDetailView();

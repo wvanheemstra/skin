@@ -81,6 +81,21 @@ Ext.define("Skin.view.touch.login.View", {
                                 key: "login.password"
                             }
                         ]
+                    },
+                    {
+                        xtype: "textfield",
+                        itemId: "uiTextField",
+                        name: "uiTextField",
+                        required: true,
+                        hidden: true,
+                        value: "neutral", // make configurable
+                        plugins: [
+                            {
+                                type: "localization",
+                                method: "setPlaceHolder",
+                                key: "login.ui"
+                            }
+                        ]
                     }
                 ]
             },
@@ -97,7 +112,7 @@ Ext.define("Skin.view.touch.login.View", {
             {
                 xtype: "button",
                 itemId: "logInButton",
-                ui: "action",
+                ui: "neutral", // WAS action
                 padding: "10px",
                 plugins: [
                     {
