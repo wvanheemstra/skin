@@ -1,7 +1,7 @@
 /**
- * The mock ui service object.
+ * The mock company service object.
  */
-Ext.define("Skin.service.ui.mock.Service", {
+Ext.define("Skin.service.company.mock.Service", {
     extend: "FlowMVC.mvc.service.mock.AbstractServiceMock",
 
     inject: [
@@ -9,24 +9,24 @@ Ext.define("Skin.service.ui.mock.Service", {
     ],
 
     /**
-     * The mock ui service call.
+     * The mock company service call.
      *
-     * @param {String} ui The ui being set.
+     * @param {String} company The company being set.
      */
-    set: function(ui) {
-        this.logger.debug("set: ui = " + ui);
+    set: function(company) {
+        this.logger.debug("set: company = " + company);
 
         if(
-	        (ui == "dark") ||
-		    (ui == "light") ||
-            (ui == "neutral")
+	        (company == "Your Company") ||
+		    (company == "Caledonia") ||
+            (company == "van Heemstra Pictures")
             ) {
 
             var response = {
                 success: true,
-                sessionToken: "qwerty0987654321",
-                ui: {
-                    ui:"neutral"
+                sessionToken: "qwerty1357908642",
+                company: {
+                    company:"Your Company"
                 }
             };
 
