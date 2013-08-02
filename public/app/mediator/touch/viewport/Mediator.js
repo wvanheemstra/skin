@@ -27,7 +27,8 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
     extend: "Skin.mediator.abstract.Mediator",
 
     requires: [
-        "Skin.event.ui.Event",    
+        "Skin.event.ui.Event",     
+        "Skin.event.company.Event",    
         "Skin.event.authentication.Event",
         "Skin.event.navigation.Event"
     ],
@@ -82,6 +83,11 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
         var direction;
 
         switch(action) {
+        	
+            case Skin.event.company.Event.SET_COMPANY_SUCCESS:
+                console.log("company: "+ Skin.config.global.Config.getCompany());
+                break;         	
+        	
             case Skin.event.ui.Event.SET_UI_SUCCESS:
                 console.log("ui: "+ Skin.config.global.Config.getUi());
                 break;        	
