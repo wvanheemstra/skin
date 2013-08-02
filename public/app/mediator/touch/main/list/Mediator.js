@@ -32,7 +32,6 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
            tap: "onNewMainButtonTap"
        },
 
-// CURRENTLY WE DO NOT HAVE A SEARCH IN THE TILE VIEW
         searchInput :{
             keyup:          "onSearchKeyUp",
             clearicontap:   "onSearchClearIconTap"
@@ -49,6 +48,8 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
     setupGlobalEventListeners: function() {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
+
+        this.eventBus.addGlobalEventListener(Skin.event.ui.Event.SET_UI_SUCCESS, this.onSetUISuccess, this);
         
         this.eventBus.addGlobalEventListener(Skin.event.authentication.Event.LOGIN_SUCCESS, this.onLoginSuccess, this);
         
@@ -88,6 +89,15 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
         this.mainStore.setSelectedRecord(record);
     },
 
+    /**
+     * Handles the set UI event. 
+     *
+     */
+    setUI: function() {
+    	Ext.getCmp('titlebar').ui = Skin.config.global.Config.getUi();
+    	this.logger.debug("current ui: " + Skin.config.global.Config.getUi());
+    },
+
     ////////////////////////////////////////////////
     // EVENT BUS HANDLERS
     ////////////////////////////////////////////////
@@ -114,6 +124,15 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
         	this.navigate(Skin.event.authentication.Event.LOGIN_SUCCESS);
         	this.getMainListData();
 		}
+    },
+
+    /**
+     * Handles the set ui success application-level event. Update the components for the ui.
+     */
+    onSetUISuccess: function() {
+        this.logger.debug("onSetUISuccess");
+        this.logger.debug("ui: " + Skin.config.global.Config.getUi()); // added by wvh, for testing only
+        this.setUI();
     },
 
     /**

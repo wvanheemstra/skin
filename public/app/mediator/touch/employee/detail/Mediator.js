@@ -196,7 +196,6 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
     	this.logger.debug("current view: " + Skin.config.global.Config.getCurrentView());
     },
 
-
     /**
      * Handles the set ui success application-level event. Update the components for the ui.
      */

@@ -48,6 +48,8 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
 
+        this.eventBus.addGlobalEventListener(Skin.event.ui.Event.SET_UI_SUCCESS, this.onSetUISuccess, this);
+
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.CREATE_MAIN_SUCCESS, this.onCreateMainSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.UPDATE_MAIN_SUCCESS, this.onUpdateMainSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.DELETE_MAIN_SUCCESS, this.onDeleteMainSuccess, this);
@@ -155,6 +157,15 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
         this.getView().reset();
     },
 
+    /**
+     * Handles the set UI event. 
+     *
+     */
+    setUI: function() {
+    	Ext.getCmp('titlebar').ui = Skin.config.global.Config.getUi();
+    	this.logger.debug("current ui: " + Skin.config.global.Config.getUi());
+    },
+
     ////////////////////////////////////////////////
     // EVENT BUS HANDLERS
     ////////////////////////////////////////////////
@@ -166,6 +177,15 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
     onPainted: function() {
     	Skin.config.global.Config.setCurrentView('mainDetailView');
     	this.logger.debug("current view: " + Skin.config.global.Config.getCurrentView());
+    },
+
+    /**
+     * Handles the set ui success application-level event. Update the components for the ui.
+     */
+    onSetUISuccess: function() {
+        this.logger.debug("onSetUISuccess");
+        this.logger.debug("ui: " + Skin.config.global.Config.getUi()); // added by wvh, for testing only
+        this.setUI();
     },
 
     /**

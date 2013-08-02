@@ -117,16 +117,6 @@ Ext.define("Skin.mediator.touch.employee.tile.Mediator", {
     ////////////////////////////////////////////////
 
     /**
-     * Handles the initialize application-level event. Set the ui of the component(s).
-     * 
-     */    
-    onInitialize: function() {
-    	//Ext.getCmp('titlebar').ui = Skin.config.global.Config.getUi();
-    	alert('Hello.. the toolbar is initialized!!');
-    	this.logger.debug("current ui: " + Skin.config.global.Config.getUi());
-    },
-
-    /**
      * Handles the painted application-level event. Set the employee tile view
      * as the current view.
      */    
