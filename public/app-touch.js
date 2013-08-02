@@ -31,7 +31,9 @@ Ext.onReady(function () {
 
     Ext.require([
         "Skin.service.ui.Service",
-        "Skin.service.ui.mock.Service",    
+        "Skin.service.ui.mock.Service", 
+        "Skin.service.company.Service",
+        "Skin.service.company.mock.Service",           
         "Skin.service.authentication.Service",
         "Skin.service.authentication.mock.Service",
         "Skin.service.main.Service",
@@ -68,7 +70,8 @@ Ext.onReady(function () {
         // MOCKS
         ////////////////////////////////////////////
         authenticationService:  "Skin.service.authentication.mock.Service",
-        uiService:        		"Skin.service.ui.mock.Service",        
+        uiService:        		"Skin.service.ui.mock.Service",
+        companyService:        	"Skin.service.company.mock.Service",                
         mainService:			"Skin.service.main.mock.Service",
         employeeService:        "Skin.service.employee.mock.Service",
 
@@ -78,6 +81,10 @@ Ext.onReady(function () {
         
         uiServiceClass: {
             value: "Skin.service.ui.mock.Service"
+        },
+        
+        companyServiceClass: {
+            value: "Skin.service.company.mock.Service"
         }        
     });
 
@@ -127,7 +134,8 @@ Ext.application({
     ////////////////////////////////////////////
     controllers:[
         "bootstrap.Controller",
-        "ui.Controller",        
+        "ui.Controller",
+        "company.Controller",                
         "authentication.Controller",
         "main.Controller",
         "employee.Controller"

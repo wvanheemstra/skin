@@ -54,6 +54,7 @@ Ext.define("Skin.view.touch.login.View", {
 //            },
             {
                 xtype: "fieldset",
+                itemId: "company",
                 title: "Your Company",
                 items: [
                     {

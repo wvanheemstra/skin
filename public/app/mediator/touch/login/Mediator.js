@@ -26,6 +26,7 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
 
     requires: [
     	"Skin.event.ui.Event",
+    	"Skin.event.company.Event",
         "Skin.event.authentication.Event",
         "nineam.locale.LocaleManager"
     ],
@@ -58,7 +59,7 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
         this.logger.debug("setupGlobalEventListeners");
 
         this.eventBus.addGlobalEventListener(Skin.event.ui.Event.SET_UI_SUCCESS, this.onSetUISuccess, this);
-
+        this.eventBus.addGlobalEventListener(Skin.event.company.Event.SET_COMPANY_SUCCESS, this.onSetCompanySuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.authentication.Event.LOGIN_SUCCESS, this.onLoginSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.authentication.Event.LOGIN_FAILURE, this.onLoginFailure, this);
         this.eventBus.addGlobalEventListener(Skin.event.authentication.Event.LOGOUT_SUCCESS, this.onLogoutSuccess, this);
@@ -72,6 +73,15 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
     	//Ext.getCmp('titlebar').ui = Skin.config.global.Config.getUi();
     	this.logger.debug("current ui: " + Skin.config.global.Config.getUi());
     }, 
+
+    /**
+     * Handles the set company event. 
+     *
+     */
+    setCompany: function() {
+    	//Ext.getCmp('company').title = Skin.config.global.Config.getCompany();
+    	this.logger.debug("current company: " + Skin.config.global.Config.getCompany());
+    },
 
     /**
      * The functional, testable login method. Show a loading mask and dispatch the application-level login event.
@@ -152,6 +162,14 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
     onSetUISuccess: function() {
         this.logger.debug("onSetUISuccess");
         this.setUI();
+    },
+
+    /**
+     * Handles the set company success event from the login controller.
+     */
+    onSetCompanySuccess: function() {
+        this.logger.debug("onSetCompanySuccess");
+        this.setCompany();
     },
 
     /**
