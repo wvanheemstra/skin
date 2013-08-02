@@ -67,11 +67,29 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
 
+        this.eventBus.addGlobalEventListener(Skin.event.ui.Event.SET_UI, this.onSetUI, this);
+        this.eventBus.addGlobalEventListener(Skin.event.company.Event.SET_COMPANY, this.onSetCompany, this);
         this.eventBus.addGlobalEventListener(Skin.event.navigation.Event.NAVIGATE, this.onNavigate, this);
     },
 
     /**
-     * Maps the current application action like ui, login, logout, show a view, etc and navigates to a
+     * Handles the set ui event
+     *
+     */
+    setUI: function(ui) {
+        this.logger.debug("set: ui = ", ui);
+    },
+    
+    /**
+     * Handles the set company event
+     *
+     */
+    setCompany: function(company) {
+        this.logger.debug("set: company = ", company);
+    },    
+
+    /**
+     * Maps the current application action like company, ui, login, logout, show a view, etc and navigates to a
      * corresponding view.
      *
      * @param action    The current application-level action.
@@ -84,13 +102,13 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
 
         switch(action) {
         	
-            case Skin.event.company.Event.SET_COMPANY_SUCCESS:
-                console.log("company: "+ Skin.config.global.Config.getCompany());
-                break;         	
-        	
-            case Skin.event.ui.Event.SET_UI_SUCCESS:
-                console.log("ui: "+ Skin.config.global.Config.getUi());
-                break;        	
+//            case Skin.event.company.Event.SET_COMPANY_SUCCESS:
+//                console.log("company: "+ Skin.config.global.Config.getCompany());
+//                break;         	
+//        	
+//            case Skin.event.ui.Event.SET_UI_SUCCESS:
+//                console.log("ui: "+ Skin.config.global.Config.getUi());
+//                break;        	
 
             case Skin.event.authentication.Event.LOGIN_SUCCESS:
             	// HERE WE GET WHICH VIEW TO GO TO
@@ -152,7 +170,25 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
     ////////////////////////////////////////////////
 
     /**
-     * Handles the navigation applicaiton event and passes on the action to a functional, testable method.
+     * Handles the ui application event and passes on the ui to a functional, testable method.
+     */
+    onSetUI: function(event) {
+        this.logger.debug("onSetUI");
+
+        this.setUI(event.ui)
+    },
+
+    /**
+     * Handles the company application event and passes on the company to a functional, testable method.
+     */
+    onSetCompany: function(event) {
+        this.logger.debug("onSetCompany");
+
+        this.setCompany(event.company)
+    },
+
+    /**
+     * Handles the navigation application event and passes on the action to a functional, testable method.
      */
     onNavigate: function(event) {
         this.logger.debug("onNavigate");

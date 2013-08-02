@@ -43,7 +43,6 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
         },
         usernameTextField:      true,
         passwordTextField:      true,
-        uiTextField:			true,
         signInFailedLabel:      true
     },
 
@@ -88,10 +87,9 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
      *
      * @param {String} username The username being passed to authenticate the user.
      * @param {String} password The password being passed to authenticate the user.
-     * @param {String} ui The ui being passed to set the ui.
      */
     login: function(username, password, ui) {
-        this.logger.debug("login: username = " + username + ", password = " + password+ ", ui = " + ui);
+        this.logger.debug("login: username = " + username + ", password = " + password);
 
         var view = this.getView();
 
@@ -102,9 +100,9 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
             message: nineam.locale.LocaleManager.getProperty("login.signingIn")
         });
 
-		Skin.config.global.Config.setUi(ui);
-		var evt = Ext.create("Skin.event.ui.Event", Skin.event.ui.Event.SET_UI, ui);
-		this.eventBus.dispatchGlobalEvent(evt);
+//		Skin.config.global.Config.setUi(ui);
+//		var evt = Ext.create("Skin.event.ui.Event", Skin.event.ui.Event.SET_UI, ui);
+//		this.eventBus.dispatchGlobalEvent(evt);
 
         var evt = Ext.create("Skin.event.authentication.Event", Skin.event.authentication.Event.LOGIN, username, password);
         this.eventBus.dispatchGlobalEvent(evt);
@@ -127,12 +125,11 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
      * Determines if the credentials are valid for login and the ui is set.
      *
      * @param username      The username being passed to authenticate the user.
-     * @param password      The password being passed to authenticate the user.
-     * @param ui      		The ui being passed to set the ui.     
+     * @param password      The password being passed to authenticate the user.    
      * @return {Boolean}    Flag indicating if the supplied username and password are valid.
      */
-    areLoginCredentialsValid: function(username, password, ui) {
-        return (username.length !== 0 && password.length !== 0 && ui.length !== 0);
+    areLoginCredentialsValid: function(username, password) {
+        return (username.length !== 0 && password.length !== 0);
     },
 
     /**
@@ -225,7 +222,6 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
 
         var username = this.getUsernameTextField().getValue();
         var password = this.getPasswordTextField().getValue();
-        var ui = this.getUiTextField().getValue();
 
         // NOTE: if you don't reference a component multiple times you don't need to create a ref to it can simply
         // gain access to it with the method: getComponentById()
@@ -240,8 +236,8 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
 
             label.setHtml("");
 
-            if(me.areLoginCredentialsValid(username, password, ui)) {
-                me.login(username, password, ui);
+            if(me.areLoginCredentialsValid(username, password)) {
+                me.login(username, password);
             } else {
                 me.showSignInFailedMessage(nineam.locale.LocaleManager.getProperty("login.credentialsRequired"));
             }
