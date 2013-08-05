@@ -7,15 +7,12 @@
  * </p>
  */
 Ext.define("Skin.view.touch.main.list.View", {
-    extend: "Ext.Panel",
+    extend: "Skin.view.touch.main.base.View",
     alias: "widget.mainListView",
     controller: "Skin.mediator.touch.main.list.Mediator",
 
     requires: [
-        "Ext.TitleBar",
-        "Ext.dataview.List",
-        "Ext.field.Search",
-        "Skin.view.touch.component.ListView"
+        //"Skin.view.touch.component.ListView"
     ],
 
     config: {
@@ -28,6 +25,7 @@ Ext.define("Skin.view.touch.main.list.View", {
             {
                 xtype: "titlebar",
                 itemId: "titlebar",
+                ui: "neutral",
                 docked: "top",
                 plugins: [
                     {
@@ -53,7 +51,7 @@ Ext.define("Skin.view.touch.main.list.View", {
                         xtype: "button",
                         itemId: "newMainButton",
                         align: "right",
-                        ui: "action",
+                        ui: "neutral", // WAS action
                         plugins: [
                             {
                                 type: "localization",
@@ -69,6 +67,7 @@ Ext.define("Skin.view.touch.main.list.View", {
                 //xtype: "listview",
                 itemId: "list",
                 fullscreen: true,
+				ui: "neutral",
                 itemTpl: "<div class='contact'>{name}</div>",
                 grouped: false,// WAS true, grouped currently causes an error
                 onItemDisclosure: true,

@@ -12,8 +12,7 @@ Ext.define("Skin.view.touch.main.detail.View", {
     controller: "Skin.mediator.touch.main.detail.Mediator",
 
     requires: [
-        "Ext.form.FieldSet",
-        "Ext.Toolbar"
+        "Ext.form.FieldSet"
     ],
 
     config: {
@@ -22,6 +21,7 @@ Ext.define("Skin.view.touch.main.detail.View", {
             {
                 xtype: "titlebar",
                 itemId: "titlebar",
+                ui: "neutral",
                 docked: "top",
                 plugins: [
                     {
@@ -47,7 +47,7 @@ Ext.define("Skin.view.touch.main.detail.View", {
                         xtype: "button",
                         itemId: "saveMainButton",
                         align: "right",
-                        ui: "action",
+                        ui: "neutral", // WAS action
                         plugins: [
                             {
                                 type: "localization",
@@ -81,7 +81,7 @@ Ext.define("Skin.view.touch.main.detail.View", {
                 xtype: "button",
                 itemId: "deleteButton",
                 align: "center",
-                ui: "action",
+                ui: "neutral", // WAS action
                 plugins: [
                     {
                         type: "localization",

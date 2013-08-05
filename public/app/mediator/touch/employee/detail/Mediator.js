@@ -19,16 +19,10 @@
  * The employee detail mediator essentially fulfills the passive view pattern for the employee detail view.
  */
 Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
-    extend: "Skin.mediator.abstract.Mediator",
+    extend: "Skin.mediator.touch.employee.base.Mediator",
 
     requires: [
-        "Skin.event.employee.Event",
         "Skin.event.navigation.Event"
-    ],
-
-    inject: [
-        "employeeStore",
-        "logger"
     ],
 
     // set up view event to mediator mapping

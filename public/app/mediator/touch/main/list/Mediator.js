@@ -1,42 +1,29 @@
 /**
- *  @class Skin.mediator.touch.main.list.Mediator
- *
- *  This {@link Ext.app.Controller} serves as a demonstration of how to
- *  listen to various events relating to a {@link Ext.ux.slidenavigation.View}.
- *
+ * The main list mediator essentially fulfills the passive view pattern for the main list view.
  */
 Ext.define("Skin.mediator.touch.main.list.Mediator", {
-    extend: "Skin.mediator.abstract.Mediator",
-
-    requires: [
-        "Skin.event.main.Event"
-    ],
-
-    inject: [
-        "mainStore",
-        "logger"
-    ],
+    extend: "Skin.mediator.touch.main.base.Mediator",
 
     // set up view event to mediator mapping
     control: {
-	
-       titlebar: {
-    	   painted: "onPainted"
-       },	
-	
-       logoutButton: {
-           tap: "onLogoutButtonTap"
-       },
+    	
+    	titlebar: {
+    		painted: "onPainted"
+    	},
+    	    	
+        logoutButton: {
+            tap: "onLogoutButtonTap"
+        },
 
-       newMainButton: {
-           tap: "onNewMainButtonTap"
-       },
+        newMainButton: {
+            tap: "onNewMainButtonTap"
+        },
 
         searchInput :{
             keyup:          "onSearchKeyUp",
             clearicontap:   "onSearchClearIconTap"
         },
-        
+
         list: {
             disclose: "onListDisclose"
         }
@@ -50,9 +37,9 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
         this.logger.debug("setupGlobalEventListeners");
 
         this.eventBus.addGlobalEventListener(Skin.event.ui.Event.SET_UI_SUCCESS, this.onSetUISuccess, this);
-        
+
         this.eventBus.addGlobalEventListener(Skin.event.authentication.Event.LOGIN_SUCCESS, this.onLoginSuccess, this);
-        
+
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_LIST_SUCCESS, this.onGetMainListSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_LIST_FAILURE, this.onGetMainListFailure, this);
     },
@@ -88,7 +75,7 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
         this.navigate(Skin.event.navigation.Event.ACTION_SHOW_MAIN_DETAIL);
         this.mainStore.setSelectedRecord(record);
     },
-
+    
     /**
      * Handles the set UI event. 
      *
@@ -96,7 +83,7 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
     setUI: function() {
     	Ext.getCmp('titlebar').ui = Skin.config.global.Config.getUi();
     	this.logger.debug("current ui: " + Skin.config.global.Config.getUi());
-    },
+    },     
 
     ////////////////////////////////////////////////
     // EVENT BUS HANDLERS
@@ -112,14 +99,14 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
     },
 
     /**
-     * Handles the login success application-level event. Slide the main view
+     * Handles the login success application-level event. Slide the main list view
      * onto stage.
      */
     onLoginSuccess: function() {
         this.logger.debug("onLoginSuccess");
         
-        console.log("next view: " + Skin.config.global.Config.getNextView()); // added by wvh, for testing only
-                
+        this.logger.debug("next view: " + Skin.config.global.Config.getNextView()); // added by wvh, for testing only
+        
 		if(Skin.config.global.Config.getNextView()==='mainListView') {
         	this.navigate(Skin.event.authentication.Event.LOGIN_SUCCESS);
         	this.getMainListData();
@@ -136,7 +123,7 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
     },
 
     /**
-     * Handles the get main application-level event.
+     * Handles the get mains application-level event.
      */
     onGetMainListSuccess: function() {
         this.logger.debug("onGetMainListSuccess");
@@ -146,13 +133,13 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
     },
 
     /**
-     * Handles the get main failure event from the login controller.
+     * Handles the get mains failure event from the login controller.
      */
     onGetMainListFailure: function() {
         this.logger.debug("onGetMainListFailure");
 
         this.getView().setMasked(false);
-    },    
+    },
 
     ////////////////////////////////////////////////
     // VIEW EVENT HANDLERS
@@ -162,28 +149,28 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
      * Handles the tap of the logout button. Dispatches the logout application-level event.
      */
     onLogoutButtonTap: function() {
-    	if(Skin.config.global.Config.getCurrentView()==='mainListView') { 	
+    	if(Skin.config.global.Config.getCurrentView()==='mainListView') {      	
 	        this.logger.debug("onLogoutButtonTap");
-
+	
 	        var evt = Ext.create("Skin.event.authentication.Event", Skin.event.authentication.Event.LOGOUT);
 	        this.eventBus.dispatchGlobalEvent(evt);
-		}//eof if
+    	}//eof if	        
     },
 
     /**
      * Handles the tap of the new main button. Shows the main detail view.
      */
     onNewMainButtonTap: function() {
-    	if(Skin.config.global.Config.getCurrentView()==='mainListView') {	
+    	if(Skin.config.global.Config.getCurrentView()==='mainListView') {     	
 	        this.logger.debug("onNewMainButtonTap");
-
+	
 	        this.showMainDetail();
-		}//eof if
+    	}//eof if
     },
 
     /**
-     * Handles the list disclose of a main list item. Shows the main detail view passing in a reference to
-     * the selected item in the main.
+     * Handles the list disclose of an main list item. Shows the main detail view passing in a reference to
+     * the selected item in the list.
      *
      * @param {Ext.dataview.List} list  Reference to the visual list component.
      * @param {Object/Ext.data.Model} record Reference to the selected item in the list.
@@ -193,11 +180,12 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
      * @param {Object} options ???
      */
     onListDisclose: function(list, record, target, index, evt, options) {
-    	if(Skin.config.global.Config.getCurrentView()==='mainListView') {	
+    	if(Skin.config.global.Config.getCurrentView()==='mainListView') {      	
 	        this.logger.debug("onListDisclose");
+	
 	        this.mainStore.setSelectedRecord(record);
 	        this.showMainDetail(record);
-		}//eof if
+    	}//eof if
     },
 
     /**
@@ -214,7 +202,7 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
 
     /**
      * Handles the key up event on the search field. Filters the list component's store by the value in the
-     * search field and determining if it matches the first or last name elements of each record in the list.
+     * search field and determining if it matches the name element of each record in the list.
      *
      * @param {Ext.field.Search} field Reference to the search field.
      *
@@ -243,7 +231,6 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
 	                //if it is nothing, continue
 	                if (!searches[i]) continue;
 	
-	
 	                //if found, create a new regular expression which is case insenstive
 	                regexps.push(new RegExp(searches[i], "i"));
 	            }
@@ -258,7 +245,7 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
 	                    var search = regexps[i],
 	                        didMatch = record.get("name").match(search);
 	
-	                    //if it matched the first or last name, push it into the matches array
+	                    //if it matched the name, push it into the matches array
 	                    matched.push(didMatch);
 	                }
 	

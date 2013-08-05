@@ -19,16 +19,7 @@
  * The employee list mediator essentially fulfills the passive view pattern for the employee list view.
  */
 Ext.define("Skin.mediator.touch.employee.list.Mediator", {
-    extend: "Skin.mediator.abstract.Mediator",
-
-    requires: [
-        "Skin.event.employee.Event"
-    ],
-
-    inject: [
-        "employeeStore",
-        "logger"
-    ],
+    extend: "Skin.mediator.touch.employee.base.Mediator",
 
     // set up view event to mediator mapping
     control: {

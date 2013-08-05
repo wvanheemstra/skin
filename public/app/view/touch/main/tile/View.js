@@ -7,14 +7,11 @@
  * </p>
  */
 Ext.define("Skin.view.touch.main.tile.View", {
-    extend: "Ext.Panel",
+    extend: "Skin.view.touch.main.base.View",
     alias: "widget.mainTileView",
     controller: "Skin.mediator.touch.main.tile.Mediator",
 
     requires: [
-        "Ext.TitleBar",
-        "Ext.dataview.List",
-        "Ext.field.Search",
         //"Skin.view.touch.component.TileView"
     ],
 
@@ -28,6 +25,7 @@ Ext.define("Skin.view.touch.main.tile.View", {
             {
                 xtype: "titlebar",
                 itemId: "titlebar",
+                ui: "neutral",
                 docked: "top",
                 plugins: [
                     {
@@ -53,7 +51,7 @@ Ext.define("Skin.view.touch.main.tile.View", {
                         xtype: "button",
                         itemId: "newMainButton",
                         align: "right",
-                        ui: "action",
+                        ui: "neutral", // WAS action
                         plugins: [
                             {
                                 type: "localization",
@@ -76,6 +74,7 @@ Ext.define("Skin.view.touch.main.tile.View", {
             {
                 xtype: "list",
                 itemId: "tile",
+                ui: "neutral",
                 fullscreen: true,
                 itemTpl: "<div class='contact'>{name}</div>",
                 grouped: false, // WAS true, but this causes an error
@@ -99,7 +98,7 @@ Ext.define("Skin.view.touch.main.tile.View", {
                         itemId:"titlebar",
                         id:"titlebar",
                         docked: "top",
-
+                        ui: "neutral",
                         items: [
                             {
                                 xtype: "searchfield" ,
@@ -112,5 +111,4 @@ Ext.define("Skin.view.touch.main.tile.View", {
             }// eof list                      
         ]
     }// eof config
-
 });

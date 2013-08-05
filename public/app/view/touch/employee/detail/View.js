@@ -29,8 +29,7 @@ Ext.define("Skin.view.touch.employee.detail.View", {
     controller: "Skin.mediator.touch.employee.detail.Mediator",
 
     requires: [
-        "Ext.form.FieldSet",
-        "Ext.Toolbar"
+        "Ext.form.FieldSet"
     ],
 
     config: {

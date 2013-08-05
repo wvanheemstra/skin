@@ -2,25 +2,19 @@
  * The main detail mediator essentially fulfills the passive view pattern for the main detail view.
  */
 Ext.define("Skin.mediator.touch.main.detail.Mediator", {
-    extend: "Skin.mediator.abstract.Mediator",
+    extend: "Skin.mediator.touch.main.base.Mediator",
 
     requires: [
-        "Skin.event.main.Event",
         "Skin.event.navigation.Event"
-    ],
-
-    inject: [
-        "mainStore",
-        "logger"
     ],
 
     // set up view event to mediator mapping
     control: {
-	
+    	
     	titlebar: {
     		painted: "onPainted"
-    	},
-	
+    	},    	
+    	
         backButton: {
             tap: "onBackButtonTap"
         },
@@ -47,7 +41,7 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
     setupGlobalEventListeners: function() {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
-
+        
         this.eventBus.addGlobalEventListener(Skin.event.ui.Event.SET_UI_SUCCESS, this.onSetUISuccess, this);
 
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.CREATE_MAIN_SUCCESS, this.onCreateMainSuccess, this);
@@ -115,9 +109,9 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
      * Simple navigation method used to navigate back, depending on the previous view.
      */
     backToPrevious: function() {
-	
-    	this.logger.debug("previous view: "+Skin.config.global.Config.getPreviousView());	
-	
+    	
+    	this.logger.debug("previous view: "+Skin.config.global.Config.getPreviousView());
+    	
         switch(Skin.config.global.Config.getPreviousView()) {
             case 'mainListView':
             	this.backToMainList();
@@ -164,7 +158,7 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
     setUI: function() {
     	Ext.getCmp('titlebar').ui = Skin.config.global.Config.getUi();
     	this.logger.debug("current ui: " + Skin.config.global.Config.getUi());
-    },
+    }, 
 
     ////////////////////////////////////////////////
     // EVENT BUS HANDLERS
@@ -189,41 +183,41 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
     },
 
     /**
-     * Handles the create main success application-level event. Navigates back to the main view.
+     * Handles the create main success application-level event. Navigates back to the main list view.
      */
     onCreateMainSuccess: function() {
         this.logger.debug("onCreateMainSuccess");
 
         this.getView().setMasked(false);
-        this.backToPrevious(); // WAS this.backToMainList();
+        this.backToPrevious();
     },
 
     /**
-     * Handles the update main success application-level event. Navigates back to the main view.
+     * Handles the update main success application-level event. Navigates back to the main list view.
      */
     onUpdateMainSuccess: function() {
         this.logger.debug("onUpdateMainSuccess");
 
         this.getView().setMasked(false);
-        this.backToPrevious(); // WAS this.backToMainList();
+        this.backToPrevious();
     },
 
     /**
-     * Handles the delete main success application-level event. Navigates back to the main view.
+     * Handles the delete main success application-level event. Navigates back to the main list view.
      */
     onDeleteMainSuccess: function() {
         this.logger.debug("onDeleteMainSuccess");
 
         this.reset();
-        this.backToPrevious(); // WAS this.backToMainList();
+        this.backToPrevious();
     },
 
     /**
      * Handles the change of the selected record in the main store. Loads the appropriate record in the view or
      * resets it if the record is null.
      *
-     * @param {Skin.store.MainStore} store The store that has the selected record.
-     * @param {Skin.model.MainModel} record The selected record of the store.
+     * @param {Skin.store.main.Store} store The store that has the selected record.
+     * @param {Skin.model.main.Model} record The selected record of the store.
      */
     onSelectedRecordChange: function(store, record) {
         var logMsg = (record != null)
@@ -243,12 +237,12 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
     ////////////////////////////////////////////////
 
     /**
-     * Handles the back button tap event. Navigates back to the main view.
+     * Handles the back button tap event. Navigates back to the main list view.
      */
     onBackButtonTap: function() {
         this.logger.debug("onBackButtonTap");
 
-        this.backToPrevious(); // WAS this.backToMainList();
+        this.backToPrevious();
     },
 
     /**

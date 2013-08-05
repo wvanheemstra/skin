@@ -24,15 +24,12 @@
  * </p>
  */
 Ext.define("Skin.view.touch.employee.list.View", {
-    extend: "Ext.Panel",
+    extend: "Skin.view.touch.employee.base.View",
     alias: "widget.employeeListView",
     controller: "Skin.mediator.touch.employee.list.Mediator",
 
     requires: [
-        "Ext.TitleBar",
-        "Ext.dataview.List",
-        "Ext.field.Search",
-        "Skin.view.touch.component.ListView"
+        //"Skin.view.touch.component.ListView"
     ],
 
     config: {

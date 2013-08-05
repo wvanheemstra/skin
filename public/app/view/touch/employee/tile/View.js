@@ -24,14 +24,11 @@
  * </p>
  */
 Ext.define("Skin.view.touch.employee.tile.View", {
-    extend: "Ext.Panel",
+    extend: "Skin.view.touch.employee.base.View",
     alias: "widget.employeeTileView",
     controller: "Skin.mediator.touch.employee.tile.Mediator",
 
     requires: [
-        "Ext.TitleBar",
-        "Ext.dataview.List",
-        "Ext.field.Search",
         //"Skin.view.touch.component.TileView"
     ],
 
@@ -119,7 +116,6 @@ Ext.define("Skin.view.touch.employee.tile.View", {
                         id:"titlebar",
                         docked: "top",
                         ui: "neutral",
-
                         items: [
                             {
                                 xtype: "searchfield" ,
@@ -132,5 +128,4 @@ Ext.define("Skin.view.touch.employee.tile.View", {
             }// eof list                      
         ]
     }// eof config
-
 });
