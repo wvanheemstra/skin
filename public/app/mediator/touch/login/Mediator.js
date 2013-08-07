@@ -25,6 +25,7 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
     extend: "Skin.mediator.abstract.Mediator",
 
     requires: [
+    	"Skin.event.session.Event",    
     	"Skin.event.ui.Event",
     	"Skin.event.company.Event",
         "Skin.event.authentication.Event",
@@ -41,9 +42,10 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
             tap: "onLoginButtonTap",
             painted: "onPainted"
         },
-        usernameTextField:      true,
-        passwordTextField:      true,
-        signInFailedLabel:      true
+        usernameTextField:      		true,
+        passwordTextField:      		true,
+        keepmeloggedinCheckboxField:    true,
+        logInFailedLabel:      			true
     },
 
     ////////////////////////////////////////////////
@@ -57,12 +59,33 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
 
+        this.eventBus.addGlobalEventListener(Skin.event.session.Event.SET_SESSION_SUCCESS, this.onSetSessionSuccess, this);
+        this.eventBus.addGlobalEventListener(Skin.event.session.Event.CLEAR_SESSION_SUCCESS, this.onClearSessionSuccess, this);        
         this.eventBus.addGlobalEventListener(Skin.event.ui.Event.SET_UI_SUCCESS, this.onSetUISuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.company.Event.SET_COMPANY_SUCCESS, this.onSetCompanySuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.authentication.Event.LOGIN_SUCCESS, this.onLoginSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.authentication.Event.LOGIN_FAILURE, this.onLoginFailure, this);
         this.eventBus.addGlobalEventListener(Skin.event.authentication.Event.LOGOUT_SUCCESS, this.onLogoutSuccess, this);
     },
+
+
+    /**
+     * Handles the set Session event. 
+     *
+     */
+    setSession: function() {
+    	this.logger.debug("set session id: " + Skin.config.global.Config.getId() + ", sessionId: " + Skin.config.global.Config.getSessionId());
+    },
+    
+    /**
+     * Handles the clear Session event. 
+     *
+     */
+    clearSession: function() {
+    	this.logger.debug("clear session id: " + Skin.config.global.Config.getId() + ", sessionId: " + Skin.config.global.Config.getSessionId());
+    	Skin.config.global.Config.setId(0);
+		Skin.config.global.Config.setSessionId('');   	
+    },      
 
     /**
      * Handles the set UI event. 
@@ -87,9 +110,17 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
      *
      * @param {String} username The username being passed to authenticate the user.
      * @param {String} password The password being passed to authenticate the user.
+     * @param {Boolean} keepmeloggedin The keepmeloggedin being passed.
      */
-    login: function(username, password, ui) {
-        this.logger.debug("login: username = " + username + ", password = " + password);
+    login: function(username, password, keepmeloggedin) {
+        this.logger.debug("login: username = " + username + ", password = " + password + ", keepmeloggedin = " + keepmeloggedin);
+
+		if(keepmeloggedin) {
+			Skin.config.global.Config.setKeepMeLoggedIn(true);		
+		} 
+		else {
+			Skin.config.global.Config.setKeepMeLoggedIn(false);	
+		}
 
         var view = this.getView();
 
@@ -97,7 +128,7 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
 
         view.setMasked({
             xtype: "loadmask",
-            message: nineam.locale.LocaleManager.getProperty("login.signingIn")
+            message: nineam.locale.LocaleManager.getProperty("login.loggingIn")
         });
 
 //		Skin.config.global.Config.setUi(ui);
@@ -113,10 +144,10 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
      *
      * @param message   The message string displayed for a failed login.
      */
-    showSignInFailedMessage: function(message) {
-        this.logger.debug("showSignInFailedMessage: " + message);
+    showLogInFailedMessage: function(message) {
+        this.logger.debug("showLogInFailedMessage: " + message);
 
-        var label = this.getSignInFailedLabel();
+        var label = this.getLogInFailedLabel();
         label.setHtml(message);
         label.show();
     },
@@ -154,6 +185,22 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
     },
 
     /**
+     * Handles the set session success event from the login controller.
+     */
+    onSetSessionSuccess: function() {
+        this.logger.debug("onSetSessionSuccess");
+        this.setSession();
+    },
+    
+    /**
+     * Handles the clear session success event from the login controller.
+     */
+    onClearSessionSuccess: function() {
+        this.logger.debug("onClearSessionSuccess");
+        this.clearSession();
+    },    
+
+    /**
      * Handles the set ui success event from the login controller.
      */
     onSetUISuccess: function() {
@@ -175,6 +222,17 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
     onLoginSuccess: function() {
         this.logger.debug("onLoginSuccess");
 
+		// HERE IS PROBABLY WHERE WE LIKE TO SET SESSION
+		if(Skin.config.global.Config.getKeepMeLoggedIn()) {
+			var id = 12345;
+			Skin.config.global.Config.setId(id);
+			var sessionId = "12345";
+			Skin.config.global.Config.setSessionId(sessionId);
+			
+			var evt = Ext.create("Skin.event.session.Event", Skin.event.session.Event.SET_SESSION, id, sessionId);
+        	this.eventBus.dispatchGlobalEvent(evt);
+		}
+
 		Skin.config.global.Config.setNextView('mainTileView'); // added by wvh, sets the next view to go to from here
 
         var view = this.getView();
@@ -186,7 +244,14 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
      * onto stage.
      */
     onLogoutSuccess: function() {
-        this.logger.debug("onLoginSuccess");
+        this.logger.debug("onLogoutSuccess");
+
+		// HERE IS PROBABLY WHERE WE LIKE TO CLEAR SESSION
+		var id = Skin.config.global.Config.getId(id);
+		var sessionId = Skin.config.global.Config.getSessionId(sessionId);
+		
+		var evt = Ext.create("Skin.event.session.Event", Skin.event.session.Event.CLEAR_SESSION, id, sessionId);
+        this.eventBus.dispatchGlobalEvent(evt);
 
         var view = this.getView();
         view.setMasked(false);
@@ -204,7 +269,7 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
         var view = this.getView();
         view.setMasked(false);
 
-        this.showSignInFailedMessage(nineam.locale.LocaleManager.getProperty("login.loginFailed"));
+        this.showLogInFailedMessage(nineam.locale.LocaleManager.getProperty("login.loginFailed"));
     },
 
     ////////////////////////////////////////////////
@@ -222,10 +287,11 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
 
         var username = this.getUsernameTextField().getValue();
         var password = this.getPasswordTextField().getValue();
+       	var keepmeloggedin = this.getKeepmeloggedinCheckboxField().getChecked(); 
 
         // NOTE: if you don't reference a component multiple times you don't need to create a ref to it can simply
         // gain access to it with the method: getComponentById()
-        var label = this.getComponentById("signInFailedLabel", this.getView());
+        var label = this.getComponentById("logInFailedLabel", this.getView());
         var me = this;
 
         label.hide();
@@ -237,9 +303,9 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
             label.setHtml("");
 
             if(me.areLoginCredentialsValid(username, password)) {
-                me.login(username, password);
+                me.login(username, password, keepmeloggedin);
             } else {
-                me.showSignInFailedMessage(nineam.locale.LocaleManager.getProperty("login.credentialsRequired"));
+                me.showLogInFailedMessage(nineam.locale.LocaleManager.getProperty("login.credentialsRequired"));
             }
         });
 

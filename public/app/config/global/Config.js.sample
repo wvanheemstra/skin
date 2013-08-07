@@ -12,6 +12,9 @@ Ext.define("Skin.config.global.Config",{
     singleton : true,
     config : {
         //myLastCustomer : 0,     // initialize to 0
+        id: 0,     				  // initialize to 0
+        sessionId: '',            // initialize to empty
+        keepMeLoggedIn: false,	  // initialize to false
         previousView: '',         // initialize to empty
         currentView: '',          // initialize to empty
         nextView: '',             // initialize to empty

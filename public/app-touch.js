@@ -30,6 +30,7 @@ Ext.onReady(function () {
     console.log("app.onReady");
 
     Ext.require([
+        "Skin.service.session.mock.Service",    
         "Skin.service.ui.Service",
         "Skin.service.ui.mock.Service", 
         "Skin.service.company.Service",
@@ -63,17 +64,27 @@ Ext.onReady(function () {
         ////////////////////////////////////////////
         // IMPL
         ////////////////////////////////////////////
+        sessionStore:			"Skin.store.session.Store",
         mainStore:				"Skin.store.main.Store",
         employeeStore:          "Skin.store.employee.Store",
 
+	    ////////////////////////////////////////////
+	    // SERVICES
+	    ////////////////////////////////////////////	    
+        
         ////////////////////////////////////////////
-        // MOCKS
-        ////////////////////////////////////////////
+        // SERVICE MOCKS
+        //////////////////////////////////////////// 
+        sessionService:         "Skin.service.session.mock.Service",       
         authenticationService:  "Skin.service.authentication.mock.Service",
         uiService:        		"Skin.service.ui.mock.Service",
         companyService:        	"Skin.service.company.mock.Service",                
         mainService:			"Skin.service.main.mock.Service",
         employeeService:        "Skin.service.employee.mock.Service",
+
+        sessionServiceClass: {
+            value: "Skin.service.session.mock.Service"
+        },
 
         authenticationServiceClass: {
             value: "Skin.service.authentication.mock.Service"
@@ -112,6 +123,7 @@ Ext.application({
     // MODELS
     ////////////////////////////////////////////
     models: [
+        "session.Model",
     	"main.Model",
         "employee.Model"
     ],    
@@ -134,6 +146,7 @@ Ext.application({
     ////////////////////////////////////////////
     controllers:[
         "bootstrap.Controller",
+        "session.Controller",    
         "ui.Controller",
         "company.Controller",                
         "authentication.Controller",

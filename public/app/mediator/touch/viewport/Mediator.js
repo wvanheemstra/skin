@@ -27,6 +27,7 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
     extend: "Skin.mediator.abstract.Mediator",
 
     requires: [
+       // "Skin.event.session.Event",    
         "Skin.event.ui.Event",     
         "Skin.event.company.Event",    
         "Skin.event.authentication.Event",
@@ -67,10 +68,28 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
 
+        //this.eventBus.addGlobalEventListener(Skin.event.session.Event.SET_SESSION, this.onSetSession, this);
+        //this.eventBus.addGlobalEventListener(Skin.event.session.Event.CLEAR_SESSION, this.onClearSession, this);        
         this.eventBus.addGlobalEventListener(Skin.event.ui.Event.SET_UI, this.onSetUI, this);
         this.eventBus.addGlobalEventListener(Skin.event.company.Event.SET_COMPANY, this.onSetCompany, this);
         this.eventBus.addGlobalEventListener(Skin.event.navigation.Event.NAVIGATE, this.onNavigate, this);
     },
+
+    /**
+     * Handles the set session event
+     *
+     */
+//    setSession: function(id, sessionId) {
+//        this.logger.debug("setSession: id = " + id + ", sessionId = " + sessionId);
+//    },
+
+    /**
+     * Handles the clear session event
+     *
+     */
+//    clearSession: function(id, sessionId) {
+//        this.logger.debug("clearSession: id = " + id + ", sessionId = " + sessionId);
+//    },
 
     /**
      * Handles the set ui event
@@ -170,21 +189,39 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
     ////////////////////////////////////////////////
 
     /**
-     * Handles the ui application event and passes on the ui to a functional, testable method.
+     * Handles the set session application event and passes on the id and sessionId to a functional, testable method.
+     */
+//    onSetSession: function(event) {
+//        this.logger.debug("onSetSession");
+//
+//        this.setSession(event.id, event.sessionId);
+//    },
+
+    /**
+     * Handles the clear session application event and passes on the id and sessionId to a functional, testable method.
+     */
+//    onClearSession: function(event) {
+//        this.logger.debug("onClearSession");
+//
+//        this.clearSession(event.id, event.sessionId);
+//    },
+
+    /**
+     * Handles the set ui application event and passes on the ui to a functional, testable method.
      */
     onSetUI: function(event) {
         this.logger.debug("onSetUI");
 
-        this.setUI(event.ui)
+        this.setUI(event.ui);
     },
 
     /**
-     * Handles the company application event and passes on the company to a functional, testable method.
+     * Handles the set company application event and passes on the company to a functional, testable method.
      */
     onSetCompany: function(event) {
         this.logger.debug("onSetCompany");
 
-        this.setCompany(event.company)
+        this.setCompany(event.company);
     },
 
     /**
@@ -193,7 +230,7 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
     onNavigate: function(event) {
         this.logger.debug("onNavigate");
 
-        this.navigate(event.action)
+        this.navigate(event.action);
     }
 
 });

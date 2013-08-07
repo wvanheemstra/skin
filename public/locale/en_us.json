@@ -7,9 +7,10 @@
         "username": "Username",
         "password": "Password",
         "passwordHint": "Hint: password",
+        "keepmeloggedin": "Keep me logged in",
         "submit": "Log In",
         "reset": "Clear",
-        "signingIn" : "Signing In...",
+        "loggingIn" : "Logging In...",
         "credentialsRequired": "Please enter your username and password.",
         "loginFailed": "Login failed. Please enter the correct credentials."
     },

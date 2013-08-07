@@ -7,9 +7,10 @@
         "username": "Gebruikersnaam",
         "password": "Wachtwoord",
         "passwordHint": "Hint: password",
+        "keepmeloggedin": "Houd me ingelogd",
         "submit": "Log In",
         "reset": "Wissen",
-        "signingIn" : "Verifieren...",
+        "loggingIn" : "Verifieren...",
         "credentialsRequired": "Voer alsjeblieft gebruikersnaam en wachtwoord in.",
         "loginFailed": "Login mislukt. Voer alsjeblieft de juiste gegevens in."
     },

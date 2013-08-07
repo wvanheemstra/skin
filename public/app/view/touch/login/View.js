@@ -82,6 +82,20 @@ Ext.define("Skin.view.touch.login.View", {
                                 key: "login.password"
                             }
                         ]
+                    },
+                    {
+                        xtype: "checkboxfield",
+                        itemId: "keepmeloggedinCheckboxField",
+                        name: "keepmeloggedinCheckboxField",
+                        required: false,
+                        checked: false,
+                        plugins: [
+                            {
+                                type: "localization",
+                                method: "setLabel",
+                                key: "login.keepmeloggedin"
+                            }
+                        ]
                     }
                 ]
             },
@@ -110,8 +124,8 @@ Ext.define("Skin.view.touch.login.View", {
             },
             {
                 xtype: "label",
-                itemId: "signInFailedLabel",
-                name: "signInFailedLabel",
+                itemId: "logInFailedLabel",
+                name: "logInFailedLabel",
                 hidden: true,
                 hideAnimation: "fadeOut",
                 showAnimation: "fadeIn",

@@ -7,9 +7,10 @@
         "username": "Benutzername",
         "password": "Kennwort",
         "passwordHint": "Hinweis: password",
+        "keepmeloggedin": "Angemeldet bleiben",
         "submit": "Meld an",
         "reset": "Neu stellen",
-        "signingIn" : "Überprüfen...",
+        "loggingIn" : "Überprüfen...",
         "credentialsRequired": "Tragen Sie bitte Ihre Benutzername und Kennwort ein.",
         "loginFailed": "Anmelden hat gefählt. Bitte tragen Sie die richtige Daten ein."
     },
