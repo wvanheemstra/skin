@@ -12,7 +12,12 @@ Ext.define("Skin.model.session.Model", {
 	    ],
 	    validations: [
 	        { type: "presence", field: "id" }
-	    ]
+	    ],
+	    proxy: {
+	    	type: "localstorage",
+	    	id: "Skin.session.ApplicationKey"	
+	    }
+	    
 	},//eof config
 	// Ext requires properties outside of config
     idProperty: "id",
@@ -22,5 +27,9 @@ Ext.define("Skin.model.session.Model", {
 	],
     validations: [
         { type: "presence", field: "id" }
-    ]
+    ],
+    proxy: {
+    	type: "localstorage",
+    	id: "Skin.session.ApplicationKey"	
+    }
 });

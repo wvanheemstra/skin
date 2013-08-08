@@ -16,6 +16,7 @@ Ext.define("Skin.controller.session.Controller", {
         "sessionServiceClass",
         "logger"
     ],
+    
 
     /**
      * Sets up global event bus handlers.

@@ -22,6 +22,21 @@ Ext.define("Skin.event.session.Event", {
         SET_SESSION_FAILURE:  "setSessionFailure",
 
         /**
+         * The get session event type.
+         */
+        GET_SESSION:    "getSession",
+
+        /**
+         * The get session success event type.
+         */
+        GET_SESSION_SUCCESS:  "getSessionSuccess",
+
+        /**
+         * The get session failure event type.
+         */
+        GET_SESSION_FAILURE:  "getSessionFailure",
+
+        /**
          * The clear session event type.
          */
         CLEAR_SESSION:         "clearSession",

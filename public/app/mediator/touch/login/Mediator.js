@@ -59,33 +59,14 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
 
-        this.eventBus.addGlobalEventListener(Skin.event.session.Event.SET_SESSION_SUCCESS, this.onSetSessionSuccess, this);
-        this.eventBus.addGlobalEventListener(Skin.event.session.Event.CLEAR_SESSION_SUCCESS, this.onClearSessionSuccess, this);        
+        this.eventBus.addGlobalEventListener(Skin.event.session.Event.GET_SESSION_SUCCESS, this.onGetSessionSuccess, this);
+        this.eventBus.addGlobalEventListener(Skin.event.session.Event.GET_SESSION_FAILURE, this.onGetSessionFailure, this);       
         this.eventBus.addGlobalEventListener(Skin.event.ui.Event.SET_UI_SUCCESS, this.onSetUISuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.company.Event.SET_COMPANY_SUCCESS, this.onSetCompanySuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.authentication.Event.LOGIN_SUCCESS, this.onLoginSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.authentication.Event.LOGIN_FAILURE, this.onLoginFailure, this);
         this.eventBus.addGlobalEventListener(Skin.event.authentication.Event.LOGOUT_SUCCESS, this.onLogoutSuccess, this);
-    },
-
-
-    /**
-     * Handles the set Session event. 
-     *
-     */
-    setSession: function() {
-    	this.logger.debug("set session id: " + Skin.config.global.Config.getId() + ", sessionId: " + Skin.config.global.Config.getSessionId());
-    },
-    
-    /**
-     * Handles the clear Session event. 
-     *
-     */
-    clearSession: function() {
-    	this.logger.debug("clear session id: " + Skin.config.global.Config.getId() + ", sessionId: " + Skin.config.global.Config.getSessionId());
-    	Skin.config.global.Config.setId(0);
-		Skin.config.global.Config.setSessionId('');   	
-    },      
+    },     
 
     /**
      * Handles the set UI event. 
@@ -176,29 +157,34 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
     ////////////////////////////////////////////////
 
     /**
-     * Handles the painted application-level event. Set the login view
-     * as the current view.
+     * Handles the painted application-level event.
      */    
     onPainted: function() {
-    	Skin.config.global.Config.setCurrentView('loginView');
-    	this.logger.debug("current view: " + Skin.config.global.Config.getCurrentView());
-    },
-
-    /**
-     * Handles the set session success event from the login controller.
-     */
-    onSetSessionSuccess: function() {
-        this.logger.debug("onSetSessionSuccess");
-        this.setSession();
+    	// Check if there is still a session of a not-logged off user
+    	var id = Skin.config.global.Config.getId();
+    	var sessionId = Skin.config.global.Config.getSessionId();
+    	var evt = Ext.create("Skin.event.session.Event", Skin.event.session.Event.GET_SESSION, id, sessionId);
+        this.eventBus.dispatchGlobalEvent(evt);
     },
     
     /**
-     * Handles the clear session success event from the login controller.
+     * Handles the get session success event
      */
-    onClearSessionSuccess: function() {
-        this.logger.debug("onClearSessionSuccess");
-        this.clearSession();
-    },    
+    onGetSessionSuccess: function() { 
+    	this.logger.debug("onGetSessionSuccess"); 	
+    	Skin.config.global.Config.setCurrentView('mainTileView');
+    	this.logger.debug("current view: " + Skin.config.global.Config.getCurrentView());
+    	this.navigate(Skin.event.navigation.Event.ACTION_SHOW_MAIN_TILE);
+    },
+    
+    /**
+     * Handles the get session failure event
+     */
+    onGetSessionFailure: function() { 
+    	this.logger.debug("onGetSessionFailure"); 
+    	Skin.config.global.Config.setCurrentView('loginView');
+    	this.logger.debug("current view: " + Skin.config.global.Config.getCurrentView());	
+    },    	    
 
     /**
      * Handles the set ui success event from the login controller.
@@ -229,6 +215,8 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
 			var sessionId = "12345";
 			Skin.config.global.Config.setSessionId(sessionId);
 			
+			this.logger.debug("set session: id = " + id + ", sessionId = " + sessionId);			
+			
 			var evt = Ext.create("Skin.event.session.Event", Skin.event.session.Event.SET_SESSION, id, sessionId);
         	this.eventBus.dispatchGlobalEvent(evt);
 		}
@@ -249,6 +237,8 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
 		// HERE IS PROBABLY WHERE WE LIKE TO CLEAR SESSION
 		var id = Skin.config.global.Config.getId(id);
 		var sessionId = Skin.config.global.Config.getSessionId(sessionId);
+		
+		this.logger.debug("clear session: id = " + id + ", sessionId = " + sessionId);
 		
 		var evt = Ext.create("Skin.event.session.Event", Skin.event.session.Event.CLEAR_SESSION, id, sessionId);
         this.eventBus.dispatchGlobalEvent(evt);

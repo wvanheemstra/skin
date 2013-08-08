@@ -26,8 +26,7 @@
 Ext.define("Skin.mediator.touch.viewport.Mediator", {
     extend: "Skin.mediator.abstract.Mediator",
 
-    requires: [
-       // "Skin.event.session.Event",    
+    requires: [   
         "Skin.event.ui.Event",     
         "Skin.event.company.Event",    
         "Skin.event.authentication.Event",
@@ -67,29 +66,11 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
     setupGlobalEventListeners: function() {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
-
-        //this.eventBus.addGlobalEventListener(Skin.event.session.Event.SET_SESSION, this.onSetSession, this);
-        //this.eventBus.addGlobalEventListener(Skin.event.session.Event.CLEAR_SESSION, this.onClearSession, this);        
+       
         this.eventBus.addGlobalEventListener(Skin.event.ui.Event.SET_UI, this.onSetUI, this);
         this.eventBus.addGlobalEventListener(Skin.event.company.Event.SET_COMPANY, this.onSetCompany, this);
         this.eventBus.addGlobalEventListener(Skin.event.navigation.Event.NAVIGATE, this.onNavigate, this);
     },
-
-    /**
-     * Handles the set session event
-     *
-     */
-//    setSession: function(id, sessionId) {
-//        this.logger.debug("setSession: id = " + id + ", sessionId = " + sessionId);
-//    },
-
-    /**
-     * Handles the clear session event
-     *
-     */
-//    clearSession: function(id, sessionId) {
-//        this.logger.debug("clearSession: id = " + id + ", sessionId = " + sessionId);
-//    },
 
     /**
      * Handles the set ui event
@@ -119,20 +100,12 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
         var view;
         var direction;
 
-        switch(action) {
-        	
-//            case Skin.event.company.Event.SET_COMPANY_SUCCESS:
-//                console.log("company: "+ Skin.config.global.Config.getCompany());
-//                break;         	
-//        	
-//            case Skin.event.ui.Event.SET_UI_SUCCESS:
-//                console.log("ui: "+ Skin.config.global.Config.getUi());
-//                break;        	
+        switch(action) {      	
 
             case Skin.event.authentication.Event.LOGIN_SUCCESS:
             	// HERE WE GET WHICH VIEW TO GO TO
                 console.log("next view: "+ Skin.config.global.Config.getNextView()); // added by wvh, for testing only
-                
+             
                 //WAS view = this.getEmployeeListView();
                 view = this.getViewByXType(Skin.config.global.Config.getNextView());
                 
@@ -141,6 +114,16 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
 
             case Skin.event.authentication.Event.LOGOUT_SUCCESS:
                 view = this.getLoginView();
+                direction = this.getSlideRightTransition();
+                break;
+
+            case Skin.event.navigation.Event.ACTION_SHOW_MAIN_LIST:
+                view = this.getMainListView();
+                direction = this.getSlideRightTransition();
+                break;
+
+            case Skin.event.navigation.Event.ACTION_SHOW_MAIN_TILE:
+                view = this.getMainTileView();
                 direction = this.getSlideRightTransition();
                 break;
 
@@ -187,24 +170,6 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
     ////////////////////////////////////////////////
     // EVENT BUS HANDLERS
     ////////////////////////////////////////////////
-
-    /**
-     * Handles the set session application event and passes on the id and sessionId to a functional, testable method.
-     */
-//    onSetSession: function(event) {
-//        this.logger.debug("onSetSession");
-//
-//        this.setSession(event.id, event.sessionId);
-//    },
-
-    /**
-     * Handles the clear session application event and passes on the id and sessionId to a functional, testable method.
-     */
-//    onClearSession: function(event) {
-//        this.logger.debug("onClearSession");
-//
-//        this.clearSession(event.id, event.sessionId);
-//    },
 
     /**
      * Handles the set ui application event and passes on the ui to a functional, testable method.

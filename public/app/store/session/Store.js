@@ -2,7 +2,8 @@
  * Contains the list of session domain objects.
  */
 Ext.define("Skin.store.session.Store", {
-    extend: "FlowMVC.mvc.store.AbstractStore",
+	extend: "FlowMVC.mvc.store.AbstractStore",
+	storeId: "sessionStore",
     // Touch uses properties inside of config
 	config: {
 	    model: "Skin.model.session.Model",
@@ -18,9 +19,9 @@ Ext.define("Skin.store.session.Store", {
 	        }
 	    },
 	    autoLoad: true,
-	    proxy:{
+	    proxy: {
 	    	type: 'localstorage',
-	    	id: 'SkinApplicationKey'
+	    	id: 'Skin.session.ApplicationKey'
 	    }
 	},//eof config
 	// Ext requires properties outside of config
@@ -39,6 +40,6 @@ Ext.define("Skin.store.session.Store", {
     autoLoad: true,
     proxy:{
     	type: 'localstorage',
-    	id: 'SkinApplicationKey'	
+    	id: 'Skin.session.ApplicationKey'	
     }	
 });
