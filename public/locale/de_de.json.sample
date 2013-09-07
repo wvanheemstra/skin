@@ -16,6 +16,19 @@
     },
 
     /////////////////////////////////////////////
+    // MAIN SLIDE
+    /////////////////////////////////////////////
+    "mainSlide": {
+        "title": "Mains",			
+        "logOff": "Abmelden",
+        "new": "Neu",
+        "search": "live suchen",
+        "name": "Name",
+        "loading": "Laat Mains...",
+        "noMains": "Keine Mains wurden gefunden."
+    },	
+	
+    /////////////////////////////////////////////
     // MAIN LIST
     /////////////////////////////////////////////
     "mainList": {
@@ -41,6 +54,19 @@
         "noMains": "Keine Mains wurden gefunden."
     },
 
+    /////////////////////////////////////////////
+    // MAIN ITEMS
+    /////////////////////////////////////////////
+    "mainItem1": {
+        "title": "Item 1",
+    },	
+    "mainItem2": {
+        "title": "Item 2",
+    },
+    "mainItem3": {
+        "title": "Item 3",
+    },	
+	
     /////////////////////////////////////////////
     // MAIN DETAIL
     /////////////////////////////////////////////

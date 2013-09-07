@@ -16,6 +16,19 @@
     },
 
     /////////////////////////////////////////////
+    // MAIN SLIDE
+    /////////////////////////////////////////////
+    "mainSlide": {
+        "title": "Mains",		
+        "logOff": "Log Off",
+        "new": "New",
+        "search": "live search",
+        "name": "Name",
+        "loading": "Loading Mains...",
+        "noMains": "No Mains found."
+    },
+	
+    /////////////////////////////////////////////
     // MAIN LIST
     /////////////////////////////////////////////
     "mainList": {
@@ -40,7 +53,20 @@
         "loading": "Loading Mains...",
         "noMains": "No Mains found."
     },
-
+	
+    /////////////////////////////////////////////
+    // MAIN ITEMS
+    /////////////////////////////////////////////
+    "mainItem1": {
+        "title": "Item 1",
+    },	
+    "mainItem2": {
+        "title": "Item 2",
+    },
+    "mainItem3": {
+        "title": "Item 3 - Movies",
+    },
+	
     /////////////////////////////////////////////
     // MAIN DETAIL
     /////////////////////////////////////////////

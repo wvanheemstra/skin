@@ -16,6 +16,22 @@
     },
 
     /////////////////////////////////////////////
+    // MAIN SLIDE
+    /////////////////////////////////////////////
+    "mainSlide": {
+        "title": "Mains",
+        "title1": "Mains1",	
+        "title2": "Mains2",
+        "title3": "Mains3",		
+        "logOff": "Log Uit",
+        "new": "Nieuw",
+        "search": "live zoeken",
+        "name": "Naam",
+        "loading": "Laad Mains...",
+        "noMains": "Geen Mains gevonden."
+    },	
+	
+    /////////////////////////////////////////////
     // MAIN LIST
     /////////////////////////////////////////////
     "mainList": {
@@ -41,6 +57,19 @@
         "noMains": "Geen Mains gevonden."
     },
 
+    /////////////////////////////////////////////
+    // MAIN ITEMS
+    /////////////////////////////////////////////
+    "mainItem1": {
+        "title": "Item 1",
+    },	
+    "mainItem2": {
+        "title": "Item 2",
+    },
+    "mainItem3": {
+        "title": "Item 3",
+    },		
+	
     /////////////////////////////////////////////
     // MAIN DETAIL
     /////////////////////////////////////////////
