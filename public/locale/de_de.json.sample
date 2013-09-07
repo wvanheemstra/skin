@@ -1,0 +1,127 @@
+{
+    /////////////////////////////////////////////
+    // LOGIN
+    /////////////////////////////////////////////
+    "login": {
+        "title": "Anmelden",
+        "username": "Benutzername",
+        "password": "Kennwort",
+        "passwordHint": "Hinweis: password",
+        "keepmeloggedin": "Angemeldet bleiben",
+        "submit": "Meld an",
+        "reset": "Neu stellen",
+        "loggingIn" : "Überprüfen...",
+        "credentialsRequired": "Tragen Sie bitte Ihre Benutzername und Kennwort ein.",
+        "loginFailed": "Anmelden hat gefählt. Bitte tragen Sie die richtige Daten ein."
+    },
+
+    /////////////////////////////////////////////
+    // MAIN SLIDE
+    /////////////////////////////////////////////
+    "mainSlide": {
+        "title": "Mains",			
+        "logOff": "Abmelden",
+        "new": "Neu",
+        "search": "live suchen",
+        "name": "Name",
+        "loading": "Laat Mains...",
+        "noMains": "Keine Mains wurden gefunden."
+    },	
+	
+    /////////////////////////////////////////////
+    // MAIN LIST
+    /////////////////////////////////////////////
+    "mainList": {
+        "title": "Mains",
+        "logOff": "Abmelden",
+        "new": "Neu",
+        "search": "live suchen",
+        "name": "Name",
+        "loading": "Laat Mains...",
+        "noMains": "Keine Mains wurden gefunden."
+    },
+
+    /////////////////////////////////////////////
+    // MAIN TILE
+    /////////////////////////////////////////////
+    "mainTile": {
+        "title": "Mains",
+        "logOff": "Abmelden",
+        "new": "Neu",
+        "search": "live suchen",
+        "name": "Name",
+        "loading": "Laat Mains...",
+        "noMains": "Keine Mains wurden gefunden."
+    },
+
+    /////////////////////////////////////////////
+    // MAIN ITEMS
+    /////////////////////////////////////////////
+    "mainItem1": {
+        "title": "Item 1",
+    },	
+    "mainItem2": {
+        "title": "Item 2",
+    },
+    "mainItem3": {
+        "title": "Item 3",
+    },	
+	
+    /////////////////////////////////////////////
+    // MAIN DETAIL
+    /////////////////////////////////////////////
+    "mainDetail": {
+        "title": "Main",
+        "back": "Zurück",
+        "save": "Speichern",
+        "name": "Name",
+        "delete": "Löschen",
+        "creatingMain": "Mach Main neu an ...",
+        "updatingMain": "Bearbeit Main ...",
+        "deletingMain": "Lösch Main..."
+    },
+
+    /////////////////////////////////////////////
+    // EMPLOYEE LIST
+    /////////////////////////////////////////////
+    "employeeList": {
+        "title": "Arbeiter",
+        "logOff": "Abmelden",
+        "new": "Neu",
+        "search": "live suchen",
+        "firstName": "Vorname",
+        "lastName": "Nachname",
+        "loading": "Laat Arbeiter...",
+        "noEmployees": "Keine Arbeiter gefunden."
+    },
+
+    /////////////////////////////////////////////
+    // EMPLOYEE TILE
+    /////////////////////////////////////////////
+    "employeeTile": {
+        "title": "Arbeiter",
+        "logOff": "Abmelden",
+        "new": "Neu",
+        "search": "live suchen",
+        "firstName": "Vorname",
+        "lastName": "Nachname",
+        "loading": "Laat Arbeiter...",
+        "noEmployees": "Keine Arbeiter gefunden."
+    },
+
+    /////////////////////////////////////////////
+    // EMPLOYEE DETAIL
+    /////////////////////////////////////////////
+    "employeeDetail": {
+        "title": "Arbeiter",
+        "back": "Zurück",
+        "save": "Speichern",
+        "firstName": "Vorname",
+        "lastName": "Nachname",
+        "phoneNumber": "Telefonnummer",
+        "delete": "Löschen",
+        "creatingEmployee": "Mach Arbeiter neu an...",
+        "updatingEmployee": "Bearbeit Arbeiter...",
+        "deletingEmployee": "Lösch Arbeiter..."
+    }
+}
