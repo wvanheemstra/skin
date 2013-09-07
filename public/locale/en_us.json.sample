@@ -22,7 +22,8 @@
         "title": "Mains",
         "title1": "Mains1",	
         "title2": "Mains2",
-        "title3": "Mains3",			
+        "title3": "Mains3",	
+        "title4": "Mains4",			
         "logOut": "Log Out",
         "new": "New",
         "search": "live search",
@@ -69,7 +70,9 @@
     "mainItem3": {
         "title": "Item 3",
     },		
-	
+    "mainItem4": {
+        "title": "Item 4",
+    },		
     /////////////////////////////////////////////
     // MAIN DETAIL
     /////////////////////////////////////////////

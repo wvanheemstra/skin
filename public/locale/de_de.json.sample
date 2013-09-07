@@ -19,7 +19,11 @@
     // MAIN SLIDE
     /////////////////////////////////////////////
     "mainSlide": {
-        "title": "Mains",			
+        "title": "Mains",
+        "title1": "Mains1",	
+        "title2": "Mains2",
+        "title3": "Mains3",	
+        "title4": "Mains4",				
         "logOut": "Abmelden",
         "new": "Neu",
         "search": "live suchen",
@@ -65,6 +69,9 @@
     },
     "mainItem3": {
         "title": "Item 3",
+    },	
+    "mainItem4": {
+        "title": "Item 4",
     },	
 	
     /////////////////////////////////////////////

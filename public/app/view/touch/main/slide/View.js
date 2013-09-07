@@ -14,6 +14,7 @@ Ext.define("Skin.view.touch.main.slide.View", {
 
     requires: [
 		// empty
+		"nineam.locale.LocaleManager"
     ],
 	
     /**
@@ -110,13 +111,13 @@ Ext.define("Skin.view.touch.main.slide.View", {
 				items: [{
 					xtype: "button",
 					itemId: "logoutButton",
-					ui: "neutral",				
+					ui: "neutral",
 					align: "left",
 					plugins: [
 						{
 							type: "localization",
 							method: "setText",
-							key: "mainList.logOut"
+							key: "mainSlide.logOut"
 						}
 					]
 				}]
@@ -139,7 +140,7 @@ Ext.define("Skin.view.touch.main.slide.View", {
          * can define the order of the items by defining an 'order' parameter.
          */        
         items: [{
-            title: 'Item 1',
+            title: 'Home',
 			plugins: [
 				{
 					type: "localization",
@@ -147,7 +148,7 @@ Ext.define("Skin.view.touch.main.slide.View", {
 					key: "mainItem1.title"
 				}
 			],			
-            group: 'Group 1',
+            group: 'Group 0',
 			ui: 'neutral',
 			hidden: true, // hide the item initially
             // Enable the slide button using the defaults defined above in
@@ -168,7 +169,7 @@ Ext.define("Skin.view.touch.main.slide.View", {
             },{
                 xtype: 'panel',
 				style: 'background-image: url("./resources/bg/noise.png");',
-                //OLD html: '<img src="./resources/img/guide.jpg" width="100%" />',
+                html: '<center><img src="./resources/logos/logo.png" /></center>',
 
                 // Mask this item when the container is opened
                 maskOnOpen: true
@@ -311,6 +312,109 @@ Ext.define("Skin.view.touch.main.slide.View", {
                     html: '<img class="image-wrap" src="http://content9.flixster.com/movie/11/15/90/11159075_pro.jpg" />'
                 }]
             }]
+        },{
+            title: 'Administration',
+			plugins: [
+				{
+					type: "localization",
+					method: "setTitle",
+					key: "mainItem4.title"
+				}
+			],
+            group: 'Group 1',
+			ui: 'neutral',
+			hidden: true, // hide the item initially			
+            order: 0,
+			slideButton: true,
+			
+            // Extend `slideButtonDefaults`
+        //    slideButton: {
+        //        iconMask: false,
+        //        iconCls: null,
+        //        text: 'menu'
+        //    },
+
+            items: [{
+                xtype: 'toolbar',
+                //title: 'Item 4',
+				plugins: [
+                    {
+                        type: "localization",
+                        method: "setTitle",
+                        key: "mainItem4.title"
+                    }
+                ],
+                docked: 'top',
+				ui: 'neutral'
+            },{
+                xtype: 'container',
+                scrollable: 'vertical',
+                // ORIGINAL style: 'margin: auto !important; text-align: center;',
+				style: 'margin: auto !important; text-align: center; background-image: url("./resources/bg/noise.png");',
+                maskOnOpen: true,
+                defaults: {
+                    style: "float: left; margin: 10px; box-shadow: "+
+                           "#999 0px 0px 6px 2px; border: 1px solid #888; "+
+                           "overflow: hidden;",
+                    height: 170,
+                    width: 110
+                },
+                items: [{
+                    html: '<img class="image-wrap" src="http://content6.flixster.com/movie/11/13/43/11134356_pro.jpg" />'
+                },{
+                    html: '<img class="image-wrap" src="http://content9.flixster.com/movie/11/16/11/11161107_pro.jpg" />'
+                },{
+                    html: '<img class="image-wrap" src="http://content8.flixster.com/movie/11/16/10/11161098_pro.jpg" />'
+                },{
+                    html: '<img class="image-wrap" src="http://content6.flixster.com/movie/11/15/75/11157588_pro.jpg" />'
+                },{
+                    html: '<img class="image-wrap" src="http://content9.flixster.com/movie/11/16/13/11161343_pro.jpg" />'
+                },{
+                    html: '<img class="image-wrap" src="http://content6.flixster.com/movie/11/16/12/11161272_pro.jpg" />'
+                },{
+                    html: '<img class="image-wrap" src="http://content7.flixster.com/movie/11/16/24/11162445_pro.jpg" />'
+                },{
+                    html: '<img class="image-wrap" src="http://content8.flixster.com/movie/11/15/92/11159214_pro.jpg" />'
+                },{
+                    html: '<img class="image-wrap" src="http://content8.flixster.com/movie/11/16/03/11160390_pro.jpg" />'
+                },{
+                    html: '<img class="image-wrap" src="http://content8.flixster.com/movie/11/16/05/11160598_pro.jpg" />'
+                },{
+                    html: '<img class="image-wrap" src="http://content8.flixster.com/movie/11/16/09/11160942_pro.jpg" />'
+                },{
+                    html: '<img class="image-wrap" src="http://content7.flixster.com/movie/11/15/25/11152577_pro.jpg" />'
+                },{
+                    html: '<img class="image-wrap" src="http://content8.flixster.com/movie/11/16/09/11160962_pro.jpg" />'
+                },{
+                    html: '<img class="image-wrap" src="http://content6.flixster.com/movie/11/16/02/11160244_pro.jpg" />'
+                },{
+                    html: '<img class="image-wrap" src="http://content9.flixster.com/movie/11/16/25/11162555_pro.jpg" />'
+                },{
+                    html: '<img class="image-wrap" src="http://content9.flixster.com/movie/11/15/83/11158339_pro.jpg" />'
+                },{
+                    html: '<img class="image-wrap" src="http://content6.flixster.com/movie/11/15/65/11156544_pro.jpg" />'
+                },{
+                    html: '<img class="image-wrap" src="http://content7.flixster.com/movie/11/15/66/11156693_pro.jpg" />'
+                },{
+                    html: '<img class="image-wrap" src="http://content6.flixster.com/movie/11/15/90/11159072_pro.jpg" />'
+                },{
+                    html: '<img class="image-wrap" src="http://content9.flixster.com/movie/11/16/26/11162639_pro.jpg" />'
+                },{
+                    html: '<img class="image-wrap" src="http://content6.flixster.com/movie/11/16/26/11162672_pro.jpg" />'
+                },{
+                    html: '<img class="image-wrap" src="http://content8.flixster.com/movie/11/15/92/11159258_pro.jpg" />'
+                },{
+                    html: '<img class="image-wrap" src="http://content6.flixster.com/movie/11/15/84/11158472_pro.jpg" />'
+                },{
+                    html: '<img class="image-wrap" src="http://content7.flixster.com/movie/11/15/65/11156581_pro.jpg" />'
+                },{
+                    html: '<img class="image-wrap" src="http://content9.flixster.com/movie/11/15/16/11151659_pro.jpg" />'
+                },{
+                    html: '<img class="image-wrap" src="http://content8.flixster.com/movie/11/15/81/11158182_pro.jpg" />'
+                },{
+                    html: '<img class="image-wrap" src="http://content9.flixster.com/movie/11/15/90/11159075_pro.jpg" />'
+                }]
+            }]
         }],
         /**
          * @cfg {Object} groups Mapping of group name to order.  For example,
@@ -328,16 +432,20 @@ Ext.define("Skin.view.touch.main.slide.View", {
          *  By default groups are ordered by their name.
          */
         groups: {
+		    'Group 0': 0,		
 		    'Group 1': 1,
             'Group 2': 2,
-            'Group 3': 3
+            'Group 3': 3,
+			'Group 4': 4
 		},
         /**
          * @cfg {Object} defaults An object of default values to apply to any Ext
          * components created from those listed in ``items``.
          */
         defaults: {
-            layout: 'card'
+            layout: 'card',
+			style: 'background: #fff'
+			
 			/**
              *  Here's an example of how to add a different type of
              *  component for the defaults.
@@ -352,6 +460,12 @@ Ext.define("Skin.view.touch.main.slide.View", {
          * Defaults to 'left'.
          */
         listPosition: 'left',
+		
+        /**
+         * @cfg {String} background Background of a panel in the container.
+         * Defaults to ''.
+         */		
+		background: 'background-image: url("./resources/bg/noise.png");',
 
         /**
          * @cfg {String} slideSelector Class selector of object (or parent)
@@ -415,8 +529,14 @@ Ext.define("Skin.view.touch.main.slide.View", {
             model: me.getModel(),
             sorters: 'order',
             grouper: {
-                property: 'group',
-                sortProperty: 'groupOrder'
+                //property: 'group',
+                //sortProperty: 'groupOrder',
+				groupFn: function(record) {
+					var group = record.get('group');
+					group = me.getGroup(group);
+					// Hide the generic group name, instead show the custom group name
+					return '<span style="display:none;">' + record.get('group') + '</span>' + group;
+				}
             }
         });
 		console.log("store created");
@@ -484,6 +604,33 @@ Ext.define("Skin.view.touch.main.slide.View", {
 		this.list.select(selectedItemIndex);
         this.__init = true;
 	},
+	
+    /**
+     *  @private
+     *
+     *  Sets the background.
+     */	
+	setBackground: function(background) {
+		console.log("setBackground");	
+		// TO DO
+	},
+
+    /**
+     *  @private
+     *
+     *  Gets the group.
+     */	
+	getGroup: function(group) {
+		console.log("getGroup");
+		// TO DO ... translating the group 
+		if(group == 'Group 0'){ var group = '' }		
+		if(group == 'Group 1'){ var group = 'A' }
+		if(group == 'Group 2'){ var group = 'B' }
+		if(group == 'Group 3'){ var group = 'C' }
+		if(group == 'Group 4'){ var group = 'D' }			
+		return group;
+	},	
+	
     /**
      *  @private
      *
