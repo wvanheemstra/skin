@@ -265,7 +265,7 @@ Ext.define("Skin.view.extjs.main.slide.View", {
         if (shadowStyle) {
             if (!document.getElementById(id)) {
                 style           = document.createElement('style');
-                style.type      = 'text/css';
+                style.type      = 'text/css';		
                 style.innerHTML = '.x-slidenavigation-container.x-dragging, '+
                                   '.x-slidenavigation-container.open { '+
                                   'box-shadow: '+shadowStyle+';'+

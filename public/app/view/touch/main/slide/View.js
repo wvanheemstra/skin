@@ -168,7 +168,8 @@ Ext.define("Skin.view.touch.main.slide.View", {
 				ui: 'neutral'				
             },{
                 xtype: 'panel',
-                html: '<img src="./resources/img/guide.jpg" width="100%" />',
+				style: 'background-image: url("./resources/bg/noise.png");',
+                //OLD html: '<img src="./resources/img/guide.jpg" width="100%" />',
 
                 // Mask this item when the container is opened
                 maskOnOpen: true
@@ -201,6 +202,7 @@ Ext.define("Skin.view.touch.main.slide.View", {
             },{
                 xtype: 'panel',
                 layout: 'card',
+				style: 'background-image: url("./resources/bg/noise.png");',
                 styleHtmlContent: true,
                 html: '<p>The toolbar on this page doesn\'t have a slideButton, so you\'ll have to "slide" the toolbar to view the menu.</p><p>Donec neque augue, fermentum quis tempor quis, lacinia ut augue. Sed dictum risus id arcu vehicula sed porttitor nisi egestas. Aliquam arcu felis, sagittis vel pulvinar vitae, ultricies a augue. Praesent eget erat tellus. Aenean nec dui magna. Cras sagittis, diam vel bibendum mattis, neque purus placerat turpis, sit amet tempor neque nisl non eros. Pellentesque id orci nulla, nec eleifend quam. Proin ut magna turpis. Phasellus erat urna, faucibus in tempus bibendum, ultrices a mauris. Nulla semper ante sed est placerat sagittis. Nam ut vestibulum nulla. Sed sit amet aliquet urna. Morbi est velit, vulputate quis pretium vitae, lobortis sed ligula.</p>',
                 scrollable: true,
@@ -242,7 +244,8 @@ Ext.define("Skin.view.touch.main.slide.View", {
             },{
                 xtype: 'container',
                 scrollable: 'vertical',
-                style: 'margin: auto !important; text-align: center;',
+                // ORIGINAL style: 'margin: auto !important; text-align: center;',
+				style: 'margin: auto !important; text-align: center; background-image: url("./resources/bg/noise.png");',
                 maskOnOpen: true,
                 defaults: {
                     style: "float: left; margin: 10px; box-shadow: "+
@@ -509,11 +512,11 @@ Ext.define("Skin.view.touch.main.slide.View", {
         if (shadowStyle) {
             if (!document.getElementById(id)) {
                 style           = document.createElement('style');
-                style.type      = 'text/css';
+                style.type      = 'text/css';			
                 style.innerHTML = '.x-slidenavigation-container.x-dragging, '+
                                   '.x-slidenavigation-container.open { '+
                                   'box-shadow: '+shadowStyle+';'+
-                                  '-webkit-box-shadow:'+shadowStyle+';';
+                                  '-webkit-box-shadow:'+shadowStyle+';';					  
                 document.getElementsByTagName('head')[0].appendChild(style);
             }
         }
@@ -862,7 +865,10 @@ Ext.define("Skin.view.touch.main.slide.View", {
             store: this.store,
             docked: listPosition,
             cls: 'x-slidenavigation-list',
-            style: 'position: absolute; top: 0; '+listPosition+': 0; height: 100%;' + 'z-index: 2',
+			style: 'position: absolute; top: 0; '+listPosition+': 0; height: 100%;' + 'z-index: 2',
+			
+		//	style: 'position: absolute; top: 0; '+listPosition+': 0; height: 100%;' + 'z-index: 2; background-image: url("http://localhost:3000/resources/bg/noise.png");',
+			
 			listeners: {
 			   select: this.onSelect,
 			   itemtap: this.onItemTap,
