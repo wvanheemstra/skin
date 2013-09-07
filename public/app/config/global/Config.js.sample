@@ -21,7 +21,8 @@ Ext.define("Skin.config.global.Config",{
         nextView: 'mainslide',    // initialize to empty
         ui: 'neutral',        	  // initialize to 'neutral'
         company: 'Your Company',  // initialize to 'Your Company'
-		locale: 'en_us'			  // initialize to 'en_us'
+		locale: 'en_us',	      // initialize to 'en_us',
+		background: 'noise'       // initialize to 'noise'
     },
     constructor : function(config){
         this.initConfig(config);

@@ -8,7 +8,8 @@ Ext.define("Skin.mediator.touch.login.base.Mediator", {
     extend: "Skin.mediator.abstract.Mediator",
 
     requires: [
-    	"Skin.event.session.Event",    
+    	"Skin.event.session.Event",  
+    	"Skin.event.background.Event",		
     	"Skin.event.ui.Event",
     	"Skin.event.company.Event",
         "Skin.event.authentication.Event",
@@ -35,7 +36,8 @@ Ext.define("Skin.mediator.touch.login.base.Mediator", {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
         this.eventBus.addGlobalEventListener(Skin.event.session.Event.GET_SESSION_SUCCESS, this.onGetSessionSuccess, this);
-        this.eventBus.addGlobalEventListener(Skin.event.session.Event.GET_SESSION_FAILURE, this.onGetSessionFailure, this);       
+        this.eventBus.addGlobalEventListener(Skin.event.session.Event.GET_SESSION_FAILURE, this.onGetSessionFailure, this); 
+        this.eventBus.addGlobalEventListener(Skin.event.background.Event.SET_BACKGROUND_SUCCESS, this.onSetBackgroundSuccess, this);		
         this.eventBus.addGlobalEventListener(Skin.event.ui.Event.SET_UI_SUCCESS, this.onSetUISuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.company.Event.SET_COMPANY_SUCCESS, this.onSetCompanySuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.authentication.Event.LOGIN_SUCCESS, this.onLoginSuccess, this);
@@ -68,6 +70,13 @@ Ext.define("Skin.mediator.touch.login.base.Mediator", {
 		// placeholder
     },    	    
 
+    /**
+     * Handles the set background success event from the login controller.
+     */
+    onSetBackgroundSuccess: function() {
+		// placeholder
+    },	
+	
     /**
      * Handles the set ui success event from the login controller.
      */

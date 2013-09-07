@@ -119,5 +119,3 @@ Ext.define("Skin.view.touch.login.View", {
         ]
     }
 });
-
-

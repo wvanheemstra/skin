@@ -11,6 +11,7 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
 
     requires: [   
 		"Skin.event.session.Event",
+        "Skin.event.background.Event", 		
         "Skin.event.ui.Event",     
         "Skin.event.company.Event",    
         "Skin.event.authentication.Event",
@@ -63,6 +64,9 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
 	setupViewport: function(){
 		this.logger.debug("setupViewport");
 
+		var background = Skin.config.global.Config.getBackground();
+		this.setBackground(background);		
+		
 		var ui = Skin.config.global.Config.getUi();
 		this.setUI(ui);
 		
@@ -73,6 +77,17 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
 		var sessionId = Skin.config.global.Config.getSessionId();
 		this.getSession(id, sessionId);
 	},	
+
+    /**
+     * Sets the background
+     *
+	 * @param background	The background to set.	 
+     */
+    setBackground: function(background) {
+        this.logger.debug("setBackground: background = " + background);
+		var evt = Ext.create("Skin.event.background.Event", Skin.event.background.Event.SET_BACKGROUND, background);
+		this.eventBus.dispatchGlobalEvent(evt);
+    },
 	
     /**
      * Sets the ui
@@ -112,11 +127,7 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
             	// HERE WE GET WHICH VIEW TO GO TO
 				var nextView = Skin.config.global.Config.getNextView();
                 console.log("next view: " + nextView); // added by wvh, for testing only
-				if(nextView == 'login') {
-					view = this.getViewByXType("loginView");
-					var left = 100, top = 100, animate = false;
-					view.setPosition(left, top, animate); // NEW by wvh
-				}
+				if(nextView == 'login') {view = this.getViewByXType("loginView");}
 				if(nextView == 'mainslide') {view = this.getViewByXType("mainSlideView");}
 				if(nextView == 'mainlist') {view = this.getViewByXType("mainListView");}
 				if(nextView == 'maintile') {view = this.getViewByXType("mainTileView");}

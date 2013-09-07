@@ -8,7 +8,8 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
     extend: "Skin.mediator.abstract.Mediator",
 
     requires: [
-    	"Skin.event.session.Event",    
+    	"Skin.event.session.Event",  
+    	"Skin.event.background.Event",		
     	"Skin.event.ui.Event",
     	"Skin.event.company.Event",
         "Skin.event.authentication.Event",
@@ -21,6 +22,7 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
 
     // set up view event to mediator mapping
     control: {
+		//background:						true,	
 		company:						true,
         logInButton: {
             tap: "onLoginButtonTap",
@@ -41,12 +43,23 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
      */
     setupGlobalEventListeners: function() {
         this.callParent();
-        this.logger.debug("setupGlobalEventListeners");       
+        this.logger.debug("setupGlobalEventListeners"); 
+        this.eventBus.addGlobalEventListener(Skin.event.background.Event.SET_BACKGROUND_SUCCESS, this.onSetBackgroundSuccess, this);		
         this.eventBus.addGlobalEventListener(Skin.event.ui.Event.SET_UI_SUCCESS, this.onSetUISuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.company.Event.SET_COMPANY_SUCCESS, this.onSetCompanySuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.authentication.Event.LOGIN_SUCCESS, this.onLoginSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.authentication.Event.LOGIN_FAILURE, this.onLoginFailure, this);
         this.eventBus.addGlobalEventListener(Skin.event.authentication.Event.LOGOUT_SUCCESS, this.onLogoutSuccess, this);
+    },
+
+    /**
+     * Handles the set background event. 
+     *
+     * @param background    The background to be set.	 
+     */
+    setBackground: function(background) {
+		this.logger.debug("setBackground: background = " + background);
+		//this.getBackground().setTitle(Skin.config.global.Config.getBackground());  // TO DO
     },
 	
     /**
@@ -163,6 +176,14 @@ Ext.define("Skin.mediator.touch.login.Mediator", {
 		this.logger.debug("onPainted");
     },    	    
 
+    /**
+     * Handles the set background success event from the login controller.
+     */
+    onSetBackgroundSuccess: function() {
+        this.logger.debug("onSetBackgroundSuccess");
+        this.setBackground(Skin.config.global.Config.getBackground());
+    },	
+	
     /**
      * Handles the set ui success event from the login controller.
      */

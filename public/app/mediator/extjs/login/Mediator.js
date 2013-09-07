@@ -9,6 +9,7 @@ Ext.define("Skin.mediator.extjs.login.Mediator", {
 
     // set up view event to mediator mapping
     control: {
+		//background: 					true,	
 		company: 						true,
         "logInButton": {
             click: "onLoginButtonClick",
@@ -24,6 +25,15 @@ Ext.define("Skin.mediator.extjs.login.Mediator", {
     // FUNCTIONAL METHODS
     ////////////////////////////////////////////////
 
+    /**
+     * Handles the set background event. 
+     *
+     */
+    setBackground: function(background) {
+		this.logger.debug("setBackground: background = " + background);
+    	//this.getBackground().setTitle(Skin.config.global.Config.getBackground()); // TO DO
+    },	
+	
     /**
      * Handles the set UI event. 
      *
@@ -141,12 +151,24 @@ Ext.define("Skin.mediator.extjs.login.Mediator", {
     	var sessionId = Skin.config.global.Config.getSessionId();
     	var evt = Ext.create("Skin.event.session.Event", Skin.event.session.Event.GET_SESSION, id, sessionId);
         this.eventBus.dispatchGlobalEvent(evt);
+
+		var background = Skin.config.global.Config.getBackground();
+		var evt = Ext.create("Skin.event.background.Event", Skin.event.company.Event.SET_BACKGROUND, background);
+        this.eventBus.dispatchGlobalEvent(evt);
 		
 		var company = Skin.config.global.Config.getCompany();
 		var evt = Ext.create("Skin.event.company.Event", Skin.event.company.Event.SET_COMPANY, company);
         this.eventBus.dispatchGlobalEvent(evt);
     },    	    
 
+    /**
+     * Handles the set background success event from the login controller.
+     */
+    onSetBackgroundSuccess: function() {
+        this.logger.debug("onSetBackgroundSuccess");
+        this.setBackground(Skin.config.global.Config.getBackground());
+    },	
+	
     /**
      * Handles the set ui success event from the login controller.
      */

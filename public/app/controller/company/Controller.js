@@ -33,7 +33,6 @@ Ext.define("Skin.controller.company.Controller", {
     setupGlobalEventListeners: function() {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
-
         this.eventBus.addGlobalEventListener(Skin.event.company.Event.SET_COMPANY, this.onSet, this);
     },
 
@@ -45,19 +44,9 @@ Ext.define("Skin.controller.company.Controller", {
      */
     set: function(company) {
         this.logger.debug("set: company = " + company);
-
 //        var service = this.getService(this.companyServiceClass);
 //        this.companyService.setUsePromise(true);
         this.executeServiceCall(this.companyService, this.companyService.set, [company], this.setSuccess, this.setFailure, this);
-    },
-
-    /**
-     * Resets the session data.
-     */
-    resetSessionData: function() {
-        this.logger.info("resetSessionData");
-
-        this.setSessionToken(null);
     },
 
     ////////////////////////////////////////////////
@@ -72,10 +61,6 @@ Ext.define("Skin.controller.company.Controller", {
      */
     setSuccess: function(response) {
         this.logger.info("setSuccess");
-
-        // The server will send a token that can be used throughout the app to confirm that the company is set.
-        this.setSessionToken(response.sessionToken);
-
         var evt = Ext.create("Skin.event.company.Event", Skin.event.company.Event.SET_COMPANY_SUCCESS);
         this.eventBus.dispatchGlobalEvent(evt);
     },
@@ -88,9 +73,6 @@ Ext.define("Skin.controller.company.Controller", {
      */
     setFailure: function(response) {
         this.logger.warn("setFailure");
-
-        this.resetSessionData();
-
         var evt = Ext.create("Skin.event.company.Event", Skin.event.company.Event.SET_COMPANY_FAILURE);
         this.eventBus.dispatchGlobalEvent(evt);
     },
@@ -108,8 +90,6 @@ Ext.define("Skin.controller.company.Controller", {
     onSet: function(event) {
         var company = event.company;
         this.logger.debug("onSet");
-
         this.set(company);
     }
-
 });
