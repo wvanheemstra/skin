@@ -153,7 +153,6 @@ Ext.define("Skin.view.touch.main.slide.View", {
             // Enable the slide button using the defaults defined above in
             // `slideButtonDefaults`.
             slideButton: true,
-			logoutButton: true,
             items: [{
                 xtype: 'toolbar',
                 //title: 'Item 1',
@@ -186,7 +185,8 @@ Ext.define("Skin.view.touch.main.slide.View", {
 			],			
             group: 'Group 2',
 			ui: 'neutral',
-			hidden: true, // hide the item initially			
+			hidden: true, // hide the item initially
+            slideButton: true,			
             items: [{
                 xtype: 'toolbar',
                 //title: 'Item 2',
@@ -204,7 +204,7 @@ Ext.define("Skin.view.touch.main.slide.View", {
                 layout: 'card',
 				style: 'background-image: url("./resources/bg/noise.png");',
                 styleHtmlContent: true,
-                html: '<p>The toolbar on this page doesn\'t have a slideButton, so you\'ll have to "slide" the toolbar to view the menu.</p><p>Donec neque augue, fermentum quis tempor quis, lacinia ut augue. Sed dictum risus id arcu vehicula sed porttitor nisi egestas. Aliquam arcu felis, sagittis vel pulvinar vitae, ultricies a augue. Praesent eget erat tellus. Aenean nec dui magna. Cras sagittis, diam vel bibendum mattis, neque purus placerat turpis, sit amet tempor neque nisl non eros. Pellentesque id orci nulla, nec eleifend quam. Proin ut magna turpis. Phasellus erat urna, faucibus in tempus bibendum, ultrices a mauris. Nulla semper ante sed est placerat sagittis. Nam ut vestibulum nulla. Sed sit amet aliquet urna. Morbi est velit, vulputate quis pretium vitae, lobortis sed ligula.</p>',
+                html: '<p>Some text here.</p><p>Donec neque augue, fermentum quis tempor quis, lacinia ut augue. Sed dictum risus id arcu vehicula sed porttitor nisi egestas. Aliquam arcu felis, sagittis vel pulvinar vitae, ultricies a augue. Praesent eget erat tellus. Aenean nec dui magna. Cras sagittis, diam vel bibendum mattis, neque purus placerat turpis, sit amet tempor neque nisl non eros. Pellentesque id orci nulla, nec eleifend quam. Proin ut magna turpis. Phasellus erat urna, faucibus in tempus bibendum, ultrices a mauris. Nulla semper ante sed est placerat sagittis. Nam ut vestibulum nulla. Sed sit amet aliquet urna. Morbi est velit, vulputate quis pretium vitae, lobortis sed ligula.</p>',
                 scrollable: true,
                 maskOnOpen: true
             }]
@@ -221,13 +221,14 @@ Ext.define("Skin.view.touch.main.slide.View", {
 			ui: 'neutral',
 			hidden: true, // hide the item initially			
             order: 0,
-
+			slideButton: true,
+			
             // Extend `slideButtonDefaults`
-            slideButton: {
-                iconMask: false,
-                iconCls: null,
-                text: 'menu'
-            },
+        //    slideButton: {
+        //        iconMask: false,
+        //        iconCls: null,
+        //        text: 'menu'
+        //    },
 
             items: [{
                 xtype: 'toolbar',
