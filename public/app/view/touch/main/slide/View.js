@@ -415,7 +415,7 @@ Ext.define("Skin.view.touch.main.slide.View", {
         me._slideButtonConfig = {
             xtype: 'button',
             iconMask: true,
-            iconCls: 'more',
+            iconCls: 'list', //WAS 'more',
             align: this.getListPosition(),
             name: 'slidebutton',
             listeners: {
