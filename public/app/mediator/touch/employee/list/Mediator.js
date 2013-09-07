@@ -23,24 +23,19 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
 
     // set up view event to mediator mapping
     control: {
-    	
     	titlebar: {
     		painted: "onPainted"
-    	},
-    	    	
+    	}, 	
         logoutButton: {
             tap: "onLogoutButtonTap"
         },
-
         newEmployeeButton: {
             tap: "onNewEmployeeButtonTap"
         },
-
         searchInput :{
             keyup:          "onSearchKeyUp",
             clearicontap:   "onSearchClearIconTap"
         },
-
         list: {
             disclose: "onListDisclose"
         }
@@ -52,11 +47,8 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
     setupGlobalEventListeners: function() {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
-
         this.eventBus.addGlobalEventListener(Skin.event.ui.Event.SET_UI_SUCCESS, this.onSetUISuccess, this);
-
         this.eventBus.addGlobalEventListener(Skin.event.authentication.Event.LOGIN_SUCCESS, this.onLoginSuccess, this);
-
         this.eventBus.addGlobalEventListener(Skin.event.employee.Event.GET_EMPLOYEE_LIST_SUCCESS, this.onGetEmployeeListSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.employee.Event.GET_EMPLOYEE_LIST_FAILURE, this.onGetEmployeeListFailure, this);
     },
@@ -66,12 +58,10 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
      */
     getEmployeeListData: function() {
         this.logger.debug("getEmployeeListData");
-
         this.getView().setMasked({
             xtype: "loadmask",
             message: nineam.locale.LocaleManager.getProperty("employeeList.loading")
         });
-
         var evt = Ext.create("Skin.event.employee.Event", Skin.event.employee.Event.GET_EMPLOYEE_LIST);
         this.eventBus.dispatchGlobalEvent(evt);
     },
@@ -88,7 +78,7 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
             ? ": id = " + record.get("id") + ", employee = " + record.get("firstName")
             : "new employee";
         this.logger.debug("showEmployeeDetail = " + logMsg);
-		Skin.config.global.Config.setPreviousView('employeeListView');
+		Skin.config.global.Config.setPreviousView('employeelist');
         this.navigate(Skin.event.navigation.Event.ACTION_SHOW_EMPLOYEE_DETAIL);
         this.employeeStore.setSelectedRecord(record);
     },
@@ -96,10 +86,15 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
     /**
      * Handles the set UI event. 
      *
+     * @param ui    The ui to be set.	 
      */
-    setUI: function() {
-    	Ext.getCmp('titlebar').ui = Skin.config.global.Config.getUi();
-    	this.logger.debug("current ui: " + Skin.config.global.Config.getUi());
+    setUI: function(ui) {
+		this.logger.debug("setUI: ui = " + ui);
+    	//Ext.getCmp('toolbar').ui = ui;
+		for ( var i=0; i<this.getView().items.length; i++)
+        {
+            this.items.getAt(i).setUi(ui);
+        }
     },     
 
     ////////////////////////////////////////////////
@@ -111,8 +106,7 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
      * as the current view.
      */    
     onPainted: function() {
-    	Skin.config.global.Config.setCurrentView('employeeListView');
-    	this.logger.debug("current view: " + Skin.config.global.Config.getCurrentView());
+    	this.logger.debug("onPainted");		
     },
 
     /**
@@ -121,10 +115,7 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
      */
     onLoginSuccess: function() {
         this.logger.debug("onLoginSuccess");
-        
-        this.logger.debug("next view: " + Skin.config.global.Config.getNextView()); // added by wvh, for testing only
-        
-		if(Skin.config.global.Config.getNextView()==='employeeListView') {
+		if(Skin.config.global.Config.getNextView()==='employeelist') {
         	this.navigate(Skin.event.authentication.Event.LOGIN_SUCCESS);
         	this.getEmployeeListData();
 		}
@@ -135,8 +126,7 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
      */
     onSetUISuccess: function() {
         this.logger.debug("onSetUISuccess");
-        this.logger.debug("ui: " + Skin.config.global.Config.getUi()); // added by wvh, for testing only
-        this.setUI();
+        this.setUI(Skin.config.global.Config.getUi());
     },
 
     /**
@@ -144,7 +134,6 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
      */
     onGetEmployeeListSuccess: function() {
         this.logger.debug("onGetEmployeeListSuccess");
-
         this.getView().setMasked(false);
         this.getList().setStore(this.employeeStore);
     },
@@ -154,7 +143,6 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
      */
     onGetEmployeeListFailure: function() {
         this.logger.debug("onGetEmployeeListFailure");
-
         this.getView().setMasked(false);
     },
 
@@ -166,9 +154,8 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
      * Handles the tap of the logout button. Dispatches the logout application-level event.
      */
     onLogoutButtonTap: function() {
-    	if(Skin.config.global.Config.getCurrentView()==='employeeListView') {      	
+    	if(Skin.config.global.Config.getCurrentView()==='employeelist') {      	
 	        this.logger.debug("onLogoutButtonTap");
-	
 	        var evt = Ext.create("Skin.event.authentication.Event", Skin.event.authentication.Event.LOGOUT);
 	        this.eventBus.dispatchGlobalEvent(evt);
     	}//eof if	        
@@ -178,9 +165,8 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
      * Handles the tap of the new employee button. Shows the employee detail view.
      */
     onNewEmployeeButtonTap: function() {
-    	if(Skin.config.global.Config.getCurrentView()==='employeeListView') {     	
+    	if(Skin.config.global.Config.getCurrentView()==='employeelist') {     	
 	        this.logger.debug("onNewEmployeeButtonTap");
-	
 	        this.showEmployeeDetail();
     	}//eof if
     },
@@ -197,9 +183,8 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
      * @param {Object} options ???
      */
     onListDisclose: function(list, record, target, index, evt, options) {
-    	if(Skin.config.global.Config.getCurrentView()==='employeeListView') {      	
+    	if(Skin.config.global.Config.getCurrentView()==='employeelist') {      	
 	        this.logger.debug("onListDisclose");
-	
 	        this.employeeStore.setSelectedRecord(record);
 	        this.showEmployeeDetail(record);
     	}//eof if
@@ -209,9 +194,8 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
      * Handles the clear icon tap event on the search field. Clears all filter on the list's store.
      */
     onSearchClearIconTap: function() {
-    	if(Skin.config.global.Config.getCurrentView()==='employeeListView') {    	
+    	if(Skin.config.global.Config.getCurrentView()==='employeelist') {    	
 	        this.logger.debug("onSearchClearIconTap");
-	
 	        var store = this.getList().getStore();
 	        store.clearFilter();
     	}//eof if        
@@ -228,36 +212,28 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
     onSearchKeyUp: function(field) {
     	if(Skin.config.global.Config.getCurrentView()==='employeeListView') {
 	        this.logger.debug("onSearchKeyUp");
-	
 	        //get the store and the value of the field
 	        var value = field.getValue();
 	        var store = this.getList().getStore();
-	
 	        //first clear any current filters on the store
 	        store.clearFilter();
-	
 	        //check if a value is set first, as if it isn't we don't have to do anything
 	        if (value) {
 	            //the user could have entered spaces, so we must split them so we can loop through them all
 	            var searches = value.split(" "),
 	                regexps = [],
 	                i;
-	
 	            //loop them all
 	            for (i = 0; i < searches.length; i++) {
 	                //if it is nothing, continue
 	                if (!searches[i]) continue;
-	
-	
 	                //if found, create a new regular expression which is case insenstive
 	                regexps.push(new RegExp(searches[i], "i"));
 	            }
-	
 	            //now filter the store by passing a method
 	            //the passed method will be called for each record in the store
 	            store.filter(function(record) {
 	                var matched = [];
-	
 	                //loop through each of the regular expressions
 	                for (i = 0; i < regexps.length; i++) {
 	                    var search = regexps[i],
@@ -267,7 +243,6 @@ Ext.define("Skin.mediator.touch.employee.list.Mediator", {
 	                    //if it matched the first or last name, push it into the matches array
 	                    matched.push(didMatch);
 	                }
-	
 	                //if nothing was found, return false (dont so in the store)
 	                if (regexps.length > 1 && matched.indexOf(false) != -1) {
 	                    return false;

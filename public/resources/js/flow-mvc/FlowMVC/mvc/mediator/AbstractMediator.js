@@ -128,7 +128,7 @@ Ext.define("FlowMVC.mvc.mediator.AbstractMediator", {
      * @return {Object/Object[]} A single view or list of views matchig the provided xtype.
      */
     getViewByXType: function(xtype, isSingeltonView) {
-        FlowMVC.mvc.mediator.AbstractMediator.logger.debug("getViewByXType: xtype = ", xtype);
+        FlowMVC.mvc.mediator.AbstractMediator.logger.debug("getViewByXType: xtype = " + xtype);
 
         var view = null;
         var viewsArray = Ext.ComponentQuery.query(xtype);

@@ -7,6 +7,47 @@ Ext.define("Skin.service.main.mock.Service", {
     inject: [
         "logger"
     ],
+
+    /**
+     * The mock service call.
+     */
+    getMainSlide: function() {
+        this.logger.debug("getMainSlide");
+
+        var response = {
+            success: true,
+            mainSlide: [
+                { id: 0,    name: "Alfa" },
+                { id: 1,    name: "Bravo" },
+                { id: 2,    name: "Charlie" },
+                { id: 3,    name: "Delta" },
+                { id: 4,    name: "Echo" },
+                { id: 5,    name: "Foxtrot" },
+                { id: 6,    name: "Golf" },
+                { id: 7,    name: "Hotel" },
+                { id: 8,    name: "India" },
+                { id: 9,    name: "Juliet" },
+                { id: 10,   name: "Kilo" },
+                { id: 11,   name: "Lima" },
+                { id: 12,   name: "Mike" },
+                { id: 13,   name: "November" },
+                { id: 14,   name: "Oscar" },
+                { id: 15,   name: "Papa" },
+                { id: 16,   name: "Quebec" },                
+                { id: 17,   name: "Romeo" },
+                { id: 18,   name: "Sierra" },
+                { id: 19,   name: "Tango" },
+                { id: 20,   name: "Uniform" },              
+                { id: 21,   name: "Victor" },
+                { id: 22,   name: "Whiskey" },
+                { id: 23,   name: "X-ray" },                
+                { id: 24,   name: "Yankee" },
+                { id: 25,   name: "Zulu" }
+            ]
+        };
+
+        return this.delayedSuccess(response);
+    },
     
     /**
      * The mock service call.

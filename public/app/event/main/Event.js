@@ -7,6 +7,21 @@ Ext.define("Skin.event.main.Event", {
     statics: {
 
         /**
+         * The get main slide event type.
+         */
+        GET_MAIN_SLIDE:          "getMainSlide",
+    	
+        /**
+         * The get main slide success event type.
+         */
+        GET_MAIN_SLIDE_SUCCESS:  "getMainSlideSuccess",
+
+        /**
+         * The get main slide failure event type.
+         */
+        GET_MAIN_SLIDE_FAILURE:  "getMainSlideFailure",	
+	
+        /**
          * The get main list event type.
          */
         GET_MAIN_LIST:          "getMainList",

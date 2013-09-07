@@ -16,32 +16,22 @@
  */
 
 /**
- * The employee list mediator essentially fulfills the passive view pattern for the employee list view.
+ * The employee list mediator essentially fulfils the passive view pattern for the employee list view.
  */
 Ext.define("Skin.mediator.extjs.employee.detail.Mediator", {
-    extend: "Skin.mediator.abstract.Mediator",
-
-    requires: [
-        "Skin.event.employee.Event",
-        "Skin.event.navigation.Event",
-        "nineam.locale.LocaleManager"
-    ],
-
-    inject: [
-        "employeeStore",
-        "logger"
-    ],
+    extend: "Skin.mediator.extjs.employee.base.Mediator",
 
     // set up view event to mediator mapping
     control: {
+    	toolbar: {
+    		painted: "onPainted"
+    	},	
         backButton: {
             click: "onBackButtonClick"
         },
-
         saveEmployeeButton: {
             click: "onSaveEmployeeButtonClick"
         },
-
         deleteButton: {
             click: "onDeleteButtonClick"
         }
@@ -60,7 +50,7 @@ Ext.define("Skin.mediator.extjs.employee.detail.Mediator", {
     setupGlobalEventListeners: function() {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
-
+        this.eventBus.addGlobalEventListener(Skin.event.ui.Event.SET_UI_SUCCESS, this.onSetUISuccess, this);				
         this.eventBus.addGlobalEventListener(Skin.event.employee.Event.CREATE_EMPLOYEE_SUCCESS, this.onCreateEmployeeSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.employee.Event.UPDATE_EMPLOYEE_SUCCESS, this.onUpdateEmployeeSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.employee.Event.DELETE_EMPLOYEE_SUCCESS, this.onDeleteEmployeeSuccess, this);
@@ -74,14 +64,10 @@ Ext.define("Skin.mediator.extjs.employee.detail.Mediator", {
      */
     saveEmployee: function(employee) {
         this.logger.debug("saveEmployee");
-
         var evt;
         var msg;
-
         if(employee != null) {
-
             var id = employee.id;
-
             if( (id != null) && (id != "") ) {
                 evt = Ext.create("Skin.event.employee.Event", Skin.event.employee.Event.UPDATE_EMPLOYEE);
                 msg = nineam.locale.LocaleManager.getProperty("employeeDetail.updatingEmployee");
@@ -89,9 +75,7 @@ Ext.define("Skin.mediator.extjs.employee.detail.Mediator", {
                 evt = Ext.create("Skin.event.employee.Event", Skin.event.employee.Event.CREATE_EMPLOYEE);
                 msg = nineam.locale.LocaleManager.getProperty("employeeDetail.creatingEmployee");
             }
-
             this.getView().setLoading(msg);
-
             evt.employee = employee;
             this.eventBus.dispatchGlobalEvent(evt);
         }
@@ -104,27 +88,26 @@ Ext.define("Skin.mediator.extjs.employee.detail.Mediator", {
      */
     deleteEmployee: function(employee) {
         this.logger.debug("deleteEmployee");
-
         if(employee != null) {
-
             this.getView().setLoading(nineam.locale.LocaleManager.getProperty("employeeDetail.deletingEmployee"));
-
             var evt = Ext.create("Skin.event.employee.Event", Skin.event.employee.Event.DELETE_EMPLOYEE);
             evt.employee = employee;
-
             this.eventBus.dispatchGlobalEvent(evt);
         }
     },
 
     /**
      * Simple navigation method used to navigate back, depending on the previous view.
+	 *
+	 * @param view	The view to go back to.
      */
-    backToPrevious: function() {
-        switch(Skin.config.global.Config.getPreviousView()) {
-            case 'employeeListView':
+    backToPrevious: function(view) {
+    	this.logger.debug("backToPrevious: view = " + view);
+        switch(view) {
+            case 'employeelist':
             	this.backToEmployeeList();
                 break;
-            case 'employeeTileView':
+            case 'employeetile':
             	this.backToEmployeeTile();
                 break;               
         }
@@ -135,7 +118,6 @@ Ext.define("Skin.mediator.extjs.employee.detail.Mediator", {
      */
     backToEmployeeList: function() {
         this.logger.debug("backToEmployeeList");
-
         this.navigate(Skin.event.navigation.Event.ACTION_BACK_SHOW_EMPLOYEE_LIST);
     },
 
@@ -144,7 +126,6 @@ Ext.define("Skin.mediator.extjs.employee.detail.Mediator", {
      */
     backToEmployeeTile: function() {
         this.logger.debug("backToEmployeeTile");
-
         this.navigate(Skin.event.navigation.Event.ACTION_BACK_SHOW_EMPLOYEE_TILE);
     },
 
@@ -153,7 +134,6 @@ Ext.define("Skin.mediator.extjs.employee.detail.Mediator", {
      */
     reset: function() {
         this.logger.debug("reset");
-
         this.getView().setLoading(false);
         // TODO: there doesn't appear to be an easy way to reset the currently loaded record in a form so we're hacking this. Might need to be updated for future vrs of ExtJS
         // resets the visual side so we're tapping into some u
@@ -163,18 +143,47 @@ Ext.define("Skin.mediator.extjs.employee.detail.Mediator", {
         this.getView().getForm().reset();
     },
 
+    /**
+     * Handles the set UI event. 
+     *
+	 * @param ui    The ui to set. 
+     */
+    setUI: function(ui) {
+		this.logger.debug("setUI: ui = " + ui);
+    	//Ext.getCmp('toolbar').ui = ui;
+		for ( var i=0; i<this.getView().items.length; i++)
+        {
+            this.items.getAt(i).setUi(ui);
+        }
+    },
+	
     ////////////////////////////////////////////////
     // EVENT BUS HANDLERS
     ////////////////////////////////////////////////
 
     /**
+     * Handles the painted application-level event. Set the main detail view
+     * as the current view.
+     */    
+    onPainted: function() {
+		this.logger.debug("onPainted");
+    },	
+
+    /**
+     * Handles the set ui success application-level event. Update the components for the ui.
+     */
+    onSetUISuccess: function() {
+        this.logger.debug("onSetUISuccess");
+        this.setUI(Skin.config.global.Config.getUi());
+    },
+	
+    /**
      * Handles the create employee success application-level event. Navigates back to the employee list view.
      */
     onCreateEmployeeSuccess: function() {
         this.logger.debug("onCreateEmployeeSuccess");
-
         this.getView().setLoading(false);
-        this.backToPrevious(); // WAS this.backToEmployeeList();
+        this.backToPrevious(Skin.config.global.Config.getPreviousView());
     },
 
     /**
@@ -182,9 +191,8 @@ Ext.define("Skin.mediator.extjs.employee.detail.Mediator", {
      */
     onUpdateEmployeeSuccess: function() {
         this.logger.debug("onUpdateEmployeeFailure");
-
         this.getView().setLoading(false);
-        this.backToPrevious(); // WAS this.backToEmployeeList();
+        this.backToPrevious(Skin.config.global.Config.getPreviousView());
     },
 
     /**
@@ -192,9 +200,8 @@ Ext.define("Skin.mediator.extjs.employee.detail.Mediator", {
      */
     onDeleteEmployeeSuccess: function() {
         this.logger.debug("onDeleteEmployeeSuccess");
-
         this.reset();
-        this.backToPrevious(); // WAS this.backToEmployeeList();
+        this.backToPrevious(Skin.config.global.Config.getPreviousView());
     },
 
     /**
@@ -209,7 +216,6 @@ Ext.define("Skin.mediator.extjs.employee.detail.Mediator", {
             ? ": id = " + record.get("id") + ", employee = " + record.get("firstName")
             : "new employee";
         this.logger.debug("onSelectedRecordChange = " + logMsg);
-
         if (record) {
             this.getView().loadRecord(record);
         } else {
@@ -226,8 +232,7 @@ Ext.define("Skin.mediator.extjs.employee.detail.Mediator", {
      */
     onBackButtonClick: function() {
         this.logger.debug("onBackButtonClick");
-
-        this.backToPrevious(); // WAS this.backToEmployeeList();
+        this.backToPrevious(Skin.config.global.Config.getPreviousView());
     },
 
     /**
@@ -236,15 +241,12 @@ Ext.define("Skin.mediator.extjs.employee.detail.Mediator", {
      */
     onSaveEmployeeButtonClick: function() {
         this.logger.debug("onSaveEmployeeButtonClick");
-
         var employee = this.getView().getRecord();
         var newEmployee = this.getView().getValues();
-
         // if this is a new employee record, there's no id available
         if(employee != null) {
             newEmployee.id = employee.data.id;
         }
-
         this.saveEmployee(newEmployee);
     },
 
@@ -254,13 +256,9 @@ Ext.define("Skin.mediator.extjs.employee.detail.Mediator", {
      */
     onDeleteButtonClick: function() {
         this.logger.debug("onDeleteButtonClick");
-
         var employee = this.getView().getRecord();
-
 	    if(employee) {
 		    this.deleteEmployee(employee.data);
 	    }
     }
-
 });
-

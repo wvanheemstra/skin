@@ -38,6 +38,7 @@ Ext.define("Skin.view.touch.main.list.View", {
                     {
                         xtype: "button",
                         itemId: "logoutButton",
+						ui: "neutral",				
                         align: "left",
                         plugins: [
                             {
@@ -47,6 +48,9 @@ Ext.define("Skin.view.touch.main.list.View", {
                             }
                         ]
                     },
+					{
+						xtype: "spacer"
+					},
                     {
                         xtype: "button",
                         itemId: "newMainButton",
@@ -64,7 +68,6 @@ Ext.define("Skin.view.touch.main.list.View", {
             },
             {
                 xtype: "list",
-                //xtype: "listview",
                 itemId: "list",
                 fullscreen: true,
 				ui: "neutral",
@@ -89,6 +92,7 @@ Ext.define("Skin.view.touch.main.list.View", {
                         xtype: "titlebar" ,
                         itemId:"titlebar",
                         id:"titlebar",
+						ui: "neutral",
                         docked: "top",
 
                         items: [

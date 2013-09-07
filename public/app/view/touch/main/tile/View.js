@@ -47,6 +47,9 @@ Ext.define("Skin.view.touch.main.tile.View", {
                             }
                         ]
                     },
+					{
+						xtype: "spacer"
+					},
                     {
                         xtype: "button",
                         itemId: "newMainButton",

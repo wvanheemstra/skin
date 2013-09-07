@@ -16,5 +16,6 @@ Ext.define("Skin.view.touch.main.base.View", {
     ],
 
     config: {
+	
     }
 });

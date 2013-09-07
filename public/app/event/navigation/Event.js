@@ -40,7 +40,7 @@ Ext.define("Skin.event.navigation.Event", {
     direction: "",
 
     /**
-     * Constructor. Provides details on how the applicaiton should navigate and to what screen.
+     * Constructor. Provides details on how the application should navigate and to what screen.
      *
      * @param {String} type The event type.
      * @param {String} action The string action that maps to the navigation.

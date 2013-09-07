@@ -1,20 +1,3 @@
-/*
- Copyright (c) 2013 [Web App Solution, Inc.](mailto:admin@webappsolution.com)
-
- CafeTownsend Sencha Touch DeftJS PoC is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- CafeTownsend Sencha Touch DeftJS PoC is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with CafeTownsend Sencha Touch DeftJS PoC.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 /**
  * The basic Viewport for the application.
  *
@@ -30,10 +13,15 @@ Ext.define("Skin.view.extjs.viewport.View", {
     width: 800,
 
     requires: [
+		"Skin.config.global.Config",
         "Skin.view.extjs.login.View",
-        "Skin.view.extjs.employee.list.View",
-        "Skin.view.extjs.employee.detail.View",
-        "Skin.view.extjs.employee.tile.View"
+		"Skin.view.extjs.main.slide.View",
+        "Skin.view.extjs.main.list.View",
+        "Skin.view.extjs.main.detail.View",
+        "Skin.view.extjs.main.tile.View"		
+        //"Skin.view.extjs.employee.list.View",
+        //"Skin.view.extjs.employee.detail.View",
+        //"Skin.view.extjs.employee.tile.View"
     ],
 
     config: {
@@ -51,23 +39,44 @@ Ext.define("Skin.view.extjs.viewport.View", {
         {
             xtype: "loginView",
             itemId: "login",
-            hidden: false
+            hidden: true
         },
+		// THIS BELOW CAUSES THE ERROR Uncaught TypeError: Object #<Object> has no method 'getById'
         {
-            xtype: "employeeListView",
-            itemId: "emplist",
+            xtype: "mainSlideView",
+            itemId: "mainslide", 
+            hidden: true
+        },		
+        {
+            xtype: "mainListView",
+            itemId: "mainlist",
             hidden: true
         },
         {
-            xtype: "employeeDetailView",
-            itemId: "empdetail",
+            xtype: "mainDetailView",
+            itemId: "maindetail",
             hidden: true
         },
         {
-            xtype: "employeeTileView",
-            itemId: "emptile",
+            xtype: "mainTileView",
+            itemId: "maintile",
             hidden: true
         }
+        // {
+            // xtype: "employeeListView",
+            // itemId: "employeelist",
+            // hidden: true
+        // },
+        // {
+            // xtype: "employeeDetailView",
+            // itemId: "employeedetail",
+            // hidden: true
+        // },
+        // {
+            // xtype: "employeeTileView",
+            // itemId: "employeetile",
+            // hidden: true
+        // }
     ],
 
     // TODO: BMR: Remove all logic from views
@@ -87,7 +96,7 @@ Ext.define("Skin.view.extjs.viewport.View", {
     }
 
 }, function() {
-    this.getCurrentItem = "login";
+    this.getCurrentItem = Skin.config.global.Config.getInitialView();// WAS "login";
     console.log("viewport create, currentitem = " + this.getCurrentItem);
 });
 

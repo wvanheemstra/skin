@@ -25,6 +25,7 @@ Ext.define("Skin.controller.main.Controller", {
     setupGlobalEventListeners: function() {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
+        this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_SLIDE, this.onGetMainSlide, this);
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_LIST, this.onGetMainList, this); 
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_TILE, this.onGetMainTile, this);               
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.CREATE_MAIN, this.onCreateMain, this);
@@ -36,9 +37,17 @@ Ext.define("Skin.controller.main.Controller", {
      * Performs get main by using the referenced service and sets up the service success and failure
      * callback handlers.
      */
+    getMainSlide: function() {
+        this.logger.debug("getMainSlide");
+        this.executeServiceCall(this.mainService, this.mainService.getMainSlide, null, this.getMainSlideSuccess, this.getMainSlideFailure, this);
+    },	
+	
+    /**
+     * Performs get main by using the referenced service and sets up the service success and failure
+     * callback handlers.
+     */
     getMainList: function() {
         this.logger.debug("getMainList");
-
         this.executeServiceCall(this.mainService, this.mainService.getMainList, null, this.getMainListSuccess, this.getMainListFailure, this);
     },
 
@@ -48,7 +57,6 @@ Ext.define("Skin.controller.main.Controller", {
      */
     getMainTile: function() {
         this.logger.debug("getMainTile");
-
         this.executeServiceCall(this.mainService, this.mainService.getMainTile, null, this.getMainTileSuccess, this.getMainTileFailure, this);
     },
 
@@ -60,7 +68,6 @@ Ext.define("Skin.controller.main.Controller", {
      */
     createMain: function(main) {
         this.logger.debug("createMain");
-
         this.executeServiceCall(this.mainService, this.mainService.createMain, [main], this.createMainSuccess, this.createMainFailure, this);
     },
 
@@ -72,7 +79,6 @@ Ext.define("Skin.controller.main.Controller", {
      */
     updateMain: function(main) {
         this.logger.debug("updateMain");
-
         this.executeServiceCall(this.mainService, this.mainService.updateMain, [main], this.updateMainSuccess, this.updateMainFailure, this);
     },
 
@@ -84,7 +90,6 @@ Ext.define("Skin.controller.main.Controller", {
      */
     deleteMain: function(main) {
         this.logger.debug("deleteMain");
-
         this.executeServiceCall(this.mainService, this.mainService.deleteMain, [main], this.deleteMainSuccess, this.deleteMainFailure, this);
     },
 
@@ -92,6 +97,21 @@ Ext.define("Skin.controller.main.Controller", {
     // SERVICE SUCCESS/FAULT HANDLERS
     ////////////////////////////////////////////////
 
+    /**
+     * Handles the successful get main service call and takes the response data packet as a parameter.
+     * Fires off the corresponding success event on the application-level event bus.
+     *
+     * @param {Object} response The response data packet from the successful service call.
+     */
+    getMainSlideSuccess: function(response) {
+        this.logger.info("getMainSlideSuccess");
+
+		this.mainStore.setData(response.mainSlide);
+
+        var evt = Ext.create("Skin.event.main.Event", Skin.event.main.Event.GET_MAIN_SLIDE_SUCCESS);
+        this.eventBus.dispatchGlobalEvent(evt);
+    },	
+	
     /**
      * Handles the successful get main service call and takes the response data packet as a parameter.
      * Fires off the corresponding success event on the application-level event bus.
@@ -121,7 +141,20 @@ Ext.define("Skin.controller.main.Controller", {
         var evt = Ext.create("Skin.event.main.Event", Skin.event.main.Event.GET_MAIN_TILE_SUCCESS);
         this.eventBus.dispatchGlobalEvent(evt);
     },
-        
+
+    /**
+     * Handles the failed get main service call and takes the response data packet as a parameter.
+     * Fires off the corresponding failure event on the application-level event bus.
+     *
+     * @param {Object} response The response data packet from the failed service call.
+     */
+    getMainSlideFailure: function(response) {
+        this.logger.warn("getMainSlideFailure");
+
+        var evt = Ext.create("Skin.event.main.Event", Skin.event.main.Event.GET_MAIN_SLIDE_FAILURE);
+        this.eventBus.dispatchGlobalEvent(evt);
+    },
+	
     /**
      * Handles the failed get main service call and takes the response data packet as a parameter.
      * Fires off the corresponding failure event on the application-level event bus.
@@ -238,6 +271,18 @@ Ext.define("Skin.controller.main.Controller", {
     // EVENT BUS HANDLERS
     ////////////////////////////////////////////////
 
+    /**
+     * Handles the get main event on the application-level event bus. Calls a functional method that's more
+     * testable than this event handler.
+     *
+     * @param {Skin.event.main.Event} event Reference to the main event.
+     */
+    onGetMainSlide: function(event) {
+        this.logger.debug("onGetMainSlide");
+
+        this.getMainSlide();
+    },
+	
     /**
      * Handles the get main event on the application-level event bus. Calls a functional method that's more
      * testable than this event handler.

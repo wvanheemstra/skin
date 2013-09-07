@@ -35,93 +35,117 @@ Ext.define("Skin.view.extjs.login.View", {
     },
 
     items: [
-        {
-            xtype: "form",
-            plugins: [
-                {
-                    ptype: "localization",
-                    method: "setTitle",
-                    key: "login.title"
-                }
-            ],
+		{
+			xtype: 'panel',
+			//ui: 'neutral',
+			itemId: 'company',
+			title: 'Your Company',
+			items: [
+				{
+					xtype: "form",
+					//ui: "neutral",
+					plugins: [
+						{
+							ptype: "localization",
+							method: "setTitle",
+							key: "login.title"
+						}
+					],
 
-            frame: true,
-            bodyPadding: "5px 5px 0",
-            width: 350,
-            fieldDefaults: {
-                labelWidth: 125,
-                msgTarget: "side",
-                autoFitErrors: false
-            },
-            defaults: {
-                width: 300,
-                inputType: "password"
-            },
-            defaultType: "textfield",
+					frame: true,
+					bodyPadding: "5px 5px 0",
+					width: 350,
+					fieldDefaults: {
+						labelWidth: 125,
+						msgTarget: "side",
+						autoFitErrors: false
+					},
+					defaults: {
+						width: 300,
+						inputType: "password"
+					},
+					defaultType: "textfield",
 
-            buttons: [
-                {
-                    id:"logInButton",
-                    plugins: [
-                        {
-                            ptype: "localization",
-                            method: "setText",
-                            key: "login.submit"
-                        }
-                    ]
-                }
-            ],
+					buttons: [
+						{
+							id:"logInButton",
+							//ui: "neutral",
+							plugins: [
+								{
+									ptype: "localization",
+									method: "setText",
+									key: "login.submit"
+								}
+							]
+						}
+					],
 
-            items: [
-                {
-                    itemId: "usernameTextField",
-                    inputType: "text",
-                    plugins: [
-                        {
-                            ptype: "localization",
-                            method: "setFieldLabel",
-                            key: "login.username"
-                        }
-                    ]
-                },
-                {
-                    itemId: "passwordTextField",
-                    plugins: [
-                        {
-                            ptype: "localization",
-                            method: "setFieldLabel",
-                            key: "login.password"
-                        }
-                    ]
-                },
-                {
-                    xtype: "label",
-                    plugins: [
-                        {
-                            ptype: "localization",
-                            method: "setText",
-                            key: "login.passwordHint"
-                        }
-                    ]
-                },
-                {
-                    xtype: "label",
-                    itemId: "signInFailedLabel",
-                    hidden: true,
-                    hideAnimation: "fadeOut",
-                    showAnimation: "fadeIn",
-                    style: "color:#990000;margin:5px 0px;",
-                    plugins: [
-                        {
-                            ptype: "localization",
-                            method: "setText",
-                            key: "login.loginFailed"
-                        }
-                    ]
-                }
-            ]
-        }
-
+					items: [
+						{
+							itemId: "usernameTextField",
+							inputType: "text",
+							plugins: [
+								{
+									ptype: "localization",
+									method: "setFieldLabel",
+									key: "login.username"
+								}
+							]
+						},
+						{
+							itemId: "passwordTextField",
+							plugins: [
+								{
+									ptype: "localization",
+									method: "setFieldLabel",
+									key: "login.password"
+								}
+							]
+						},
+						{
+							xtype: "label",
+							plugins: [
+								{
+									ptype: "localization",
+									method: "setText",
+									key: "login.passwordHint"
+								}
+							]
+						},
+						{
+							xtype: "checkboxfield",
+							checked: false,
+							itemId: "keepmeloggedinCheckboxField",
+							boxLabel: '...',
+							plugins: [
+								{
+									ptype: "localization",
+									method: "setBoxLabel",
+									key: "login.keepmeloggedin"
+								}
+							]
+						},				
+						{
+							xtype: "label",
+							itemId: "logInFailedLabel",
+							hidden: true,
+							hideAnimation: "fadeOut",
+							showAnimation: "fadeIn",
+							style: "color:#990000;margin:5px 0px;",
+							plugins: [
+								{
+									ptype: "localization",
+									method: "setText",
+									key: "login.loginFailed"
+								}
+							]
+						}
+					]
+				}			
+			
+			
+			]
+		}
     ]
 });
 

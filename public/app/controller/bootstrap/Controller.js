@@ -1,20 +1,3 @@
-/*
- Copyright (c) 2013 [Web App Solution, Inc.](mailto:admin@webappsolution.com)
-
- CafeTownsend Sencha Touch DeftJS PoC is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- CafeTownsend Sencha Touch DeftJS PoC is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with CafeTownsend Sencha Touch DeftJS PoC.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 /**
  * The BootstrapController acts like a service controller with asynchronous callback methods for successful
  * and failed authentication service calls.
@@ -57,7 +40,7 @@ Ext.define("Skin.controller.bootstrap.Controller", {
     },
 
     /**
-     * Initializes the Localization Manager loading in two languages for now.
+     * Initializes the Localization Manager loading in four languages for now.
      */
     initLocaleManager: function() {
         var lm = nineam.locale.LocaleManager;
@@ -65,7 +48,7 @@ Ext.define("Skin.controller.bootstrap.Controller", {
 
         var locales = Ext.create("nineam.locale.store.LocalesStore", {
             data: [
-                {id: "en_uk", label: "English UK", url: "locale/en_uk.json"},
+                {id: "en_gb", label: "English GB", url: "locale/en_gb.json"},
                 {id: "en_us", label: "English US", url: "locale/en_us.json"},
                 {id: "es_us", label: "Spanish", url: "locale/es_us.json"},
                 {id: "nl_nl", label: "Dutch", url: "locale/nl_nl.json"},
@@ -76,11 +59,12 @@ Ext.define("Skin.controller.bootstrap.Controller", {
 
         var locale = lm.getPersistedLocale();
         
+		//locale = "de_de"; // for testing only
         
         this.logger.debug("locale: " + locale);
         
         
-        locale = locale ? locale : "en_uk";
+        locale = locale ? locale : Skin.config.global.Config.getLocale();  // WAS "en_uk"
         this.logger.debug("initLocaleManager: locale = " + locale);
         lm.setLocale(locale);
     },

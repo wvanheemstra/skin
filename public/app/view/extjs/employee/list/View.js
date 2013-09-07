@@ -47,6 +47,7 @@ Ext.define("Skin.view.extjs.employee.list.View", {
     items: [
         {
             xtype: "toolbar",
+			itemId: "toolbar",
             width: 400,
 
             items: [

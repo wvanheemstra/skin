@@ -58,9 +58,7 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
     setupGlobalEventListeners: function() {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
-        
         this.eventBus.addGlobalEventListener(Skin.event.ui.Event.SET_UI_SUCCESS, this.onSetUISuccess, this);
-
         this.eventBus.addGlobalEventListener(Skin.event.employee.Event.CREATE_EMPLOYEE_SUCCESS, this.onCreateEmployeeSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.employee.Event.UPDATE_EMPLOYEE_SUCCESS, this.onUpdateEmployeeSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.employee.Event.DELETE_EMPLOYEE_SUCCESS, this.onDeleteEmployeeSuccess, this);
@@ -74,14 +72,10 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
      */
     saveEmployee: function(employee) {
         this.logger.debug("saveEmployee");
-
         var evt;
         var msg;
-
         if(employee != null) {
-
             var id = employee.id;
-
             if( (id != null) && (id != "") ) {
                 evt = Ext.create("Skin.event.employee.Event", Skin.event.employee.Event.UPDATE_EMPLOYEE);
                 msg = nineam.locale.LocaleManager.getProperty("employeeDetail.updatingEmployee");
@@ -89,12 +83,10 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
                 evt = Ext.create("Skin.event.employee.Event", Skin.event.employee.Event.CREATE_EMPLOYEE);
                 msg = nineam.locale.LocaleManager.getProperty("employeeDetail.creatingEmployee");
             }
-
             this.getView().setMasked({
                 xtype: "loadmask",
                 message: msg
             });
-
             evt.employee = employee;
             this.eventBus.dispatchGlobalEvent(evt);
         }
@@ -107,17 +99,13 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
      */
     deleteEmployee: function(employee) {
         this.logger.debug("deleteEmployee");
-
         if(employee != null) {
-
             this.getView().setMasked({
                 xtype: "loadmask",
                 message: nineam.locale.LocaleManager.getProperty("employeeDetail.deletingEmployee")
             });
-
             var evt = Ext.create("Skin.event.employee.Event", Skin.event.employee.Event.DELETE_EMPLOYEE);
             evt.employee = employee;
-
             this.eventBus.dispatchGlobalEvent(evt);
         }
     },
@@ -125,15 +113,13 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
     /**
      * Simple navigation method used to navigate back, depending on the previous view.
      */
-    backToPrevious: function() {
-    	
-    	this.logger.debug("previous view: "+Skin.config.global.Config.getPreviousView());
-    	
+    backToPrevious: function(view) {
+    	this.logger.debug("previous view: " + view);
         switch(Skin.config.global.Config.getPreviousView()) {
-            case 'employeeListView':
+            case 'employeelist':
             	this.backToEmployeeList();
                 break;
-            case 'employeeTileView':
+            case 'employeetile':
             	this.backToEmployeeTile();
                 break;               
         }
@@ -144,7 +130,6 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
      */
     backToEmployeeList: function() {
         this.logger.debug("backToEmployeeList");
-
         this.navigate(Skin.event.navigation.Event.ACTION_BACK_SHOW_EMPLOYEE_LIST);
     },
 
@@ -153,7 +138,6 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
      */
     backToEmployeeTile: function() {
         this.logger.debug("backToEmployeeTile");
-
         this.navigate(Skin.event.navigation.Event.ACTION_BACK_SHOW_EMPLOYEE_TILE);
     },
 
@@ -162,7 +146,6 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
      */
     reset: function() {
         this.logger.debug("reset");
-
         this.getView().setMasked(false);
         this.getView().setRecord(null);
         this.getView().reset();
@@ -171,10 +154,15 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
     /**
      * Handles the set UI event. 
      *
+     * @param ui    The ui to be set.
      */
-    setUI: function() {
-    	Ext.getCmp('titlebar').ui = Skin.config.global.Config.getUi();
-    	this.logger.debug("current ui: " + Skin.config.global.Config.getUi());
+    setUI: function(ui) {
+		this.logger.debug("setUI: ui = " + ui);
+    	//Ext.getCmp('toolbar').ui = ui;
+		for ( var i=0; i<this.getView().items.length; i++)
+        {
+            this.items.getAt(i).setUi(ui);
+        }
     }, 
 
     ////////////////////////////////////////////////
@@ -186,8 +174,7 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
      * as the current view.
      */    
     onPainted: function() {
-    	Skin.config.global.Config.setCurrentView('employeeDetailView');
-    	this.logger.debug("current view: " + Skin.config.global.Config.getCurrentView());
+    	this.logger.debug("onPainted");
     },
 
     /**
@@ -195,8 +182,7 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
      */
     onSetUISuccess: function() {
         this.logger.debug("onSetUISuccess");
-        this.logger.debug("ui: " + Skin.config.global.Config.getUi()); // added by wvh, for testing only
-        this.setUI();
+        this.setUI(Skin.config.global.Config.getUi());
     },
 
     /**
@@ -204,9 +190,8 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
      */
     onCreateEmployeeSuccess: function() {
         this.logger.debug("onCreateEmployeeSuccess");
-
         this.getView().setMasked(false);
-        this.backToPrevious(); // WAS this.backToEmployeeList();
+        this.backToPrevious(Skin.config.global.Config.getPreviousView()); // WAS this.backToEmployeeList();
     },
 
     /**
@@ -214,9 +199,8 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
      */
     onUpdateEmployeeSuccess: function() {
         this.logger.debug("onUpdateEmployeeSuccess");
-
         this.getView().setMasked(false);
-        this.backToPrevious(); // WAS this.backToEmployeeList();
+        this.backToPrevious(Skin.config.global.Config.getPreviousView()); // WAS this.backToEmployeeList();
     },
 
     /**
@@ -224,9 +208,8 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
      */
     onDeleteEmployeeSuccess: function() {
         this.logger.debug("onDeleteEmployeeSuccess");
-
         this.reset();
-        this.backToPrevious();
+        this.backToPrevious(Skin.config.global.Config.getPreviousView());
     },
 
     /**
@@ -241,7 +224,6 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
             ? ": id = " + record.get("id") + ", employee = " + record.get("firstName")
             : "new employee";
         this.logger.debug("onSelectedRecordChange = " + logMsg);
-
         if (record) {
             this.getView().setRecord(record);
         } else {
@@ -258,8 +240,7 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
      */
     onBackButtonTap: function() {
         this.logger.debug("onBackButtonTap");
-
-        this.backToPrevious(); // WAS this.backToEmployeeList();
+        this.backToPrevious(Skin.config.global.Config.getPreviousView()); // WAS this.backToEmployeeList();
     },
 
     /**
@@ -268,15 +249,12 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
      */
     onSaveEmployeeButtonTap: function() {
         this.logger.debug("onSaveEmployeeButtonTap");
-
         var employee = this.getView().getRecord();
         var newEmployee = this.getView().getValues();
-
         // if this is a new employee record, there's no id available
         if(employee != null) {
             newEmployee.id = employee.data.id;
         }
-
         this.saveEmployee(newEmployee);
     },
 
@@ -286,13 +264,9 @@ Ext.define("Skin.mediator.touch.employee.detail.Mediator", {
      */
     onDeleteButtonTap: function() {
         this.logger.debug("onDeleteButtonTap");
-
         var employee = this.getView().getRecord();
-
 	    if(employee) {
 		    this.deleteEmployee(employee.data);
 	    }
     }
-
 });
-

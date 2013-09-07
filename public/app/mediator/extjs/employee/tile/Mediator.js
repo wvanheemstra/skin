@@ -16,22 +16,16 @@
  */
 
 /**
- * The employee list mediator essentially fulfills the passive view pattern for the employee list view.
+ * The employee list mediator essentially fulfils the passive view pattern for the employee list view.
  */
 Ext.define("Skin.mediator.extjs.employee.tile.Mediator", {
-    extend: "Skin.mediator.abstract.Mediator",
-
-    requires: [
-        "Skin.event.employee.Event"
-    ],
-
-    inject: [
-        "employeeStore",
-        "logger"
-    ],
+    extend: "Skin.mediator.extjs.employee.base.Mediator",
 
     // set up view event to mediator mapping
     control: {
+	    toolbar: {
+    		painted: "onPainted"
+    	},	
         logoutButton: {
             click: "onLogoutButtonClick"
         },
@@ -49,9 +43,8 @@ Ext.define("Skin.mediator.extjs.employee.tile.Mediator", {
     setupGlobalEventListeners: function() {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
-
+		this.eventBus.addGlobalEventListener(Skin.event.ui.Event.SET_UI_SUCCESS, this.onSetUISuccess, this);				
         this.eventBus.addGlobalEventListener(Skin.event.authentication.Event.LOGIN_SUCCESS, this.onLoginSuccess, this);
-
         this.eventBus.addGlobalEventListener(Skin.event.employee.Event.GET_EMPLOYEE_TILE_SUCCESS, this.onGetEmployeeTileSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.employee.Event.GET_EMPLOYEE_TILE_FAILURE, this.onGetEmployeeTileFailure, this);
         this.eventBus.addGlobalEventListener(Skin.event.employee.Event.UPDATE_EMPLOYEE_SUCCESS, this.onGetEmployeeTileSuccess, this);
@@ -64,9 +57,7 @@ Ext.define("Skin.mediator.extjs.employee.tile.Mediator", {
      */
     getEmployeeTileData: function() {
         this.logger.debug("getEmployeeTileData");
-
         this.getView().setLoading(nineam.locale.LocaleManager.getProperty("employeeTile.loading"));
-
         var evt = Ext.create("Skin.event.employee.Event", Skin.event.employee.Event.GET_EMPLOYEE_TILE);
         this.eventBus.dispatchGlobalEvent(evt);
     },
@@ -82,34 +73,62 @@ Ext.define("Skin.mediator.extjs.employee.tile.Mediator", {
         var logMsg = (record != null)
             ? ": id = " + record.get("id") + ", employee = " + record.get("firstName")
             : "";
-        this.logger.debug("showEmployeeDetail = ", logMsg);
-
+        this.logger.debug("showEmployeeDetail = " + logMsg);
+		Skin.config.global.Config.setPreviousView('employeetile');
         this.employeeStore.setSelectedRecord(record);
         this.navigate(Skin.event.navigation.Event.ACTION_SHOW_EMPLOYEE_DETAIL);
     },
 
+    /**
+     * Handles the set UI event. 
+     *
+	 * @param ui	The ui to set.
+     */
+    setUI: function(ui) {
+    	this.logger.debug("setUI: ui = " + ui);
+		for ( var i=0; i<this.getView().items.length; i++)
+        {
+            this.items.getAt(i).setUi(ui);
+        }		
+    },
+	
     ////////////////////////////////////////////////
     // EVENT BUS HANDLERS
     ////////////////////////////////////////////////
 
+    /**
+     * Handles the painted application-level event. Set the main tile view
+     * as the current view.
+     */    
+    onPainted: function() {
+    	this.logger.debug("onPainted");
+    },	
+	
     /**
      * Handles the login success application-level event. Slide the employee tile view
      * onto stage.
      */
     onLoginSuccess: function() {
         this.logger.debug("onLoginSuccess");
-		if(Skin.config.global.Config.getNextView()==='employeeTileView') {
+		if(Skin.config.global.Config.getNextView()==='employeetile') {
         	this.navigate(Skin.event.authentication.Event.LOGIN_SUCCESS);
         	this.getEmployeeTileData();
 		}
     },
 
     /**
+     * Handles the set ui success application-level event. Update the components for the ui.
+     */
+    onSetUISuccess: function() {
+        this.logger.debug("onSetUISuccess");
+        this.setUI(Skin.config.global.Config.getUi());
+    },	
+	
+    /**
      * Handles the get employees application-level event.
      */
     onGetEmployeeTileSuccess: function() {
         this.logger.debug("onGetEmployeeTileSuccess");
-
         this.getView().setLoading(false);
         this.getTile().getStore().loadRecords(this.employeeStore.getRange());
     },
@@ -119,7 +138,6 @@ Ext.define("Skin.mediator.extjs.employee.tile.Mediator", {
      */
     onGetEmployeeTileFailure: function() {
         this.logger.debug("onGetEmployeeTileFailure");
-
         this.getView().setLoading(false);
     },
 
@@ -149,19 +167,21 @@ Ext.define("Skin.mediator.extjs.employee.tile.Mediator", {
      * Handles the tap of the logout button. Dispatches the logout application-level event.
      */
     onLogoutButtonClick: function() {
-        this.logger.debug("onLogoutButtonClick");
-
-        var evt = Ext.create("Skin.event.authentication.Event", Skin.event.authentication.Event.LOGOUT);
-        this.eventBus.dispatchGlobalEvent(evt);
+    	if(Skin.config.global.Config.getCurrentView()==='maintile') {	
+			this.logger.debug("onLogoutButtonClick");
+			var evt = Ext.create("Skin.event.authentication.Event", Skin.event.authentication.Event.LOGOUT);
+			this.eventBus.dispatchGlobalEvent(evt);
+    	}		
     },
 
     /**
      * Handles the tap of the new employee button. Shows the employee detail view.
      */
     onNewEmployeeButtonClick: function() {
-        this.logger.debug("onNewEmployeeButtonClick");
-
-        this.showEmployeeDetail(null);
+    	if(Skin.config.global.Config.getCurrentView()==='maintile') {	
+			this.logger.debug("onNewEmployeeButtonClick");
+			this.showEmployeeDetail(null);
+    	}		
     },
 
     /**
@@ -174,19 +194,22 @@ Ext.define("Skin.mediator.extjs.employee.tile.Mediator", {
      * @param {Object} options ???
      */
     onTileSelect: function(tile, record, index, options) {
-        this.logger.debug("onTileSelect");
-
-        this.showEmployeeDetail(record);
+    	if(Skin.config.global.Config.getCurrentView()==='employeetile') {	
+			this.logger.debug("onTileSelect");
+			this.showEmployeeDetail(record);
+    	}	
     }
 
     /**
      * Handles the clear icon tap event on the search field. Clears all filter on the list's store.
      */
 //    onSearchClearIconTap: function() {
+//    	if(Skin.config.global.Config.getCurrentView()==='mainTileView') {
 //        this.logger.debug("onSearchClearIconTap");
 //
 //        var store = this.getView().getStore();
 //        store.clearFilter();
+//    	}//eof if
 //    },
 
     /**
@@ -198,6 +221,7 @@ Ext.define("Skin.mediator.extjs.employee.tile.Mediator", {
      * TODO: BMR: 02/28/13: clean this up. pulled directly from another example with minor changes: http://www.phs4j.com/2012/05/add-a-searchfield-to-a-sencha-touch-2-list-mvc/
      */
 //    onSearchKeyUp: function(field) {
+//    	if(Skin.config.global.Config.getCurrentView()==='mainTileView') {
 //        this.logger.debug("onSearchKeyUp");
 //
 //        //get the store and the value of the field
@@ -253,7 +277,7 @@ Ext.define("Skin.mediator.extjs.employee.tile.Mediator", {
 //                }
 //            });
 //        }
+//    	}//eof if
 //    },
-
 });
 

@@ -1,29 +1,24 @@
 /**
- * The main list mediator essentially fulfills the passive view pattern for the main list view.
+ * The main list mediator essentially fulfils the passive view pattern for the main list view.
  */
 Ext.define("Skin.mediator.touch.main.list.Mediator", {
     extend: "Skin.mediator.touch.main.base.Mediator",
 
     // set up view event to mediator mapping
     control: {
-    	
     	titlebar: {
     		painted: "onPainted"
     	},
-    	    	
         logoutButton: {
             tap: "onLogoutButtonTap"
         },
-
         newMainButton: {
             tap: "onNewMainButtonTap"
         },
-
         searchInput :{
             keyup:          "onSearchKeyUp",
             clearicontap:   "onSearchClearIconTap"
         },
-
         list: {
             disclose: "onListDisclose"
         }
@@ -35,11 +30,8 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
     setupGlobalEventListeners: function() {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
-
         this.eventBus.addGlobalEventListener(Skin.event.ui.Event.SET_UI_SUCCESS, this.onSetUISuccess, this);
-
         this.eventBus.addGlobalEventListener(Skin.event.authentication.Event.LOGIN_SUCCESS, this.onLoginSuccess, this);
-
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_LIST_SUCCESS, this.onGetMainListSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_LIST_FAILURE, this.onGetMainListFailure, this);
     },
@@ -49,12 +41,10 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
      */
     getMainListData: function() {
         this.logger.debug("getMainListData");
-
         this.getView().setMasked({
             xtype: "loadmask",
             message: nineam.locale.LocaleManager.getProperty("mainList.loading")
         });
-
         var evt = Ext.create("Skin.event.main.Event", Skin.event.main.Event.GET_MAIN_LIST);
         this.eventBus.dispatchGlobalEvent(evt);
     },
@@ -71,7 +61,7 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
             ? ": id = " + record.get("id") + ", main = " + record.get("name")
             : "new main";
         this.logger.debug("showMainDetail = " + logMsg);
-		Skin.config.global.Config.setPreviousView('mainListView');
+		Skin.config.global.Config.setPreviousView('mainlist');
         this.navigate(Skin.event.navigation.Event.ACTION_SHOW_MAIN_DETAIL);
         this.mainStore.setSelectedRecord(record);
     },
@@ -79,10 +69,14 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
     /**
      * Handles the set UI event. 
      *
+     * @param ui    The ui to set.	 
      */
-    setUI: function() {
-    	Ext.getCmp('titlebar').ui = Skin.config.global.Config.getUi();
-    	this.logger.debug("current ui: " + Skin.config.global.Config.getUi());
+    setUI: function(ui) {
+    	this.logger.debug("setUI: ui = " + ui);
+		for ( var i=0; i<this.getView().items.length; i++)
+        {
+            this.getView().items.getAt(i).setUi(ui);
+        }
     },     
 
     ////////////////////////////////////////////////
@@ -90,12 +84,10 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
     ////////////////////////////////////////////////
 
     /**
-     * Handles the painted application-level event. Set the main list view
-     * as the current view.
+     * Handles the painted application-level event. 
      */    
     onPainted: function() {
-    	Skin.config.global.Config.setCurrentView('mainListView');
-    	this.logger.debug("current view: " + Skin.config.global.Config.getCurrentView());
+	    this.logger.debug("onPainted");	
     },
 
     /**
@@ -103,11 +95,8 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
      * onto stage.
      */
     onLoginSuccess: function() {
-        this.logger.debug("onLoginSuccess");
-        
-        this.logger.debug("next view: " + Skin.config.global.Config.getNextView()); // added by wvh, for testing only
-        
-		if(Skin.config.global.Config.getNextView()==='mainListView') {
+        this.logger.debug("onLoginSuccess");        
+		if(Skin.config.global.Config.getNextView()==='mainlist') {
         	this.navigate(Skin.event.authentication.Event.LOGIN_SUCCESS);
         	this.getMainListData();
 		}
@@ -118,8 +107,7 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
      */
     onSetUISuccess: function() {
         this.logger.debug("onSetUISuccess");
-        this.logger.debug("ui: " + Skin.config.global.Config.getUi()); // added by wvh, for testing only
-        this.setUI();
+        this.setUI(Skin.config.global.Config.getUi());
     },
 
     /**
@@ -127,7 +115,6 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
      */
     onGetMainListSuccess: function() {
         this.logger.debug("onGetMainListSuccess");
-
         this.getView().setMasked(false);
         this.getList().setStore(this.mainStore);
     },
@@ -137,7 +124,6 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
      */
     onGetMainListFailure: function() {
         this.logger.debug("onGetMainListFailure");
-
         this.getView().setMasked(false);
     },
 
@@ -149,23 +135,21 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
      * Handles the tap of the logout button. Dispatches the logout application-level event.
      */
     onLogoutButtonTap: function() {
-    	if(Skin.config.global.Config.getCurrentView()==='mainListView') {      	
+    	if(Skin.config.global.Config.getCurrentView()==='mainlist') {      	
 	        this.logger.debug("onLogoutButtonTap");
-	
 	        var evt = Ext.create("Skin.event.authentication.Event", Skin.event.authentication.Event.LOGOUT);
 	        this.eventBus.dispatchGlobalEvent(evt);
-    	}//eof if	        
+    	}	        
     },
 
     /**
      * Handles the tap of the new main button. Shows the main detail view.
      */
     onNewMainButtonTap: function() {
-    	if(Skin.config.global.Config.getCurrentView()==='mainListView') {     	
+    	if(Skin.config.global.Config.getCurrentView()==='mainlist') {     	
 	        this.logger.debug("onNewMainButtonTap");
-	
 	        this.showMainDetail();
-    	}//eof if
+    	}
     },
 
     /**
@@ -180,24 +164,22 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
      * @param {Object} options ???
      */
     onListDisclose: function(list, record, target, index, evt, options) {
-    	if(Skin.config.global.Config.getCurrentView()==='mainListView') {      	
+    	if(Skin.config.global.Config.getCurrentView()==='mainlist') {      	
 	        this.logger.debug("onListDisclose");
-	
 	        this.mainStore.setSelectedRecord(record);
 	        this.showMainDetail(record);
-    	}//eof if
+    	}
     },
 
     /**
      * Handles the clear icon tap event on the search field. Clears all filter on the list's store.
      */
     onSearchClearIconTap: function() {
-    	if(Skin.config.global.Config.getCurrentView()==='mainListView') {    	
+    	if(Skin.config.global.Config.getCurrentView()==='mainlist') {    	
 	        this.logger.debug("onSearchClearIconTap");
-	
 	        var store = this.getList().getStore();
 	        store.clearFilter();
-    	}//eof if        
+    	}        
     },
 
     /**
@@ -209,46 +191,37 @@ Ext.define("Skin.mediator.touch.main.list.Mediator", {
      * TODO: BMR: 02/28/13: clean this up. pulled directly from another example with minor changes: http://www.phs4j.com/2012/05/add-a-searchfield-to-a-sencha-touch-2-list-mvc/
      */
     onSearchKeyUp: function(field) {
-    	if(Skin.config.global.Config.getCurrentView()==='mainListView') {
+    	if(Skin.config.global.Config.getCurrentView()==='mainlist') {
 	        this.logger.debug("onSearchKeyUp");
-	
 	        //get the store and the value of the field
 	        var value = field.getValue();
 	        var store = this.getList().getStore();
-	
 	        //first clear any current filters on the store
 	        store.clearFilter();
-	
 	        //check if a value is set first, as if it isn't we don't have to do anything
 	        if (value) {
 	            //the user could have entered spaces, so we must split them so we can loop through them all
 	            var searches = value.split(" "),
 	                regexps = [],
 	                i;
-	
 	            //loop them all
 	            for (i = 0; i < searches.length; i++) {
 	                //if it is nothing, continue
 	                if (!searches[i]) continue;
-	
-	                //if found, create a new regular expression which is case insenstive
+	                //if found, create a new regular expression which is case insensitive
 	                regexps.push(new RegExp(searches[i], "i"));
 	            }
-	
 	            //now filter the store by passing a method
 	            //the passed method will be called for each record in the store
 	            store.filter(function(record) {
 	                var matched = [];
-	
 	                //loop through each of the regular expressions
 	                for (i = 0; i < regexps.length; i++) {
 	                    var search = regexps[i],
 	                        didMatch = record.get("name").match(search);
-	
 	                    //if it matched the name, push it into the matches array
 	                    matched.push(didMatch);
 	                }
-	
 	                //if nothing was found, return false (dont so in the store)
 	                if (regexps.length > 1 && matched.indexOf(false) != -1) {
 	                    return false;

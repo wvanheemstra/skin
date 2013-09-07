@@ -43,6 +43,9 @@ Ext.define("Skin.view.touch.main.detail.View", {
                             }
                         ]
                     },
+					{
+						xtype: "spacer"
+					},
                     {
                         xtype: "button",
                         itemId: "saveMainButton",

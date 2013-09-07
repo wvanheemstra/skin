@@ -15,11 +15,13 @@ Ext.define("Skin.config.global.Config",{
         id: 0,     				  // initialize to 0
         sessionId: '',            // initialize to empty
         keepMeLoggedIn: false,	  // initialize to false
+		initialView: 'login',     // initialize to 'login'
         previousView: '',         // initialize to empty
         currentView: '',          // initialize to empty
-        nextView: '',             // initialize to empty
-        ui: '',        	  	      // initialize to empty
-        company: 'Your Company'	  // initialize to 'Your Company'
+        nextView: 'mainslide',    // initialize to empty
+        ui: 'neutral',        	  // initialize to 'neutral'
+        company: 'Your Company',  // initialize to 'Your Company'
+		locale: 'en_us'			  // initialize to 'en_us'
     },
     constructor : function(config){
         this.initConfig(config);

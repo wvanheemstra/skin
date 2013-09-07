@@ -3,7 +3,6 @@
  */
 Ext.define("Skin.store.session.Store", {
 	extend: "FlowMVC.mvc.store.AbstractStore",
-	storeId: "sessionStore",
     // Touch uses properties inside of config
 	config: {
 	    model: "Skin.model.session.Model",

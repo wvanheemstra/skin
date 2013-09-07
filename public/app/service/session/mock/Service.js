@@ -25,7 +25,33 @@ Ext.define("Skin.service.session.mock.Service", {
 	    // THIS IS A FORCEFULL FIX TO GET THE SAME DATA IN localstorage
 	    var key = "Skin.session.ApplicationKey";
 	    var value = localStorage.getItem(key);
+		
+		if (typeof sessionModel == 'undefined'){
+			var sessionModel = new Skin.model.session.Model({
+				id: null,
+				sessionId: null
+			});
+		}
 	    
+		// THIS CHECK IS ONLY TO SEE IF THERE IS A SESSION IN LOCALSTORAGE
+		// WITHOUT KNOWING THE sessionId, I.E. sessionId = ''
+		// USED E.G. WHEN RELOADING THE PAGE OR OPENING UP THE PAGE IN A NEW TAB
+		if(me.sessionId === '' && value!=''){
+			this.logger.debug("getSession.success");
+			Skin.config.global.Config.setId(value['id']);
+			Skin.config.global.Config.setSessionId(value['sessionId']);
+			var response = {
+				success: true,
+				sessionToken: "qwerty1234567890",
+				session: {
+					id: value['id'],
+					sessionId: value['sessionId']
+				}
+			};
+			return me.delayedSuccess(response);
+		}
+
+		// THIS CHECK IS WHEN WE DO PROVIDE A sessionId OTHER THAN '' TO VERIFY
 	    if(value[id] === sessionModel.get('id') && value[sessionId] === sessionModel.get('sessionId')) {
 
 			var sessionStore = me.sessionStore;
@@ -52,9 +78,6 @@ Ext.define("Skin.service.session.mock.Service", {
 	                    sessionId: me.sessionId
 	                }
 	            };
-	            
-				this.logger.debug("sessionStore: ");// for testing only
-		    	console.log(sessionStore);
 	            
 	            return me.delayedSuccess(response);
 			}// eof second if
@@ -111,9 +134,9 @@ Ext.define("Skin.service.session.mock.Service", {
 	    // THIS IS A FORCEFULL FIX TO GET THE SAME DATA IN localstorage
 	    var key = "Skin.session.ApplicationKey";
 	    var value = {};
-	    value[id] = sessionModel.get('id');
-	    value[sessionId] = sessionModel.get('sessionId');
-	    localStorage.setItem(key, value);
+	    value['id'] = sessionModel.get('id');
+	    value['sessionId'] = sessionModel.get('sessionId');
+	    localStorage.setItem(key, JSON.stringify(value));
 	    // REPLACE ONCE SENCHA WORKS WITH localstorage AS DESIGNED
 	    
 		if(null!=sessionStore.getAt(0).get('sessionId')){
@@ -163,17 +186,29 @@ Ext.define("Skin.service.session.mock.Service", {
 		
 		// THIS IS A FORCEFULL FIX TO CLEAR THE SAME DATA FROM localstorage
 	    var key = "Skin.session.ApplicationKey";
-	    var value = {};
-	    localStorage.setItem(key, value);
+	    localStorage.removeItem(key);
 	    // REPLACE ONCE SENCHA WORKS WITH localstorage AS DESIGNED
 		
-		if(null!=sessionStore.getAt(0).get('sessionId')){
-			this.logger.debug("setSession.failure");
-			return me.delayedFailure(response);
+		//if(null!=sessionStore.getAt(0).get('sessionId')){  // sessionStore.getAt(0) is undefined
+		
+		if(true) { // TEMP SET TO ALWAYS BE TRUE, Store has no more data
+			this.logger.debug("clearSession.success");
+			var response = {
+                success: true,
+                sessionToken: "",
+                session: {
+                    id: me.id,
+                    sessionId: me.sessionId
+                }
+            };
+			return me.delayedSuccess(response);	
 		}
 		else {   
-			this.logger.debug("setSession.success");
-			return me.delayedSuccess(response);
+			this.logger.debug("clearSession.failure");
+			var response = {
+                success: false
+            };
+			return me.delayedFailure(response);
 		}
 	} 
 	

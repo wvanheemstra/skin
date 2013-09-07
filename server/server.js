@@ -4,23 +4,115 @@ var express = require('express'),
 
 config = require('../config/server.js');
 var configs = config.configs;
-    
+
+
+/*
+ * SERVER - The Server used for shutdown etc
+ * See: https://www.exratione.com/2011/07/running-a-nodejs-server-as-a-service-using-forever/
+ */
+var server = express();
+// Port
+if(typeof configs.server_port === 'undefined'){
+	var server_port = process.env.PORT || 10080;
+}
+else {
+	var server_port = configs.server_port;
+}
+server.listen(server_port);
+console.log('Node Version: ' + process.version);
+console.log("Express server listening on port %d", server_port);
+console.log("To shutdown server gracefully type: node prepareForStop.js");
+
+server.get('/prepareForShutdown', function(req, res) {
+  if(req.connection.remoteAddress == "127.0.0.1"
+    || req.socket.remoteAddress == "127.0.0.1"
+    // 0.4.7 oddity in https only
+    || req.connection.socket.remoteAddress == "127.0.0.1") 
+  {
+    managePreparationForShutdown(function() {
+      // don't complete the connection until the preparation is done.
+      res.statusCode = 200;
+      res.end();
+    });
+  } 
+  else {
+    res.statusCode = 500;
+    res.end();
+  }
+});
+
+var managePreparationForShutdown = function(callback) {
+  // perform all the cleanup and other operations needed prior to shutdown,
+  // but do not actually shutdown. Call the callback function only when
+  // these operations are actually complete.
+  	try {
+		app.close();
+		console.log("Shutdown app successful.");
+	}
+	catch(ex) {
+		console.log("Shutdown app failed.");
+	}
+  	try {
+		api.close();
+		console.log("Shutdown api successful.");
+	}
+	catch(ex) {
+		console.log("Shutdown api failed.");
+	} 
+  console.log("All preparations for shutdown completed.");
+  callback();
+};
+
+/*
+ * APP - The Application
+ */   
 var app = express();
+// Port
 if(typeof configs.app_port === 'undefined'){
 	var app_port = process.env.PORT || 3000;
 }
 else {
 	var app_port = configs.app_port;
 }
-
+// Group ID
+if(typeof configs.app_gid === 'undefined'){
+	var app_gid = "root";
+}
+else {
+	var app_gid = configs.app_gid;
+}
+// User ID
+if(typeof configs.app_uid === 'undefined'){
+	var app_uid = "root";
+}
+else {
+	var app_uid = configs.app_uid;
+}
+/*
+ * API- The Application Programming Interface
+ */
 var api = express();
+// Port
 if(typeof configs.api_port === 'undefined'){
 	var api_port = app_port+1 || 3001;
 }
 else {
 	var api_port = configs.api_port;
 }
-
+// Group ID
+if(typeof configs.api_gid === 'undefined'){
+	var api_gid = "root";
+}
+else {
+	var api_gid = configs.api_gid;
+}
+// User ID
+if(typeof configs.app_uid === 'undefined'){
+	var api_uid = "root";
+}
+else {
+	var api_uid = configs.api_uid;
+}
 api.configure(function(){
 	api.use(api.router);
 });
@@ -167,8 +259,48 @@ app.get('/touch', function(req, res) {
     res.render('index-touch', { title: title, host: host, web_root: web_root, layout: false });
 });
 
-app.listen(app_port);
-api.listen(api_port);
+app.listen(app_port, function () {
+	console.log("Express app server listening on port %d in %s mode", app_port, app.settings.env);
+	// launching as the root user 
+	// and then downgrading the process permissions 
+	// to run as another (non-privileged) user 
+	// after the port is bound
+	// for better security
+	try {
+		process.setgid(app_gid); // Note: this function is only available on POSIX platforms (i.e. not Windows)
+		console.log("App GID set to " + app_gid);
+	}
+	catch(ex) {
+		console.log("App GID not set. Not supported on Windows.");
+	}
+	try {
+		process.setuid(app_uid); // Note: this function is only available on POSIX platforms (i.e. not Windows)
+		console.log("App UID set to " + app_uid);
+	}
+	catch(ex) {
+		console.log("App UID not set. Not supported on Windows.");
+	}
+});
 
-console.log("Express app server listening on port %d in %s mode", app_port, app.settings.env);
-console.log("Express api server listening on port %d in %s mode", api_port, api.settings.env);
+api.listen(api_port, function() {
+	console.log("Express api server listening on port %d in %s mode", api_port, api.settings.env);
+	// launching as the root user 
+	// and then downgrading the process permissions 
+	// to run as another (non-privileged) user 
+	// after the port is bound
+	// for better security
+	try {
+		process.setgid(api_gid); // Note: this function is only available on POSIX platforms (i.e. not Windows)
+		console.log("Api GID set to " + api_gid);
+	}
+	catch(ex) {
+		console.log("Api GID not set. Not supported on Windows.");
+	}
+	try {
+		process.setuid(api_uid); // Note: this function is only available on POSIX platforms (i.e. not Windows)
+		console.log("Api UID set to " + api_uid);
+	}
+	catch(ex) {
+		console.log("Api UID not set. Not supported on Windows.");
+	}
+});

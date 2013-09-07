@@ -10,19 +10,15 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
 
     // set up view event to mediator mapping
     control: {
-    	
     	titlebar: {
     		painted: "onPainted"
     	},    	
-    	
         backButton: {
             tap: "onBackButtonTap"
         },
-
         saveMainButton: {
             tap: "onSaveMainButtonTap"
         },
-
         deleteButton: {
             tap: "onDeleteButtonTap"
         }
@@ -41,9 +37,7 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
     setupGlobalEventListeners: function() {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
-        
         this.eventBus.addGlobalEventListener(Skin.event.ui.Event.SET_UI_SUCCESS, this.onSetUISuccess, this);
-
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.CREATE_MAIN_SUCCESS, this.onCreateMainSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.UPDATE_MAIN_SUCCESS, this.onUpdateMainSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.DELETE_MAIN_SUCCESS, this.onDeleteMainSuccess, this);
@@ -57,14 +51,10 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
      */
     saveMain: function(main) {
         this.logger.debug("saveMain");
-
         var evt;
         var msg;
-
         if(main != null) {
-
             var id = main.id;
-
             if( (id != null) && (id != "") ) {
                 evt = Ext.create("Skin.event.main.Event", Skin.event.main.Event.UPDATE_MAIN);
                 msg = nineam.locale.LocaleManager.getProperty("mainDetail.updatingMain");
@@ -72,12 +62,10 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
                 evt = Ext.create("Skin.event.main.Event", Skin.event.main.Event.CREATE_MAIN);
                 msg = nineam.locale.LocaleManager.getProperty("mainDetail.creatingMain");
             }
-
             this.getView().setMasked({
                 xtype: "loadmask",
                 message: msg
             });
-
             evt.main = main;
             this.eventBus.dispatchGlobalEvent(evt);
         }
@@ -90,44 +78,50 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
      */
     deleteMain: function(main) {
         this.logger.debug("deleteMain");
-
         if(main != null) {
-
             this.getView().setMasked({
                 xtype: "loadmask",
                 message: nineam.locale.LocaleManager.getProperty("mainDetail.deletingMain")
             });
-
             var evt = Ext.create("Skin.event.main.Event", Skin.event.main.Event.DELETE_MAIN);
             evt.main = main;
-
             this.eventBus.dispatchGlobalEvent(evt);
         }
     },
 
     /**
      * Simple navigation method used to navigate back, depending on the previous view.
+	 *
+	 * @param view	The view to go back to.
      */
-    backToPrevious: function() {
-    	
-    	this.logger.debug("previous view: "+Skin.config.global.Config.getPreviousView());
-    	
-        switch(Skin.config.global.Config.getPreviousView()) {
-            case 'mainListView':
+    backToPrevious: function(view) {
+    	this.logger.debug("backToPrevious view: " + view);
+        switch(view) {
+            case 'mainslide':
+            	this.backToMainSlide();
+                break;		
+            case 'mainlist':
             	this.backToMainList();
                 break;
-            case 'mainTileView':
+            case 'maintile':
             	this.backToMainTile();
                 break;               
         }
     },
-
+	
+    /**
+     * Simple navigation method used to navigate back to the main slide view.
+     */
+    backToMainSlide: function() {
+        this.logger.debug("backToMainSlide");
+        this.navigate(Skin.event.navigation.Event.ACTION_BACK_SHOW_MAIN_SLIDE);
+    },
+	
     /**
      * Simple navigation method used to navigate back to the main list view.
      */
     backToMainList: function() {
         this.logger.debug("backToMainList");
-
         this.navigate(Skin.event.navigation.Event.ACTION_BACK_SHOW_MAIN_LIST);
     },
 
@@ -136,7 +130,6 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
      */
     backToMainTile: function() {
         this.logger.debug("backToMainTile");
-
         this.navigate(Skin.event.navigation.Event.ACTION_BACK_SHOW_MAIN_TILE);
     },
 
@@ -145,7 +138,6 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
      */
     reset: function() {
         this.logger.debug("reset");
-
         this.getView().setMasked(false);
         this.getView().setRecord(null);
         this.getView().reset();
@@ -154,10 +146,14 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
     /**
      * Handles the set UI event. 
      *
+     * @param ui    The ui to set.	 
      */
-    setUI: function() {
-    	Ext.getCmp('titlebar').ui = Skin.config.global.Config.getUi();
-    	this.logger.debug("current ui: " + Skin.config.global.Config.getUi());
+    setUI: function(ui) {
+		this.logger.debug("setUI: ui = " + ui);
+    	for ( var i=0; i<this.getView().items.length; i++)
+        {
+            this.getView().items.getAt(i).setUi(ui);
+        }
     }, 
 
     ////////////////////////////////////////////////
@@ -169,8 +165,7 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
      * as the current view.
      */    
     onPainted: function() {
-    	Skin.config.global.Config.setCurrentView('mainDetailView');
-    	this.logger.debug("current view: " + Skin.config.global.Config.getCurrentView());
+		this.logger.debug("onPainted");
     },
 
     /**
@@ -178,8 +173,7 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
      */
     onSetUISuccess: function() {
         this.logger.debug("onSetUISuccess");
-        this.logger.debug("ui: " + Skin.config.global.Config.getUi()); // added by wvh, for testing only
-        this.setUI();
+        this.setUI(Skin.config.global.Config.getUi());
     },
 
     /**
@@ -187,9 +181,8 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
      */
     onCreateMainSuccess: function() {
         this.logger.debug("onCreateMainSuccess");
-
         this.getView().setMasked(false);
-        this.backToPrevious();
+        this.backToPrevious(Skin.config.global.Config.getPreviousView());
     },
 
     /**
@@ -197,9 +190,8 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
      */
     onUpdateMainSuccess: function() {
         this.logger.debug("onUpdateMainSuccess");
-
         this.getView().setMasked(false);
-        this.backToPrevious();
+        this.backToPrevious(Skin.config.global.Config.getPreviousView());
     },
 
     /**
@@ -207,9 +199,8 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
      */
     onDeleteMainSuccess: function() {
         this.logger.debug("onDeleteMainSuccess");
-
         this.reset();
-        this.backToPrevious();
+        this.backToPrevious(Skin.config.global.Config.getPreviousView());
     },
 
     /**
@@ -224,7 +215,6 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
             ? ": id = " + record.get("id") + ", main = " + record.get("name")
             : "new main";
         this.logger.debug("onSelectedRecordChange = " + logMsg);
-
         if (record) {
             this.getView().setRecord(record);
         } else {
@@ -241,8 +231,7 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
      */
     onBackButtonTap: function() {
         this.logger.debug("onBackButtonTap");
-
-        this.backToPrevious();
+        this.backToPrevious(Skin.config.global.Config.getPreviousView());
     },
 
     /**
@@ -251,15 +240,12 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
      */
     onSaveMainButtonTap: function() {
         this.logger.debug("onSaveMainButtonTap");
-
         var main = this.getView().getRecord();
         var newMain = this.getView().getValues();
-
         // if this is a new main record, there's no id available
         if(main != null) {
             newMain.id = main.data.id;
         }
-
         this.saveMain(newMain);
     },
 
@@ -269,12 +255,9 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
      */
     onDeleteButtonTap: function() {
         this.logger.debug("onDeleteButtonTap");
-
         var main = this.getView().getRecord();
-
 	    if(main) {
 		    this.deleteMain(main.data);
 	    }
     }
-
 });
