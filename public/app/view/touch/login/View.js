@@ -20,6 +20,8 @@ Ext.define("Skin.view.touch.login.View", {
                 key: "login.title"
             }
         ],
+		style: Ext.Viewport.getOrientation() == "portrait" ? "width:320px;height:480px;margin:auto;-moz-border-radius:15px;border-radius:15px;" : "width:480px;height:320px;margin:auto;-moz-border-radius:15px;border-radius:15px;",
+		baseCls: 'x-box',		
         items: [
 //            {
 //                xtype: "image",
@@ -88,7 +90,8 @@ Ext.define("Skin.view.touch.login.View", {
                 xtype: "button",
                 itemId: "logInButton",
                 ui: "neutral", // WAS "action",
-                padding: "10px",
+                padding: 10,
+				margin: 10,
                 plugins: [
                     {
                         type: "localization",
@@ -104,7 +107,7 @@ Ext.define("Skin.view.touch.login.View", {
                 hidden: true,
                 hideAnimation: "fadeOut",
                 showAnimation: "fadeIn",
-                style: "color:#990000;margin:5px 0px;",
+                style: "color:#990000;margin:5px 10px;",
                 plugins: [
                     {
                         type: "localization",

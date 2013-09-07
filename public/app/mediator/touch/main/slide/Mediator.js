@@ -9,9 +9,9 @@ Ext.define("Skin.mediator.touch.main.slide.Mediator", {
     	// titlebar: {
     		// painted: "onPainted"
     	// },
-        // logoutButton: {
-            // tap: "onLogoutButtonTap"
-        // },
+        logoutButton: {
+            tap: "onLogoutButtonTap"
+        },
         // newMainButton: {
             // tap: "onNewMainButtonTap"
         // },
@@ -30,9 +30,6 @@ Ext.define("Skin.mediator.touch.main.slide.Mediator", {
 				console.log('Container close (position='+position+',duration='+duration+')');
 			},
 			select: function(nav, item, index) {
-			
-				console.log(item);
-			
 				console.log('Selected item (index='+index+')');
 			},
 			opened: function(nav) {

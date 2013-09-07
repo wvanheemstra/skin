@@ -20,7 +20,7 @@
     /////////////////////////////////////////////
     "mainSlide": {
         "title": "Mains",		
-        "logOff": "Log Off",
+        "logOut": "Log Out",
         "new": "New",
         "search": "live search",
         "name": "Name",
@@ -33,7 +33,7 @@
     /////////////////////////////////////////////
     "mainList": {
         "title": "Mains",
-        "logOff": "Log Off",
+        "logOut": "Log Out",
         "new": "New",
         "search": "live search",
         "name": "Name",
@@ -46,7 +46,7 @@
     /////////////////////////////////////////////
     "mainTile": {
         "title": "Mains",
-        "logOff": "Log Off",
+        "logOut": "Log Out",
         "new": "New",
         "search": "live search",
         "name": "Name",
@@ -86,7 +86,7 @@
     /////////////////////////////////////////////
     "employeeList": {
         "title": "Employees",
-        "logOff": "Log Off",
+        "logOut": "Log Out",
         "new": "New",
         "search": "live search",
         "firstName": "First Name",
@@ -100,7 +100,7 @@
     /////////////////////////////////////////////
     "employeeTile": {
         "title": "Employees",
-        "logOff": "Log Off",
+        "logOut": "Log Out",
         "new": "New",
         "search": "live search",
         "firstName": "First Name",

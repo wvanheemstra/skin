@@ -103,7 +103,24 @@ Ext.define("Skin.view.touch.main.slide.View", {
                     placeHolder: 'search',
                     width: 180
                 }]
-            }]
+            },{
+                xtype: 'toolbar',
+                docked: 'bottom',
+                ui: 'neutral',
+				items: [{
+					xtype: "button",
+					itemId: "logoutButton",
+					ui: "neutral",				
+					align: "left",
+					plugins: [
+						{
+							type: "localization",
+							method: "setText",
+							key: "mainList.logOut"
+						}
+					]
+				}]
+			}]
         },
         /**
          * @cfg {Object} container Configuration for the container
@@ -136,6 +153,7 @@ Ext.define("Skin.view.touch.main.slide.View", {
             // Enable the slide button using the defaults defined above in
             // `slideButtonDefaults`.
             slideButton: true,
+			logoutButton: true,
             items: [{
                 xtype: 'toolbar',
                 //title: 'Item 1',
@@ -147,7 +165,7 @@ Ext.define("Skin.view.touch.main.slide.View", {
                     }
                 ],
                 docked: 'top',
-				ui: 'neutral'
+				ui: 'neutral'				
             },{
                 xtype: 'panel',
                 html: '<img src="./resources/img/guide.jpg" width="100%" />',
@@ -522,7 +540,7 @@ Ext.define("Skin.view.touch.main.slide.View", {
 			return parent.add(Ext.merge(me._slideButtonConfig, config));
         }
         return false;
-    },
+    },	
     /**
      *  @private
      *

@@ -57,7 +57,7 @@ Ext.define("Skin.view.extjs.employee.list.View", {
                         {
                             ptype: "localization",
                             method: "setText",
-                            key: "employeeList.logOff"
+                            key: "employeeList.logOut"
                         }
                     ]
                 },

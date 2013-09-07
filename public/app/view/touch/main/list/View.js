@@ -44,7 +44,7 @@ Ext.define("Skin.view.touch.main.list.View", {
                             {
                                 type: "localization",
                                 method: "setText",
-                                key: "mainList.logOff"
+                                key: "mainList.logOut"
                             }
                         ]
                     },

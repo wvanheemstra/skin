@@ -43,7 +43,7 @@ Ext.define("Skin.view.extjs.main.tile.View", {
                         {
                             ptype: "localization",
                             method: "setText",
-                            key: "mainTile.logOff"
+                            key: "mainTile.logOut"
                         }
                     ]
                 },
