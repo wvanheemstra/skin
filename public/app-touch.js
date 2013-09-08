@@ -22,6 +22,8 @@ Ext.onReady(function () {
         "Skin.service.company.mock.Service",   
         "Skin.service.url.Service",
         "Skin.service.url.mock.Service", 
+        "Skin.service.title.Service",
+        "Skin.service.title.mock.Service", 		
         "Skin.service.authentication.Service",
         "Skin.service.authentication.mock.Service",
         "Skin.service.main.Service",
@@ -67,7 +69,8 @@ Ext.onReady(function () {
         backgroundService:      "Skin.service.background.mock.Service",
         uiService:        		"Skin.service.ui.mock.Service",
         companyService:        	"Skin.service.company.mock.Service",   
-        urlService:        	    "Skin.service.url.mock.Service", 		
+        urlService:        	    "Skin.service.url.mock.Service", 
+        titleService:        	"Skin.service.title.mock.Service", 		
         mainService:			"Skin.service.main.mock.Service",
         //employeeService:        "Skin.service.employee.mock.Service",
 
@@ -93,6 +96,10 @@ Ext.onReady(function () {
 
         urlServiceClass: {
             value: "Skin.service.url.mock.Service"
+        },
+		
+        titleServiceClass: {
+            value: "Skin.service.title.mock.Service"
         }		
     });
 
@@ -150,6 +157,7 @@ Ext.application({
         "ui.Controller",
         "company.Controller",   
         "url.Controller",
+        "title.Controller",		
         "authentication.Controller",
         "main.Controller"
         //"employee.Controller"

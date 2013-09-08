@@ -11,7 +11,7 @@ Ext.define("Skin.service.url.Service", {
     /**
      * The set ajax service call. Hits a json service and handles the success and fault accordingly.
      *
-     * @param {String} url The ur; being set.
+     * @param {String} url The url being set.
      */
 	set: function(url) {
         this.logger.debug("set: url = " + url);		

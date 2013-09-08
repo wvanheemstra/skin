@@ -5,7 +5,7 @@ Ext.define("Skin.mediator.touch.main.modal.Mediator", {
     extend: "Skin.mediator.touch.main.base.Mediator",
 
     requires: [
-        "Skin.event.navigation.Event"
+        // all set in the base mediator
     ],	
 	
     // set up view event to mediator mapping
@@ -13,14 +13,14 @@ Ext.define("Skin.mediator.touch.main.modal.Mediator", {
 	
 	    closeButton: {
             tap: "onCloseButtonTap"
-        }
+        },
 	
 //		'button[action=hide]': {
 //			tap: 'hide'
 //		},
-//    	titlebar: {
-//    		painted: "onPainted"
-//    	},
+    	titlebar: {
+    		painted: "onPainted"
+    	}
 //        logoutButton: {
 //            tap: "onLogoutButtonTap"
 //        },
@@ -43,6 +43,7 @@ Ext.define("Skin.mediator.touch.main.modal.Mediator", {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
         this.eventBus.addGlobalEventListener(Skin.event.ui.Event.SET_UI_SUCCESS, this.onSetUISuccess, this);
+        this.eventBus.addGlobalEventListener(Skin.event.title.Event.SET_TITLE_SUCCESS, this.onSetTitleSuccess, this);		
 //        this.eventBus.addGlobalEventListener(Skin.event.authentication.Event.LOGIN_SUCCESS, this.onLoginSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_MODAL_SUCCESS, this.onGetMainModalSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_MODAL_FAILURE, this.onGetMainModalFailure, this);
@@ -103,8 +104,23 @@ Ext.define("Skin.mediator.touch.main.modal.Mediator", {
         {
             this.getView().items.getAt(i).setUi(ui);
         }
+		//this.getView().refresh();
     },     
 
+    /**
+     * Handles the set Title event. 
+     *
+     * @param title    The title to set.	 
+     */
+    setTitle: function(title) {
+    	this.logger.debug("setTitle: title = " + title);
+		for ( var i=0; i<this.getView().items.length; i++)
+        {
+            this.getView().items.getAt(i).setTitle(title);
+        }
+		//this.getView().refresh();
+    }, 	
+	
     ////////////////////////////////////////////////
     // EVENT BUS HANDLERS
     ////////////////////////////////////////////////
@@ -113,7 +129,10 @@ Ext.define("Skin.mediator.touch.main.modal.Mediator", {
      * Handles the painted application-level event. 
      */    
     onPainted: function() {
-	    this.logger.debug("onPainted");	
+	    this.logger.debug("onPainted");
+
+		// TEMP fix: 
+		this.onSetTitleSuccess();
     },
 
     /**
@@ -124,6 +143,14 @@ Ext.define("Skin.mediator.touch.main.modal.Mediator", {
         this.setUI(Skin.config.global.Config.getUi());
     },
 
+    /**
+     * Handles the set title success application-level event. Update the components for the title.
+     */
+    onSetTitleSuccess: function() {
+        this.logger.debug("onSetTitleSuccess");
+        this.setTitle(Skin.config.global.Config.getTitle());
+    },	
+	
     /**
      * Handles the get mains application-level event.
      */

@@ -392,7 +392,8 @@ Ext.define("Skin.view.touch.main.slide.View", {
                 },
                 items: [{
 					xtype: 'button',  
-					text: 'People', 
+					text: 'People',
+					title: 'People',
 					url: 'https://www.google.co.uk/search?q=people&source=lnms&tbm=isch',
 					listeners: {
 						release: function(button, e, eOpts) {
@@ -409,7 +410,8 @@ Ext.define("Skin.view.touch.main.slide.View", {
 					}
 				},{
 					xtype: 'button',  
-					text: 'Products', 
+					text: 'Products',
+					title: 'Products',		
 					url: 'https://www.google.co.uk/search?q=products&source=lnms&tbm=isch',
 					listeners: {
 						release: function(button, e, eOpts) {
@@ -427,6 +429,7 @@ Ext.define("Skin.view.touch.main.slide.View", {
 				},{
 					xtype: 'button',  
 					text: 'Bookings', 
+					title: 'Bookings',					
 					url: 'https://www.google.co.uk/search?q=bookings&source=lnms&tbm=isch',
 					listeners: {
 						release: function(button, e, eOpts) {
@@ -676,19 +679,28 @@ Ext.define("Skin.view.touch.main.slide.View", {
 		console.log("showModal");
 		console.log("button: text = " + button.getText());
 		var me = this,
-			url = '';
+			url = '',
+			title = '';
 		// TO DO: open the modal view 
-		// and optionally points its content 
+		// set the title and
+		// optionally points its content 
 		// to the url if provided 
 		// by the button
+		try {
+			title = button.title;
+			console.log("button: title = " + title);		
+		}
+		catch(ex){
+			// exception
+		}		
 		try {
 			url = button.url;
 			console.log("button: url = " + url);		
 		}
 		catch(ex){
 			// exception
-		}
-		me.fireEvent('showmodal', url);
+		}	
+		me.fireEvent('showmodal', {title: title, url: url});
 	},
 	
     /**

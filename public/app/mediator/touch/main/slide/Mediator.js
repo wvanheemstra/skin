@@ -53,11 +53,11 @@ Ext.define("Skin.mediator.touch.main.slide.Mediator", {
 			dragend: function(nav) {
 				console.log('Container dragend');
 			},
-			showmodal: function(url) {
-				console.log('Container showmodal: url = ' + url);
+			showmodal: function(args) {
+				console.log('Container showmodal: title = ' + args['title'] + ', url = ' + args['url']);
 				// Avoid the next call if the url is an object, not a string
-				if(typeof url != null){
-					this.showMainModal(url);
+				if(typeof args['url'] != null) {
+					this.showMainModal(args);
 				}
 			}
 		},
@@ -115,13 +115,16 @@ Ext.define("Skin.mediator.touch.main.slide.Mediator", {
 	/**
 	 * Handles the show main modal
 	 *
-	 * @param url	The optional url to show in the modal
+	 * @param args	The args to show in the modal
 	 */
-	showMainModal: function(url) {
-		this.logger.debug("showMainModal: url = " + url);
-		if(url){
-			this.setURL(url);
+	showMainModal: function(args) {
+		this.logger.debug("showMainModal: title = " + args['title'] + ", url = " + args['url']);
+		if(args['title']){
+			this.setTitle(args['title']);
 		}
+		if(args['url']){
+			this.setURL(args['url']);
+		}		
 		Skin.config.global.Config.setPreviousView('mainslide');
 		this.navigate(Skin.event.navigation.Event.ACTION_SHOW_MAIN_MODAL);
 	},
@@ -138,6 +141,15 @@ Ext.define("Skin.mediator.touch.main.slide.Mediator", {
             this.getView().items.getAt(i).setUi(ui);
         }
     }, 
+
+	/** 
+	 * Handles the set Title event.
+	 * @param title	The title to set.
+	 */
+	setTitle: function(title) {
+		this.logger.debug("setTitle: title = " + title);
+		Skin.config.global.Config.setTitle(title);
+	},
 	
 	/** 
 	 * Handles the set URL event.
