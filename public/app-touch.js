@@ -126,6 +126,7 @@ Ext.application({
 		"Skin.view.touch.main.slide.View",
         "Skin.view.touch.main.list.View",
         "Skin.view.touch.main.tile.View",
+        "Skin.view.touch.main.modal.View",		
         "Skin.view.touch.main.detail.View"
         //"Skin.view.touch.employee.list.View",
         //"Skin.view.touch.employee.tile.View",
@@ -191,6 +192,7 @@ Ext.application({
 			{ xtype: "mainSlideView" },
             { xtype: "mainListView" },
             { xtype: "mainTileView" },
+            { xtype: "mainModalView" },	
             { xtype: "mainDetailView" }
             //{ xtype: "employeeListView" },
             //{ xtype: "employeeTileView" },

@@ -6,6 +6,9 @@ Ext.define("Skin.mediator.touch.main.slide.Mediator", {
 	
     // set up view event to mediator mapping
     control: {
+//		'button[action=showPopup]': {
+//			tap: 'showPopup'
+//		},	
     	// titlebar: {
     		// painted: "onPainted"
     	// },

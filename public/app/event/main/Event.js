@@ -52,6 +52,21 @@ Ext.define("Skin.event.main.Event", {
         GET_MAIN_TILE_FAILURE:  "getMainTileFailure",        
 
         /**
+         * The get main modal event type.
+         */
+        GET_MAIN_MODAL:          "getMainModal",
+    	
+        /**
+         * The get main modal success event type.
+         */
+        GET_MAIN_MODAL_SUCCESS:  "getMainModalSuccess",
+
+        /**
+         * The get main modal failure event type.
+         */
+        GET_MAIN_MODAL_FAILURE:  "getMainModalFailure",	
+		
+        /**
          * The get main event type.
          */
         GET_MAIN:               "getMain",

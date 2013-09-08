@@ -27,7 +27,7 @@ Ext.define("Skin.controller.main.Controller", {
         this.logger.debug("setupGlobalEventListeners");
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_SLIDE, this.onGetMainSlide, this);
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_LIST, this.onGetMainList, this); 
-        this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_TILE, this.onGetMainTile, this);               
+        this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_TILE, this.onGetMainTile, this);        this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_MODAL, this.onGetMainModal, this);               
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.CREATE_MAIN, this.onCreateMain, this);
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.UPDATE_MAIN, this.onUpdateMain, this);
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.DELETE_MAIN, this.onDeleteMain, this);
@@ -60,6 +60,15 @@ Ext.define("Skin.controller.main.Controller", {
         this.executeServiceCall(this.mainService, this.mainService.getMainTile, null, this.getMainTileSuccess, this.getMainTileFailure, this);
     },
 
+    /**
+     * Performs get main by using the referenced service and sets up the service success and failure
+     * callback handlers.
+     */
+    getMainModal: function() {
+        this.logger.debug("getMainModal");
+        this.executeServiceCall(this.mainService, this.mainService.getMainModal, null, this.getMainModalSuccess, this.getMainModalFailure, this);
+    },	
+	
     /**
      * Performs create main by using the referenced service and sets up the service success and failure
      * callback handlers.
@@ -143,6 +152,21 @@ Ext.define("Skin.controller.main.Controller", {
     },
 
     /**
+     * Handles the successful get main service call and takes the response data packet as a parameter.
+     * Fires off the corresponding success event on the application-level event bus.
+     *
+     * @param {Object} response The response data packet from the successful service call.
+     */
+    getMainModalSuccess: function(response) {
+        this.logger.info("getMainModalSuccess");
+
+        this.mainStore.setData(response.mainModal);
+
+        var evt = Ext.create("Skin.event.main.Event", Skin.event.main.Event.GET_MAIN_MODAL_SUCCESS);
+        this.eventBus.dispatchGlobalEvent(evt);
+    },	
+	
+    /**
      * Handles the failed get main service call and takes the response data packet as a parameter.
      * Fires off the corresponding failure event on the application-level event bus.
      *
@@ -181,6 +205,19 @@ Ext.define("Skin.controller.main.Controller", {
         this.eventBus.dispatchGlobalEvent(evt);
     }, 
 
+    /**
+     * Handles the failed get main service call and takes the response data packet as a parameter.
+     * Fires off the corresponding failure event on the application-level event bus.
+     *
+     * @param {Object} response The response data packet from the failed service call.
+     */
+    getMainModalFailure: function(response) {
+        this.logger.warn("getMainModalFailure");
+
+        var evt = Ext.create("Skin.event.main.Event", Skin.event.main.Event.GET_MAIN_MODAL_FAILURE);
+        this.eventBus.dispatchGlobalEvent(evt);
+    }, 	
+	
     /**
      * Handles the successful create main service call and takes the response data packet as a parameter.
      * Fires off the corresponding success event on the application-level event bus.
@@ -306,7 +343,19 @@ Ext.define("Skin.controller.main.Controller", {
 
         this.getMainTile();
     }, 
-       
+
+    /**
+     * Handles the get main event on the application-level event bus. Calls a functional method that's more
+     * testable than this event handler.
+     *
+     * @param {Skin.event.main.Event} event Reference to the main event.
+     */
+    onGetMainModal: function(event) {
+        this.logger.debug("onGetMainModal");
+
+        this.getMainModal();
+    },
+	
     /**
      * Handles the create main event on the application-level event bus. Calls a functional method that's more
      * testable than this event handler.

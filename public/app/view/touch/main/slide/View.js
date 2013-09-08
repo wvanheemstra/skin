@@ -154,6 +154,7 @@ Ext.define("Skin.view.touch.main.slide.View", {
             // Enable the slide button using the defaults defined above in
             // `slideButtonDefaults`.
             slideButton: true,
+			slideHeader: true,
             items: [{
                 xtype: 'toolbar',
                 //title: 'Item 1',
@@ -165,12 +166,11 @@ Ext.define("Skin.view.touch.main.slide.View", {
                     }
                 ],
                 docked: 'top',
-				ui: 'neutral'				
+				ui: 'neutral'
             },{
                 xtype: 'panel',
 				style: 'background-image: url("./resources/bg/noise.png");',
                 html: '<center><img src="./resources/logos/logo.png" /></center>',
-
                 // Mask this item when the container is opened
                 maskOnOpen: true
             }]
@@ -187,7 +187,8 @@ Ext.define("Skin.view.touch.main.slide.View", {
             group: 'Group 2',
 			ui: 'neutral',
 			hidden: true, // hide the item initially
-            slideButton: true,			
+            slideButton: true,
+			slideHeader: true,			
             items: [{
                 xtype: 'toolbar',
                 //title: 'Item 2',
@@ -204,6 +205,30 @@ Ext.define("Skin.view.touch.main.slide.View", {
                 xtype: 'panel',
                 layout: 'card',
 				style: 'background-image: url("./resources/bg/noise.png");',
+				items: [{  
+					xtype: 'button',
+					height: 280,
+					width: 200,
+					margin: 20,
+					text: 'Popup',  
+					//action: 'showPopup',
+					listeners: {
+		//				release: this.showModal,  // showModal cannot be found
+						release: function(button, e) {
+							console.log('released');						
+							console.log(this);
+							var view = Ext.ComponentQuery.query("mainSlideView");
+		//					view.showModal(); // WE CANNOT REACH THIS FUNCTION YET
+						},
+						tap: function(button, e) {
+							// console.log('tapped ++++++++++++++++++++++++++');
+							// Need this to stop auto-selecting any component
+							// hidden beneath the container.
+							e.preventDefault();
+						},
+						scope: this
+					}
+				}],
                 styleHtmlContent: true,
                 html: '<p>Some text here.</p><p>Donec neque augue, fermentum quis tempor quis, lacinia ut augue. Sed dictum risus id arcu vehicula sed porttitor nisi egestas. Aliquam arcu felis, sagittis vel pulvinar vitae, ultricies a augue. Praesent eget erat tellus. Aenean nec dui magna. Cras sagittis, diam vel bibendum mattis, neque purus placerat turpis, sit amet tempor neque nisl non eros. Pellentesque id orci nulla, nec eleifend quam. Proin ut magna turpis. Phasellus erat urna, faucibus in tempus bibendum, ultrices a mauris. Nulla semper ante sed est placerat sagittis. Nam ut vestibulum nulla. Sed sit amet aliquet urna. Morbi est velit, vulputate quis pretium vitae, lobortis sed ligula.</p>',
                 scrollable: true,
@@ -223,14 +248,7 @@ Ext.define("Skin.view.touch.main.slide.View", {
 			hidden: true, // hide the item initially			
             order: 0,
 			slideButton: true,
-			
-            // Extend `slideButtonDefaults`
-        //    slideButton: {
-        //        iconMask: false,
-        //        iconCls: null,
-        //        text: 'menu'
-        //    },
-
+			slideHeader: true,
             items: [{
                 xtype: 'toolbar',
                 //title: 'Item 3',
@@ -257,6 +275,10 @@ Ext.define("Skin.view.touch.main.slide.View", {
                     width: 110
                 },
                 items: [{
+					xtype: 'button',  
+					text: 'Pop up',  
+					action: 'showPopup'
+				},{
                     html: '<img class="image-wrap" src="http://content6.flixster.com/movie/11/13/43/11134356_pro.jpg" />'
                 },{
                     html: '<img class="image-wrap" src="http://content9.flixster.com/movie/11/16/11/11161107_pro.jpg" />'
@@ -326,14 +348,13 @@ Ext.define("Skin.view.touch.main.slide.View", {
 			hidden: true, // hide the item initially			
             order: 0,
 			slideButton: true,
-			
+			slideHeader: true,			
             // Extend `slideButtonDefaults`
         //    slideButton: {
         //        iconMask: false,
         //        iconCls: null,
         //        text: 'menu'
         //    },
-
             items: [{
                 xtype: 'toolbar',
                 //title: 'Item 4',
@@ -360,6 +381,10 @@ Ext.define("Skin.view.touch.main.slide.View", {
                     width: 110
                 },
                 items: [{
+					xtype: 'button',  
+					text: 'People',  
+					action: 'showPopup'
+				},{				
                     html: '<img class="image-wrap" src="http://content6.flixster.com/movie/11/13/43/11134356_pro.jpg" />'
                 },{
                     html: '<img class="image-wrap" src="http://content9.flixster.com/movie/11/16/11/11161107_pro.jpg" />'
@@ -443,9 +468,7 @@ Ext.define("Skin.view.touch.main.slide.View", {
          * components created from those listed in ``items``.
          */
         defaults: {
-            layout: 'card',
-			style: 'background: #fff'
-			
+            layout: 'card'			
 			/**
              *  Here's an example of how to add a different type of
              *  component for the defaults.
@@ -518,7 +541,17 @@ Ext.define("Skin.view.touch.main.slide.View", {
          */
         slideButtonDefaults: {
 			selector: 'toolbar'  // WAS nothing, LEAVING THIS EMPTY CAUSES AN ERROR
-		}
+		},
+		
+        /**
+         *  Define the default slide header config.  Any item that has
+         *  a `slideHeader` value that is `true`
+         *  will use these values at the default.
+         */
+        slideHeaderDefaults: {
+			selector: 'toolbar'  // WAS nothing, LEAVING THIS EMPTY CAUSES AN ERROR
+		}		
+		
     },
 	initConfig: function() {
 		console.log("initConfig");
@@ -575,6 +608,19 @@ Ext.define("Skin.view.touch.main.slide.View", {
              */
             selector: ['toolbar']
         };
+        // Default config values used for creating a slideHeader.
+        me._slideHeaderConfig = {
+			xtype: 'image',
+			width: 218,
+			height: 44,	
+			src:'/resources/logos/slideheaderlogo.png',
+            name: 'slideheader',
+            /**
+             *  To add the header into a toolbar, you can add the following
+             *  to any item in your navigation list.
+             */
+            selector: ['toolbar']
+        };		
         /**
          *  Default config for masked items.
          */
@@ -614,7 +660,18 @@ Ext.define("Skin.view.touch.main.slide.View", {
 		console.log("setBackground");	
 		// TO DO
 	},
-
+	
+    /**
+     *  @private
+     *
+     *  Shows the modal.
+     */	
+	showModal: function(){
+		console.log("showModal");
+		
+		// to do
+	},
+	
     /**
      *  @private
      *
@@ -623,7 +680,7 @@ Ext.define("Skin.view.touch.main.slide.View", {
 	getGroup: function(group) {
 		console.log("getGroup");
 		// TO DO ... translating the group 
-		if(group == 'Group 0'){ var group = '' }		
+		if(group == 'Group 0'){ var group = '' } // Reserved for the Home item		
 		if(group == 'Group 1'){ var group = 'A' }
 		if(group == 'Group 2'){ var group = 'B' }
 		if(group == 'Group 3'){ var group = 'C' }
@@ -692,6 +749,31 @@ Ext.define("Skin.view.touch.main.slide.View", {
         }
         return false;
     },	
+	
+    /**
+     *  @private
+     *
+     *  Creates a header.  For an example
+     *  config, see ``slideHeaderDefaults``.
+     */
+    createSlideHeader: function(el, config) {
+		console.log("createSlideHeader");	
+        var me      = this,
+            config  = Ext.merge(me.getSlideHeaderDefaults(),
+                                Ext.isObject(config) ? config : {}),
+            parent  = el.down(config.selector),
+            listPosition = this.getListPosition();
+        if (parent) {
+            // Make sure that the button is placed on the correct side of the toolbar
+//            layout = parent.getLayout();
+//            if (layout && Ext.isFunction(layout.setPack)) {
+//                layout.setPack(listPosition);
+//            }
+			return parent.add(Ext.merge(me._slideHeaderConfig, config));
+        }
+        return false;
+    },	
+	
     /**
      *  @private
      *
@@ -774,6 +856,10 @@ Ext.define("Skin.view.touch.main.slide.View", {
                 if ((item.raw.slideButton || false)) {
                     me.createSlideButton(me._cache[index], item.raw.slideButton);
                 }
+				// Add a header, if desired
+				if((item.raw.slideHeader || false)) {
+					me.createSlideHeader(me._cache[index], item.raw.slideHeader);
+				}
             }
         }
         if (Ext.isFunction(me._cache[index])) {
@@ -1014,9 +1100,6 @@ Ext.define("Skin.view.touch.main.slide.View", {
             docked: listPosition,
             cls: 'x-slidenavigation-list',
 			style: 'position: absolute; top: 0; '+listPosition+': 0; height: 100%;' + 'z-index: 2',
-			
-		//	style: 'position: absolute; top: 0; '+listPosition+': 0; height: 100%;' + 'z-index: 2; background-image: url("http://localhost:3000/resources/bg/noise.png");',
-			
 			listeners: {
 			   select: this.onSelect,
 			   itemtap: this.onItemTap,
