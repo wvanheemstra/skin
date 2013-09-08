@@ -183,6 +183,7 @@ Ext.define("Skin.view.touch.main.slide.View", {
                 maskOnOpen: true
             }]
         },
+		/* NO LONGER IN USE
 		{
             title: 'Item 2',
 			plugins: [
@@ -239,7 +240,10 @@ Ext.define("Skin.view.touch.main.slide.View", {
                 scrollable: true,
                 maskOnOpen: true
             }]
-        },{
+        } */
+		
+		/*  NO LONGER IN USE
+		,{
             title: 'Item 3',
 			plugins: [
 				{
@@ -339,7 +343,8 @@ Ext.define("Skin.view.touch.main.slide.View", {
                     html: '<img class="image-wrap" src="http://content9.flixster.com/movie/11/15/90/11159075_pro.jpg" />'
                 }]
             }]
-        },{
+        }, */
+		{
             title: 'Administration',
 			plugins: [
 				{

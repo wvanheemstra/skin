@@ -7,17 +7,15 @@
  * </p>
  */
  Ext.define("Skin.view.touch.main.modal.View", {
-    //extend: "Skin.view.touch.main.base.View",
-    extend: "Ext.form.Panel",	
+    extend: "Skin.view.touch.main.base.View",
     alias: "widget.mainModalView",
     controller: "Skin.mediator.touch.main.modal.Mediator",
 
     requires: [
-        "Ext.form.FieldSet"
+        // empty
     ],
 	
 	config: {
-
         items: [{
 			xtype: "titlebar",
 			itemId: "titlebar",
@@ -30,22 +28,10 @@
 					key: "mainModal.title"
 				}
 			],
-			
-/*	
-			itemId: 'popbox',  
-			hidden: true, // hide the view initially
-			floating: true,  
-			centered: true,  
-			modal: true,  
-			height: 200,  
-			width: 300,  
-			showAnimation: { type: 'slide', direction: 'left'},  
-			styleHtmlContent: true,  
-			html: 'Hi, I\'m a popup',  
-*/			
-			
 			items: [{
 				xtype: "button",
+				iconMask: true,
+				iconCls: 'delete',
 				itemId: "closeButton",
 				align: "left",
 				plugins: [
