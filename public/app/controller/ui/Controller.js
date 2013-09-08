@@ -74,7 +74,7 @@ Ext.define("Skin.controller.ui.Controller", {
         this.logger.info("setSuccess");
 
         // The server will send a token that can be used throughout the app to confirm that the ui is set.
-        this.setSessionToken(response.sessionToken);
+        //this.setSessionToken(response.sessionToken);
 
         var evt = Ext.create("Skin.event.ui.Event", Skin.event.ui.Event.SET_UI_SUCCESS);
         this.eventBus.dispatchGlobalEvent(evt);
@@ -89,7 +89,7 @@ Ext.define("Skin.controller.ui.Controller", {
     setFailure: function(response) {
         this.logger.warn("setFailure");
 
-        this.resetSessionData();
+        //this.resetSessionData();
 
         var evt = Ext.create("Skin.event.ui.Event", Skin.event.ui.Event.SET_UI_FAILURE);
         this.eventBus.dispatchGlobalEvent(evt);

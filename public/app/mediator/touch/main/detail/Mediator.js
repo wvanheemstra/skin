@@ -227,7 +227,7 @@ Ext.define("Skin.mediator.touch.main.detail.Mediator", {
     ////////////////////////////////////////////////
 
     /**
-     * Handles the back button tap event. Navigates back to the main list view.
+     * Handles the back button tap event. Navigates back to the previous main view.
      */
     onBackButtonTap: function() {
         this.logger.debug("onBackButtonTap");

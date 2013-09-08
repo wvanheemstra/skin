@@ -13,6 +13,8 @@ Ext.define("Skin.mediator.extjs.viewport.Mediator", {
 		"Skin.event.session.Event",
         "Skin.event.ui.Event",     
         "Skin.event.company.Event",	
+        "Skin.event.url.Event",
+        "Skin.event.background.Event",		
         "Skin.event.authentication.Event",
         "Skin.event.navigation.Event"
     ],
@@ -46,8 +48,14 @@ Ext.define("Skin.mediator.extjs.viewport.Mediator", {
 		var ui = Skin.config.global.Config.getUi();
 		this.setUI(ui);
 		
+		var background = Skin.config.global.Config.getBackground();
+		this.setBackground(background);	
+		
 		var company = Skin.config.global.Config.getCompany();
 		this.setCompany(company);
+		
+		var url = Skin.config.global.Config.getUrl();
+		this.setURL(url);	
 		
 		var id = Skin.config.global.Config.getId();
 		var sessionId = Skin.config.global.Config.getSessionId();
@@ -64,6 +72,17 @@ Ext.define("Skin.mediator.extjs.viewport.Mediator", {
 		var evt = Ext.create("Skin.event.ui.Event", Skin.event.ui.Event.SET_UI, ui);
 		this.eventBus.dispatchGlobalEvent(evt);		
     },
+
+    /**
+     * Sets the background
+     *
+	 * @param background	The background to set.
+     */
+    setBackground: function(background) {
+        this.logger.debug("setBackground: background = " + background);
+		var evt = Ext.create("Skin.event.background.Event", Skin.event.background.Event.SET_BACKGROUND, background);
+		this.eventBus.dispatchGlobalEvent(evt);		
+    },
     
     /**
      * Sets the company
@@ -75,6 +94,17 @@ Ext.define("Skin.mediator.extjs.viewport.Mediator", {
 		var evt = Ext.create("Skin.event.company.Event", Skin.event.company.Event.SET_COMPANY, company);
 		this.eventBus.dispatchGlobalEvent(evt);
     },	
+
+    /**
+     * Sets the url
+     *
+	 * @param url	The url to set.	 
+     */
+    setURL: function(url) {
+        this.logger.debug("setURL: url = " + url);
+		var evt = Ext.create("Skin.event.url.Event", Skin.event.url.Event.SET_URL, url);
+		this.eventBus.dispatchGlobalEvent(evt);
+    },
 	
     /**
      * Maps the current application action like login, logout, show a view, etc and navigates to a
@@ -97,7 +127,7 @@ Ext.define("Skin.mediator.extjs.viewport.Mediator", {
 				if(nextView == 'login') {view = this.getViewByXType("loginView");}
 				if(nextView == 'mainslide') {view = this.getViewByXType("mainSlideView");}
 				if(nextView == 'mainlist') {view = this.getViewByXType("mainListView");}
-				if(nextView == 'maintile') {view = this.getViewByXType("mainTileView");}
+				if(nextView == 'maintile') {view = this.getViewByXType("mainTileView");}				
                 if(nextView == 'employeelist') {view = this.getViewByXType("employeeListView");}
 				if(nextView == 'employeetile') {view = this.getViewByXType("employeeTileView");}
 				Skin.config.global.Config.setCurrentView(nextView);
@@ -115,6 +145,12 @@ Ext.define("Skin.mediator.extjs.viewport.Mediator", {
 				Skin.config.global.Config.setCurrentView('maindetail');
                 direction = this.getSlideLeftTransition();
                 break;
+				
+            case Skin.event.navigation.Event.ACTION_SHOW_MAIN_MODAL:
+                view = this.getViewByXType("mainModalView");
+				Skin.config.global.Config.setCurrentView('mainmodal');
+                direction = this.getSlideLeftTransition();// CHANGE THIS TO AN OPEN TRANSITION
+                break;				
 
             case Skin.event.navigation.Event.ACTION_BACK_SHOW_MAIN_SLIDE:
                 view = this.getViewByXType("mainSlideView");
@@ -132,7 +168,13 @@ Ext.define("Skin.mediator.extjs.viewport.Mediator", {
                 view = this.getViewByXType("mainTileView");
 				Skin.config.global.Config.setCurrentView('maintile');
                 direction = this.getSlideRightTransition();
-                break;				
+                break;
+
+            case Skin.event.navigation.Event.ACTION_CLOSE_SHOW_MAIN_SLIDE:
+                view = this.getViewByXType("mainSlideView");
+				Skin.config.global.Config.setCurrentView('mainslide');
+                direction = this.getSlideRightTransition(); // CHANGE THIS TO A CLOSE TRANSITION
+                break;
 				
             // case Skin.event.navigation.Event.ACTION_SHOW_EMPLOYEE_DETAIL:
                 // view = this.getViewByXType("employeeDetailView");

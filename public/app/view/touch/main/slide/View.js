@@ -218,18 +218,15 @@ Ext.define("Skin.view.touch.main.slide.View", {
 					height: 280,
 					width: 200,
 					margin: 20,
-					text: 'Popup',  
-					//action: 'showPopup',
+					text: 'Show Modal',
+					url: 'www.expedia.com',
 					listeners: {
-		//				release: this.showModal,  // showModal cannot be found
-						release: function(button, e) {
-							console.log('released');						
-							console.log(this);
-							var view = Ext.ComponentQuery.query("mainSlideView");
-		//					view.showModal(); // WE CANNOT REACH THIS FUNCTION YET
+						release: function(button, e, eOpts) {
+							console.log('released');
+							var me = button.up('mainSlideView');
+							me.showModal(button, e);
 						},
 						tap: function(button, e) {
-							// console.log('tapped ++++++++++++++++++++++++++');
 							// Need this to stop auto-selecting any component
 							// hidden beneath the container.
 							e.preventDefault();
@@ -390,63 +387,56 @@ Ext.define("Skin.view.touch.main.slide.View", {
                 },
                 items: [{
 					xtype: 'button',  
-					text: 'People',  
-					action: 'showPopup'
-				},{				
-                    html: '<img class="image-wrap" src="http://content6.flixster.com/movie/11/13/43/11134356_pro.jpg" />'
-                },{
-                    html: '<img class="image-wrap" src="http://content9.flixster.com/movie/11/16/11/11161107_pro.jpg" />'
-                },{
-                    html: '<img class="image-wrap" src="http://content8.flixster.com/movie/11/16/10/11161098_pro.jpg" />'
-                },{
-                    html: '<img class="image-wrap" src="http://content6.flixster.com/movie/11/15/75/11157588_pro.jpg" />'
-                },{
-                    html: '<img class="image-wrap" src="http://content9.flixster.com/movie/11/16/13/11161343_pro.jpg" />'
-                },{
-                    html: '<img class="image-wrap" src="http://content6.flixster.com/movie/11/16/12/11161272_pro.jpg" />'
-                },{
-                    html: '<img class="image-wrap" src="http://content7.flixster.com/movie/11/16/24/11162445_pro.jpg" />'
-                },{
-                    html: '<img class="image-wrap" src="http://content8.flixster.com/movie/11/15/92/11159214_pro.jpg" />'
-                },{
-                    html: '<img class="image-wrap" src="http://content8.flixster.com/movie/11/16/03/11160390_pro.jpg" />'
-                },{
-                    html: '<img class="image-wrap" src="http://content8.flixster.com/movie/11/16/05/11160598_pro.jpg" />'
-                },{
-                    html: '<img class="image-wrap" src="http://content8.flixster.com/movie/11/16/09/11160942_pro.jpg" />'
-                },{
-                    html: '<img class="image-wrap" src="http://content7.flixster.com/movie/11/15/25/11152577_pro.jpg" />'
-                },{
-                    html: '<img class="image-wrap" src="http://content8.flixster.com/movie/11/16/09/11160962_pro.jpg" />'
-                },{
-                    html: '<img class="image-wrap" src="http://content6.flixster.com/movie/11/16/02/11160244_pro.jpg" />'
-                },{
-                    html: '<img class="image-wrap" src="http://content9.flixster.com/movie/11/16/25/11162555_pro.jpg" />'
-                },{
-                    html: '<img class="image-wrap" src="http://content9.flixster.com/movie/11/15/83/11158339_pro.jpg" />'
-                },{
-                    html: '<img class="image-wrap" src="http://content6.flixster.com/movie/11/15/65/11156544_pro.jpg" />'
-                },{
-                    html: '<img class="image-wrap" src="http://content7.flixster.com/movie/11/15/66/11156693_pro.jpg" />'
-                },{
-                    html: '<img class="image-wrap" src="http://content6.flixster.com/movie/11/15/90/11159072_pro.jpg" />'
-                },{
-                    html: '<img class="image-wrap" src="http://content9.flixster.com/movie/11/16/26/11162639_pro.jpg" />'
-                },{
-                    html: '<img class="image-wrap" src="http://content6.flixster.com/movie/11/16/26/11162672_pro.jpg" />'
-                },{
-                    html: '<img class="image-wrap" src="http://content8.flixster.com/movie/11/15/92/11159258_pro.jpg" />'
-                },{
-                    html: '<img class="image-wrap" src="http://content6.flixster.com/movie/11/15/84/11158472_pro.jpg" />'
-                },{
-                    html: '<img class="image-wrap" src="http://content7.flixster.com/movie/11/15/65/11156581_pro.jpg" />'
-                },{
-                    html: '<img class="image-wrap" src="http://content9.flixster.com/movie/11/15/16/11151659_pro.jpg" />'
-                },{
-                    html: '<img class="image-wrap" src="http://content8.flixster.com/movie/11/15/81/11158182_pro.jpg" />'
-                },{
-                    html: '<img class="image-wrap" src="http://content9.flixster.com/movie/11/15/90/11159075_pro.jpg" />'
-                }]
+					text: 'People', 
+					url: 'https://www.google.co.uk/search?q=people&source=lnms&tbm=isch',
+					listeners: {
+						release: function(button, e, eOpts) {
+							console.log('released');
+							var me = button.up('mainSlideView');
+							me.showModal(button, e);
+						},
+						tap: function(button, e) {
+							// Need this to stop auto-selecting any component
+							// hidden beneath the container.
+							e.preventDefault();
+						},
+						scope: this
+					}
+				},{
+					xtype: 'button',  
+					text: 'Products', 
+					url: 'https://www.google.co.uk/search?q=products&source=lnms&tbm=isch',
+					listeners: {
+						release: function(button, e, eOpts) {
+							console.log('released');
+							var me = button.up('mainSlideView');
+							me.showModal(button, e);
+						},
+						tap: function(button, e) {
+							// Need this to stop auto-selecting any component
+							// hidden beneath the container.
+							e.preventDefault();
+						},
+						scope: this
+					}
+				},{
+					xtype: 'button',  
+					text: 'Bookings', 
+					url: 'https://www.google.co.uk/search?q=bookings&source=lnms&tbm=isch',
+					listeners: {
+						release: function(button, e, eOpts) {
+							console.log('released');
+							var me = button.up('mainSlideView');
+							me.showModal(button, e);
+						},
+						tap: function(button, e) {
+							// Need this to stop auto-selecting any component
+							// hidden beneath the container.
+							e.preventDefault();
+						},
+						scope: this
+					}
+				}]
             }]
         }],
         /**
@@ -673,11 +663,27 @@ Ext.define("Skin.view.touch.main.slide.View", {
      *  @private
      *
      *  Shows the modal.
+	 *
+	 * @param button The button that requested to show the modal
+	 * @param e The event
      */	
-	showModal: function(){
+	showModal: function(button, e){
 		console.log("showModal");
-		
-		// to do
+		console.log("button: text = " + button.getText());
+		var me = this,
+			url = '';
+		// TO DO: open the modal view 
+		// and optionally points its content 
+		// to the url if provided 
+		// by the button
+		try {
+			url = button.url;
+			console.log("button: url = " + url);		
+		}
+		catch(ex){
+			// exception
+		}
+		me.fireEvent('showmodal', url);
 	},
 	
     /**

@@ -52,7 +52,14 @@ Ext.define("Skin.mediator.touch.main.slide.Mediator", {
 			},
 			dragend: function(nav) {
 				console.log('Container dragend');
-			}			
+			},
+			showmodal: function(url) {
+				console.log('Container showmodal: url = ' + url);
+				// Avoid the next call if the url is an object, not a string
+				if(typeof url != null){
+					this.showMainModal(url);
+				}
+			}
 		},
 		slideNavigationContainer: {
 			//  The 'activate' event fires on the container, 
@@ -61,71 +68,7 @@ Ext.define("Skin.mediator.touch.main.slide.Mediator", {
                 console.log('Activate Container: Item = ' + container.item);
             }			
 		}
-    },
-
-/* TRY TO IMPLEMENT THE FOLLOWING HERE, AS IN THE ORIGINAL CONTROLLER OF SLIDENAVIGATION
- * SEE 	https://github.com/wnielson/sencha-SlideNavigation/blob/master/app/controller/Main.js
-	config: {
-        refs: {
-            slideNav:                   'slidenavigationview',
-            moviePosterListContainer:   'slidenavigationview container[title="Item 8"]'
-        },
-
-        control: {
-            //
-            //  Here are examples of the various events you can listen for.
-            //
-            slideNav: {
-                open: function(nav, position, duration) {
-                    console.log('Container open (position='+position+',duration='+duration+')');
-                },
-
-                close: function(nav, position, duration) {
-                    console.log('Container close (position='+position+',duration='+duration+')');
-                },
-
-                select: function(nav, item, index) {
-                    console.log('Selected item (index='+index+')');
-                },
-
-                opened: function(nav) {
-                    console.log('Container opened');
-                },
-
-                closed: function(nav) {
-                    console.log('Container closed');
-                },
-
-                slideend: function(nav) {
-                    console.log('Container slideend');
-                },
-
-                slidestart: function(nav) {
-                    console.log('Container slidestart');
-                },
-
-                dragstart: function(nav) {
-                    console.log('Container dragstart');
-                },
-
-                dragend: function(nav) {
-                    console.log('Container dragend');
-                }
-            },
-
-            //
-            //  The 'activate' event fires on the container, not the child
-            //  element.
-            //
-            //
-            moviePosterListContainer: {
-                activate: function(container) {
-                    console.log('Activate moviePosterListContainer');
-                }
-            }
-        }
-    }
-*/	
+    },	
 	
     /**
      * Sets up global event bus handlers. Called by the parent superclass during the initialization phase.
@@ -169,6 +112,20 @@ Ext.define("Skin.mediator.touch.main.slide.Mediator", {
         this.mainStore.setSelectedRecord(record);
     },
     
+	/**
+	 * Handles the show main modal
+	 *
+	 * @param url	The optional url to show in the modal
+	 */
+	showMainModal: function(url) {
+		this.logger.debug("showMainModal: url = " + url);
+		if(url){
+			this.setURL(url);
+		}
+		Skin.config.global.Config.setPreviousView('mainslide');
+		this.navigate(Skin.event.navigation.Event.ACTION_SHOW_MAIN_MODAL);
+	},
+	
     /**
      * Handles the set UI event. 
      *
@@ -181,6 +138,15 @@ Ext.define("Skin.mediator.touch.main.slide.Mediator", {
             this.getView().items.getAt(i).setUi(ui);
         }
     }, 
+	
+	/** 
+	 * Handles the set URL event.
+	 * @param url	The url to set.
+	 */
+	setURL: function(url) {
+		this.logger.debug("setURL: url = " + url);
+		Skin.config.global.Config.setUrl(url);
+	},
 	
     ////////////////////////////////////////////////
     // EVENT BUS HANDLERS

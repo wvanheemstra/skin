@@ -22,7 +22,8 @@ Ext.define("Skin.config.global.Config",{
         ui: 'neutral',        	  // initialize to 'neutral'
         company: 'Your Company',  // initialize to 'Your Company'
 		locale: 'en_us',	      // initialize to 'en_us'
-		background: 'noise'       // initialize to 'noise'
+		background: 'noise',      // initialize to 'noise'
+		url: ''					  // initialize to ''
     },
     constructor : function(config){
         this.initConfig(config);

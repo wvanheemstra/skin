@@ -13,7 +13,8 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
 		"Skin.event.session.Event",
         "Skin.event.background.Event", 		
         "Skin.event.ui.Event",     
-        "Skin.event.company.Event",    
+        "Skin.event.company.Event",  
+        "Skin.event.url.Event", 		
         "Skin.event.authentication.Event",
         "Skin.event.navigation.Event"
     ],
@@ -28,6 +29,7 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
         mainSlideView:			"mainSlideView",		
         mainListView:			"mainListView",
         mainTileView:			"mainTileView",
+        mainModalView:			"mainModalView",	
         mainDetailView:		    "mainDetailView"
         //employeeListView:       "employeeListView",
         //employeeTileView:       "employeeTileView",
@@ -73,6 +75,9 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
 		var company = Skin.config.global.Config.getCompany();
 		this.setCompany(company);
 		
+		var url = Skin.config.global.Config.getUrl();
+		this.setURL(url);
+		
 		var id = Skin.config.global.Config.getId();
 		var sessionId = Skin.config.global.Config.getSessionId();
 		this.getSession(id, sessionId);
@@ -111,6 +116,17 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
 		this.eventBus.dispatchGlobalEvent(evt);
     },    
 
+    /**
+     * Sets the url
+     *
+	 * @param url	The url to set.	 
+     */
+    setURL: function(url) {
+        this.logger.debug("setURL: url = " + url);
+		var evt = Ext.create("Skin.event.url.Event", Skin.event.url.Event.SET_URL, url);
+		this.eventBus.dispatchGlobalEvent(evt);
+    },	
+	
     /**
      * Maps the current application action like company, ui, login, logout, show a view, etc and navigates to a
      * corresponding view.
@@ -161,6 +177,12 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
                 direction = this.getSlideRightTransition();
                 break;
 
+            case Skin.event.navigation.Event.ACTION_SHOW_MAIN_MODAL:
+                view = this.getMainModalView();
+				Skin.config.global.Config.setCurrentView('mainmodal');
+                direction = this.getSlideLeftTransition(); // CHANGE THIS TO AN OPEN TRANSITION
+                break;				
+				
             case Skin.event.navigation.Event.ACTION_SHOW_MAIN_DETAIL:
                 view = this.getMainDetailView();
 				Skin.config.global.Config.setCurrentView('maindetail');
@@ -183,8 +205,14 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
                 view = this.getMainTileView();
 				Skin.config.global.Config.setCurrentView('maintile');
                 direction = this.getSlideRightTransition();
-                break;
+                break;				
 
+            case Skin.event.navigation.Event.ACTION_CLOSE_SHOW_MAIN_SLIDE:
+                view = this.getMainSlideView();
+				Skin.config.global.Config.setCurrentView('mainslide');
+                direction = this.getSlideRightTransition(); // CHANGE THIS TO A CLOSE TRANSITION
+                break;				
+				
             // case Skin.event.navigation.Event.ACTION_SHOW_EMPLOYEE_DETAIL:
                 // view = this.getEmployeeDetailView();
 				// Skin.config.global.Config.setCurrentView('employeedetail');

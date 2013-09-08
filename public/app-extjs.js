@@ -21,7 +21,9 @@ Ext.onReady(function () {
         "Skin.service.ui.Service",
         "Skin.service.ui.mock.Service", 
         "Skin.service.company.Service",
-        "Skin.service.company.mock.Service",		
+        "Skin.service.company.mock.Service",
+        "Skin.service.url.Service",
+        "Skin.service.url.mock.Service",
         "Skin.service.authentication.Service",
         "Skin.service.authentication.mock.Service",
         "Skin.service.main.Service",
@@ -74,6 +76,7 @@ Ext.onReady(function () {
         backgroundService:      "Skin.service.background.mock.Service",		
         uiService:        		"Skin.service.ui.mock.Service",
         companyService:        	"Skin.service.company.mock.Service",
+        urlService:        	    "Skin.service.url.mock.Service",		
         mainService:			"Skin.service.main.mock.Service",
         //employeeService:        "Skin.service.employee.mock.Service",
 
@@ -95,7 +98,11 @@ Ext.onReady(function () {
         
         companyServiceClass: {
             value: "Skin.service.company.mock.Service"
-        }		
+        },
+
+        urlServiceClass: {
+            value: "Skin.service.url.mock.Service"
+        }
     });
 });
 
@@ -135,7 +142,8 @@ Ext.application({
         "Skin.view.extjs.main.slide.View",		
         "Skin.view.extjs.main.list.View",
         "Skin.view.extjs.main.detail.View",
-        "Skin.view.extjs.main.tile.View"	
+        "Skin.view.extjs.main.tile.View",
+        "Skin.view.extjs.main.modal.View"		
         //"Skin.view.extjs.employee.list.View",
         //"Skin.view.extjs.employee.detail.View",
         //"Skin.view.extjs.employee.tile.View"
@@ -149,7 +157,8 @@ Ext.application({
         "session.Controller",  
         "background.Controller",		
         "ui.Controller",
-        "company.Controller",		
+        "company.Controller",
+        "url.Controller",		
         "authentication.Controller",
         "main.Controller"		
         //"employee.Controller"

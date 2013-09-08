@@ -18,7 +18,8 @@ Ext.define("Skin.view.extjs.viewport.View", {
 		"Skin.view.extjs.main.slide.View",
         "Skin.view.extjs.main.list.View",
         "Skin.view.extjs.main.detail.View",
-        "Skin.view.extjs.main.tile.View"		
+        "Skin.view.extjs.main.tile.View",
+        "Skin.view.extjs.main.modal.View"		
         //"Skin.view.extjs.employee.list.View",
         //"Skin.view.extjs.employee.detail.View",
         //"Skin.view.extjs.employee.tile.View"
@@ -61,7 +62,12 @@ Ext.define("Skin.view.extjs.viewport.View", {
             xtype: "mainTileView",
             itemId: "maintile",
             hidden: true
-        }
+        },
+        {
+            xtype: "mainModalView",
+            itemId: "mainmodal",
+            hidden: true
+        }		
         // {
             // xtype: "employeeListView",
             // itemId: "employeelist",

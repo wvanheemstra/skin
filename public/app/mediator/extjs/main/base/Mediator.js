@@ -5,7 +5,12 @@ Ext.define("Skin.mediator.extjs.main.base.Mediator", {
     extend: "Skin.mediator.abstract.Mediator",
 
     requires: [
-        "Skin.event.main.Event"
+		"Skin.event.ui.Event",
+		"Skin.event.url.Event",
+		"Skin.event.company.Event",
+		"Skin.event.background.Event",
+		"Skin.event.authentication.Event",
+        "Skin.event.main.Event"		
     ],
 
     inject: [
@@ -20,13 +25,23 @@ Ext.define("Skin.mediator.extjs.main.base.Mediator", {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
         this.eventBus.addGlobalEventListener(Skin.event.ui.Event.SET_UI_SUCCESS, this.onSetUISuccess, this);
+        this.eventBus.addGlobalEventListener(Skin.event.url.Event.SET_URL_SUCCESS, this.onSetURLSuccess, this);
+        this.eventBus.addGlobalEventListener(Skin.event.company.Event.SET_COMPANY_SUCCESS, this.onSetCompanySuccess, this);	
+        this.eventBus.addGlobalEventListener(Skin.event.background.Event.SET_BACKGROUND_SUCCESS, this.onSetBackgroundSuccess, this);			
+		
         this.eventBus.addGlobalEventListener(Skin.event.authentication.Event.LOGIN_SUCCESS, this.onLoginSuccess, this);
+		
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_SLIDE_SUCCESS, this.onGetMainSlideSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_SLIDE_FAILURE, this.onGetMainSlideFailure, this);		
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_LIST_SUCCESS, this.onGetMainListSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_LIST_FAILURE, this.onGetMainListFailure, this);
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_TILE_SUCCESS, this.onGetMainTileSuccess, this);
-        this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_TILE_FAILURE, this.onGetMainTileFailure, this);		
+        this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_TILE_FAILURE, this.onGetMainTileFailure, this);	
+        this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_MODAL_SUCCESS, this.onGetMainModalSuccess, this);
+        this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_MODAL_FAILURE, this.onGetMainModalFailure, this);
+        this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_DETAIL_SUCCESS, this.onGetMainDetailSuccess, this);
+        this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_DETAIL_FAILURE, this.onGetMainDetailFailure, this);		
+		
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.UPDATE_MAIN_SUCCESS, this.onUpdateMainSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.DELETE_MAIN_SUCCESS, this.onDeleteMainSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.CREATE_MAIN_SUCCESS, this.onCreateMainSuccess, this);
@@ -51,6 +66,27 @@ Ext.define("Skin.mediator.extjs.main.base.Mediator", {
         // placeholder
     },
 
+    /**
+     * Handles the set url success application-level event. Update the components for the url.
+     */
+    onSetURLSuccess: function() {
+        // placeholder
+    },	
+
+    /**
+     * Handles the set background success application-level event. Update the components for the background.
+     */
+    onSetBackgroundSuccess: function() {
+        // placeholder
+    },
+
+    /**
+     * Handles the set company success application-level event. Update the components for the company.
+     */
+    onSetCompanySuccess: function() {
+        // placeholder
+    },
+	
     /**
      * Handles the login success application-level event. Slide the main list view
      * onto stage.
@@ -98,6 +134,34 @@ Ext.define("Skin.mediator.extjs.main.base.Mediator", {
      * Handles the get mains failure event from the login controller.
      */
     onGetMainTileFailure: function() {
+        // placeholder
+    },
+
+    /**
+     * Handles the get mains success application-level event.
+     */
+    onGetMainDetailSuccess: function() {
+        // placeholder
+    },
+
+    /**
+     * Handles the get mains failure event from the login controller.
+     */
+    onGetMainDetailFailure: function() {
+        // placeholder
+    },
+
+    /**
+     * Handles the get mains success application-level event.
+     */
+    onGetMainModalSuccess: function() {
+        // placeholder
+    },
+
+    /**
+     * Handles the get mains failure event from the login controller.
+     */
+    onGetMainModalFailure: function() {
         // placeholder
     },
 	
