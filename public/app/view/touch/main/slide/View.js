@@ -169,8 +169,16 @@ Ext.define("Skin.view.touch.main.slide.View", {
 				ui: 'neutral'
             },{
                 xtype: 'panel',
+				scrollable: true,
 				style: 'background-image: url("./resources/bg/noise.png");',
-                html: '<center><img src="./resources/logos/logo.png" /></center>',
+				styleHtmlContent: true,
+                html: [
+					'<center>',
+					'<img src="./resources/logos/logo.png" />',
+					'<h2>Welcome to Your Home Page</h2>',
+					'<p>This page can be customized in whatever way you prefer.</p>',
+					'</center>'
+				].join(""),
                 // Mask this item when the container is opened
                 maskOnOpen: true
             }]
