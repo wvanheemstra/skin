@@ -46,13 +46,13 @@
 			
 			items: [{
 				xtype: "button",
-				itemId: "backButton",
+				itemId: "closeButton",
 				align: "left",
 				plugins: [
 					{
 						type: "localization",
 						method: "setText",
-						key: "mainModal.back"
+						key: "mainModal.close"
 					}
 				]
 			}]

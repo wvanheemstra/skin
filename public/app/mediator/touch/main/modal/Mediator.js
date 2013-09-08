@@ -11,8 +11,8 @@ Ext.define("Skin.mediator.touch.main.modal.Mediator", {
     // set up view event to mediator mapping
     control: {
 	
-	    backButton: {
-            tap: "onBackButtonTap"
+	    closeButton: {
+            tap: "onCloseButtonTap"
         }
 	
 //		'button[action=hide]': {
@@ -146,10 +146,10 @@ Ext.define("Skin.mediator.touch.main.modal.Mediator", {
     ////////////////////////////////////////////////
 
     /**
-     * Handles the back button tap event. Navigates back to the previous main view.
+     * Handles the close button tap event. Navigates back to the previous main view.
      */
-    onBackButtonTap: function() {
-        this.logger.debug("onBackButtonTap");
+    onCloseButtonTap: function() {
+        this.logger.debug("onCloseButtonTap");
         this.backToPrevious(Skin.config.global.Config.getPreviousView());
     }
 	

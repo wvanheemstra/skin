@@ -6,6 +6,11 @@ Ext.define("Skin.mediator.extjs.main.modal.Mediator", {
 
     // set up view event to mediator mapping
     control: {
+	
+	    closeButton: {
+            tap: "onCloseButtonTap"
+        }	
+	
 //    	toolbar: {
 //    		painted: "onPainted"
 //    	},	
@@ -21,6 +26,50 @@ Ext.define("Skin.mediator.extjs.main.modal.Mediator", {
     },
 
 
+    /**
+     * Simple navigation method used to navigate back, depending on the previous view.
+	 *
+	 * @param view	The view to go back to.
+     */
+    backToPrevious: function(view) {
+    	this.logger.debug("backToPrevious view: " + view);
+        switch(view) {
+            case 'mainslide':
+            	this.backToMainSlide();
+                break;		
+            case 'mainlist':
+            	this.backToMainList();
+                break;
+            case 'maintile':
+            	this.backToMainTile();
+                break;               
+        }
+    },
+	
+    /**
+     * Simple navigation method used to navigate back to the main slide view.
+     */
+    backToMainSlide: function() {
+        this.logger.debug("backToMainSlide");
+        this.navigate(Skin.event.navigation.Event.ACTION_BACK_SHOW_MAIN_SLIDE);
+    },
+	
+    /**
+     * Simple navigation method used to navigate back to the main list view.
+     */
+    backToMainList: function() {
+        this.logger.debug("backToMainList");
+        this.navigate(Skin.event.navigation.Event.ACTION_BACK_SHOW_MAIN_LIST);
+    },
+
+    /**
+     * Simple navigation method used to navigate back to the main tile view.
+     */
+    backToMainTile: function() {
+        this.logger.debug("backToMainTile");
+        this.navigate(Skin.event.navigation.Event.ACTION_BACK_SHOW_MAIN_TILE);
+    },	
+	
     /**
      * Handles the set UI event. 
 	 *
@@ -79,7 +128,13 @@ Ext.define("Skin.mediator.extjs.main.modal.Mediator", {
     // VIEW EVENT HANDLERS
     ////////////////////////////////////////////////
 
-	// TO DO
+    /**
+     * Handles the close button tap event. Navigates back to the previous main view.
+     */
+    onCloseButtonTap: function() {
+        this.logger.debug("onCloseButtonTap");
+        this.backToPrevious(Skin.config.global.Config.getPreviousView());
+    }
 
 });
 

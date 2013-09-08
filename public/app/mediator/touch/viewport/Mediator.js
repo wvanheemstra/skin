@@ -136,7 +136,11 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
     navigate: function(action) {
         this.logger.debug("navigate: action = " + action);
         var view;
+		var animation = {};
         var direction;
+		var type = 'slide'; // default, choose from: slide, pop, flip, fadeOut, etc.
+		var duration = 0;
+		var easing = {};
         switch(action) {      	
 
             case Skin.event.authentication.Event.LOGIN_SUCCESS:
@@ -150,91 +154,126 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
                 //if(nextView == 'employeelist') {view = this.getViewByXType("employeeListView");}
 				//if(nextView == 'employeetile') {view = this.getViewByXType("employeeTileView");}
 				Skin.config.global.Config.setCurrentView(nextView);
-                direction = this.getSlideLeftTransition();
+                direction = 'left';
                 break;
 
             case Skin.event.authentication.Event.LOGOUT_SUCCESS:
                 view = this.getLoginView();
 				Skin.config.global.Config.setCurrentView('login');
-                direction = this.getSlideRightTransition();
+                type = 'pop';
+				duration = 600;
+				easing = {type: 'ease-out'};
                 break;
 				
             case Skin.event.navigation.Event.ACTION_SHOW_MAIN_SLIDE:
                 view = this.getMainSlideView();
 				Skin.config.global.Config.setCurrentView('mainslide');
-                direction = this.getSlideRightTransition();
+                direction = 'right';
                 break;
 				
             case Skin.event.navigation.Event.ACTION_SHOW_MAIN_LIST:
                 view = this.getMainListView();
 				Skin.config.global.Config.setCurrentView('mainlist');
-                direction = this.getSlideRightTransition();
+                direction = 'right';
                 break;
 
             case Skin.event.navigation.Event.ACTION_SHOW_MAIN_TILE:
                 view = this.getMainTileView();
 				Skin.config.global.Config.setCurrentView('maintile');
-                direction = this.getSlideRightTransition();
+                direction = 'right';
                 break;
 
             case Skin.event.navigation.Event.ACTION_SHOW_MAIN_MODAL:
                 view = this.getMainModalView();
 				Skin.config.global.Config.setCurrentView('mainmodal');
-                direction = this.getSlideLeftTransition(); // CHANGE THIS TO AN OPEN TRANSITION
+				type = 'pop';
+				duration = 600;
+				easing = {type: 'ease-in'};
                 break;				
 				
             case Skin.event.navigation.Event.ACTION_SHOW_MAIN_DETAIL:
                 view = this.getMainDetailView();
 				Skin.config.global.Config.setCurrentView('maindetail');
-                direction = this.getSlideLeftTransition();
+                direction = 'left';
+				type = 'slide';
                 break;
 
             case Skin.event.navigation.Event.ACTION_BACK_SHOW_MAIN_SLIDE:
                 view = this.getMainSlideView();
 				Skin.config.global.Config.setCurrentView('mainslide');
-                direction = this.getSlideRightTransition();
+                direction = 'right';
+				type = 'slide';
                 break;				
 				
             case Skin.event.navigation.Event.ACTION_BACK_SHOW_MAIN_LIST:
                 view = this.getMainListView();
 				Skin.config.global.Config.setCurrentView('mainlist');
-                direction = this.getSlideRightTransition();
+                direction = 'right';
+				type = 'slide';
                 break;
                 
             case Skin.event.navigation.Event.ACTION_BACK_SHOW_MAIN_TILE:
                 view = this.getMainTileView();
 				Skin.config.global.Config.setCurrentView('maintile');
-                direction = this.getSlideRightTransition();
+                direction = 'right';
+				type = 'slide';
                 break;				
 
             case Skin.event.navigation.Event.ACTION_CLOSE_SHOW_MAIN_SLIDE:
                 view = this.getMainSlideView();
 				Skin.config.global.Config.setCurrentView('mainslide');
-                direction = this.getSlideRightTransition(); // CHANGE THIS TO A CLOSE TRANSITION
+				type = 'pop';
+				duration = 600;
+				easing = {type: 'ease-out'};
                 break;				
 				
             // case Skin.event.navigation.Event.ACTION_SHOW_EMPLOYEE_DETAIL:
                 // view = this.getEmployeeDetailView();
 				// Skin.config.global.Config.setCurrentView('employeedetail');
-                // direction = this.getSlideLeftTransition();
+                // direction = 'left'; this.getSlideLeftTransition();
+				// type = 'slide';
                 // break;
 
             // case Skin.event.navigation.Event.ACTION_BACK_SHOW_EMPLOYEE_LIST:
                 // view = this.getEmployeeListView();
 				// Skin.config.global.Config.setCurrentView('employeelist');
-                // direction = this.getSlideRightTransition();
+                // direction = 'right'; this.getSlideRightTransition();
+				// type = 'slide';	
                 // break;
 
             // case Skin.event.navigation.Event.ACTION_BACK_SHOW_EMPLOYEE_TILE:
                 // view = this.getEmployeeTileView();
 				// Skin.config.global.Config.setCurrentView('employeetile');
-                // direction = this.getSlideRightTransition();
+                // direction = 'right'; this.getSlideRightTransition();
+				// type = 'slide';		
                 // break;
         }
 
         // only navigate to the screen if the view exist
         if(view != null) {
-            Ext.Viewport.animateActiveItem(view, direction);
+			animation['duration'] = duration;
+			animation['type'] = type;
+			animation['direction'] = direction;
+			animation['easing'] = easing;
+			
+			switch(type) {
+				case 'slide':
+					Ext.Viewport.animateActiveItem(view, animation);
+					break;
+				case 'pop':
+					view.hideAnimation = 'fadeOut';
+					Ext.Viewport.animateActiveItem(view, animation);
+					break;
+				case 'show':
+					view.show();		
+					break;
+				case 'flip':
+					Ext.Viewport.animateActiveItem(view, animation);
+					break;
+				case 'fadeOut':	
+					Ext.Viewport.animateActiveItem(view, animation);
+					break;
+			}	
         } else {
             this.logger.warn("ViewportMediator.navigate: couldn't map navigation to action = ", action);
         }

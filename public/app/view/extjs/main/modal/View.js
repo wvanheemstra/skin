@@ -26,13 +26,13 @@ Ext.define("Skin.view.extjs.main.modal.View", {
             docked: "top",
             width: 400,
             items: [{
-				itemId: "backButton",
+				itemId: "closeButton",
 				ui: "neutral",
 				plugins: [
 					{
 						ptype: "localization",
 						method: "setText",
-						key: "mainDetail.back"
+						key: "mainDetail.close"
 					}
 				]
 			}]
