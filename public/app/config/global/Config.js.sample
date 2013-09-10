@@ -24,7 +24,23 @@ Ext.define("Skin.config.global.Config",{
 		locale: 'en_us',	      // initialize to 'en_us'
 		background: 'noise',      // initialize to 'noise'
 		url: '',				  // initialize to ''
-		title: ''				  // initialize to ''		
+		title: '',				  // initialize to ''
+		apps: [{
+			person:  [{
+				title: 'Persons',
+				url: 'http://localhost:4000/touch?app=person'
+			}]
+		},{
+			product:  [{
+				title: 'Products',
+				url: 'http://localhost:4000/touch?app=product'
+			}]
+		},{
+			booking:  [{
+				title: 'Bookings',
+				url: 'http://localhost:4000/touch?app=booking'
+			}]
+		}]
     },
     constructor : function(config){
         this.initConfig(config);

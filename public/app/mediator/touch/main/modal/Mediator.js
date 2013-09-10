@@ -104,7 +104,6 @@ Ext.define("Skin.mediator.touch.main.modal.Mediator", {
         {
             this.getView().items.getAt(i).setUi(ui);
         }
-		//this.getView().refresh();
     },     
 
     /**
@@ -116,9 +115,8 @@ Ext.define("Skin.mediator.touch.main.modal.Mediator", {
     	this.logger.debug("setTitle: title = " + title);
 		for ( var i=0; i<this.getView().items.length; i++)
         {
-            this.getView().items.getAt(i).setTitle(title);
+            this.getView().items.getAt(i).setTitle(title); // WE SEE THE TEXT ON THE TOOLBAR, BUT NOT ON THE TITLE BAR... HOW COME??
         }
-		//this.getView().refresh();
     }, 	
 	
     ////////////////////////////////////////////////

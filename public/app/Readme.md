@@ -6,6 +6,10 @@ This folder contains the controllers
 
 This folder contains the models
 
+# ./mediator
+
+This folder contains the mediators
+
 # ./view
 
 This folder contains the views

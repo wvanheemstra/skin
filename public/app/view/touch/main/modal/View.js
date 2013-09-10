@@ -16,6 +16,19 @@
     ],
 	
 	config: {
+		html: "<iframe src='http://www.amazon.com' width='100%' height='100%' scrolling='no'>Loading ...</iframe>",
+		/*
+		iframe : {
+			width: "100%",
+			height: "100%",
+			scrolling : "no",
+			src: "http://www.amazon.com"
+		},
+		*/
+		layout: {
+			type: "fit"
+		},
+		scroll : "vertical",
         items: [{
 			xtype: "titlebar",
 			itemId: "titlebar",
@@ -42,6 +55,11 @@
 					}
 				]
 			}]
+		},{
+			xtype: "toolbar",
+			itemId: "bottombar",
+			ui: "neutral",
+			docked: "bottom"
 		}]
     }
 });	

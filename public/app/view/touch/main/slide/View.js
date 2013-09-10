@@ -392,9 +392,10 @@ Ext.define("Skin.view.touch.main.slide.View", {
                 },
                 items: [{
 					xtype: 'button',  
-					text: 'People',
-					title: 'People',
-					url: 'https://www.google.co.uk/search?q=people&source=lnms&tbm=isch',
+					itemId: 'person',
+					//text: 'People',
+					//title: 'People',
+					//url: 'https://www.google.co.uk/search?q=people&source=lnms&tbm=isch',
 					listeners: {
 						release: function(button, e, eOpts) {
 							console.log('released');
@@ -410,9 +411,10 @@ Ext.define("Skin.view.touch.main.slide.View", {
 					}
 				},{
 					xtype: 'button',  
-					text: 'Products',
-					title: 'Products',		
-					url: 'https://www.google.co.uk/search?q=products&source=lnms&tbm=isch',
+					itemId: 'product',
+					//text: 'Products',
+					//title: 'Products',		
+					//url: 'https://www.google.co.uk/search?q=products&source=lnms&tbm=isch',
 					listeners: {
 						release: function(button, e, eOpts) {
 							console.log('released');
@@ -427,10 +429,11 @@ Ext.define("Skin.view.touch.main.slide.View", {
 						scope: this
 					}
 				},{
-					xtype: 'button',  
-					text: 'Bookings', 
-					title: 'Bookings',					
-					url: 'https://www.google.co.uk/search?q=bookings&source=lnms&tbm=isch',
+					xtype: 'button',
+					itemId: 'booking',					
+					//text: 'Bookings', 
+					//title: 'Bookings',					
+					//url: 'https://www.google.co.uk/search?q=bookings&source=lnms&tbm=isch',
 					listeners: {
 						release: function(button, e, eOpts) {
 							console.log('released');
