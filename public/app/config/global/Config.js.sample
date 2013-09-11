@@ -25,6 +25,29 @@ Ext.define("Skin.config.global.Config",{
 		background: 'noise',      // initialize to 'noise'
 		url: '',				  // initialize to ''
 		title: '',				  // initialize to ''
+		groups: [{
+			0: [{
+				title: '' // left empty intentionally, so this group is without a header
+			}]
+		},{
+			1: [{
+				title: 'A'
+			}]
+		},{
+			2: [{
+				title: 'B'
+			}]
+		}],
+		categories: [{
+			0: [{
+				title: 'Home',
+				group: 0
+			}],
+			1: [{
+				title: 'Administration',
+				group: 1
+			}]
+		}],	
 		apps: [{
 			person:  [{
 				title: 'Persons',
@@ -40,7 +63,7 @@ Ext.define("Skin.config.global.Config",{
 				title: 'Bookings',
 				url: 'http://localhost:4000/touch?app=booking'
 			}]
-		}]
+		}]	
     },
     constructor : function(config){
         this.initConfig(config);

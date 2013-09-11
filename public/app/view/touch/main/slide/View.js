@@ -79,6 +79,7 @@ Ext.define("Skin.view.touch.main.slide.View", {
         list: {
             width: 250,
             maxDrag: 400, //WAS null,
+			itemId: 'list',
             itemTpl: '{title}',
             grouped: true, //WAS true,
 			ui: 'neutral',
@@ -138,23 +139,65 @@ Ext.define("Skin.view.touch.main.slide.View", {
          * The items can either be Ext components or special objects with a "handler"
          * key, which should be a function to execute when selected.  Additionally, you
          * can define the order of the items by defining an 'order' parameter.
-         */        
+         */  
+		items: [], // NEW we create the items on the fly
+/**		 
         items: [{
-            title: 'Home',
+			itemId: 0, //'Home'
+            title:  '-', //'Home',
+			// this item has no method setTitle
 			plugins: [
 				{
 					type: "localization",
 					method: "setTitle",
 					key: "mainItem1.title"
 				}
-			],			
-            group: 'Group 0',
+			],	
+			//
+            group: '',
 			ui: 'neutral',
 			hidden: true, // hide the item initially
             // Enable the slide button using the defaults defined above in
             // `slideButtonDefaults`.
             slideButton: true,
 			slideHeader: true,
+			listeners: {
+				painted: function(item, eOpts){
+					console.log('painted');
+					var me = item;
+					var categories = Skin.config.global.Config.getCategories();
+					console.log(categories);
+					for (var i = 0; i < categories.length; i++)
+					{
+						var category = categories[i];
+						console.log(category);
+						for (var key in category) {
+							if (key === 'length' || !category.hasOwnProperty(key)) continue;
+							console.log(key);
+							var value = category[key][0];
+							if(key == '0'){
+								console.log(value);
+								for (var key in value) {
+									console.log(key);
+									if(key == 'title'){
+										var title = value[key];
+										console.log(title);
+										me.title = title;
+										var show = me.title;
+										console.log('I managed to set the title to: '+show);
+										//me.setTitle(title);
+									}
+									if(key == 'group'){
+										var group = value[key];
+										console.log(group);
+										me.group = group;
+									}
+								}
+							}
+						}
+					}
+				}
+			},
             items: [{
                 xtype: 'toolbar',
                 //title: 'Item 1',
@@ -183,7 +226,7 @@ Ext.define("Skin.view.touch.main.slide.View", {
                 maskOnOpen: true
             }]
         },
-		/* NO LONGER IN USE
+		// NO LONGER IN USE
 		{
             title: 'Item 2',
 			plugins: [
@@ -240,9 +283,9 @@ Ext.define("Skin.view.touch.main.slide.View", {
                 scrollable: true,
                 maskOnOpen: true
             }]
-        } */
+        } //
 		
-		/*  NO LONGER IN USE
+		//  NO LONGER IN USE
 		,{
             title: 'Item 3',
 			plugins: [
@@ -343,9 +386,11 @@ Ext.define("Skin.view.touch.main.slide.View", {
                     html: '<img class="image-wrap" src="http://content9.flixster.com/movie/11/15/90/11159075_pro.jpg" />'
                 }]
             }]
-        }, */
+        }, //
 		{
-            title: 'Administration',
+			itemId: 1, //'administration',
+			title: '-',
+			// this item has no method setTitle
 			plugins: [
 				{
 					type: "localization",
@@ -353,7 +398,8 @@ Ext.define("Skin.view.touch.main.slide.View", {
 					key: "mainItem4.title"
 				}
 			],
-            group: 'Group 1',
+			//
+            group: 1,
 			ui: 'neutral',
 			hidden: true, // hide the item initially			
             order: 0,
@@ -365,6 +411,41 @@ Ext.define("Skin.view.touch.main.slide.View", {
         //        iconCls: null,
         //        text: 'menu'
         //    },
+			listeners: {
+				painted: function(item, eOpts){
+					console.log('painted');
+					var me = item;
+					var categories = Skin.config.global.Config.getCategories();
+					console.log(categories);
+					for (var i = 0; i < categories.length; i++)
+					{
+						var category = categories[i];
+						console.log(category);
+						for (var key in category) {
+							if (key === 'length' || !category.hasOwnProperty(key)) continue;
+							console.log(key);
+							var value = category[key][0];
+							if(key == '1'){
+								console.log(value);
+								for (var key in value) {
+									console.log(key);
+									if(key == 'title'){
+										var title = value[key];
+										console.log(title);
+										me.title = title;
+										//me.setTitle(title);
+									}
+									if(key == 'group'){
+										var group = value[key];
+										console.log(group);
+										me.group = group;
+									}
+								}
+							}
+						}
+					}
+				}
+			},
             items: [{
                 xtype: 'toolbar',
                 //title: 'Item 4',
@@ -393,14 +474,47 @@ Ext.define("Skin.view.touch.main.slide.View", {
                 items: [{
 					xtype: 'button',  
 					itemId: 'person',
-					//text: 'People',
-					//title: 'People',
-					//url: 'https://www.google.co.uk/search?q=people&source=lnms&tbm=isch',
+					text: '',
+					title: '',
+					url: '',
 					listeners: {
 						release: function(button, e, eOpts) {
 							console.log('released');
 							var me = button.up('mainSlideView');
 							me.showModal(button, e);
+						},
+						painted: function(button, eOpts){
+							console.log('show');
+							var me = button;
+							var apps = Skin.config.global.Config.getApps();
+							console.log(apps);
+							for (var i = 0; i < apps.length; i++)
+							{
+								var app = apps[i];
+								console.log(app);
+								for (var key in app) {
+									if (key === 'length' || !app.hasOwnProperty(key)) continue;
+									console.log(key);
+									var value = app[key][0];
+									console.log(value);
+									if(key == 'person'){
+										for (var key in value) {
+											console.log(key);
+											if(key == 'title'){
+												var title = value[key];
+												console.log(title);
+												me.title = title;
+												me.setText(title);
+											}
+											if(key == 'url'){
+												var url = value[key];
+												console.log(url);
+												me.url=url;
+											}
+										}
+									}
+								}
+							}
 						},
 						tap: function(button, e) {
 							// Need this to stop auto-selecting any component
@@ -412,14 +526,47 @@ Ext.define("Skin.view.touch.main.slide.View", {
 				},{
 					xtype: 'button',  
 					itemId: 'product',
-					//text: 'Products',
-					//title: 'Products',		
-					//url: 'https://www.google.co.uk/search?q=products&source=lnms&tbm=isch',
+					text: '',
+					title: '',		
+					url: '',
 					listeners: {
 						release: function(button, e, eOpts) {
 							console.log('released');
 							var me = button.up('mainSlideView');
 							me.showModal(button, e);
+						},
+						painted: function(button, eOpts){
+							console.log('show');
+							var me = button;
+							var apps = Skin.config.global.Config.getApps();
+							console.log(apps);
+							for (var i = 0; i < apps.length; i++)
+							{
+								var app = apps[i];
+								console.log(app);
+								for (var key in app) {
+									if (key === 'length' || !app.hasOwnProperty(key)) continue;
+									console.log(key);
+									var value = app[key][0];
+									console.log(value);
+									if(key == 'product'){
+										for (var key in value) {
+											console.log(key);
+											if(key == 'title'){
+												var title = value[key];
+												console.log(title);
+												me.title = title;
+												me.setText(title);
+											}
+											if(key == 'url'){
+												var url = value[key];
+												console.log(url);
+												me.url=url;
+											}
+										}
+									}
+								}
+							}
 						},
 						tap: function(button, e) {
 							// Need this to stop auto-selecting any component
@@ -431,14 +578,47 @@ Ext.define("Skin.view.touch.main.slide.View", {
 				},{
 					xtype: 'button',
 					itemId: 'booking',					
-					//text: 'Bookings', 
-					//title: 'Bookings',					
-					//url: 'https://www.google.co.uk/search?q=bookings&source=lnms&tbm=isch',
+					text: '', 
+					title: '',					
+					url: '',
 					listeners: {
 						release: function(button, e, eOpts) {
 							console.log('released');
 							var me = button.up('mainSlideView');
 							me.showModal(button, e);
+						},
+						painted: function(button, eOpts){
+							console.log('show');
+							var me = button;
+							var apps = Skin.config.global.Config.getApps();
+							console.log(apps);
+							for (var i = 0; i < apps.length; i++)
+							{
+								var app = apps[i];
+								console.log(app);
+								for (var key in app) {
+									if (key === 'length' || !app.hasOwnProperty(key)) continue;
+									console.log(key);
+									var value = app[key][0];
+									console.log(value);
+									if(key == 'booking'){
+										for (var key in value) {
+											console.log(key);
+											if(key == 'title'){
+												var title = value[key];
+												console.log(title);
+												me.title = title;
+												me.setText(title);
+											}
+											if(key == 'url'){
+												var url = value[key];
+												console.log(url);
+												me.url=url;
+											}
+										}
+									}
+								}
+							}
 						},
 						tap: function(button, e) {
 							// Need this to stop auto-selecting any component
@@ -450,6 +630,8 @@ Ext.define("Skin.view.touch.main.slide.View", {
 				}]
             }]
         }],
+		
+*/		
         /**
          * @cfg {Object} groups Mapping of group name to order.  For example,
          * say you have defined two groups; "Group 1" and "Group 2".  By default
@@ -466,11 +648,11 @@ Ext.define("Skin.view.touch.main.slide.View", {
          *  By default groups are ordered by their name.
          */
         groups: {
-		    'Group 0': 0,		
-		    'Group 1': 1,
-            'Group 2': 2,
-            'Group 3': 3,
-			'Group 4': 4
+		    '0': 0,		
+		    '1': 1,
+            '2': 2,
+            '3': 3,
+			'4': 4
 		},
         /**
          * @cfg {Object} defaults An object of default values to apply to any Ext
@@ -582,6 +764,10 @@ Ext.define("Skin.view.touch.main.slide.View", {
             }
         });
 		console.log("store created");
+		
+		// Create items for the list
+		me.createItems(me.config.items || []); // NEW by wvh
+		
         // Add the items into the list.
         me.addItems(me.config.items || []);
 		console.log("items added");
@@ -721,6 +907,110 @@ Ext.define("Skin.view.touch.main.slide.View", {
 		if(group == 'Group 4'){ var group = 'D' }			
 		return group;
 	},	
+
+	/**
+	 * @private
+	 *
+	 * Creates an array of items (or a single item)
+	 */
+	createItems: function(items) {
+		console.log("createItems");
+		var me = this,
+			items = Ext.isArray(items) ? items : [items];
+		
+		// MAKE THIS A FOR LOOP FOR THE NUMBER OF ITEMS TO CREATE
+		
+		// create the new item
+		
+		var item = { // the new item
+			itemId: 'Home', // 0
+			title: 'Home', // '-'
+			// this item has no method setTitle
+			plugins: [
+				{
+					type: "localization",
+					method: "setTitle",
+					key: "mainItem1.title"
+				}
+			],	
+			//
+            group: '',
+			ui: 'neutral',
+			hidden: true, // hide the item initially
+            // Enable the slide button using the defaults defined above in
+            // `slideButtonDefaults`.
+            slideButton: true,
+			slideHeader: true,
+			listeners: {
+				painted: function(item, eOpts){
+					console.log('painted');
+					var me = item;
+					var categories = Skin.config.global.Config.getCategories();
+					console.log(categories);
+					for (var i = 0; i < categories.length; i++)
+					{
+						var category = categories[i];
+						console.log(category);
+						for (var key in category) {
+							if (key === 'length' || !category.hasOwnProperty(key)) continue;
+							console.log(key);
+							var value = category[key][0];
+							if(key == '0'){
+								console.log(value);
+								for (var key in value) {
+									console.log(key);
+									if(key == 'title'){
+										var title = value[key];
+										console.log(title);
+										me.title = title;
+										var show = me.title;
+										console.log('I managed to set the title to: '+show);
+										//me.setTitle(title);
+									}
+									if(key == 'group'){
+										var group = value[key];
+										console.log(group);
+										me.group = group;
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+            items: [{
+                xtype: 'toolbar',
+                //title: 'Item 1',
+				plugins: [
+                    {
+                        type: "localization",
+                        method: "setTitle",
+                        key: "mainItem1.title"
+                    }
+                ],
+                docked: 'top',
+				ui: 'neutral'
+            },{
+                xtype: 'panel',
+				scrollable: true,
+				style: 'background-image: url("./resources/bg/noise.png");',
+				styleHtmlContent: true,
+                html: [
+					'<center>',
+					'<img src="./resources/logos/logo.png" />',
+					'<h2>Welcome to Your Home Page</h2>',
+					'<p>This page can be customized in whatever way you prefer.</p>',
+					'</center>'
+				].join(""),
+                // Mask this item when the container is opened
+                maskOnOpen: true
+            }]
+		};	
+		
+		// the new item is now created
+			
+		items.push(item); // adding the item to the items
+	},
 	
     /**
      *  @private
