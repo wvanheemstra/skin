@@ -1050,17 +1050,18 @@ Ext.define("Skin.view.touch.main.slide.View", {
                            "overflow: hidden;",
                     height: 170,
                     width: 110
-                },
-                items: []
+                }
 			};
+			
+		result['items'] = [];
 		
 		for (var i = 0; i < appNames.length; i++) {
 			appName = appNames[i];
 			console.log(appName);		
 
 			var apps = Skin.config.global.Config.getApps();
-			for (var i = 0; i < apps.length; i++) {
-				var app = apps[i];
+			for (var n = 0; n < apps.length; n++) {
+				var app = apps[n];
 				console.log(app);
 				for (var key in app) {
 					if (key === 'length' || !app.hasOwnProperty(key)) continue;
@@ -1086,7 +1087,7 @@ Ext.define("Skin.view.touch.main.slide.View", {
 						
 						var item = {
 							xtype: 'button',
-							itemId: value,				
+							itemId: appName,				
 							text: text, 
 							title: title,					
 							url: url,
@@ -1096,41 +1097,6 @@ Ext.define("Skin.view.touch.main.slide.View", {
 									var me = button.up('mainSlideView');
 									me.showModal(button, e);
 								},
-								/*
-								painted: function(button, eOpts){
-									console.log('show');
-									var me = button;
-									var apps = Skin.config.global.Config.getApps();
-									console.log(apps);
-									for (var i = 0; i < apps.length; i++)
-									{
-										var app = apps[i];
-										console.log(app);
-										for (var key in app) {
-											if (key === 'length' || !app.hasOwnProperty(key)) continue;
-											console.log(key);
-											var value = app[key][0];
-											console.log(value);
-											if(key == 'booking'){
-												for (var key in value) {
-													console.log(key);
-													if(key == 'title'){
-														var title = value[key];
-														console.log(title);
-														me.title = title;
-														me.setText(title);
-													}
-													if(key == 'url'){
-														var url = value[key];
-														console.log(url);
-														me.url=url;
-													}
-												}
-											}
-										}
-									}
-								},
-								*/
 								tap: function(button, e) {
 									// Need this to stop auto-selecting any component
 									// hidden beneath the container.
@@ -1138,9 +1104,9 @@ Ext.define("Skin.view.touch.main.slide.View", {
 								},
 								scope: this
 							}
-						};
+						}
 						result.items.push(item);
-					}
+					}					
 				}
 			}
 		}
