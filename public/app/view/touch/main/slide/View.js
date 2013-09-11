@@ -896,16 +896,33 @@ Ext.define("Skin.view.touch.main.slide.View", {
      *  @private
      *
      *  Gets the group.
+	 *
+	 * @param groupId	The ID of the group to get
      */	
-	getGroup: function(group) {
+	getGroup: function(groupId) {
 		console.log("getGroup");
-		// TO DO ... translating the group 
-		if(group == 'Group 0'){ var group = '' } // Reserved for the Home item		
-		if(group == 'Group 1'){ var group = 'A' }
-		if(group == 'Group 2'){ var group = 'B' }
-		if(group == 'Group 3'){ var group = 'C' }
-		if(group == 'Group 4'){ var group = 'D' }			
-		return group;
+		var groups = Skin.config.global.Config.getGroups();
+		for (var i = 0; i < groups.length; i++) {
+			var group = groups[i];
+			console.log(group);
+			for (var key in group) {
+				if (key === 'length' || !group.hasOwnProperty(key)) continue;
+				console.log(key);
+				var value = group[key][0];
+				if(key == groupId){
+					console.log(value);
+					for (var key in value) {
+						console.log(key);
+						if(key == 'title'){
+							var title = value[key];
+							console.log(title);
+							group = title;
+							return group;
+						}
+					}
+				}
+			}	
+		}
 	},	
 
 	/**
@@ -947,13 +964,13 @@ Ext.define("Skin.view.touch.main.slide.View", {
 					// create the new item
 					var item = { // the new item
 						itemId: itemId, // 0
-						title: title, // '-'
+						title: title, // TRANSLATION DOES NOT SEEM TO WORK YET
 						// this item has no method setTitle
 						plugins: [
 							{
 								type: "localization",
 								method: "setTitle",
-								key: "mainItem1.title"
+								key: "mainCategory"+itemId+".title"
 							}
 						],	
 						//
@@ -974,7 +991,7 @@ Ext.define("Skin.view.touch.main.slide.View", {
 								{
 									type: "localization",
 									method: "setTitle",
-									key: "mainItem1.title"
+									key: "mainCategory"+itemId+".title"
 								}
 							],
 							docked: 'top',

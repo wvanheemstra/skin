@@ -59,20 +59,15 @@
     },
 
     /////////////////////////////////////////////
-    // MAIN ITEMS
+    // MAIN CATEGORIES
     /////////////////////////////////////////////
-    "mainItem1": {
-        "title": "Item 1",
+    "mainCategory0": {
+        "title": "Home",
     },	
-    "mainItem2": {
-        "title": "Item 2",
-    },
-    "mainItem3": {
-        "title": "Item 3",
-    },		
-    "mainItem4": {
-        "title": "Item 4",
+    "mainCategory1": {
+        "title": "Administration",
     },	
+	
     /////////////////////////////////////////////
     // MAIN DETAIL
     /////////////////////////////////////////////
