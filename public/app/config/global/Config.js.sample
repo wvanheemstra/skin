@@ -41,7 +41,12 @@ Ext.define("Skin.config.global.Config",{
 		categories: [{
 			0: [{
 				title: 'Home',
-				group: 0
+				group: 0,
+				html: ['<center>',
+					'<img src="./resources/logos/logo.png" />',
+					'<h2>Welcome to Your Home Page</h2>',
+					'<p>This page can be customized in whatever way you prefer.</p>',
+					'</center>'].join("")
 			}],
 			1: [{
 				title: 'Administration',
