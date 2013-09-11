@@ -960,6 +960,10 @@ Ext.define("Skin.view.touch.main.slide.View", {
 							var html = value[key];
 							console.log(html);
 						}
+						if(key == 'apps'){
+							var apps = value[key];
+							console.log(apps);
+						}
 					}
 					// create the new item
 					var item = { // the new item
@@ -996,22 +1000,151 @@ Ext.define("Skin.view.touch.main.slide.View", {
 							],
 							docked: 'top',
 							ui: 'neutral'
-						},{
-							xtype: 'panel',
-							scrollable: true,
-							style: 'background-image: url("./resources/bg/noise.png");',
-							styleHtmlContent: true,
-							html: html,
-							// Mask this item when the container is opened
-							maskOnOpen: true
 						}]
 					}
 				}
 				// the new item is now created
+				// extend the item's items 
+				// for either html 
+				// or (a collection of) apps
+				if(apps){
+					item.items.push(me.addApps(apps));
+				}
+				else {
+					item.items.push({
+						xtype: 'panel',
+						scrollable: true,
+						style: 'background-image: url("./resources/bg/noise.png");',
+						styleHtmlContent: true,
+						html: html,
+						// Mask this item when the container is opened
+						maskOnOpen: true
+					});
+				}
 				items.push(item); // adding the item to the items
 				itemId += 1; // increase itemId by 1
 			}
 		}// end of for
+	},
+
+	/**
+	 * @private
+	 *
+	 * Build an array consisting of app objects
+	 *
+	 * @param apps	The array of app names 
+	 *				to retrieve the app objects for and return as an array 
+	 */
+    addApps: function(apps) {
+		console.log("addApps");	
+		var appNames = apps,
+			appName,
+			result = {
+                xtype: 'container',
+                scrollable: 'vertical',
+				style: 'margin: auto !important; text-align: center; background-image: url("./resources/bg/noise.png");',
+                maskOnOpen: true,
+                defaults: {
+                    style: "float: left; margin: 10px; box-shadow: "+
+                           "#999 0px 0px 6px 2px; border: 1px solid #888; "+
+                           "overflow: hidden;",
+                    height: 170,
+                    width: 110
+                },
+                items: []
+			};
+		
+		for (var i = 0; i < appNames.length; i++) {
+			appName = appNames[i];
+			console.log(appName);		
+
+			var apps = Skin.config.global.Config.getApps();
+			for (var i = 0; i < apps.length; i++) {
+				var app = apps[i];
+				console.log(app);
+				for (var key in app) {
+					if (key === 'length' || !app.hasOwnProperty(key)) continue;
+					console.log(key);
+					var value = app[key][0];
+					if(key == appName){
+						console.log(value);
+						// to do
+						// value is e.g. 
+						// {title: "Persons", url: "http://localhost:4000/touch?app=person"}
+						for (var key in value) {
+							console.log(key);
+							if(key == 'title'){
+								var title = value[key];
+								console.log(title);
+							}
+							if(key == 'url'){
+								var url = value[key];
+								console.log(url);
+							}
+						}
+						var text = title;
+						
+						var item = {
+							xtype: 'button',
+							itemId: value,				
+							text: text, 
+							title: title,					
+							url: url,
+							listeners: {
+								release: function(button, e, eOpts) {
+									console.log('released');
+									var me = button.up('mainSlideView');
+									me.showModal(button, e);
+								},
+								/*
+								painted: function(button, eOpts){
+									console.log('show');
+									var me = button;
+									var apps = Skin.config.global.Config.getApps();
+									console.log(apps);
+									for (var i = 0; i < apps.length; i++)
+									{
+										var app = apps[i];
+										console.log(app);
+										for (var key in app) {
+											if (key === 'length' || !app.hasOwnProperty(key)) continue;
+											console.log(key);
+											var value = app[key][0];
+											console.log(value);
+											if(key == 'booking'){
+												for (var key in value) {
+													console.log(key);
+													if(key == 'title'){
+														var title = value[key];
+														console.log(title);
+														me.title = title;
+														me.setText(title);
+													}
+													if(key == 'url'){
+														var url = value[key];
+														console.log(url);
+														me.url=url;
+													}
+												}
+											}
+										}
+									}
+								},
+								*/
+								tap: function(button, e) {
+									// Need this to stop auto-selecting any component
+									// hidden beneath the container.
+									e.preventDefault();
+								},
+								scope: this
+							}
+						};
+						result.items.push(item);
+					}
+				}
+			}
+		}
+		return result;
 	},
 	
     /**
