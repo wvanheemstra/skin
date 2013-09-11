@@ -916,100 +916,85 @@ Ext.define("Skin.view.touch.main.slide.View", {
 	createItems: function(items) {
 		console.log("createItems");
 		var me = this,
-			items = Ext.isArray(items) ? items : [items];
+			items = Ext.isArray(items) ? items : [items],
+			itemId = 0;
 		
-		// MAKE THIS A FOR LOOP FOR THE NUMBER OF ITEMS TO CREATE
-		
-		// create the new item
-		
-		var item = { // the new item
-			itemId: 'Home', // 0
-			title: 'Home', // '-'
-			// this item has no method setTitle
-			plugins: [
-				{
-					type: "localization",
-					method: "setTitle",
-					key: "mainItem1.title"
-				}
-			],	
-			//
-            group: '',
-			ui: 'neutral',
-			hidden: true, // hide the item initially
-            // Enable the slide button using the defaults defined above in
-            // `slideButtonDefaults`.
-            slideButton: true,
-			slideHeader: true,
-			listeners: {
-				painted: function(item, eOpts){
-					console.log('painted');
-					var me = item;
-					var categories = Skin.config.global.Config.getCategories();
-					console.log(categories);
-					for (var i = 0; i < categories.length; i++)
-					{
-						var category = categories[i];
-						console.log(category);
-						for (var key in category) {
-							if (key === 'length' || !category.hasOwnProperty(key)) continue;
-							console.log(key);
-							var value = category[key][0];
-							if(key == '0'){
-								console.log(value);
-								for (var key in value) {
-									console.log(key);
-									if(key == 'title'){
-										var title = value[key];
-										console.log(title);
-										me.title = title;
-										var show = me.title;
-										console.log('I managed to set the title to: '+show);
-										//me.setTitle(title);
-									}
-									if(key == 'group'){
-										var group = value[key];
-										console.log(group);
-										me.group = group;
-									}
-								}
-							}
+		var categories = Skin.config.global.Config.getCategories();
+		for (var i = 0; i < categories.length; i++) {
+			var category = categories[i];
+			console.log(category);
+			for (var key in category) {
+				if (key === 'length' || !category.hasOwnProperty(key)) continue;
+				console.log(key);
+				var value = category[key][0];
+				if(key == itemId){
+					console.log(value);
+					for (var key in value) {
+						console.log(key);
+						if(key == 'title'){
+							var title = value[key];
+							console.log(title);
+						}
+						if(key == 'group'){
+							var group = value[key];
+							console.log(group);
+						}
+						if(key == 'html'){
+							var html = value[key];
+							console.log(html);
 						}
 					}
+					// create the new item
+					var item = { // the new item
+						itemId: itemId, // 0
+						title: title, // '-'
+						// this item has no method setTitle
+						plugins: [
+							{
+								type: "localization",
+								method: "setTitle",
+								key: "mainItem1.title"
+							}
+						],	
+						//
+						group: group,
+						ui: 'neutral',
+						hidden: true, // hide the item initially
+						// Enable the slide button using the defaults defined above in
+						// `slideButtonDefaults`.
+						slideButton: true,
+						slideHeader: true,
+						listeners: {	
+							// empty
+						},
+						items: [{
+							xtype: 'toolbar',
+							//title: 'Item 1',
+							plugins: [
+								{
+									type: "localization",
+									method: "setTitle",
+									key: "mainItem1.title"
+								}
+							],
+							docked: 'top',
+							ui: 'neutral'
+						},{
+							xtype: 'panel',
+							scrollable: true,
+							style: 'background-image: url("./resources/bg/noise.png");',
+							styleHtmlContent: true,
+							html: html,
+							// Mask this item when the container is opened
+							maskOnOpen: true
+						}]
+					}
 				}
-			},
-            items: [{
-                xtype: 'toolbar',
-                //title: 'Item 1',
-				plugins: [
-                    {
-                        type: "localization",
-                        method: "setTitle",
-                        key: "mainItem1.title"
-                    }
-                ],
-                docked: 'top',
-				ui: 'neutral'
-            },{
-                xtype: 'panel',
-				scrollable: true,
-				style: 'background-image: url("./resources/bg/noise.png");',
-				styleHtmlContent: true,
-                html: [
-					'<center>',
-					'<img src="./resources/logos/logo.png" />',
-					'<h2>Welcome to Your Home Page</h2>',
-					'<p>This page can be customized in whatever way you prefer.</p>',
-					'</center>'
-				].join(""),
-                // Mask this item when the container is opened
-                maskOnOpen: true
-            }]
-		};	
-		
-		// the new item is now created
-			
-		items.push(item); // adding the item to the items
+				// the new item is now created
+				items.push(item); // adding the item to the items
+				itemId += 1; // increase itemId by 1
+			}
+		}// end of for
 	},
 	
     /**
