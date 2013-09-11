@@ -50,7 +50,8 @@ Ext.define("Skin.config.global.Config",{
 			}],
 			1: [{
 				title: 'Administration',
-				group: 1
+				group: 1,
+				apps: [person, product, booking]
 			}]
 		}],	
 		apps: [{
