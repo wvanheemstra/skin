@@ -65,8 +65,14 @@
         "title": "Home",
     },	
     "mainCategory1": {
-        "title": "Administratie",
+        "title": "Alle",
     },	
+    "mainCategory2": {
+        "title": "Administratie",
+    },
+    "mainCategory3": {
+        "title": "Marketing",
+    },
 	
     /////////////////////////////////////////////
     // MAIN DETAIL

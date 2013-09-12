@@ -26,17 +26,15 @@ Ext.define("Skin.config.global.Config",{
 		url: '',				  // initialize to ''
 		title: '',				  // initialize to ''
 		groups: [{
-			0: [{
-				title: '' // left empty intentionally, so this group is without a header
-			}]
+			0: [{title: ''}] // left empty intentionally, so this group is without a header
 		},{
-			1: [{
-				title: 'A'
-			}]
+			1: [{title: '&nbsp;'}] // left with a space, so still with a header but no title
 		},{
-			2: [{
-				title: 'B'
-			}]
+			2: [{title: 'A'}]
+		},{
+			3: [{title: 'B'}]
+		},{
+			14: [{title: 'M'}]
 		}],
 		categories: [{
 			0: [{
@@ -49,15 +47,30 @@ Ext.define("Skin.config.global.Config",{
 					'</center>'].join("")
 			}],
 			1: [{
-				title: 'Administration',
+				title: 'All',
 				group: 1,
-				apps: ['person', 'product', 'booking']
+				apps: ['*']
+			}],
+			2: [{
+				title: 'Administration',
+				group: 2,
+				apps: ['person', 'organisation', 'product', 'booking']
+			}],
+			3: [{
+				title: 'Marketing',
+				group: 14,
+				apps: ['null']
 			}]
 		}],	
 		apps: [{
 			person:  [{
 				title: 'Persons',
 				url: 'http://localhost:4000/touch?app=person'
+			}]
+		},{
+			organisation:  [{
+				title: 'Organisations',
+				url: 'http://localhost:4000/touch?app=organisation'
 			}]
 		},{
 			product:  [{
@@ -68,6 +81,11 @@ Ext.define("Skin.config.global.Config",{
 			booking:  [{
 				title: 'Bookings',
 				url: 'http://localhost:4000/touch?app=booking'
+			}]
+		},{
+			null:  [{
+				title: 'Empty',
+				url: 'http://about:blank'
 			}]
 		}]	
     },

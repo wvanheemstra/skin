@@ -652,7 +652,8 @@ Ext.define("Skin.view.touch.main.slide.View", {
 		    '1': 1,
             '2': 2,
             '3': 3,
-			'4': 4
+			'4': 4,
+			'14': 5
 		},
         /**
          * @cfg {Object} defaults An object of default values to apply to any Ext
@@ -1067,7 +1068,7 @@ Ext.define("Skin.view.touch.main.slide.View", {
 					if (key === 'length' || !app.hasOwnProperty(key)) continue;
 					console.log(key);
 					var value = app[key][0];
-					if(key == appName){
+					if(key == appName || appName == '*'){ // * indicates list all apps
 						console.log(value);
 						// to do
 						// value is e.g. 
