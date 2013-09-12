@@ -75,7 +75,7 @@ Ext.define("Skin.config.global.Config",{
 		},{
 			null:  [{
 				title: 'Empty',
-				url: 'http://about:blank'
+				url: 'about:blank'
 			}]
 		}]	
     },
