@@ -25,21 +25,11 @@ Ext.define("Skin.config.global.Config",{
 		background: 'noise',      // initialize to 'noise'
 		url: '',				  // initialize to ''
 		title: '',				  // initialize to ''
-		groups: [{
-			0: [{title: ''}] // left empty intentionally, so this group is without a header
-		},{
-			1: [{title: '&nbsp;'}] // left with a space, so still with a header but no title
-		},{
-			2: [{title: 'A'}]
-		},{
-			3: [{title: 'B'}]
-		},{
-			14: [{title: 'M'}]
-		}],
-		categories: [{
+		groups: {'': 0,'&nbsp;': 1,'A': 2,'B': 3,'C': 4,'D': 5,'E': 6,'F': 7,'G': 8,'H': 9,'I': 10,'J': 11,'K': 12,'L': 13,'M': 14,'N': 15,'O': 16,'P': 17,'Q': 18,'R': 19,'S': 20,'T': 21,'U': 22,'V': 23,'W': 24,'X': 25,'Y': 26,'Z': 27},
+		categories: [{ // Make sure the 'locale' files contain the titles for these categories, e.g. mainCategory3
 			0: [{
 				title: 'Home',
-				group: 0,
+				group: '', // intentionally left empty, to avoid a group bar
 				html: ['<center>',
 					'<img src="./resources/logos/logo.png" />',
 					'<h2>Welcome to Your Home Page</h2>',
@@ -48,17 +38,17 @@ Ext.define("Skin.config.global.Config",{
 			}],
 			1: [{
 				title: 'All',
-				group: 1,
+				group: '&nbsp;', // intentionally a space, to avoid a title on the group bar
 				apps: ['*']
 			}],
 			2: [{
 				title: 'Administration',
-				group: 2,
+				group: 'A',
 				apps: ['person', 'organisation', 'product', 'booking']
 			}],
 			3: [{
 				title: 'Marketing',
-				group: 14,
+				group: 'M',
 				apps: ['null']
 			}]
 		}],	
