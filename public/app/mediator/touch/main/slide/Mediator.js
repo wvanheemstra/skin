@@ -123,7 +123,10 @@ Ext.define("Skin.mediator.touch.main.slide.Mediator", {
 			this.setTitle(args['title']);
 		}
 		if(args['url']){
-			this.setURL(args['url']);
+			var url = args['url'];
+			this.setURL(url); // TEMPORARY; THIS SHOULD ONLY BE DONE ON BY THE url MEDIATOR/CONTROLLER
+			var evt = Ext.create("Skin.event.url.Event", Skin.event.url.Event.SET_URL, url);
+	        this.eventBus.dispatchGlobalEvent(evt);
 		}		
 		Skin.config.global.Config.setPreviousView('mainslide');
 		this.navigate(Skin.event.navigation.Event.ACTION_SHOW_MAIN_MODAL);

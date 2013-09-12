@@ -43,7 +43,8 @@ Ext.define("Skin.mediator.touch.main.modal.Mediator", {
         this.callParent();
         this.logger.debug("setupGlobalEventListeners");
         this.eventBus.addGlobalEventListener(Skin.event.ui.Event.SET_UI_SUCCESS, this.onSetUISuccess, this);
-        this.eventBus.addGlobalEventListener(Skin.event.title.Event.SET_TITLE_SUCCESS, this.onSetTitleSuccess, this);		
+        this.eventBus.addGlobalEventListener(Skin.event.title.Event.SET_TITLE_SUCCESS, this.onSetTitleSuccess, this);	
+        this.eventBus.addGlobalEventListener(Skin.event.url.Event.SET_URL_SUCCESS, this.onSetURLSuccess, this);		
 //        this.eventBus.addGlobalEventListener(Skin.event.authentication.Event.LOGIN_SUCCESS, this.onLoginSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_MODAL_SUCCESS, this.onGetMainModalSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_MODAL_FAILURE, this.onGetMainModalFailure, this);
@@ -117,7 +118,19 @@ Ext.define("Skin.mediator.touch.main.modal.Mediator", {
         {
             this.getView().items.getAt(i).setTitle(title); // WE SEE THE TEXT ON THE TOOLBAR, BUT NOT ON THE TITLE BAR... HOW COME??
         }
-    }, 	
+    }, 
+
+    /**
+     * Handles the set URL event. 
+     *
+     * @param url    The url to set.	 
+     */
+    setURL: function(url) {
+    	this.logger.debug("setURL: url = " + url);
+		var view = this.getView();
+		view.setSrc(url);
+		// to do
+    }, 
 	
     ////////////////////////////////////////////////
     // EVENT BUS HANDLERS
@@ -148,6 +161,14 @@ Ext.define("Skin.mediator.touch.main.modal.Mediator", {
         this.logger.debug("onSetTitleSuccess");
         this.setTitle(Skin.config.global.Config.getTitle());
     },	
+
+    /**
+     * Handles the set url success application-level event. Update the components for the url.
+     */
+    onSetURLSuccess: function() {
+        this.logger.debug("onSetURLSuccess");
+        this.setURL(Skin.config.global.Config.getUrl());
+    },
 	
     /**
      * Handles the get mains application-level event.

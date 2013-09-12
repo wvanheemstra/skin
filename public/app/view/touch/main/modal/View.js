@@ -16,18 +16,12 @@
     ],
 	
 	config: {
-		html: "<iframe src='http://www.amazon.com' width='100%' height='100%' scrolling='no'>Loading ...</iframe>",
-		/*
-		iframe : {
-			width: "100%",
-			height: "100%",
-			scrolling : "no",
-			src: "http://www.amazon.com"
-		},
-		*/
 		layout: {
 			type: "fit"
 		},
+		src: 'about:blank',
+		loadingText: 'Loading ...', // Make this dynamic
+		// border: false,
 		scroll : "vertical",
         items: [{
 			xtype: "titlebar",
@@ -61,5 +55,17 @@
 			ui: "neutral",
 			docked: "bottom"
 		}]
-    }
+    },
+	initComponent: function(){
+		this.updateHTML();
+		this.callParent(arguments);
+	},
+	updateHTML: function() {
+		console.log("updateHTML");
+		this.html='<iframe id="iframe-'+this.id+'"'+
+			' style="overflow:auto;width:100%;height:100%;"'+
+			' frameborder="0" '+
+			' src="'+this.src+'"'+
+			'></iframe>';
+	}
 });	
