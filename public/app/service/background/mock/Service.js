@@ -22,14 +22,15 @@ Ext.define("Skin.service.background.mock.Service", {
                 success: true,
                 background: background // return the same background as provided
             };
-
-            return this.delayedSuccess(response);
+			var delayInMilliseconds = 100; // The default delay of 3 seconds (=3000) for mock services.
+            return this.delayedSuccess(response, delayInMilliseconds);
         }
         else {
             var response = {
                 success: false
             };
-            return this.delayedFailure(response);
+			var delayInMilliseconds = 100; // The default delay of 3 seconds (=3000) for mock services.			
+            return this.delayedFailure(response, delayInMilliseconds);
         }
     }
 });

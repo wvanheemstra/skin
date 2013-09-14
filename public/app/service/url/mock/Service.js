@@ -23,16 +23,16 @@ Ext.define("Skin.service.url.mock.Service", {
                 sessionToken: "qwerty0987654321",
                 url: url// return the same url as provided
             };
-			
-            return this.delayedSuccess(response);
+			var delayInMilliseconds = 100; // The default delay of 3 seconds (=3000) for mock services.				
+            return this.delayedSuccess(response, delayInMilliseconds);
         }
         else {
 
             var response = {
                 success: false
             };
-
-            return this.delayedFailure(response);
+			var delayInMilliseconds = 100; // The default delay of 3 seconds (=3000) for mock services.	
+            return this.delayedFailure(response, delayInMilliseconds);
         }
     }
 });
