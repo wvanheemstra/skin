@@ -18,13 +18,13 @@ Ext.define("Skin.mediator.touch.main.slide.Mediator", {
         // newMainButton: {
             // tap: "onNewMainButtonTap"
         // },
-        // searchInput :{
-            // keyup:          "onSearchKeyUp",
-            // clearicontap:   "onSearchClearIconTap"
-        // },
-        // slide: {
+        searchInput :{
+            keyup:          "onSearchKeyUp",
+            clearicontap:   "onSearchClearIconTap"
+        },
+        //slide: {
             // disclose: "onSlideDisclose"
-        // },
+        //},	
 		view: {
 			open: function(nav, position, duration) {
                 console.log('Container open (position='+position+',duration='+duration+')');
@@ -257,19 +257,19 @@ Ext.define("Skin.mediator.touch.main.slide.Mediator", {
     },
 
     /**
-     * Handles the clear icon tap event on the search field. Clears all filter on the slide's store.
+     * Handles the clear icon tap event on the search field. Clears all filter on the list's store.
      */
     onSearchClearIconTap: function() {
     	if(Skin.config.global.Config.getCurrentView()==='mainslide') {    	
 	        this.logger.debug("onSearchClearIconTap");
-	        var store = this.getSlide().getStore();
+	        var store = this.getList().getStore();
 	        store.clearFilter();
     	}        
     },
 
     /**
-     * Handles the key up event on the search field. Filters the slide component's store by the value in the
-     * search field and determining if it matches the name element of each record in the slide.
+     * Handles the key up event on the search field. Filters the list component's store by the value in the
+     * search field and determining if it matches the name element of each record in the list.
      *
      * @param {Ext.field.Search} field Reference to the search field.
      *
@@ -280,7 +280,7 @@ Ext.define("Skin.mediator.touch.main.slide.Mediator", {
 	        this.logger.debug("onSearchKeyUp");
 	        //get the store and the value of the field
 	        var value = field.getValue();
-	        var store = this.getSlide().getStore();
+	        var store = this.getList().getStore(); 
 	        //first clear any current filters on the store
 	        store.clearFilter();
 	        //check if a value is set first, as if it isn't we don't have to do anything
@@ -303,7 +303,7 @@ Ext.define("Skin.mediator.touch.main.slide.Mediator", {
 	                //loop through each of the regular expressions
 	                for (i = 0; i < regexps.length; i++) {
 	                    var search = regexps[i],
-	                        didMatch = record.get("name").match(search);
+	                        didMatch = record.get("title").match(search);
 	                    //if it matched the name, push it into the matches array
 	                    matched.push(didMatch);
 	                }

@@ -103,6 +103,8 @@ Ext.define("Skin.view.touch.main.slide.View", {
                     docked: 'top',
                     xtype: 'searchfield',
                     placeHolder: 'search',
+					itemId:"searchInput",
+					// id: "searchInput", // CAN WE AVOID NAMING AN id HERE ??
                     width: 180
                 }]
             },{

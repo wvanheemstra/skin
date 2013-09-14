@@ -173,19 +173,19 @@ Ext.define("Skin.mediator.touch.main.tile.Mediator", {
     },
 
     /**
-     * Handles the clear icon tap event on the search field. Clears all filter on the tile's store.
+     * Handles the clear icon tap event on the search field. Clears all filter on the list's store.
      */
     onSearchClearIconTap: function() {
     	if(Skin.config.global.Config.getCurrentView()==='maintile') {    	
 	        this.logger.debug("onSearchClearIconTap");
-	        var store = this.getTile().getStore();
+	        var store = this.getList().getStore();
 	        store.clearFilter();
     	}   
     },
 
     /**
-     * Handles the key up event on the search field. Filters the tile component's store by the value in the
-     * search field and determining if it matches the name element of each record in the tile.
+     * Handles the key up event on the search field. Filters the list component's store by the value in the
+     * search field and determining if it matches the name element of each record in the list.
      *
      * @param {Ext.field.Search} field Reference to the search field.
      *
@@ -196,7 +196,7 @@ Ext.define("Skin.mediator.touch.main.tile.Mediator", {
 	        this.logger.debug("onSearchKeyUp");
 	        //get the store and the value of the field
 	        var value = field.getValue();
-	        var store = this.getTile().getStore();
+	        var store = this.getList().getStore();
 	        //first clear any current filters on the store
 	        store.clearFilter();
 	        //check if a value is set first, as if it isn't we don't have to do anything

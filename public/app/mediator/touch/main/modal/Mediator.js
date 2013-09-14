@@ -30,7 +30,7 @@ Ext.define("Skin.mediator.touch.main.modal.Mediator", {
 //        searchInput :{
 //            keyup:          "onSearchKeyUp",
 //            clearicontap:   "onSearchClearIconTap"
-//        },
+//        }
 //        list: {
 //            disclose: "onListDisclose"
 //        }
@@ -197,6 +197,6 @@ Ext.define("Skin.mediator.touch.main.modal.Mediator", {
     onCloseButtonTap: function() {
         this.logger.debug("onCloseButtonTap");
         this.backToPrevious(Skin.config.global.Config.getPreviousView());
-    }
+    }	
 	
 });
