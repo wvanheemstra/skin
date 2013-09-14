@@ -505,7 +505,7 @@ Ext.define("Skin.view.touch.main.slide.View", {
                            "#999 0px 0px 6px 2px; border: 1px solid #888; "+
                            "overflow: hidden;",
                     height: 170,
-                    width: 110
+                    width: 146
                 }
 			};
 			
@@ -525,7 +525,6 @@ Ext.define("Skin.view.touch.main.slide.View", {
 					var value = app[key][0];
 					if(key == appName || appName == '*'){ // * indicates list all apps
 						console.log(value);
-						// to do
 						// value is e.g. 
 						// {title: "Persons", url: "http://localhost:4000/touch?app=person"}
 						for (var key in value) {
@@ -543,9 +542,10 @@ Ext.define("Skin.view.touch.main.slide.View", {
 						
 						var item = {
 							xtype: 'button',
-							itemId: appName,				
-							text: text, 
-							title: title,					
+							itemId: appName,
+							text: text, // this shows on the button
+							title: title,
+							disabled: false,				
 							url: url,
 							listeners: {
 								release: function(button, e, eOpts) {
