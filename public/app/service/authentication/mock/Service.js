@@ -34,20 +34,15 @@ Ext.define("Skin.service.authentication.mock.Service", {
     authenticate: function(username, password) {
         this.logger.debug("authenticate: username = " + username + ", password = " + password);
 
-        if(
-	        (password == "password") ||
-		    (password == "flowmvc") ||
-            (password == "deftjs") ||
-		    (password == "a") ||
-            (password == "qwerty")
-            ) {
+        if(password == "password") { // only allow 'password' for now
 
             var response = {
                 success: true,
                 sessionToken: "qwerty1234567890",
                 user: {
-                    firstName:"John",
-                    lastName:"Doe"
+					userName: username, // return the same username as provided
+                    firstName: "John",  // mock firstName
+                    lastName: "Doe"     // mock lastName
                 }
             };
 

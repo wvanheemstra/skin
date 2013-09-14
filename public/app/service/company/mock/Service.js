@@ -16,17 +16,13 @@ Ext.define("Skin.service.company.mock.Service", {
     set: function(company) {
         this.logger.debug("set: company = " + company);
 
-        if(
-	        (company == "Your Company") ||
-		    (company == "Caledonia") ||
-            (company == "van Heemstra Pictures")
-            ) {
+        if(company == company) { //Allow any company for now
 
             var response = {
                 success: true,
                 sessionToken: "qwerty1357908642",
                 company: {
-                    company:"Your Company"
+                    company: company // return the same company as provided
                 }
             };
 

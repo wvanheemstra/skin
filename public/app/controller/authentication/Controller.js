@@ -102,6 +102,9 @@ Ext.define("Skin.controller.authentication.Controller", {
         // The server will send a token that can be used throughout the app to confirm that the user is authenticated.
         this.setSessionToken(response.sessionToken);
 
+		// Update the config for the user set
+		Skin.config.global.Config.setUser(response.user);		
+		
         var evt = Ext.create("Skin.event.authentication.Event", Skin.event.authentication.Event.LOGIN_SUCCESS);
         this.eventBus.dispatchGlobalEvent(evt);
     },

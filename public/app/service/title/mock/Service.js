@@ -16,17 +16,13 @@ Ext.define("Skin.service.title.mock.Service", {
     set: function(title) {
         this.logger.debug("set: title = " + title);
 
-        if(
-	        (title == "Google") ||
-		    (title == "Yahoo") ||
-            (title == "Amazon")
-            ) {
+        if(title == title) { // allow any title for now
 
             var response = {
                 success: true,
                 sessionToken: "qwerty0987654321",
                 title: {
-                    title:"Google"
+                    title: title // return the same title as provided
                 }
             };
 

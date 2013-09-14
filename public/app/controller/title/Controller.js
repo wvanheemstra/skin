@@ -48,6 +48,7 @@ Ext.define("Skin.controller.title.Controller", {
 
 //        var service = this.getService(this.titleServiceClass);
 //        this.titleService.setUsePromise(true);
+
         this.executeServiceCall(this.titleService, this.titleService.set, [title], this.setSuccess, this.setFailure, this);
     },
 
@@ -75,7 +76,10 @@ Ext.define("Skin.controller.title.Controller", {
 
         // The server will send a token that can be used throughout the app to confirm that the title is set.
         // this.setSessionToken(response.sessionToken);
-
+		
+		// Update the config for the title set
+		Skin.config.global.Config.setTitle(response.title);
+		
         var evt = Ext.create("Skin.event.title.Event", Skin.event.title.Event.SET_TITLE_SUCCESS);
         this.eventBus.dispatchGlobalEvent(evt);
     },

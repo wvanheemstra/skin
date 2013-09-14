@@ -16,20 +16,16 @@ Ext.define("Skin.service.url.mock.Service", {
     set: function(url) {
         this.logger.debug("set: url = " + url);
 
-        if(
-	        (url == "www.google.com") ||
-		    (url == "www.yahoo.com") ||
-            (url == "www.amazon.com")
-            ) {
+        if(url == url) { // allow all urls for now
 
             var response = {
                 success: true,
                 sessionToken: "qwerty0987654321",
                 url: {
-                    url:"www.google.com"
+                    url: url// return the same url as provided
                 }
             };
-
+			
             return this.delayedSuccess(response);
         }
         else {

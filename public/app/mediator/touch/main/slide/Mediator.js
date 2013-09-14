@@ -26,7 +26,7 @@ Ext.define("Skin.mediator.touch.main.slide.Mediator", {
             // disclose: "onSlideDisclose"
         //},
 		list: {
-			// empty, but is used by search
+			// empty, but is used by search so do not remove
 		},
 		view: {
 			open: function(nav, position, duration) {

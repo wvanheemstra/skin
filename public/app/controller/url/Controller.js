@@ -75,7 +75,10 @@ Ext.define("Skin.controller.url.Controller", {
 
         // The server will send a token that can be used throughout the app to confirm that the url is set.
         // this.setSessionToken(response.sessionToken);
-
+		
+		// Update the config for the url set
+		Skin.config.global.Config.setUrl(response.url);
+	
         var evt = Ext.create("Skin.event.url.Event", Skin.event.url.Event.SET_URL_SUCCESS);
         this.eventBus.dispatchGlobalEvent(evt);
     },

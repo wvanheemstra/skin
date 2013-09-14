@@ -61,6 +61,10 @@ Ext.define("Skin.controller.company.Controller", {
      */
     setSuccess: function(response) {
         this.logger.info("setSuccess");
+		
+		// Update the config for the company set
+		Skin.config.global.Config.setCompany(response.company);		
+		
         var evt = Ext.create("Skin.event.company.Event", Skin.event.company.Event.SET_COMPANY_SUCCESS);
         this.eventBus.dispatchGlobalEvent(evt);
     },

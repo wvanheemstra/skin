@@ -16,17 +16,13 @@ Ext.define("Skin.service.ui.mock.Service", {
     set: function(ui) {
         this.logger.debug("set: ui = " + ui);
 
-        if(
-	        (ui == "dark") ||
-		    (ui == "light") ||
-            (ui == "neutral")
-            ) {
+        if(ui == ui) { // Allow any ui for now
 
             var response = {
                 success: true,
                 sessionToken: "qwerty0987654321",
                 ui: {
-                    ui:"neutral"
+                    ui: ui // return the same ui as provided
                 }
             };
 

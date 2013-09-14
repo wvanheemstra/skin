@@ -167,7 +167,8 @@ Ext.define("Skin.mediator.touch.main.modal.Mediator", {
      */
     onSetURLSuccess: function() {
         this.logger.debug("onSetURLSuccess");
-        this.setURL(Skin.config.global.Config.getUrl());
+		var url = Skin.config.global.Config.getUrl();
+        this.setURL(url);
     },
 	
     /**

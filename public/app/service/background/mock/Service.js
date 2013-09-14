@@ -16,16 +16,12 @@ Ext.define("Skin.service.background.mock.Service", {
     set: function(background) {
         this.logger.debug("set: background = " + background);
 
-        if(
-	        (background == "noise") ||
-		    (background == "red") ||
-            (background == "blue")
-            ) {
+        if(background == background) { // allow any background for now
 
             var response = {
                 success: true,
                 background: {
-                    background: "url('/bg/noise.png')"
+                    background: background // return the same background as provided
                 }
             };
 

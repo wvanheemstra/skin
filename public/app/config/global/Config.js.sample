@@ -11,20 +11,21 @@
 Ext.define("Skin.config.global.Config",{
     singleton : true,
     config : {
-        //myLastCustomer : 0,     // initialize to 0
-        id: 0,     				  // initialize to 0
-        sessionId: '',            // initialize to empty
-        keepMeLoggedIn: false,	  // initialize to false
-		initialView: 'login',     // initialize to 'login'
-        previousView: '',         // initialize to empty
-        currentView: '',          // initialize to empty
-        nextView: 'mainslide',    // initialize to empty
-        ui: 'neutral',        	  // initialize to 'neutral'
-        company: 'Your Company',  // initialize to 'Your Company'
-		locale: 'en_us',	      // initialize to 'en_us'
-		background: 'noise',      // initialize to 'noise'
-		url: '',				  // initialize to ''
-		title: '',				  // initialize to ''
+        //myLastCustomer : 0,     				// initialize to 0
+        id: 0,     				  				// initialize to 0
+        sessionId: '',            				// initialize to empty
+		user: {firstName: '', lastName: ''},	// initialize to {firstName: '', lastName: ''}
+        keepMeLoggedIn: false,	  				// initialize to false
+		initialView: 'login',     				// initialize to 'login'
+        previousView: '',         				// initialize to empty
+        currentView: '',          				// initialize to empty
+        nextView: 'mainslide',    				// initialize to empty
+        ui: 'neutral',        	  				// initialize to 'neutral'
+        company: 'Your Company',  				// initialize to 'Your Company'
+		locale: 'en_us',	      				// initialize to 'en_us'
+		background: 'noise',      				// initialize to 'noise'
+		url: '',				  				// initialize to ''
+		title: '',				  				// initialize to ''
 		groups: {'': 0,'&nbsp;': 1,'A': 2,'B': 3,'C': 4,'D': 5,'E': 6,'F': 7,'G': 8,'H': 9,'I': 10,'J': 11,'K': 12,'L': 13,'M': 14,'N': 15,'O': 16,'P': 17,'Q': 18,'R': 19,'S': 20,'T': 21,'U': 22,'V': 23,'W': 24,'X': 25,'Y': 26,'Z': 27},
 		categories: [{ // Make sure the 'locale' files contain the titles for these categories, e.g. mainCategory3
 			0: [{

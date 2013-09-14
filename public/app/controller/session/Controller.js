@@ -101,6 +101,12 @@ Ext.define("Skin.controller.session.Controller", {
         this.setSessionToken(response.sessionToken);
 		
 		//Skin.config.global.Config.setSessionID(response.sessionToken); // new by wvh
+		
+		// Update the config for the id set
+		Skin.config.global.Config.setId(response.id);
+		
+		// Update the config for the sessionId set
+		Skin.config.global.Config.setSessionId(response.sessionId);
 
         var evt = Ext.create("Skin.event.session.Event", Skin.event.session.Event.SET_SESSION_SUCCESS);
         this.eventBus.dispatchGlobalEvent(evt);
