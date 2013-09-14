@@ -10,17 +10,12 @@ Ext.define("Skin.mediator.touch.main.modal.Mediator", {
 	
     // set up view event to mediator mapping
     control: {
-	
 	    closeButton: {
             tap: "onCloseButtonTap"
         },
-	
-//		'button[action=hide]': {
-//			tap: 'hide'
-//		},
-    	titlebar: {
-    		painted: "onPainted"
-    	}
+		titlebar: {
+			// empty, but used by setTitle
+		}
 //        logoutButton: {
 //            tap: "onLogoutButtonTap"
 //        },
@@ -44,8 +39,7 @@ Ext.define("Skin.mediator.touch.main.modal.Mediator", {
         this.logger.debug("setupGlobalEventListeners");
         this.eventBus.addGlobalEventListener(Skin.event.ui.Event.SET_UI_SUCCESS, this.onSetUISuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.title.Event.SET_TITLE_SUCCESS, this.onSetTitleSuccess, this);	
-        this.eventBus.addGlobalEventListener(Skin.event.url.Event.SET_URL_SUCCESS, this.onSetURLSuccess, this);		
-//        this.eventBus.addGlobalEventListener(Skin.event.authentication.Event.LOGIN_SUCCESS, this.onLoginSuccess, this);
+        this.eventBus.addGlobalEventListener(Skin.event.url.Event.SET_URL_SUCCESS, this.onSetURLSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_MODAL_SUCCESS, this.onGetMainModalSuccess, this);
         this.eventBus.addGlobalEventListener(Skin.event.main.Event.GET_MAIN_MODAL_FAILURE, this.onGetMainModalFailure, this);
     },
@@ -116,7 +110,9 @@ Ext.define("Skin.mediator.touch.main.modal.Mediator", {
     	this.logger.debug("setTitle: title = " + title);
 		for ( var i=0; i<this.getView().items.length; i++)
         {
-            this.getView().items.getAt(i).setTitle(title); // WE SEE THE TEXT ON THE TOOLBAR, BUT NOT ON THE TITLE BAR... HOW COME??
+			if(this.getView().items.getAt(i).getItemId() == "titlebar"){
+				this.getView().items.getAt(i).setTitle(title);
+			}
         }
     }, 
 

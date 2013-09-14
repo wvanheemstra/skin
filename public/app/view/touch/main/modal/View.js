@@ -24,17 +24,17 @@
 		// border: false,
 		scroll : "vertical",
         items: [{
-			xtype: "titlebar",
+			xtype: "toolbar", // WAS "titlebar", BUT THAT FAILED
 			itemId: "titlebar",
 			ui: "neutral",
 			docked: "top",
-			plugins: [
-				{
-					type: "localization",
-					method: "setTitle",
-					key: "mainModal.title"
-				}
-			],
+			//plugins: [  // TITLE IS SET DYNAMICALLY, MAKE locale SUITABLE FOR USE
+			//	{
+			//		type: "localization",
+			//		method: "setTitle",
+			//		key: "mainModal.title"
+			//	}
+			//],
 			items: [{
 				xtype: "button",
 				iconMask: true,
