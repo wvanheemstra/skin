@@ -87,24 +87,11 @@ Ext.define("Skin.view.touch.main.slide.View", {
                 xtype: 'toolbar',
                 docked: 'top',
                 ui: 'neutral',
-				/*
-				title:{
-					title: 'Navigation',
-					centered: false,
-					width: 200,
-					left: 0
-				},
-				*/
-				/**
-                 *  Here's an example of how to add a different type of
-                 *  component into the toolbar of the list.
-                 */
                 items: [{
                     docked: 'top',
                     xtype: 'searchfield',
                     placeHolder: 'search',
 					itemId:"searchInput",
-					// id: "searchInput", // CAN WE AVOID NAMING AN id HERE ??
                     width: 180
                 }]
             },{
