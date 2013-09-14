@@ -297,7 +297,7 @@ Ext.define("Skin.view.touch.main.slide.View", {
 			xtype: 'image',
 			width: 218,
 			height: 44,	
-			src:'/resources/logos/slideheaderlogo.png',
+			src:'/resources/logos/headerlogo.png',
             name: 'slideheader',
             /**
              *  To add the header into a toolbar, you can add the following

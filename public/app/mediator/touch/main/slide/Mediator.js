@@ -5,10 +5,7 @@ Ext.define("Skin.mediator.touch.main.slide.Mediator", {
     extend: "Skin.mediator.touch.main.base.Mediator",
 	
     // set up view event to mediator mapping
-    control: {
-//		'button[action=showPopup]': {
-//			tap: 'showPopup'
-//		},	
+    control: {	
     	// titlebar: {
     		// painted: "onPainted"
     	// },
@@ -22,9 +19,6 @@ Ext.define("Skin.mediator.touch.main.slide.Mediator", {
             keyup:          "onSearchKeyUp",
             clearicontap:   "onSearchClearIconTap"
         },
-        //slide: {
-            // disclose: "onSlideDisclose"
-        //},
 		list: {
 			// empty, but is used by search so do not remove
 		},
@@ -121,13 +115,16 @@ Ext.define("Skin.mediator.touch.main.slide.Mediator", {
 	 * @param args	The args to show in the modal
 	 */
 	showMainModal: function(args) {
-		this.logger.debug("showMainModal: title = " + args['title'] + ", url = " + args['url']);
+		this.logger.debug("showMainModal");
 		if(args['title']){
-			this.setTitle(args['title']);
+			var title = args['title'];	
+			this.logger.debug("title = " + title);			
+			var evt = Ext.create("Skin.event.title.Event", Skin.event.title.Event.SET_TITLE, title);
+	        this.eventBus.dispatchGlobalEvent(evt);
 		}
 		if(args['url']){
 			var url = args['url'];
-			this.setURL(url); // TEMPORARY; THIS SHOULD ONLY BE DONE ON BY THE url MEDIATOR/CONTROLLER
+			this.logger.debug("url = " + url);					
 			var evt = Ext.create("Skin.event.url.Event", Skin.event.url.Event.SET_URL, url);
 	        this.eventBus.dispatchGlobalEvent(evt);
 		}		
@@ -154,7 +151,6 @@ Ext.define("Skin.mediator.touch.main.slide.Mediator", {
 	 */
 	setTitle: function(title) {
 		this.logger.debug("setTitle: title = " + title);
-		Skin.config.global.Config.setTitle(title);
 	},
 	
 	/** 
@@ -163,7 +159,6 @@ Ext.define("Skin.mediator.touch.main.slide.Mediator", {
 	 */
 	setURL: function(url) {
 		this.logger.debug("setURL: url = " + url);
-		Skin.config.global.Config.setUrl(url);
 	},
 	
     ////////////////////////////////////////////////
@@ -263,7 +258,7 @@ Ext.define("Skin.mediator.touch.main.slide.Mediator", {
      * Handles the clear icon tap event on the search field. Clears all filter on the list's store.
      */
     onSearchClearIconTap: function() {
-    	if(Skin.config.global.Config.getCurrentView()==='mainslide') {    	
+    	if(Skin.config.global.Config.getCurrentView()==='mainslide') {  	
 	        this.logger.debug("onSearchClearIconTap");
 	        var store = this.getList().getStore();
 	        store.clearFilter();

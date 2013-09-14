@@ -48,6 +48,12 @@
 						key: "mainModal.close"
 					}
 				]
+			},{
+				xtype: 'image',
+				width: 218,
+				height: 44,	
+				src:'/resources/logos/headerlogo.png',
+				name: 'modalheader'
 			}]
 		},{
 			xtype: "toolbar",

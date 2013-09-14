@@ -143,7 +143,7 @@ Ext.define("Skin.mediator.touch.main.modal.Mediator", {
 	    this.logger.debug("onPainted");
 
 		// TEMP fix: 
-		this.onSetTitleSuccess();
+		// this.onSetTitleSuccess();
     },
 
     /**
