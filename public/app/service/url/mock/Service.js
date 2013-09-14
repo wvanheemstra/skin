@@ -21,9 +21,7 @@ Ext.define("Skin.service.url.mock.Service", {
             var response = {
                 success: true,
                 sessionToken: "qwerty0987654321",
-                url: {
-                    url: url// return the same url as provided
-                }
+                url: url// return the same url as provided
             };
 			
             return this.delayedSuccess(response);

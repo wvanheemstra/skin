@@ -20,9 +20,7 @@ Ext.define("Skin.service.background.mock.Service", {
 
             var response = {
                 success: true,
-                background: {
-                    background: background // return the same background as provided
-                }
+                background: background // return the same background as provided
             };
 
             return this.delayedSuccess(response);

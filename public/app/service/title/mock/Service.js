@@ -21,9 +21,7 @@ Ext.define("Skin.service.title.mock.Service", {
             var response = {
                 success: true,
                 sessionToken: "qwerty0987654321",
-                title: {
-                    title: title // return the same title as provided
-                }
+                title: title // return the same title as provided
             };
 
             return this.delayedSuccess(response);
