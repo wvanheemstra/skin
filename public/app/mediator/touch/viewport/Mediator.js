@@ -304,7 +304,12 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
     	// The next view to go to after login is set in the config file
         //var view = this.getView();
         //view.setLoading(false);
-		this.navigate(Skin.event.authentication.Event.LOGIN_SUCCESS);		
+	//	this.navigate(Skin.event.authentication.Event.LOGIN_SUCCESS);		
+		// The views need to be able to load their data,
+		// hence we throw a LOGIN_SUCCESS event
+		// to which they are listening
+		var evt = Ext.create("Core.event.authentication.Event", Core.event.authentication.Event.LOGIN_SUCCESS);
+		this.eventBus.dispatchGlobalEvent(evt);			
     },
     
     /**
