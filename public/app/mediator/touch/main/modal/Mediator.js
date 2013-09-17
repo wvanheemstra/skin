@@ -125,7 +125,6 @@ Ext.define("Skin.mediator.touch.main.modal.Mediator", {
     	this.logger.debug("setURL: url = " + url);
 		var view = this.getView();
 		view.setSrc(url);
-		// to do
     }, 
 	
     ////////////////////////////////////////////////
