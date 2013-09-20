@@ -308,7 +308,7 @@ Ext.define("Skin.mediator.touch.viewport.Mediator", {
 		// The views need to be able to load their data,
 		// hence we throw a LOGIN_SUCCESS event
 		// to which they are listening
-		var evt = Ext.create("Core.event.authentication.Event", Core.event.authentication.Event.LOGIN_SUCCESS);
+		var evt = Ext.create("Skin.event.authentication.Event", Skin.event.authentication.Event.LOGIN_SUCCESS);
 		this.eventBus.dispatchGlobalEvent(evt);			
     },
     
