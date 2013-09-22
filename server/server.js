@@ -142,7 +142,7 @@ api.post('/login', function(req, res){
 });
 
 /*
- * DEVELOPMENT
+ * APP DEVELOPMENT
  *
  * .bash_profile contains 
  * NODE_ENV=development
@@ -176,19 +176,8 @@ app.configure('development', function(){
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); // specific for development
 });
 
-app.all('*', function(req, res, next){
-  if (!req.get('Origin')) return next();
-  // use "*" here to accept any origin
-  res.set('Access-Control-Allow-Origin', '*'); // Accepts requests coming from anyone, replace '*' by configs.allowedHost to restrict it
-  res.set('Access-Control-Allow-Methods', 'GET, PUT, POST');
-  res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
-  // res.set('Access-Control-Allow-Max-Age', 3600);
-  if ('OPTIONS' == req.method) return res.send(200);
-  next();
-});
-
 /*
- * PRODUCTION
+ * APP PRODUCTION
  *
  * .bash_profile contains
  * NODE_ENV=production
@@ -225,7 +214,7 @@ app.configure('production', function(){
 app.all('*', function(req, res, next){
   if (!req.get('Origin')) return next();
   // use "*" here to accept any origin
-  res.set('Access-Control-Allow-Origin', '*'); // Accepts requests coming from anyone, replace '*' by configs.allowedHost to restrict it
+  res.set('Access-Control-Allow-Origin', '*'); // Accepts requests coming from anyone, replace '*' by configs.allowedHosts to restrict it
   res.set('Access-Control-Allow-Methods', 'GET, PUT, POST');
   res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
   // res.set('Access-Control-Allow-Max-Age', 3600);
