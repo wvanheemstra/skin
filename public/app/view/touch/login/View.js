@@ -32,6 +32,9 @@ Ext.define("Skin.view.touch.login.View", {
 				xtype: "fieldset",
 				itemId: "company",
 				title: "Your Company",
+				defaults: {
+					labelWidth: "35%"
+				},
 				height: 187, // make this flexible
 				items: [
 					{
