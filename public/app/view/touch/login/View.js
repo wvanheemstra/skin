@@ -75,7 +75,8 @@ Ext.define("Skin.view.touch.login.View", {
 								method: "setLabel",
 								key: "login.keepmeloggedin"
 							}
-						]
+						],
+						labelWidth: "50%"
 					}
 				]
 			},
