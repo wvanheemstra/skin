@@ -110,7 +110,9 @@ Ext.define("FlowMVC.mvc.service.AbstractService", {
             } else {
                 throw new Error(
                     "["+ Ext.getDisplayName(arguments.callee) +"] " +
-                    CafeTownsend.service.AbstractService.NO_RESPONDER_DEFINED
+                    // WAS CafeTownsend.service.AbstractService.NO_RESPONDER_DEFINED
+					FlowMVC.mvc.service.AbstractService.NO_RESPONDER_DEFINED
+					
                 );
             }
 
@@ -124,12 +126,29 @@ Ext.define("FlowMVC.mvc.service.AbstractService", {
         } else {
             throw new Error(
                 "["+ Ext.getDisplayName(arguments.callee) +"] " +
-                CafeTownsend.service.AbstractService.NO_RESPONDER_DEFINED
+                //WAS CafeTownsend.service.AbstractService.NO_RESPONDER_DEFINED
+				FlowMVC.mvc.service.AbstractService.NO_RESPONDER_DEFINED
             );
 
         }
     },
 
+	// BELOW FUNCTION COPIED FROM FlowMVC.mvc.service.mock.AbstractServiceMock, 
+	// BY wvh 
+	// AS FlowMVC.mvc.service.AbstractService NOW USES THIS FUNCTION TOO
+	/**
+     * Accessor method that determines if this sercvice uses promises or asyn tokens.
+     *
+     * @returns {FlowMVC.mvc.service.rpc.AsyncToken/Deft.promise.Deferred} Reference to the AsyncToken or
+     * Promise
+     */
+    getTokenOrPromise: function() {
+        FlowMVC.mvc.service.mock.AbstractServiceMock.logger.debug("getTokenOrPromise");
+        return (this.getUsePromise()) ?
+            Ext.create("Deft.promise.Deferred") :
+            Ext.create("FlowMVC.mvc.service.rpc.AsyncToken");
+    },
+	
     /**
      * Default handler for service's successful execution. Relies on the applyResponderMethod() to
      * actually call the service's client object's (object that used the service) success handler.
